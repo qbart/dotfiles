@@ -176,7 +176,9 @@ let g:EasyMotion_use_smartsign_us = 1
 
 "Easytags
 "Async easytags
+set tags=./.ctags;
 let g:easytags_async = 1
+let g:easytags_dynamic_files = 1
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -226,8 +228,9 @@ let g:airline_symbols.whitespace = 'Ξ'
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-nnoremap \ :Ag -Q<SPACE>
-nnoremap <C-\> <C-n> :NERDTreeToggle<CR>
+nnoremap <C-\> :Ag -Q<SPACE>
+nmap \| :NERDTreeFind<CR>
+nmap \ :NERDTreeToggle<CR>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
