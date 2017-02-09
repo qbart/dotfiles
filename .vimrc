@@ -79,7 +79,7 @@ set backspace=indent,eol,start
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-easytags'
 
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
@@ -96,11 +96,6 @@ Plug 'scrooloose/syntastic'
 "Fuzzy search:
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neoinclude.vim'
-" Plug 'carlitux/deoplete-ternjs'
-" Plug 'fishbullet/deoplete-ruby'
 
 "Comments:
 Plug 'tpope/vim-commentary'
@@ -173,11 +168,12 @@ let g:EasyMotion_smartcase = 1
 " Smartsign (type `3` and match `3`&`#`)
 let g:EasyMotion_use_smartsign_us = 1
 
-"Easytags
-"Async easytags
-set tags=./.ctags;
-let g:easytags_async = 1
-let g:easytags_dynamic_files = 1
+"CTags
+set tags=./tags;/
+" " let g:easytags_async = 1
+" let g:easytags_dynamic_files = 1
+" let g:easytags_opts = ['--extra=+f --exclude=.git --exclude=log --exclude=doc -R *']
+" map <leader>rt :!ctags --extra=+f --exclude=.git --exclude=log --exclude=doc -R *<CR><CR>
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
