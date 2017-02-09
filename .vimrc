@@ -99,9 +99,8 @@ Plug 'JazzCore/ctrlp-cmatcher'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
-Plug 'awetzel/elixir.nvim'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'fishbullet/deoplete-ruby'
+" Plug 'carlitux/deoplete-ternjs'
+" Plug 'fishbullet/deoplete-ruby'
 
 "Comments:
 Plug 'tpope/vim-commentary'
