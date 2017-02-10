@@ -169,11 +169,8 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
 
 "CTags
-set tags=./tags;/
-" " let g:easytags_async = 1
-" let g:easytags_dynamic_files = 1
-" let g:easytags_opts = ['--extra=+f --exclude=.git --exclude=log --exclude=doc -R *']
-" map <leader>rt :!ctags --extra=+f --exclude=.git --exclude=log --exclude=doc -R *<CR><CR>
+set tags=./.tags;/
+map <leader>rt :!ctags *<CR><CR>
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -272,9 +269,6 @@ autocmd BufWritePre * FixWhitespace
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread
 au CursorHold * checktime
-
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
 
 " Tab completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
