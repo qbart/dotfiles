@@ -79,7 +79,7 @@ set backspace=indent,eol,start
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
+Plug 'majutsushi/tagbar'
 
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
@@ -170,7 +170,9 @@ let g:EasyMotion_use_smartsign_us = 1
 
 "CTags
 set tags=./.tags;/
-map <leader>rt :!ctags *<CR><CR>
+map <leader>rt :!ctags *<cr>
+nnoremap <leader>t :CtrlPTag<cr>
+nnoremap <silent> <leader>. :TagbarToggle<CR>
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
