@@ -1,5 +1,5 @@
-set title
 
+set title
 
 "Scroll horizontally by 1 character instead of default half screen
 set sidescroll=1
@@ -173,6 +173,7 @@ set tags=./.tags;/
 map <leader>rt :!ctags *<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <silent> <leader>. :TagbarToggle<CR>
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
