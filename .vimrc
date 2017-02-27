@@ -79,7 +79,6 @@ set backspace=indent,eol,start
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'xolox/vim-misc'
-Plug 'majutsushi/tagbar'
 
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
@@ -134,16 +133,15 @@ Plug 'mhartington/oceanic-next'
 
 call plug#end()
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-" Or if you have Neovim >= 0.1.5
-if (has("termguicolors"))
- set termguicolors
-endif
 
 " Theme
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 syntax enable
+set background=dark
 colorscheme OceanicNext
+let g:colors_name="OceanicNext"
+let g:airline_theme='oceanicnext'
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -172,12 +170,11 @@ let g:EasyMotion_use_smartsign_us = 1
 set tags=./.tags;/
 map <leader>rt :!ctags *<cr>
 nnoremap <leader>t :CtrlPTag<cr>
-nnoremap <silent> <leader>. :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_cmd = 'CtrlPMixed'
 map <C-l> :CtrlPMRU<CR>
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'

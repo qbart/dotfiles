@@ -23,3 +23,4 @@ alias push='git push origin HEAD'
 alias pushf='git push -f origin HEAD'
 
 alias hc='hipchat4 --disable-gpu'
+alias tmux='env TERM=xterm-256color tmux-next'

@@ -6,5 +6,6 @@
 --exclude=log
 --exclude=doc
 --exclude=node_modules
+--exclude=vendor
 
 
