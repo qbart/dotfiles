@@ -130,6 +130,8 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'mhartington/oceanic-next'
 
+Plug 'junegunn/vim-easy-align'
+
 
 call plug#end()
 
@@ -223,6 +225,13 @@ command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap <C-\> :Ag -Q<SPACE>
 nmap \| :NERDTreeFind<CR>
 nmap \ :NERDTreeToggle<CR>
+
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
