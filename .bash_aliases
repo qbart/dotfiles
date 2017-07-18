@@ -29,5 +29,11 @@ alias pushf='git push -f origin HEAD'
 alias gan='git add -N .'
 
 alias dc='docker-compose'
+alias dcdev='docker-compose -f docker-compose.dev.yml'
 alias hc='hipchat4 --disable-gpu'
-alias tmux='env TERM=xterm-256color tmux-next'
+alias tmx='env TERM=xterm-256color tmux'
+
+if [ -f ~/.bash_aliases.projects ]; then
+    . ~/.bash_aliases.projects
+fi
+

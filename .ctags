@@ -2,6 +2,7 @@
 -f .tags
 --recurse=yes
 --tag-relative=yes
+--exclude=*.js
 --exclude=.git
 --exclude=log
 --exclude=doc
@@ -9,5 +10,6 @@
 --exclude=bower_components
 --exclude=vendor
 --exclude=build
+--exclude=_files
 
 
