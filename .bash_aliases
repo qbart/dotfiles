@@ -28,6 +28,7 @@ alias push='git push origin HEAD'
 alias pushf='git push -f origin HEAD'
 alias gan='git add -N .'
 
+alias vv='vim .'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
 alias hc='hipchat4 --disable-gpu'

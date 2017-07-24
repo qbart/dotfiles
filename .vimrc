@@ -130,6 +130,8 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'mhartington/oceanic-next'
 
+Plug 'tomasr/molokai'
+
 Plug 'junegunn/vim-easy-align'
 
 
@@ -137,13 +139,16 @@ call plug#end()
 
 
 " Theme
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
+let $NVIM_TUI_ENABLE_TRUE_COLOR=0
+" set termguicolors
 syntax enable
 set background=dark
-colorscheme OceanicNext
-let g:colors_name="OceanicNext"
-let g:airline_theme='oceanicnext'
+" colorscheme OceanicNext
+" let g:colors_name="OceanicNext"
+" let g:airline_theme='oceanicnext'
+let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
 
 set omnifunc=syntaxcomplete#Complete
 
