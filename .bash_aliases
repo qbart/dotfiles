@@ -27,12 +27,16 @@ alias commit='git commit -m'
 alias push='git push origin HEAD'
 alias pushf='git push -f origin HEAD'
 alias gan='git add -N .'
+alias gap='git add -p'
+
+alias imx='iex -S mix'
+alias ms='mix phoenix.server'
 
 alias vv='vim .'
+alias tt='tmux'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
 alias hc='hipchat4 --disable-gpu'
-alias tmx='env TERM=xterm-256color tmux'
 
 if [ -f ~/.bash_aliases.projects ]; then
     . ~/.bash_aliases.projects
