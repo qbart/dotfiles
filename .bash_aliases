@@ -31,6 +31,7 @@ alias gap='git add -p'
 
 alias imx='iex -S mix'
 alias ms='mix phoenix.server'
+alias imxp='imx phoenix.server'
 
 alias vv='vim .'
 alias tt='tmux'
