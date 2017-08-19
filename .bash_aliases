@@ -26,7 +26,7 @@ alias amend='git commit --amend -CHEAD'
 alias commit='git commit -m'
 alias push='git push origin HEAD'
 alias pushf='git push -f origin HEAD'
-alias gan='git add -N .'
+alias gan='git add -N'
 alias gap='git add -p'
 
 alias imx='iex -S mix'
