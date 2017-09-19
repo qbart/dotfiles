@@ -2,6 +2,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias json='curl -H "Content-Type: application/json"'
+
 alias apts='apt search'
 alias apti='sudo apt install'
 alias aptu='sudo apt update'
@@ -30,9 +32,9 @@ alias gan='git add -N'
 alias gap='git add -p'
 
 alias imx='iex -S mix'
-alias ms='mix phoenix.server'
-alias imxp='imx phoenix.server'
-alias pxroutes='mix phoenix.routes'
+alias ms='mix phx.server'
+alias imxp='imx phx.server'
+alias pxroutes='mix phx.routes'
 
 alias vv='vim .'
 alias tt='tmux'
