@@ -1,6 +1,7 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias open='dolphin'
 
 alias json='curl -H "Content-Type: application/json"'
 
@@ -42,6 +43,9 @@ alias tt='tmux'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
 alias hc='hipchat4 --disable-gpu'
+
+# crystal
+alias cspec='crystal spec'
 
 if [ -f ~/.bash_aliases.projects ]; then
     . ~/.bash_aliases.projects
