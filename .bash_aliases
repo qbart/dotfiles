@@ -38,13 +38,11 @@ alias gap='git add -p'
 alias imx='iex -S mix'
 alias ms='mix phx.server'
 alias imxp='imx phx.server'
-alias pxroutes='mix phx.routes'
 
 alias vv='vim .'
 alias tt='tmux'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
-alias hc='hipchat4 --disable-gpu'
 
 # crystal
 alias cspec='crystal spec'
