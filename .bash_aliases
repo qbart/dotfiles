@@ -14,6 +14,8 @@ alias aptr='sudo apt remove'
 alias aptug='sudo apt upgrade'
 alias addppa='sudo add-apt-repository'
 
+# ruby
+alias rr='rails'
 alias be='bundle exec'
 alias fspec='spring rspec'
 alias ffspec='spring rspec --only-failures'
