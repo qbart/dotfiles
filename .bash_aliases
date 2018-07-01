@@ -2,6 +2,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias open='dolphin'
+alias pp='cd ~/projects'
 
 alias json='curl -H "Content-Type: application/json"'
 
@@ -16,6 +17,7 @@ alias addppa='sudo add-apt-repository'
 
 # ruby
 alias rr='rails'
+alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active-storage --skip-action-cable --skip-coffee --skip-spring --skip-turbolinks --skip-test --skip-system-test'
 alias be='bundle exec'
 alias fspec='spring rspec'
 alias ffspec='spring rspec --only-failures'
