@@ -1,11 +1,9 @@
+# os
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
-alias open='dolphin'
+alias l='exa -h'
+alias open='(nautilus 2>/dev/null || dolphin 2>/dev/null)'
 alias pp='cd ~/projects'
-
-alias json='curl -H "Content-Type: application/json"'
-
 alias tgz='tar -cvzf'
 alias untgz='tar -xvzf'
 alias apts='apt search'
@@ -14,6 +12,13 @@ alias aptu='sudo apt update'
 alias aptr='sudo apt remove'
 alias aptug='sudo apt upgrade'
 alias addppa='sudo add-apt-repository'
+alias mkdirtoday1='mkdir $(date -I)'
+alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
+alias cdruby='cd ~/projects/ruby'
+alias cdcrystal='cd ~/projects/crystal'
+alias cdrust='cd ~/projects/rust'
+alias cdcpp='cd ~/projects/cpp'
+alias cdcs='cd ~/projects/cs'
 
 # ruby
 alias rr='rails'
@@ -24,9 +29,8 @@ alias ffspec='spring rspec --only-failures'
 alias dbmigrate='bundle exec rake db:migrate'
 alias dbmigratetest='RAILS_ENV=test bundle exec rake db:migrate'
 alias dbseed='bundle exec rake db:seed'
-alias isp='invoker start Procfile.dev'
-alias ssisp='spring stop && invoker start Procfile.dev'
 
+# git
 alias rebasem='git pull --rebase --autostash origin master'
 alias rebaseb='git pull --rebase --autostash origin'
 alias rebase5='git rebase -i HEAD~5'
@@ -39,23 +43,25 @@ alias pull='git pull'
 alias gan='git add -N'
 alias gap='git add -p'
 
+# elixir
 alias imx='iex -S mix'
 alias ms='mix phx.server'
 alias imxp='imx phx.server'
 
+# tools
 alias vv='vim .'
 alias tt='tmux'
+
+# docker
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
 
 # crystal
 alias cspec='crystal spec'
+alias crdev='heroku local -f Procfile.dev'
 
 # curl
 alias postjson='curl -X POST -H "Content-Type: application/json" -d'
 alias getjson='curl -X GET -H "Content-Type: application/json"'
-
-if [ -f ~/.bash_aliases.projects ]; then
-    . ~/.bash_aliases.projects
-fi
+alias json='curl -H "Content-Type: application/json"'
 
