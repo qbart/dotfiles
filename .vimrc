@@ -68,74 +68,14 @@ set smarttab
 set softtabstop=2
 
 "Ruler:
-set ruler
-set colorcolumn=120
+"set ruler
+"set colorcolumn=120
 
 "Undo history length
 set undolevels=200
 "Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-call plug#begin()
-Plug 'scrooloose/nerdtree'
-Plug 'xolox/vim-misc'
-
-Plug 'tpope/vim-surround'
-Plug 'sheerun/vim-polyglot'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-"Syntax:
-Plug 'scrooloose/syntastic'
-
-"Fuzzy search:
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'JazzCore/ctrlp-cmatcher'
-
-"Comments:
-Plug 'tpope/vim-commentary'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'terryma/vim-expand-region'
-Plug 'godlygeek/tabular'
-
-"Ruby
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-
-"Yaml
-Plug 'lmeijvogel/vim-yaml-helper'
-
-"JS
-Plug 'othree/yajs.vim'
-
-"HTML
-Plug 'mattn/emmet-vim'
-
-"Neovim only
-Plug 'janko-m/vim-test'
-Plug 'kassio/neoterm'
-Plug 'benekastah/neomake'
-
-"Markdown
-Plug 'shime/vim-livedown'
-
-Plug 'vimwiki/vimwiki'
-
-Plug 'jiangmiao/auto-pairs'
-
-Plug 'mhartington/oceanic-next'
-
-Plug 'tomasr/molokai'
-
-Plug 'junegunn/vim-easy-align'
-
-
-call plug#end()
 
 
 " Theme
@@ -143,7 +83,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 " set termguicolors
 syntax enable
 set background=dark
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " let g:colors_name="OceanicNext"
 " let g:airline_theme='oceanicnext'
 " let g:molokai_original = 1

@@ -2,7 +2,6 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='exa -h'
-alias open='(nautilus 2>/dev/null || dolphin 2>/dev/null)'
 alias pp='cd ~/projects'
 alias tgz='tar -cvzf'
 alias untgz='tar -xvzf'
@@ -65,3 +64,9 @@ alias postjson='curl -X POST -H "Content-Type: application/json" -d'
 alias getjson='curl -X GET -H "Content-Type: application/json"'
 alias json='curl -H "Content-Type: application/json"'
 
+# other
+alias loc='xargs wc -l'
+
+function open() {
+  nautilus $1 2>/dev/null || dolphin $1 2>/dev/null
+}
