@@ -1,3 +1,36 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'dracula/vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+
+
 
 set title
 
@@ -21,6 +54,7 @@ set mouse=a
 
 "Show absolute line number directly to the left of current cursor's position and relative numbers elsewhere (awesome!)
 set number
+set cursorline
 
 set linebreak
 set nowrap
@@ -58,10 +92,13 @@ endif
 "Indentantion:
 "Copy indent from current line when starting a new line
 set autoindent
+
 "In insert mode, add spaces instead of tabs
 set expandtab
+
 "Default tab width
 set shiftwidth=2
+
 "Smart autoindenting when starting a new line
 set smartindent
 set smarttab
@@ -72,7 +109,7 @@ set softtabstop=2
 "set colorcolumn=120
 
 "Undo history length
-set undolevels=200
+set undolevels=1000
 "Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -184,7 +221,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set signcolumn=yes
 
 set nocursorcolumn
-set nocursorline
 syntax sync minlines=256
 set synmaxcol=400
 set re=1
@@ -205,7 +241,7 @@ let test#strategy = 'neoterm'
 :nnoremap <A-l> <C-w>l
 
 "Neomake on save
-autocmd! BufWritePost * Neomake
+"""autocmd! BufWritePost * Neomake
 
 "use ESLint
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -218,7 +254,7 @@ nmap <Leader><Space>n :lnext<CR>      " next error/warning
 nmap <Leader><Space>p :lprev<CR>      " previous error/warning
 
 "Auto remove trailing whitespaces on save
-autocmd BufWritePre * FixWhitespace
+"""autocmd BufWritePre * FixWhitespace
 
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread
@@ -236,3 +272,10 @@ nnoremap <C-i> <C-i>zz
 
 xmap <Leader>/ <Plug>Commentary
 nmap <Leader>/ <Plug>CommentaryLine
+
+
+
+
+syntax on
+color dracula
+
