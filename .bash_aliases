@@ -1,7 +1,9 @@
 # os
 alias sudo='sudo '
-alias ll='exa -lha'
-alias l='exa -h'
+alias ls='exa'
+alias ll='ls -lha'
+alias l='ls -a'
+alias f='fzf'
 alias tgz='tar -cvzf'
 alias untgz='tar -xvzf'
 alias apts='apt search'
@@ -51,7 +53,7 @@ alias pushu='git push -u origin HEAD'
 alias pushf='git push --force-with-lease origin HEAD'
 alias pushhm='git push heroku master'
 alias pull='git pull'
-alias gcb='git checkout -b'
+alias cob='git checkout -b'
 alias co='git checkout'
 alias gan='git add -N'
 alias gap='git add -p'
@@ -61,6 +63,7 @@ alias gat='git tag -m "Set version" -a'
 alias gl='git l --color=always | head'
 alias st='git status'
 alias brm='git branch -D'
+alias br='git branch'
 
 # terraform
 alias tfd='terraform workspace select default'
@@ -74,6 +77,7 @@ tfmod() {
 export ERL_AFLAGS="-kernel shell_history enabled"
 alias iex='iex --erl "-kernel shell_history enabled"'
 alias im='iex -S mix'
+alias imt='iex -S mix test'
 alias imps='iex -S mix phx.server'
 alias mps='mix phx.server'
 alias mem='mix ecto.migrate'
@@ -82,7 +86,8 @@ alias megm='mix ecto.gen.migration'
 alias phx.new='mix phx.new --no-webpack --no-ecto --no-html'
 
 # tools
-alias vv='vim .'
+alias v='nvim'
+alias vv='nvim .'
 alias tt='tmux'
 
 # docker
