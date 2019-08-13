@@ -6,6 +6,7 @@ alias l='ls -a'
 alias f='fzf'
 alias tgz='tar -cvzf'
 alias untgz='tar -xvzf'
+alias tarls='tar -tvf'
 alias apts='apt search'
 alias apti='sudo apt -y install'
 alias aptu='sudo apt update'
@@ -17,7 +18,7 @@ alias mkdirtoday1='mkdir $(date -I)'
 alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
 alias cat='bat'
 alias ra='source ~/.bash_aliases'
-alias ea='vim ~/.bash_aliases'
+alias ea='nvim ~/.bash_aliases'
 
 # c++
 alias pmake=premake5
@@ -86,12 +87,16 @@ alias megm='mix ecto.gen.migration'
 alias phx.new='mix phx.new --no-webpack --no-ecto --no-html'
 
 # tools
+alias vim='nvim'
 alias v='nvim'
 alias vv='nvim .'
 alias tt='tmux'
+alias uuid4='uuid -v4'
+alias removedash='sed '"'"'s/-//g'"'"''
 
 # docker
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
+alias dbash='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) bash'
 alias d='docker'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
