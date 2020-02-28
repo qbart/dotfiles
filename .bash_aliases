@@ -1,4 +1,5 @@
 # os
+alias o='nautilus .'
 alias sudo='sudo '
 alias ls='exa'
 alias ll='ls -lha'
@@ -19,6 +20,11 @@ alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
 alias cat='bat'
 alias ra='source ~/.bash_aliases'
 alias ea='nvim ~/.bash_aliases'
+alias c='rsync -ah --inplace --info=progress2'
+alias mountntfs='sudo mount -t ntfs -o nls=utf8,umask=0222'
+alias lsntfs='sudo fdisk -l | grep NTFS'
+alias mountexfat='sudo mount -t exfat'
+alias lsexfat='sudo fdisk -l | grep exFAT'
 
 # c++
 alias pmake=premake5
@@ -35,7 +41,7 @@ alias rdmr='bundle exec rails db:migrate:redo'
 alias rdtp='bundle exec rails db:test:prepare'
 alias rds='bundle exec rails db:seed'
 alias be='bundle exec'
-alias rornew='bundle exec rails new --database=postgresql --skip-action-mailer --skip-active-storage --skip-action-cable --skip-coffee --skip-spring --skip-turbolinks --skip-test --skip-system-test'
+alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active-storage --skip-action-cable --skip-spring --skip-turbolinks --skip-test --skip-system-test'
 alias siq='bundle exec sidekiq'
 
 # python
@@ -45,7 +51,7 @@ alias py='python3'
 alias rebasem='git pull --rebase --autostash origin master'
 alias rebasec='git rebase --continue'
 alias rebaseb='git pull --rebase --autostash origin'
-alias rebase5='git rebase -i HEAD~5'
+alias rebase5='git rebase --autostash -i HEAD~5'
 alias merge='git merge --ff-only -'
 alias amend='git commit --amend -CHEAD'
 alias ci='git commit -m'
@@ -58,18 +64,20 @@ alias cob='git checkout -b'
 alias co='git checkout'
 alias gan='git add -N'
 alias gap='git add -p'
-alias glog='git log --pretty="format:%h %s"'
 alias gt='git tag'
+alias gd='git diff'
+alias gdc='git diff --cached'
 alias gat='git tag -m "Set version" -a'
-alias gl='git log --oneline --color=always | head'
+alias gl='git log --oneline -15 --color=always'
 alias st='git status'
 alias brm='git branch -D'
 alias br='git branch'
 
 # terraform
-alias tfd='terraform workspace select default'
-alias tfp='terraform workspace select production'
+alias tfp='terraform plan'
 alias tfa='terraform apply'
+alias tfi='terraform init'
+alias tfv='terraform validate'
 tfmod() {
   mkdir -p "$1" && touch "$1"/{main.tf,variables.tf,output.tf} && echo -e "# $1\n\n## Usage\n\n## Output" >> "$1/README.md"
 }
