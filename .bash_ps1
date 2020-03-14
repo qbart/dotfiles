@@ -2,28 +2,24 @@ function ps1_git_branch {
     git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed -e 's/.*/⎇: &/g'
 }
 
-function ps1_ruby {
-  asdf current ruby 2>/dev/null | awk -F"(" '{print $1;}' | xargs
+function ps1_go_version {
+  grep golang .tool-versions 2>/dev/null | sed 's/golang //'
 }
 
 function ps1_elixir {
-  asdf current elixir 2>/dev/null | awk -F"(" '{print $1;}' | xargs
+  grep elixir .tool-versions 2>/dev/null | sed 's/elixir //'
 }
 
 function ps1_erlang {
-  asdf current erlang 2>/dev/null | awk -F"(" '{print $1;}' | xargs
-}
-
-function ps1_tf_workspace {
-    terraform workspace show
+  grep erlang .tool-versions 2>/dev/null | sed 's/erlang /\//'
 }
 
 function ps1_tf_version {
-  asdf current terraform 2>/dev/null | awk -F"(" '{print $1;}' | xargs
+  grep terraform .tool-versions 2>/dev/null | sed 's/terraform //'
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\e[38;5;150m\]\[\e[38;5;123m\]\w\[\e[00m\]  \[\e[38;5;209m\]$(ps1_git_branch)  \[\e[38;5;105m\]$(ps1_tf_version)/$(ps1_tf_workspace)  \[\e[38;5;197m\]$(ps1_ruby)  \[\e[38;5;129m\]$(ps1_elixir)/$(ps1_erlang)\[\e[0m\]\n\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\e[38;5;150m\]\[\e[38;5;123m\]\w\[\e[00m\]  \[\e[38;5;209m\]$(ps1_git_branch)  \[\e[38;5;74m\]$(ps1_go_version)  \[\e[38;5;105m\]$(ps1_tf_version)  \[\e[38;5;129m\]$(ps1_elixir)$(ps1_erlang)\[\e[0m\]\n\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
