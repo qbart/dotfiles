@@ -6,4 +6,4 @@ sudo pacman -Su
 
 sudo pacman -S i3-wm i3lock i3status dmenu
 sudo pacman -S bat fzf xclip
-sudo pacman -S go cmake
+sudo pacman -S go cmake clang
