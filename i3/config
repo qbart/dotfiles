@@ -194,3 +194,4 @@ bindsym $mod+c exec subl
 # screenshot
 bindsym --release Print exec --no-startup-id "import png:- | xclip -selection clipboard -t image/png"
 
+assign [class="firefox"] 1

@@ -1,5 +1,7 @@
 # os
-alias o='nautilus .'
+alias o='thunar .'
+alias sc='sudo systemctl'
+alias pac='sudo pacman'
 alias sudo='sudo '
 alias ls='exa'
 alias ll='ls -lha'
@@ -130,4 +132,3 @@ alias hr='heroku run'
 
 # other
 alias loc='xargs wc -l'
-alias open='nautilus 2>/dev/null'
