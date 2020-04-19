@@ -1,0 +1,15 @@
+#font:
+#  normal:
+#    family: RobotoMono
+#    style: Regular
+# 
+#  bold:
+#    family: RobotoMono
+# 
+#  italic:
+#    family: RobotoMono
+
+shell:
+    program: /usr/bin/tmux
+    args:
+     - -u # force UTF-8 in tmux
