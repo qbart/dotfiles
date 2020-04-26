@@ -17,6 +17,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'derekwyatt/vim-fswitch'
+Plug 'hashivim/vim-terraform'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 

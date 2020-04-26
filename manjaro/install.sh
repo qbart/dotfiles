@@ -5,7 +5,7 @@ sudo pacman -Syy
 sudo pacman -Su
 
 sudo pacman -S i3-wm i3lock i3status rofi
-sudo pacman -S bat fzf xclip exa alacritty tmux
+sudo pacman -S bat fzf xclip exa alacritty tmux httpie
 sudo pacman -S go cmake clang neovim
 sudo pacman -S docker
 
