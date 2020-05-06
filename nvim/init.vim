@@ -7,7 +7,6 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdTree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'luochen1990/rainbow'
 Plug 'rhysd/vim-clang-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -17,8 +16,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'hashivim/vim-terraform'
 Plug 'jiangmiao/auto-pairs'
+Plug 'fatih/vim-hclfmt'
 Plug 'tpope/vim-commentary'
 
 call plug#end()
@@ -33,6 +32,7 @@ set history=2000
 set undolevels=2000
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.class
 nmap Q <Nop> "disable ex mode
+set wrap!
 "
 
 """theme
@@ -52,7 +52,6 @@ noremap l k
 noremap k j
 noremap j h
 
-let g:ctrlp_map = '<c-k>'
 nmap <C-k><C-h> :NERDTreeToggle<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
@@ -60,6 +59,10 @@ nmap <C-k><C-k> :sp<CR>
 nmap <C-k><C-l> :vs<CR>
 
 nnoremap <C-p>  :<C-u>CocList -A --normal yank<cr>
+
+nmap <C-k> :BLines<CR>
+nmap <C-k><C-j> :Files<CR>
+nmap <C-k><C-i> :Lines<CR>
 "
 
 """coc
