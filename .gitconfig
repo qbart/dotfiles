@@ -1,0 +1,9 @@
+[user]
+	email = 
+	name = qbart
+
+[core]
+    pager = delta --plus-color="#1F4945" --plus-emph-color="#008049" --minus-color="#764B4D" --minus-emph-color="#C63F37" --theme='Monokai Extended'
+
+[interactive]
+    diffFilter = delta --color-only

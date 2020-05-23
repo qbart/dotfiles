@@ -2,7 +2,6 @@ call plug#begin()
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdTree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -14,7 +13,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
@@ -23,16 +22,17 @@ Plug 'luochen1990/rainbow'
 Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sbdchd/neoformat'
-Plug 'mboughaba/i3config.vim'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
-" todo Plug 'andymass/vim-tradewinds'
+Plug 'airblade/vim-rooter'
+Plug 'rhysd/clever-f.vim'
 
 call plug#end()
 
+
 "TODO
 "ctags -R .
-"set wildignore+=**/node_modules/**
+"snippets
 "nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
 
 """various
@@ -48,14 +48,15 @@ set fileencoding=utf-8
 set sidescroll=1
 set sidescrolloff=1
 set scrolloff=9
+set ttyfast
 
-set number " show line nums
+set nonumber " show line nums
 syntax on
 set cursorline " highlight current line
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set history=10000
 set undolevels=2000
-set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.class
+set wildignore=+*.o,*.obj,*.bak,*.exe,*.pyc,*.class,**/node_modules/**
 nmap Q <Nop> "disable ex mode
 set wrap!
 set textwidth=0 " no wordwrap
@@ -70,6 +71,10 @@ set smartcase
 
 "zen
 let g:goyo_width=110
+"
+
+"""rooter
+let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git' ]
 "
 
 """theme
@@ -96,30 +101,21 @@ set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 let g:vim_current_word#highlight_current_word = 0
-let g:lightline = {
-      \ 'colorscheme': 'ThemerVimLightline',
-      \ }
 " let g:rainbow_active = 1
 colorscheme aurora
 "
 
+"""line
+map <C-S-l> :set number!<CR>
 """comments
 nmap // <Plug>CommentaryLine
 xmap /  <Plug>Commentary
 nmap /  <Plug>Commentary
 omap /  <Plug>Commentary
 
-""" nav
-" let g:tradewinds_no_maps = 1
-
-" nnoremap <silent> <c-w>g<left>  :TradewindsMove h<cr>
-" nnoremap <silent> <c-w>g<down>  :TradewindsMove j<cr>
-" nnoremap <silent> <c-w>g<up>    :TradewindsMove k<cr>
-" nnoremap <silent> <c-w>g<right> :TradewindsMove l<cr>
-
 """keybindings
 nmap K <nop>
-imap jk <ESC>
+imap fd <ESC>
 
 " natural order consistent with i3
 noremap ; l
@@ -127,7 +123,7 @@ noremap l k
 noremap k j
 noremap j h
 
-nmap <C-k><C-h> :NERDTreeToggle<CR>
+nmap <C-e> :NERDTreeFind<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
 nmap <C-k><C-k> :sp<CR>
@@ -136,13 +132,17 @@ nmap <C-k><C-l> :vs<CR>
 nnoremap <C-p>  :<C-u>CocList -A --normal yank<cr>
 
 nmap <C-f> :BLines<CR>
-nmap <C-k><C-j> :Files<CR>
+nmap <C-t> :Tags<CR>
+nmap <C-j> :Files<CR>
+nmap <C-m> :Marks<CR>
 nmap <C-k><C-i> :Rg<CR>
 
 map <C-z> :Goyo<CR>
 "
 
 """TF
+let g:terraform_align=1
+let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
 
 
@@ -221,50 +221,58 @@ aug i3config_ft_detection
 aug end
 "
 
+"""fzf
+let g:fzf_tags_command = 'ctags -R'
+"
+
+"""startify
+let g:startify_session_dir = '~/.config/nvim/session'
+
+let g:startify_lists = [
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+          \ ]
+          " \ { 'type': 'files',     'header': ['   Files']            },
+
+let g:startify_bookmarks = [
+            \ { 'hw': '~/hashira/app/wasm' },
+            \ { 'hc': '~/hashira/cloud' },
+            \ { 'kk': '~/ohkrab/krab' },
+            \ { 'kw': '~/ohkrab/www' },
+            \ { 'ci': '~/.config/i3/config' },
+            \ { 'cp': '~/.config/polybar/config.ini' },
+            \ { 'v': '~/.config/nvim/init.vim' },
+            \ { 'b': '~/.bashrc' },
+            \ { 'p': '~/projects' },
+            \ { 's': '~/selleo' },
+            \ { 'd': '~/projects/dotfiles' }
+            \ ]
+
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_delete_buffers = 1
+"
+
+"""status line
+hi User1 guifg=#69697c guibg=#000000
+hi User2 guifg=#ff66ff guibg=#000000
+hi User3 guifg=#A843A8 guibg=#000000
+hi User4 guifg=#eeee40 guibg=#000000
+set statusline=
+set statusline +=%2*%5l%*            "lines
+set statusline +=%1*/%L:%*            
+set statusline +=%3*%-3v%*             "column
+set statusline+=%=       
+set statusline +=%4*%f%*            "path
+set statusline+=%=      
+set statusline +=%1*%{&ft}\ %{&encoding}\ %*            "file info
+
+
 
 " coc-json
 " coc-yank
 " coc-go
 " coc-snippets
 
-""" close tags
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-"
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-"
-let g:closetag_filetypes = 'html,xhtml,phtml'
-
-" filetypes like xml, xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
-let g:closetag_emptyTags_caseSensitive = 1
-
-" dict
-" Disables auto-close if not in a "valid" region (based on filetype)
-"
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
-
-" Shortcut for closing tags, default is '>'
-"
-let g:closetag_shortcut = '>'
-
-" Add > at current position without closing the current tag, default is ''
-"
-let g:closetag_close_shortcut = '<leader>>'

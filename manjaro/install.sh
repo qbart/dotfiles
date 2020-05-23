@@ -17,6 +17,7 @@ xdg-settings set default-web-browser firefox.desktop
 pip3 install pynvim
 
 yay -S git-delta polybar
+yay -S paper-icon-theme
 
 sudo pacman -R xfce4-notifyd
 systemctl enable --user dunst.service

@@ -4,20 +4,17 @@ mkdir -p ~/.config/i3
 mkdir -p ~/.config/nvim/colors
 mkdir -p ~/.config/nvim/autoload/lightline/colorscheme
 mkdir -p ~/.config/alacritty
-mkdir -p ~/.config/polybar
 mkdir -p ~/.config/dunst
 mkdir -p ~/.config/ranger
 
+ln -s "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim -f
 ln -s "$(pwd)/i3/status.conf" ~/.config/i3/status.conf -f
 ln -s "$(pwd)/i3/compton.conf" ~/.config/i3/compton.conf -f
-ln -s "$(pwd)/i3/polybar" ~/.config/polybar/config -f
+ln -s "$(pwd)/polybar" ~/.config/polybar/
 ln -s "$(pwd)/ranger/rc.conf" ~/.config/ranger/rc.conf -f
 
 ln -s "$(pwd)/.bash_aliases" ~/.bash_aliases -f
-
-ln -s "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim -f
-ln -s "$(pwd)/nvim/ThemerVim.vim" ~/.config/nvim/colors/ThemerVim.vim -f
-ln -s "$(pwd)/nvim/ThemerVimLightline.vim" ~/.config/nvim/autoload/lightline/colorscheme/ThemerVimLightline.vim -f
+ln -s "$(pwd)/.bashrc" ~/.bashrc -f
 
 ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf -f
 ln -s "$(pwd)/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml -f
