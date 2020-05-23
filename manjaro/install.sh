@@ -5,7 +5,7 @@ sudo pacman -Syy
 sudo pacman -Su
 
 sudo pacman -S i3-gaps i3lock rofi compton dunst noto-fonts-emoji rxvt-unicode mpd
-sudo pacman -S bat xclip exa alacritty tmux httpie peek clipit screen ripgrep fd w3m autofs
+sudo pacman -S bat xclip copyq exa alacritty tmux httpie peek clipit screen ripgrep fd w3m autofs
 sudo pacman -S go cmake clang neovim
 sudo pacman -S docker
 
