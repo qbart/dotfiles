@@ -106,7 +106,7 @@ colorscheme aurora
 "
 
 """line
-map <C-S-l> :set number!<CR>
+map <C-w>l :set number!<CR>
 """comments
 nmap // <Plug>CommentaryLine
 xmap /  <Plug>Commentary
@@ -123,21 +123,24 @@ noremap l k
 noremap k j
 noremap j h
 
+noremap <C-k> 15j
+noremap <C-l> 15k
+
 nmap <C-e> :NERDTreeFind<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
-nmap <C-k><C-k> :sp<CR>
-nmap <C-k><C-l> :vs<CR>
+nmap <C-w><C-k> :sp<CR>
+nmap <C-w><C-l> :vs<CR>
 
 nnoremap <C-p>  :<C-u>CocList -A --normal yank<cr>
 
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
-nmap <C-m> :Marks<CR>
-nmap <C-k><C-i> :Rg<CR>
+nmap <C-b> :Marks<CR>
+nmap <C-g> :Rg<CR>
 
-map <C-z> :Goyo<CR>
+map <C-w>z :Goyo<CR>
 "
 
 """TF

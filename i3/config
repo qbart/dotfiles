@@ -36,7 +36,6 @@ bindsym --release Print exec --no-startup-id "import png:- | xclip -selection cl
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme "gruvbox-dark" -font "pango:monospace 18" -opacity "80"
 # bindsym $mod+d exec rofi -show combi -modi combi -font "Hack 14" -lines 10 -matching fuzzy daemon
 
-bindsym ctrl+Shift+x exec copyq menu
 bindsym $mod+Shift+Return split h; exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Return split v; exec --no-startup-id i3-sensible-terminal --working-directory "$(pwd)"
 
