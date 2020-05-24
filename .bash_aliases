@@ -137,3 +137,4 @@ alias hr='heroku run'
 
 # other
 alias loc='xargs wc -l'
+alias restartpolybar='~/.config/polybar/launch.sh'

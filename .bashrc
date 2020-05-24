@@ -143,10 +143,10 @@ ex ()
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
+# ----- envs -----
+export PATH=$PATH:$GOPATH/bin
 export EDITOR=nvim
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # fzf
