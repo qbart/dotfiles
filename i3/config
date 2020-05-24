@@ -1,13 +1,11 @@
-set $mod Mod4
+set $mod Mod4 
+set $alt Mod1
 set $TERMINAL=alacritty
 
 font pango:Hack 12
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
 exec --no-startup-id picom --config ~/.config/i3/compton.conf
 exec --no-startup-id clipit
 exec --no-startup-id ~/.config/polybar/launch.sh 
@@ -18,22 +16,22 @@ exec_always --no-startup-id feh --bg-center ~/Pictures/wallpapers/_.jpg
 exec --no-startup-id firefox
 exec slack
 
-#
+# assign windows to workspaces
 assign [class="Firefox"] 1
-assign [class="Slack"] 4
+assign [class="Slack"] 2
 
 # quick apps
-bindsym $mod+w exec --no-startup-id firefox      # web browser 
-bindsym $mod+g exec --no-startup-id peek         # gif recorder
-bindsym $mod+c exec --no-startup-id gcolor2      # color picker
-bindsym $mod+a exec --no-startup-id pavucontrol  # volume control
-bindsym $mod+n exec --no-startup-id nmtui        # network manager
-bindsym $mod+i exec --no-startup-id i3-sensible-terminal -e htop
-bindsym $mod+e exec --no-startup-id i3-sensible-terminal -e ranger
-# screenshot
+bindsym $mod+w exec --no-startup-id firefox                          
+bindsym $mod+g exec --no-startup-id peek                             
+bindsym $mod+c exec --no-startup-id gcolor2                          
+bindsym $mod+a exec --no-startup-id pavucontrol                     
+bindsym $mod+n exec --no-startup-id nmtui                            
+bindsym $mod+i exec --no-startup-id i3-sensible-terminal -e htop     
+bindsym $mod+e exec --no-startup-id i3-sensible-terminal -e ranger   
+# screenshot tool (rectangular selection)
 bindsym --release Print exec --no-startup-id "import png:- | xclip -selection clipboard -t image/png"
-## rofi launcher
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme "gruvbox-dark" -font "pango:monospace 18" -opacity "80"
+## .desktop app launcher
+bindsym $mod+r exec --no-startup-id rofi -show drun -theme "fancy" -font "Hack 18" -opacity "80"
 # bindsym $mod+d exec rofi -show combi -modi combi -font "Hack 14" -lines 10 -matching fuzzy daemon
 
 bindsym $mod+Shift+Return split h; exec --no-startup-id i3-sensible-terminal
@@ -44,9 +42,14 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Shift+plus scratchpad show
 
 # resize
-bindsym $mod+minus			    gaps inner current plus 10
-bindsym $mod+plus	    		gaps inner current minus 10
-bindsym $mod+r mode "resize"
+bindsym $mod+minus    gaps inner current plus  10
+bindsym $mod+plus     gaps inner current minus 10
+# bindsym $mod+r mode "resize"
+
+bindsym $mod+Mod1+j         resize shrink width  10 px or 10 ppt
+bindsym $mod+Mod1+k         resize shrink height 10 px or 10 ppt
+bindsym $mod+Mod1+l         resize grow   height 10 px or 10 ppt
+bindsym $mod+Mod1+semicolon resize grow   width  10 px or 10 ppt
 
 #
 smart_gaps on
