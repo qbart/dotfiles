@@ -1,0 +1,35 @@
+/* 
+ * rofi -dump-config > ~/.config/rofi/config.rasi
+ * rofi --help
+ * */
+
+configuration {
+    modi: "drun,calc";
+    theme: "slate";
+    icon-theme: "Paper";
+    font: "hack 18";
+    show-icons: false;   
+    combi-modi: "drun";
+    lines: 10;
+    matching: "fuzzy";
+	max-history-size: 1000;
+    sorting-method: "fzf";
+    sort: true;
+    
+    /* custom bindings */ 
+	kb-row-first: "";
+	kb-row-last: "";
+	kb-remove-to-eol: "";
+    kb-move-front: "Control+a,Home,KP_Home";
+    kb-move-end: "Control+e,End,KP_End";
+	kb-row-down: "Down,Control+k";
+	kb-row-up: "Up,Control+l";
+	kb-row-left: "Control+j";
+	kb-row-right: "Control+semicolon";
+	kb-accept-entry: "Return,KP_Enter";
+	kb-accept-custom: "Control+Return";
+	kb-accept-alt: "Shift+Return";
+	kb-cancel: "Escape";
+	kb-delete-entry: "Shift+Delete";
+}
+

@@ -145,6 +145,7 @@ ex ()
 
 # ----- envs -----
 export PATH=$PATH:$GOPATH/bin
+export VISUAL=nvim # ranger
 export EDITOR=nvim
 export GOPATH=$HOME/go
 export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -152,6 +153,7 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export BAT_THEME='Monokai Extended'
 
 _fzf_complete_edit() {
   _fzf_complete --multi --reverse --prompt="edit> " --preview 'bat --style=numbers --color=always {} | head -100' -- "$@" < <(

@@ -34,6 +34,9 @@ call plug#end()
 "ctags -R .
 "snippets
 "nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
+"coc
+"tf lsp
+"Plug 'editorconfig/editorconfig-vim'
 
 """various
 syntax enable
@@ -78,7 +81,7 @@ let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git' ]
 "
 
 """theme
-let g:polyglot_disabled = ['cpp']
+let g:polyglot_disabled = ['cpp', 'go']
 let g:cpp_class_scope_highlight = 1
 let g:cpp_named_requirements_highlight = 1
 let g:cpp_member_variable_highlight = 1
@@ -115,13 +118,33 @@ omap /  <Plug>Commentary
 
 """keybindings
 nmap K <nop>
-imap fd <ESC>
+imap jk <ESC>
 
 " natural order consistent with i3
 noremap ; l
 noremap l k
 noremap k j
 noremap j h
+
+" resize panes
+nnoremap <M-k>    :resize -2<CR>
+nnoremap <M-l>    :resize +2<CR>
+nnoremap <M-j>    :vertical resize -2<CR>
+nnoremap <M-;>    :vertical resize +2<CR>
+
+" TAB in general mode will move to text buffer
+nnoremap <TAB> :bn<CR>
+" SHIFT-TAB will go back
+nnoremap <S-TAB> :bp<CR>
+" map <leader>d :bd<cr>
+
+" moving lines
+nnoremap <S-k> :m+<CR>==
+nnoremap <S-l> :m-2<CR>==
+inoremap <C-S-k> <Esc>:m+<CR>==gi
+inoremap <C-S-l> <Esc>:m-2<CR>==gi
+vnoremap <S-k> :m'>+<CR>gv=gv
+vnoremap <S-l> :m-2<CR>gv=gv
 
 noremap <C-k> 15j
 noremap <C-l> 15k
@@ -143,13 +166,16 @@ nmap <C-g> :Rg<CR>
 map <C-w>z :Goyo<CR>
 "
 
-"""TF
+"""hashistack 
 let g:terraform_align=1
 let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
+" au BufNewFile,BufRead {*.hcl,*.nomad} call terraform#fmt()
+au BufWritePre {*.hcl,*.nomad} call terraform#fmt()
 
 
 """coc
+" set autoindent
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -158,7 +184,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-"set cmdheight=2
+" set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -197,7 +223,6 @@ else
 endif
 "
 
-
 """golang
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
@@ -217,18 +242,39 @@ autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
 "
 
-"""i3
+"""i3 / rofi / polybar / ...
 aug i3config_ft_detection
   au!
+  au BufNewFile,BufRead *.rasi set filetype=css
   au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
 aug end
 "
 
 """fzf
+"TODO
+" let g:fzf_action = {
+"   \ 'ctrl-b': 'split',
+"   \ 'ctrl-v': 'vsplit' }
 let g:fzf_tags_command = 'ctags -R'
+let g:fzf_layout = {'up':'~80%', 'window': { 'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5 } }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Normal'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 "
 
 """startify
+" SSave
 let g:startify_session_dir = '~/.config/nvim/session'
 
 let g:startify_lists = [
@@ -241,9 +287,11 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
             \ { 'hw': '~/hashira/app/wasm' },
             \ { 'hc': '~/hashira/cloud' },
-            \ { 'kk': '~/ohkrab/krab' },
+            \ { 'ka': '~/ohkrab/krab' },
             \ { 'kw': '~/ohkrab/www' },
+            \ { 'cm': '~/projects/dotfiles/manjaro/install.sh' },
             \ { 'ci': '~/.config/i3/config' },
+            \ { 'cr': '~/.config/rofi/config.rasi' },
             \ { 'cp': '~/.config/polybar/config.ini' },
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'b': '~/.bashrc' },

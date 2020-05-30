@@ -6,6 +6,9 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"ColorPicker",
+		"FileIcons",
+		"TabNine",
 		"Vintage"
 	],
 	"theme": "Adaptive.sublime-theme",

@@ -14,7 +14,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # custom
 exec_always --no-startup-id feh --bg-center ~/Pictures/wallpapers/_.jpg
 exec --no-startup-id firefox
-exec slack
+# exec slack
 
 # assign windows to workspaces
 assign [class="Firefox"] 1
@@ -25,16 +25,19 @@ bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+g exec --no-startup-id peek                             
 bindsym $mod+c exec --no-startup-id gcolor2                          
 bindsym $mod+a exec --no-startup-id pavucontrol                     
-bindsym $mod+n exec --no-startup-id nmtui                            
-bindsym $mod+i exec --no-startup-id i3-sensible-terminal -e htop     
-bindsym $mod+e exec --no-startup-id i3-sensible-terminal -e ranger   
+bindsym $mod+n exec --no-startup-id i3-sensible-terminal -e nmtui                            
+bindsym $mod+p exec --no-startup-id i3-sensible-terminal -e htop     
+# bindsym $mod+e exec --no-startup-id i3-sensible-terminal -e ~/.config/ranger/launch.sh
+bindsym $mod+e exec --no-startup-id alacritty -e ~/.config/ranger/launch.sh
 # screenshot tool (rectangular selection)
 bindsym --release Print exec --no-startup-id "import png:- | xclip -selection clipboard -t image/png"
 ## .desktop app launcher
-bindsym $mod+r exec --no-startup-id rofi -show drun -theme "fancy" -font "Hack 18" -opacity "80"
-# bindsym $mod+d exec rofi -show combi -modi combi -font "Hack 14" -lines 10 -matching fuzzy daemon
+bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons true
+bindsym $mod+i exec --no-startup-id rofimoji --skin-tone neutral 
+bindsym $mod+m exec --no-startup-id rofi -show calc -no-show-match -no-sort  -calc-command "echo -n '{result}' | xclip -selection clipboard"
+bindsym $mod+Shift+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
-bindsym $mod+Shift+Return split h; exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+Return split h; exec --no-startup-id i3-sensible-terminal --working-directory "$(pwd)"
 bindsym $mod+Return split v; exec --no-startup-id i3-sensible-terminal --working-directory "$(pwd)"
 
 # scratchpad
@@ -44,22 +47,26 @@ bindsym $mod+Shift+plus scratchpad show
 # resize
 bindsym $mod+minus    gaps inner current plus  10
 bindsym $mod+plus     gaps inner current minus 10
-# bindsym $mod+r mode "resize"
+bindsym $mod+$alt+minus    gaps outer current plus  10
+bindsym $mod+$alt+plus     gaps outer current minus 10
 
-bindsym $mod+Mod1+j         resize shrink width  10 px or 10 ppt
-bindsym $mod+Mod1+k         resize shrink height 10 px or 10 ppt
-bindsym $mod+Mod1+l         resize grow   height 10 px or 10 ppt
-bindsym $mod+Mod1+semicolon resize grow   width  10 px or 10 ppt
+bindsym $mod+$alt+j         resize shrink width  10 px or 10 ppt
+bindsym $mod+$alt+k         resize shrink height 10 px or 10 ppt
+bindsym $mod+$alt+l         resize grow   height 10 px or 10 ppt
+bindsym $mod+$alt+semicolon resize grow   width  10 px or 10 ppt
+bindsym $mod+$alt+Left      resize shrink width  10 px or 10 ppt
+bindsym $mod+$alt+Down      resize shrink height 10 px or 10 ppt
+bindsym $mod+$alt+Up        resize grow   height 10 px or 10 ppt
+bindsym $mod+$alt+Right     resize grow   width  10 px or 10 ppt
 
 #
 smart_gaps on
+smart_gaps inverse_outer
 for_window [class=".*"] border pixel 0
 gaps inner 20
-# gaps inner 20
+gaps outer 0
 hide_edge_borders smart_no_gaps
 focus_follows_mouse no
-
-
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -166,6 +173,7 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
+# bindsym $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
