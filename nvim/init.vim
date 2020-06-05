@@ -117,6 +117,9 @@ nmap /  <Plug>Commentary
 omap /  <Plug>Commentary
 
 """keybindings
+let mapleader = ","
+let maplocalleader = "\<Space>"
+
 nmap K <nop>
 imap jk <ESC>
 
@@ -225,9 +228,9 @@ endif
 
 """golang
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
-autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
-autocmd FileType go nmap gtc :CocCommand go.tags.clear<cr>
+autocmd FileType go nnoremap <localleader>t :CocCommand go.tags.clear<cr>
+autocmd FileType go nnoremap <localleader>y :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nnoremap <localleader>j :CocCommand go.tags.add json<cr>
 "
 
 """ruby
