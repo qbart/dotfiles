@@ -140,6 +140,7 @@ ex ()
   fi
 }
 
+source ~/.config/byhost/$(hostname).sh
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
