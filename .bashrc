@@ -145,10 +145,14 @@ source ~/.config/byhost/$(hostname).sh
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # ----- envs -----
+export GOPATH=$HOME/go
+export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin
+export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
+export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
 export VISUAL=nvim # ranger
 export EDITOR=nvim
-export GOPATH=$HOME/go
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # fzf
