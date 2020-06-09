@@ -14,9 +14,6 @@ ln -s "$(pwd)/.bashrc" ~/.bashrc -f
 
 ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf -f
 
-#ln -s "$(pwd)/sublime/Preferences.sublime-settings" ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings -f
-#ln -s "$(pwd)/sublime/linux.sublime-keymap" ~/.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap -f
-
 rm ~/.config/rofi/rofi
 rm ~/.config/polybar/polybar
 rm ~/.config/ranger/ranger
