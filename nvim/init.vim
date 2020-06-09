@@ -1,6 +1,7 @@
 call plug#begin()
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdTree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -231,6 +232,8 @@ autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeIm
 autocmd FileType go nnoremap <localleader>t :CocCommand go.tags.clear<cr>
 autocmd FileType go nnoremap <localleader>y :CocCommand go.tags.add yaml<cr>
 autocmd FileType go nnoremap <localleader>j :CocCommand go.tags.add json<cr>
+autocmd FileType go nnoremap <localleader>b :DlvToggleBreakpoint<cr>
+autocmd FileType go nnoremap <localleader>d :DlvDebug<cr>
 "
 
 """ruby
