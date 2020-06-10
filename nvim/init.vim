@@ -109,8 +109,13 @@ let g:vim_current_word#highlight_current_word = 0
 colorscheme aurora
 "
 
+"""panes
+map <M-j> <C-W>h 
+map <M-k> <C-W>j
+map <M-l> <C-W>k
+map <M-;> <C-W>l
 """line
-map <C-w>l :set number!<CR>
+nmap n :set number!<CR>
 """comments
 nmap // <Plug>CommentaryLine
 xmap /  <Plug>Commentary
@@ -131,10 +136,10 @@ noremap k j
 noremap j h
 
 " resize panes
-nnoremap <M-k>    :resize -2<CR>
-nnoremap <M-l>    :resize +2<CR>
-nnoremap <M-j>    :vertical resize -2<CR>
-nnoremap <M-;>    :vertical resize +2<CR>
+nnoremap <C-M-k>    :resize -2<CR>
+nnoremap <C-M-l>    :resize +2<CR>
+nnoremap <C-M-j>    :vertical resize -2<CR>
+" nnoremap <C-M-;>    :vertical resize +2<CR>
 
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bn<CR>
