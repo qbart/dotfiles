@@ -65,12 +65,18 @@ bindsym $mod+$alt+Right     resize grow   width  10 px or 10 ppt
 #
 smart_gaps on
 smart_gaps inverse_outer
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 gaps inner 20
 gaps outer 0
 hide_edge_borders smart_no_gaps
 focus_follows_mouse no
 
+
+# <colorclass>                <border>    <background>    <text>    <indicator>  <child_border>
+client.focused                #00000000   #000000         #ffffff   #11B8A1      #11B8A1
+client.focused_inactive       #00000000   #000000         #ffffff   #00000000    #00000000
+client.unfocused              #00000000   #000000         #ffffff   #00000000    #00000000
+client.urgent                 #00000000   #000000         #ffffff   #ff4050      #ff4050
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
