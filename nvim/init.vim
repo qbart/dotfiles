@@ -139,7 +139,8 @@ noremap j h
 nnoremap <C-M-k>    :resize -2<CR>
 nnoremap <C-M-l>    :resize +2<CR>
 nnoremap <C-M-j>    :vertical resize -2<CR>
-" nnoremap <C-M-;>    :vertical resize +2<CR>
+"        <C-M-;> (alacritty)
+nnoremap VIMKBRESR  :vertical resize +2<CR>
 
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bn<CR>

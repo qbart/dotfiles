@@ -7,6 +7,9 @@ shell:
       - --login
     # program: /usr/bin/tmux
      # - -u # force UTF-8 in tmux
+     
+key_bindings:
+  - { key: Semicolon, mods: Control|Alt, chars: "VIMKBRESR" } # Vim -> Resize Right
 
 # theme
 window:
