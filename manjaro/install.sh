@@ -6,7 +6,7 @@ sudo pacman -Su
 
 source ./yay.sh
 
-sudo pacman -S base-devel i3-gaps i3lock rofi compton dunst noto-fonts-emoji mpd feh autorandr
+sudo pacman -S base-devel i3-gaps i3lock rofi compton dunst noto-fonts-emoji mpd feh autorandr xorg-xwininfo
 sudo pacman -S bat xclip copyq exa alacritty tmux httpie peek clipit screen ripgrep fd w3m autofs highlight ranger
 sudo pacman -S go cmake clang neovim
 sudo pacman -S docker
