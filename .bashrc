@@ -59,6 +59,10 @@ match_lhs=""
 	&& match_lhs=$(dircolors --print-database)
 [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
 
+function __git_ps1 {
+    git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\*\ \(.+\)$/\[\ \\1\ \]/
+}
+
 if ${use_color} ; then
 	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
 	if type -P dircolors >/dev/null ; then
@@ -73,7 +77,7 @@ if ${use_color} ; then
 		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
 		# PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-		PS1='\[\033[01;32m\]\[\033[01;37m\]\w\[\033[01;32m\]\n$\[\033[00m\] '
+        PS1='\[\033[01;32m\]\[\033[01;37m\]\w\[\033[01;32m\] $(__git_ps1)\n $\[\033[00m\] '
 	fi
 
 	alias grep='grep --colour=auto'
@@ -156,7 +160,7 @@ export EDITOR=nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # fzf
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_THEME='Monokai Extended'
 

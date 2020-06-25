@@ -11,7 +11,7 @@
             "nodes": [
                 {
                     "name": "Logs",
-                    "percent": 0.6,
+                    "percent": 0.4,
                     "type": "con",
                     "swallows": [
                     {
@@ -21,13 +21,13 @@
                 ]
                 },
                 {
-                    "name": "Extra",
-                    "percent": 0.4,
+                    "name": "Console",
+                    "percent": 0.6,
                     "type": "con",
                     "swallows": [
                     {
                         "class": "^Alacritty$",
-                        "title": "^AExtra$"
+                        "title": "^AConsole$"
                     }
                 ]
                 }
@@ -40,23 +40,12 @@
             "nodes": [
                 {
                     "name": "Editor",
-                    "percent": 0.8,
+                    "percent": 1,
                     "type": "con",
                     "swallows": [
                     {
                         "class": "^Alacritty$",
                         "title": "^AEditor$"
-                    }
-                ]
-                },
-                {
-                    "name": "CLI",
-                    "percent": 0.2,
-                    "type": "con",
-                    "swallows": [
-                    {
-                        "class": "^Alacritty$",
-                        "title": "^ACLI$"
                     }
                 ]
                 }

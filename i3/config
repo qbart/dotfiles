@@ -22,7 +22,7 @@ assign [class="Slack"] 2
 
 # workspace nav
 bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+d exec --no-startup-id "i3-msg 'append_layout ~/.config/i3/code.layout.json'"; exec --no-startup-id alacritty -t ALogs; exec --no-startup-id alacritty -t AExtra; exec --no-startup-id alacritty -t ACLI; exec --no-startup-id alacritty -t AEditor
+bindsym $mod+d exec --no-startup-id "i3-msg 'append_layout ~/.config/i3/code.layout.json'"; exec --no-startup-id alacritty -t ALogs; exec --no-startup-id alacritty -t AConsole; exec --no-startup-id alacritty -t AEditor
 
 # quick apps
 bindsym $mod+w exec --no-startup-id firefox                          
