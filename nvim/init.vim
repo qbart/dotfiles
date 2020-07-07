@@ -78,7 +78,7 @@ let g:goyo_width=110
 "
 
 """rooter
-let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git' ]
+let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git', 'LICENSE' ]
 "
 
 """theme
@@ -114,6 +114,10 @@ map <M-j> <C-W>h
 map <M-k> <C-W>j
 map <M-l> <C-W>k
 map <M-;> <C-W>l
+map <M-Left> <C-W>h 
+map <M-Down> <C-W>j
+map <M-Up> <C-W>k
+map <M-Right> <C-W>l
 """line
 nmap n :set number!<CR>
 """comments
