@@ -1,12 +1,13 @@
 [Unit]
 Description=Clipboard
 StartLimitIntervalSec=0
+After=display-manager.service
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=greenclip daemon
+ExecStart=/usr/bin/greenclip daemon
 
 [Install]
 WantedBy=multi-user.target
