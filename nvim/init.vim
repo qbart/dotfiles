@@ -30,8 +30,13 @@ Plug 'rhysd/clever-f.vim'
 
 call plug#end()
 
+"TODO after install:
+" CocInstall coc-json coc-tsserver
+
 
 "TODO
+" https://github.com/dense-analysis/ale
+"tabularize
 "ctags -R .
 "snippets
 "nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
@@ -100,12 +105,19 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_assignments = 0
 let g:go_highlight_function_parameters=0
+let g:go_auto_sameids = 0
+let g:go_highlight_fields = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_auto_type_info = 1
+let g:go_addtags_transform = "snakecase"
 
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
+let g:vim_current_word#enabled = 1
+let g:vim_current_word#highlight_twins = 1
 let g:vim_current_word#highlight_current_word = 0
-" let g:rainbow_active = 1
 colorscheme aurora
 "
 
@@ -178,6 +190,8 @@ nmap <C-b> :Marks<CR>
 nmap <C-g> :Rg<CR>
 
 map <C-w>z :Goyo<CR>
+nmap <C-w>r :so $MYVIMRC<CR>
+nmap <C-m> :messages<CR>
 "
 
 """hashistack 
@@ -198,7 +212,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-" set cmdheight=2
+set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -239,11 +253,17 @@ endif
 
 """golang
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd FileType go nnoremap <localleader>t :CocCommand go.tags.clear<cr>
+autocmd FileType go nnoremap <localleader>c :CocCommand go.tags.clear<cr>
 autocmd FileType go nnoremap <localleader>y :CocCommand go.tags.add yaml<cr>
 autocmd FileType go nnoremap <localleader>j :CocCommand go.tags.add json<cr>
 autocmd FileType go nnoremap <localleader>b :DlvToggleBreakpoint<cr>
 autocmd FileType go nnoremap <localleader>d :DlvDebug<cr>
+au FileType go nmap <localleader>g :GoDeclsDir<cr>
+au FileType go nmap <localleader>a :GoAlternate<cr>
+au FileType go nmap <localleader>t :GoTest -short<cr>
+" GoCoverageToggle -short
+" K
+" [[ ]]
 "
 
 """ruby
@@ -343,3 +363,4 @@ set statusline +=%1*%{&ft}\ %{&encoding}\ %*            "file info
 " coc-go
 " coc-snippets
 
+""""""

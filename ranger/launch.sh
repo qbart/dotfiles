@@ -1,4 +1,3 @@
 #!/bin/bash
 
-source ~/.bashrc
-ranger
+alacritty --working-directory "`xcwd`" -e ranger
