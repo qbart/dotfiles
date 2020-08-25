@@ -31,7 +31,7 @@ Plug 'rhysd/clever-f.vim'
 call plug#end()
 
 "TODO after install:
-" CocInstall coc-json coc-tsserver
+" CocInstall coc-json coc-tsserver coc-go coc-yank
 
 
 "TODO
@@ -143,7 +143,7 @@ let mapleader = ","
 let maplocalleader = "\<Space>"
 
 nmap K <nop>
-imap jk <ESC>
+imap jk <ESC>;
 
 " natural order consistent with i3
 noremap ; l

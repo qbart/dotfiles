@@ -34,7 +34,7 @@ bindsym $mod+n exec --no-startup-id alacritty -e nmtui
 bindsym $mod+p exec --no-startup-id alacritty -e htop     
 bindsym $mod+e exec --no-startup-id ~/.config/ranger/launch.sh
 # screenshot tool (rectangular selection)
-bindsym --release Print exec --no-startup-id "import png:- | xclip -selection clipboard -t image/png"
+bindsym --release Print exec --no-startup-id flameshot gui
 bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons true
 bindsym $mod+i exec --no-startup-id rofimoji --skin-tone neutral 
 bindsym $mod+m exec --no-startup-id rofi -show calc -no-show-match -no-sort  -calc-command "echo -n '{result}' | xclip -selection clipboard"
@@ -44,14 +44,14 @@ bindsym $mod+Shift+Return split h; exec --no-startup-id ~/.config/alacritty/laun
 bindsym $mod+Return split v; exec --no-startup-id ~/.config/alacritty/launch.sh
 
 # scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+Shift+plus scratchpad show
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
 
 # resize
-bindsym $mod+minus    gaps inner current plus  10
-bindsym $mod+plus     gaps inner current minus 10
-bindsym $mod+$alt+minus    gaps outer current plus  10
-bindsym $mod+$alt+plus     gaps outer current minus 10
+bindsym $mod+Shift+minus    gaps inner current plus  10
+bindsym $mod+Shift+plus     gaps inner current minus 10
+bindsym $mod+$alt+minus     gaps outer current plus  10
+bindsym $mod+$alt+plus      gaps outer current minus 10
 
 bindsym $mod+$alt+j         resize shrink width  10 px or 10 ppt
 bindsym $mod+$alt+k         resize shrink height 10 px or 10 ppt

@@ -85,6 +85,7 @@ alias gll='git log --oneline -200 --color=always'
 alias st='git status'
 alias brm='git branch -D'
 alias br='git branch'
+alias wip='git commit -m "wip"'
 
 # terraform
 alias tfp='terraform plan'
