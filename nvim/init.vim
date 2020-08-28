@@ -67,7 +67,7 @@ set history=10000
 set undolevels=2000
 set wildignore=+*.o,*.obj,*.bak,*.exe,*.pyc,*.class,**/node_modules/**
 nmap Q <Nop> "disable ex mode
-set wrap!
+set nowrap
 set textwidth=0 " no wordwrap
 set wrapmargin=0
 set splitright
@@ -343,19 +343,20 @@ let g:startify_session_delete_buffers = 1
 "
 
 """status line
-hi User1 guifg=#69697c guibg=#000000
-hi User2 guifg=#ff66ff guibg=#000000
-hi User3 guifg=#A843A8 guibg=#000000
-hi User4 guifg=#eeee40 guibg=#000000
-set statusline=
-set statusline +=%2*%5l%*            "lines
-set statusline +=%1*/%L:%*            
-set statusline +=%3*%-3v%*             "column
-set statusline+=%=       
-set statusline +=%4*%f%*            "path
-set statusline+=%=      
-set statusline +=%1*%{&ft}\ %{&encoding}\ %*            "file info
+hi User1 guifg=#69697c guibg=#1b1b24
+hi User2 guifg=#ff66ff guibg=#1b1b24
+hi User3 guifg=#A843A8 guibg=#1b1b24
+hi User4 guifg=#A843A8 guibg=#1b1b24
 
+set statusline=
+set statusline=%2*%5l%*            "lines
+set statusline+=%1*/%L:%*            
+set statusline+=%3*%-3v%*             "column
+set statusline+=%1*%=
+set statusline+=%4*\ %f\ %*            "path
+set statusline+=%1*%=      
+set statusline+=%1*\ %{&ft}\ %{&encoding}\ %1*            "file info
+set fillchars=stl:\-,stlnc:\-,fold:-,diff:-  "https://vimhelp.org/options.txt.html#%27fillchars%27
 
 
 " coc-json
