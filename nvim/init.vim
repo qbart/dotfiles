@@ -78,6 +78,8 @@ set novisualbell
 set smartindent
 set smartcase
 
+set clipboard=unnamedplus
+
 "zen
 let g:goyo_width=110
 "
@@ -162,7 +164,7 @@ nnoremap VIMKBRESR  :vertical resize +2<CR>
 nnoremap <TAB> :bn<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bp<CR>
-" map <leader>d :bd<cr>
+nmap <leader>d :bd<cr>
 
 " moving lines
 nnoremap <S-k> :m+<CR>==
