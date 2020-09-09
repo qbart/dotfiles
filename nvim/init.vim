@@ -160,11 +160,10 @@ nnoremap <C-M-j>    :vertical resize -2<CR>
 "        <C-M-;> (alacritty)
 nnoremap VIMKBRESR  :vertical resize +2<CR>
 
-" TAB in general mode will move to text buffer
+" buffers
 nnoremap <TAB> :bn<CR>
-" SHIFT-TAB will go back
 nnoremap <S-TAB> :bp<CR>
-nmap <leader>d :bd<cr>
+nmap <leader>d :bd!<cr>
 
 " moving lines
 nnoremap <S-k> :m+<CR>==
@@ -174,8 +173,8 @@ inoremap <C-S-l> <Esc>:m-2<CR>==gi
 vnoremap <S-k> :m'>+<CR>gv=gv
 vnoremap <S-l> :m-2<CR>gv=gv
 
-noremap <C-k> 15j
-noremap <C-l> 15k
+noremap <C-k> 5j
+noremap <C-l> 5k
 
 nmap <C-e> :NERDTreeFind<CR>
 nmap <C-s> :w<CR>
