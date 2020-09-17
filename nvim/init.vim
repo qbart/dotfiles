@@ -357,8 +357,27 @@ set statusline+=%1*%=
 set statusline+=%4*\ %f\ %*            "path
 set statusline+=%1*%=      
 set statusline+=%1*\ %{&ft}\ %{&encoding}\ %1*            "file info
+set statusline+=%2*\%{CurrentMode()}\ %*
 set fillchars=stl:\-,stlnc:\-,fold:-,diff:-  "https://vimhelp.org/options.txt.html#%27fillchars%27
 
+" statusline
+function! CurrentMode()
+  let l:mode = mode()
+
+  if l:mode==#"n"
+    return "N"
+  elseif l:mode==?"v"
+    return "V"
+  elseif l:mode==?"V"
+    return "V"
+  elseif l:mode==#"i"
+    return "I"
+  elseif l:mode==#"R"
+    return "R"
+  elseif l:mode==#"Ctrl-V"
+    return "B"
+  endif
+endfunction
 
 " coc-json
 " coc-yank
