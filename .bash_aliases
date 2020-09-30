@@ -33,6 +33,7 @@ alias mountntfs='sudo mount -t ntfs -o nls=utf8,umask=0222'
 alias lsntfs='sudo fdisk -l | grep NTFS'
 alias mountexfat='sudo mount -t exfat'
 alias lsexfat='sudo fdisk -l | rg exFAT'
+alias cdprints='cd /var/spool/cups-pdf/$USER'
 
 # c++
 alias pmake=premake5
@@ -96,6 +97,9 @@ alias tfv='terraform validate'
 tfmod() {
   mkdir -p "$1" && touch "$1"/{main.tf,variables.tf,output.tf} && echo -e "# $1\n\n## Usage\n\n## Output" >> "$1/README.md"
 }
+
+# go
+alias gohot='air -c air.conf'
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"

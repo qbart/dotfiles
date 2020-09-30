@@ -1,3 +1,5 @@
+let g:polyglot_disabled = ['cpp', 'go']
+
 call plug#begin()
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -89,7 +91,6 @@ let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git', 'LICENSE' ]
 "
 
 """theme
-let g:polyglot_disabled = ['cpp', 'go']
 let g:cpp_class_scope_highlight = 1
 let g:cpp_named_requirements_highlight = 1
 let g:cpp_member_variable_highlight = 1
