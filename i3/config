@@ -17,7 +17,6 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/_.jpg
 exec --no-startup-id firefox
 exec --no-startup-id slack
 exec --no-startup-id discord
-# exec slack
 
 # assign windows to workspaces
 assign [class="Firefox"] 1

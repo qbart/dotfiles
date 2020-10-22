@@ -200,7 +200,6 @@ nmap <C-m> :messages<CR>
 let g:terraform_align=1
 let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
-" au BufNewFile,BufRead {*.hcl,*.nomad} call terraform#fmt()
 au BufWritePre {*.hcl,*.nomad} call terraform#fmt()
 
 
@@ -275,7 +274,7 @@ let g:ruby_pseudo_operators=1
 """clang
 let g:clang_format#auto_format=0
 let g:clang_format#detect_style_file=1
-autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat
+autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
 autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
 "

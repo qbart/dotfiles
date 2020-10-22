@@ -9,6 +9,7 @@ alias jc='sudo journalctl'
 alias pac='sudo pacman'
 alias sudo='sudo '
 alias ls='exa'
+alias lst='exa -T'
 alias ll='exa -lha -bhl --git --group-directories-first'
 alias l='ls -a'
 alias f='fzf'
@@ -55,9 +56,11 @@ alias ber='bundle exec rails'
 alias bers='bundle exec rspec'
 alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active-storage --skip-action-cable --skip-spring --skip-turbolinks --skip-test --skip-system-test'
 
+# hcloud
+alias hcsl='hcloud server list'
+
 # python
 alias py='python3'
-
 # git
 alias rebasem='git pull --rebase --autostash origin master'
 alias rebasec='git rebase --continue'
@@ -124,6 +127,8 @@ alias removedash='sed '"'"'s/-//g'"'"''
 # docker
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
 alias dbash='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) bash'
+alias drm='docker rm $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  )'
+alias drma='docker rm $(  docker ps -a | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias d='docker'
 alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
