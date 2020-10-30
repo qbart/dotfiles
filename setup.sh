@@ -1,5 +1,10 @@
 #!/bin/bash
 
+mkdir -p ~/.secrets
+touch ~/.secrets/load.sh
+chmod +x ~/.secrets/load.sh
+chmod 0700 ~/.secrets
+
 ln -s "$(pwd)/nvim" ~/.config/nvim -f
 ln -s "$(pwd)/i3" ~/.config/i3 -f
 ln -s "$(pwd)/polybar" ~/.config/polybar -f

@@ -182,3 +182,6 @@ complete -C /usr/bin/vault vault
 complete -C /usr/bin/consul consul
 complete -C /usr/local/bin/nomad nomad
 source ~/.config/timelog/autocomplete.sh
+
+# ----- secrets -----
+[ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
