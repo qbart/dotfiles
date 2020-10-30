@@ -10,3 +10,5 @@ cd /tmp
 git clone git@github.com:qbart/dragon.git
 make
 make install
+
+go get -u github.com/hetznercloud/cli/cmd/hcloud
