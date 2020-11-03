@@ -170,6 +170,8 @@ _fzf_complete_edit() {
   )
 }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# z
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # ----- asdf -----
 . $HOME/.asdf/asdf.sh
@@ -186,3 +188,4 @@ which hcloud &> /dev/null && source <(hcloud completion bash)
 
 # ----- secrets -----
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
+

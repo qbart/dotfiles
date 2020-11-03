@@ -29,6 +29,9 @@ Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
 Plug 'rhysd/clever-f.vim'
+Plug 'pbogut/fzf-mru.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 
 call plug#end()
 
@@ -82,9 +85,15 @@ set smartcase
 
 set clipboard=unnamedplus
 
+"only relative MRU
+let g:fzf_mru_relative = 1
+
 "zen
 let g:goyo_width=110
 "
+
+" disable ranger default mapping
+let g:ranger_map_keys = 0
 
 """rooter
 let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git', 'LICENSE' ]
@@ -119,6 +128,7 @@ set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 let g:vim_current_word#enabled = 1
+let g:vim_current_word#highlight_delay = 200 "ms
 let g:vim_current_word#highlight_twins = 1
 let g:vim_current_word#highlight_current_word = 0
 colorscheme aurora
@@ -162,7 +172,8 @@ nnoremap <C-M-j>    :vertical resize -2<CR>
 nnoremap VIMKBRESR  :vertical resize +2<CR>
 
 " buffers
-nnoremap <TAB> :bn<CR>
+nnoremap <TAB> :FZFMru<CR>
+" nnoremap <TAB> :bn<CR>
 nnoremap <S-TAB> :bp<CR>
 nmap <leader>d :bd!<cr>
 
@@ -177,7 +188,8 @@ vnoremap <S-l> :m-2<CR>gv=gv
 noremap <C-k> 5j
 noremap <C-l> 5k
 
-nmap <C-e> :NERDTreeFind<CR>
+" nmap <C-e> :NERDTreeFind<CR>
+nmap <C-e> :Ranger<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
 nmap <C-w><C-k> :sp<CR>
@@ -217,7 +229,7 @@ set nowritebackup
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=400
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -324,6 +336,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
             \ { 'hw': '~/hashira/app/wasm' },
             \ { 'hc': '~/hashira/cloud' },
+            \ { 'hi': '~/hashira/infra' },
             \ { 'ka': '~/ohkrab/krab' },
             \ { 'kw': '~/ohkrab/www' },
             \ { 'cm': '~/projects/dotfiles/manjaro/install.sh' },
