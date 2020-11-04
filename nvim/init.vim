@@ -37,7 +37,7 @@ Plug 'machakann/vim-highlightedyank' " highlight yank
 call plug#end()
 
 "TODO after install:
-" CocInstall coc-json coc-tsserver coc-go coc-yank
+" CocInstall coc-json coc-tsserver coc-go 
 
 
 "TODO
@@ -125,6 +125,7 @@ let g:go_highlight_structs = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 
+set signcolumn=yes
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
@@ -133,7 +134,9 @@ let g:vim_current_word#highlight_delay = 200 "ms
 let g:vim_current_word#highlight_twins = 1
 let g:vim_current_word#highlight_current_word = 0
 colorscheme aurora
-"
+
+" ranger
+let g:ranger_command_override = 'ranger --cmd "set column_ratios=1,1"'
 
 """panes
 map <M-j> <C-W>h 
@@ -196,8 +199,6 @@ nmap <C-q> :q<CR>
 nmap <C-w><C-k> :sp<CR>
 nmap <C-w><C-l> :vs<CR>
 
-nnoremap <C-p>  :<C-u>CocList -A --normal yank<cr>
-
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
@@ -215,29 +216,13 @@ let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
 au BufWritePre {*.hcl,*.nomad} call terraform#fmt()
 
-
-"""coc
-" set autoindent
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
+set hidden "https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set nobackup
 set nowritebackup
-
-" Give more space for displaying messages.
-" set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
+set cmdheight=1
+" set autoindent
 set updatetime=400
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
+set shortmess=ac "http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -394,7 +379,6 @@ function! CurrentMode()
 endfunction
 
 " coc-json
-" coc-yank
 " coc-go
 " coc-snippets
 
