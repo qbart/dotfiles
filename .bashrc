@@ -164,6 +164,12 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclu
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_THEME='Monokai Extended'
 
+# c++
+export CC=clang
+export CXX=clang++
+
+# tools
+## fzf
 _fzf_complete_edit() {
   _fzf_complete --multi --reverse --prompt="edit> " --preview 'bat --style=numbers --color=always {} | head -100' -- "$@" < <(
     $FZF_DEFAULT_COMMAND

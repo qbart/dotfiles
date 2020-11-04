@@ -1,11 +1,11 @@
 let g:polyglot_disabled = ['cpp', 'go']
+let g:highlightedyank_highlight_duration = 200
 
 call plug#begin()
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdTree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'rhysd/vim-clang-format'
@@ -30,8 +30,9 @@ Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
 Plug 'rhysd/clever-f.vim'
 Plug 'pbogut/fzf-mru.vim'
-Plug 'francoiscabrol/ranger.vim'
+Plug 'francoiscabrol/ranger.vim'  
 Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
+Plug 'machakann/vim-highlightedyank' " highlight yank
 
 call plug#end()
 
