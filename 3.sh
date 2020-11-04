@@ -12,3 +12,4 @@ make
 make install
 
 go get -u github.com/hetznercloud/cli/cmd/hcloud
+go get golang.org/x/tools/cmd/godoc

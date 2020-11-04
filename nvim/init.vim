@@ -251,12 +251,16 @@ endif
 "
 
 """golang
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd FileType go nnoremap <localleader>c :CocCommand go.tags.clear<cr>
-autocmd FileType go nnoremap <localleader>y :CocCommand go.tags.add yaml<cr>
-autocmd FileType go nnoremap <localleader>j :CocCommand go.tags.add json<cr>
-autocmd FileType go nnoremap <localleader>b :DlvToggleBreakpoint<cr>
-autocmd FileType go nnoremap <localleader>d :DlvDebug<cr>
+" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocAction('organizeImport')
+let g:go_fmt_command = "goimports"
+autocmd FileType go nmap <localleader>c :GoRemoveTags<cr>
+autocmd FileType go nmap <localleader>y :GoAddTags yaml<cr>
+autocmd FileType go nmap <localleader>j :GoAddTags json<cr>
+autocmd FileType go nmap <localleader>h :GoAddTags hcl<cr>
+autocmd FileType go nmap <localleader>d :GoDoc
+" autocmd FileType go nmap <localleader>b :DlvToggleBreakpoint<cr>
+" autocmd FileType go nmap <localleader>d :DlvDebug<cr>
 au FileType go nmap <localleader>g :GoDeclsDir<cr>
 au FileType go nmap <localleader>a :GoAlternate<cr>
 au FileType go nmap <localleader>t :GoTest -short<cr>
