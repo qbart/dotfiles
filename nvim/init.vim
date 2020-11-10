@@ -36,17 +36,13 @@ Plug 'machakann/vim-highlightedyank' " highlight yank
 
 call plug#end()
 
-"TODO after install:
-" CocInstall coc-json coc-tsserver coc-go 
-
-
 "TODO
 " https://github.com/dense-analysis/ale
+"Plug 'SirVer/ultisnips'
 "tabularize
 "ctags -R .
 "snippets
 "nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
-"coc
 "tf lsp
 "Plug 'editorconfig/editorconfig-vim'
 
@@ -160,7 +156,6 @@ let mapleader = ","
 let maplocalleader = "\<Space>"
 
 nmap K <nop>
-imap jk <ESC>;
 
 " natural order consistent with i3
 noremap ; l
@@ -279,6 +274,8 @@ let g:clang_format#detect_style_file=1
 autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
 autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
+au FileType cpp nmap <localleader>a :FSHere<cr>
+au FileType c nmap <localleader>a :FSHere<cr>
 "
 
 """i3 / rofi / polybar / ...
