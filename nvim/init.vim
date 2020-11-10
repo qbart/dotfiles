@@ -4,7 +4,7 @@ let g:highlightedyank_highlight_duration = 200
 call plug#begin()
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sebdah/vim-delve'
+" Plug 'sebdah/vim-delve'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -20,9 +20,9 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-abolish'
-Plug 'luochen1990/rainbow'
-Plug 'Raimondi/delimitMate'
+" Plug 'tpope/vim-abolish'
+" Plug 'luochen1990/rainbow'
+" Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sbdchd/neoformat'
 Plug 'qbart/vim-aurora'
@@ -382,8 +382,3 @@ function! CurrentMode()
   endif
 endfunction
 
-" coc-json
-" coc-go
-" coc-snippets
-
-""""""
