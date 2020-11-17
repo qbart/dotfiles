@@ -42,8 +42,8 @@ bindsym $mod+i exec --no-startup-id rofimoji --skin-tone neutral
 bindsym $mod+m exec --no-startup-id rofi -show calc -no-show-match -no-sort  -calc-command "echo -n '{result}' | xclip -selection clipboard"
 bindsym $mod+Shift+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
-bindsym $mod+Shift+Return split h; exec --no-startup-id ~/.config/alacritty/launch.sh
-bindsym $mod+Return split v; exec --no-startup-id ~/.config/alacritty/launch.sh
+bindsym $mod+Shift+Return split v; exec --no-startup-id ~/.config/alacritty/launch.sh
+bindsym $mod+Return split h; exec --no-startup-id ~/.config/alacritty/launch.sh
 
 # scratchpad
 bindsym $mod+minus move scratchpad
