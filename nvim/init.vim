@@ -24,7 +24,7 @@ Plug 'tpope/vim-abolish'
 " Plug 'luochen1990/rainbow'
 " Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
@@ -205,6 +205,10 @@ nmap <C-w>r :so $MYVIMRC<CR>
 nmap <C-m> :messages<CR>
 "
 
+"neoformat
+let g:neoformat_verbose = 0
+
+
 """hashistack 
 let g:terraform_align=1
 let g:terraform_fold_sections=0
@@ -269,9 +273,9 @@ let g:ruby_operators=1
 let g:ruby_pseudo_operators=1
 
 """clang
-let g:clang_format#auto_format=0
+let g:clang_format#auto_format=1
 let g:clang_format#detect_style_file=1
-autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
+" autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
 autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
 au FileType cpp nmap <localleader>a :FSHere<cr>
