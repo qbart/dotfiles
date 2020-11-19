@@ -21,7 +21,7 @@ exec --no-startup-id discord
 # assign windows to workspaces
 assign [class="Firefox"] 1
 assign [class="Slack"] 4
-assign [class="discord"] 5
+assign [class="discord"] 7
 
 # workspace nav
 bindsym $mod+Tab workspace back_and_forth

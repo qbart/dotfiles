@@ -90,7 +90,7 @@ alias gl='git log --oneline -20 --color=always'
 alias gll='git log --oneline -200 --color=always'
 alias st='git status'
 alias brm='git branch -D'
-alias br='git branch'
+alias br='echo && git branch'
 alias gg='git switch $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias wip='git commit -m "wip"'
 
