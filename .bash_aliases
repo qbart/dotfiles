@@ -57,7 +57,7 @@ alias bers='bundle exec rspec'
 alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active-storage --skip-action-cable --skip-spring --skip-turbolinks --skip-test --skip-system-test'
 
 # ssh
-alias sshh='ssh -i $HCLOUD_PEM root@$(hcloud server list | grep -v "IPV" | fzf | awk '"'"'{print $4}'"'"'  )'
+alias sshh='ssh -i $HOME/.ssh/$HCLOUD_PEM root@$(hcloud server list | grep -v "IPV" | fzf | awk '"'"'{print $4}'"'"'  )'
 
 # python
 alias py='python3'
