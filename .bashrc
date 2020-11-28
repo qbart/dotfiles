@@ -186,9 +186,9 @@ _fzf_complete_edit() {
 # ----- autocomplete -----
 complete -F _fzf_complete_edit -o default -o bashdefault edit
 complete -F _fzf_complete_edit e
-complete -C /usr/bin/vault vault
-complete -C /usr/bin/consul consul
-complete -C /usr/local/bin/nomad nomad
+complete -C $HOME/.asdf/shims/vault vault
+complete -C $HOME/.asdf/shims/consul consul
+complete -C $HOME/.asdf/shims/nomad nomad
 source ~/.config/timelog/autocomplete.sh
 which hcloud &> /dev/null && source <(hcloud completion bash)
 

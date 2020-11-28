@@ -1,12 +1,10 @@
 # env:
-  #ENV: yes env hers
+#   TERM: xterm
 
 shell:
     program: /bin/bash
     args:
       - --login
-    # program: /usr/bin/tmux
-     # - -u # force UTF-8 in tmux
      
 key_bindings:
   - { key: Semicolon, mods: Control|Alt, chars: "VIMKBRESR" } # Vim -> Resize Right
@@ -16,17 +14,16 @@ window:
   padding:
     x: 4
     y: 2
-  
 
 font:
-  regular:
-    family: "Hack"
+  normal:
+    family: "VT323"
 
   italic:
-    family: "Hack"
+    family: "VT323"
 
   bold:
-    family: "Hack"
+    family: "VT323"
 
 background_opacity: 0.90
 
