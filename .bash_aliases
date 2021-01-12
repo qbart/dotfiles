@@ -97,6 +97,7 @@ alias wip='git commit -m "wip"'
 # terraform
 alias tfp='terraform plan'
 alias tfa='terraform apply'
+alias tfaaa='terraform apply -auto-approve'
 alias tfi='terraform init'
 alias tfv='terraform validate'
 tfmod() {

@@ -24,4 +24,4 @@ yay -S paper-icon-theme
 yay -S rofi-calc
 yay rofi-greenclip
 yay -S nerd-fonts-complete
-
+yay -S glow-bin
