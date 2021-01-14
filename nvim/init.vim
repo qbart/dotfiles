@@ -328,17 +328,12 @@ let g:startify_bookmarks = [
             \ { 'hw': '~/hashira/app/wasm' },
             \ { 'hc': '~/hashira/cloud' },
             \ { 'hi': '~/hashira/infra' },
-            \ { 'ka': '~/ohkrab/krab' },
-            \ { 'kw': '~/ohkrab/www' },
-            \ { 'cm': '~/projects/dotfiles/manjaro/install.sh' },
+            \ { 'kr': '~/oh/krab' },
             \ { 'ci': '~/.config/i3/config' },
             \ { 'cr': '~/.config/rofi/config.rasi' },
             \ { 'cp': '~/.config/polybar/config.ini' },
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'b': '~/.bashrc' },
-            \ { 'p': '~/projects' },
-            \ { 's': '~/selleo' },
-            \ { 'd': '~/projects/dotfiles' }
             \ ]
 
 let g:startify_session_autoload = 1
