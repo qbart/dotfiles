@@ -120,6 +120,7 @@ alias megm='mix ecto.gen.migration'
 alias phx.new='mix phx.new --no-webpack --no-ecto --no-html'
 
 # tools
+alias asdfu='asdf plugin update --all'
 alias vv='nvim .'
 alias tt='tmux'
 alias uuid4='uuid -v4'
