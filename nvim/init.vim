@@ -21,10 +21,7 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
-" Plug 'luochen1990/rainbow'
-" Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'sbdchd/neoformat'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
@@ -33,6 +30,19 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'francoiscabrol/ranger.vim'  
 Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 Plug 'machakann/vim-highlightedyank' " highlight yank
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'for': [
+      \ 'javascript',
+      \ 'typescript',
+      \ 'css',
+      \ 'less',
+      \ 'scss',
+      \ 'json',
+      \ 'graphql',
+      \ 'vue',
+      \ 'lua',
+      \ 'python' ] }
 
 call plug#end()
 
@@ -45,6 +55,12 @@ call plug#end()
 "nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
 "tf lsp
 "Plug 'editorconfig/editorconfig-vim'
+
+" vim-prettier
+augroup plugin_prettier
+  autocmd!
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml Prettier
+augroup END
 
 """various
 syntax enable
@@ -273,9 +289,24 @@ let g:ruby_operators=1
 let g:ruby_pseudo_operators=1
 
 """clang
-let g:clang_format#auto_format=1
+let g:clang_format#auto_format=0
 let g:clang_format#detect_style_file=1
+
+augroup plugin-clang-format-auto-format
 " autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
+    autocmd!
+    autocmd BufWritePre *
+        \ if &ft =~# '^\%(c\|cpp\|objc\|java\|proto\|arduino\)$' &&
+        \     g:clang_format#auto_format &&
+        \     !clang_format#is_invalid() |
+        \     call clang_format#replace(1, line('$')) |
+        \ endif
+    autocmd FileType c,cpp,objc,java,javascript,typescript,proto,arduino
+        \ if g:clang_format#auto_formatexpr &&
+        \     !clang_format#is_invalid() |
+        \     setlocal formatexpr=clang_format#replace(v:lnum,v:lnum+v:count-1) |
+        \ endif
+augroup END
 autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
 au FileType cpp nmap <localleader>a :FSHere<cr>
