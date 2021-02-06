@@ -12,8 +12,8 @@ key_bindings:
 # theme
 window:
   padding:
-    x: 4
-    y: 2
+    x: 6
+    y: 3
 
 font:
   size: 10
@@ -44,7 +44,9 @@ background_opacity: 0.90
 custom_cursor_colors: true
 colors:
   primary:
-    background: '#282629'
+    # background: '#282629'
+    #
+    background: '#001100'
     foreground: '#e0dce0'
 
   cursor:

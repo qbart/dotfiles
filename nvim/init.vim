@@ -44,7 +44,16 @@ Plug 'prettier/vim-prettier', {
       \ 'lua',
       \ 'python' ] }
 
+Plug 'isobit/vim-caddyfile'
+
 call plug#end()
+
+source $HOME/.config/nvim/fzf.vim
+source $HOME/.config/nvim/go.vim
+source $HOME/.config/nvim/cpp.vim
+source $HOME/.config/nvim/coc.vim
+source $HOME/.config/nvim/theme.vim
+source $HOME/.config/nvim/startup.vim
 
 "TODO
 " https://github.com/dense-analysis/ale
@@ -98,11 +107,8 @@ set smartcase
 
 set clipboard=unnamedplus
 
-"only relative MRU
-let g:fzf_mru_relative = 1
-
 "zen
-let g:goyo_width=110
+let g:goyo_width="80%"
 "
 
 " disable ranger default mapping
@@ -111,41 +117,6 @@ let g:ranger_map_keys = 0
 """rooter
 let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git', 'LICENSE' ]
 "
-
-"""theme
-let g:cpp_class_scope_highlight = 1
-let g:cpp_named_requirements_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_posix_standard = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-
-let g:go_highlight_operators=1
-let g:go_highlight_extra_types=1
-let g:go_highlight_functions=1
-let g:go_highlight_types = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_variable_assignments = 0
-let g:go_highlight_function_parameters=0
-let g:go_auto_sameids = 0
-let g:go_highlight_fields = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_auto_type_info = 1
-let g:go_addtags_transform = "snakecase"
-
-set signcolumn=yes
-set background=dark
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
-let g:vim_current_word#enabled = 1
-let g:vim_current_word#highlight_delay = 200 "ms
-let g:vim_current_word#highlight_twins = 1
-let g:vim_current_word#highlight_current_word = 0
-colorscheme aurora
 
 " ranger
 let g:ranger_command_override = 'ranger --cmd "set column_ratios=1,1"'
@@ -239,79 +210,11 @@ set cmdheight=1
 set updatetime=400
 set shortmess=ac "http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-"
-
-"""golang
-" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-" autocmd BufWritePre *.go :call CocAction('organizeImport')
-let g:go_fmt_command = "goimports"
-autocmd FileType go nmap <localleader>c :GoRemoveTags<cr>
-autocmd FileType go nmap <localleader>y :GoAddTags yaml<cr>
-autocmd FileType go nmap <localleader>j :GoAddTags json<cr>
-autocmd FileType go nmap <localleader>h :GoAddTags hcl<cr>
-autocmd FileType go nmap <localleader>d :GoDoc
-" autocmd FileType go nmap <localleader>b :DlvToggleBreakpoint<cr>
-" autocmd FileType go nmap <localleader>d :DlvDebug<cr>
-au FileType go nmap <localleader>g :GoDeclsDir<cr>
-au FileType go nmap <localleader>a :GoAlternate<cr>
-au FileType go nmap <localleader>t :GoTest -short<cr>
-" GoCoverageToggle -short
-" K
-" [[ ]]
-"
 
 """ruby
 let g:ruby_operators=1
 let g:ruby_pseudo_operators=1
 
-"""clang
-let g:clang_format#auto_format=0
-let g:clang_format#detect_style_file=1
-
-augroup plugin-clang-format-auto-format
-" autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hh,*.hpp :Neoformat 
-    autocmd!
-    autocmd BufWritePre *
-        \ if &ft =~# '^\%(c\|cpp\|objc\|java\|proto\|arduino\)$' &&
-        \     g:clang_format#auto_format &&
-        \     !clang_format#is_invalid() |
-        \     call clang_format#replace(1, line('$')) |
-        \ endif
-    autocmd FileType c,cpp,objc,java,javascript,typescript,proto,arduino
-        \ if g:clang_format#auto_formatexpr &&
-        \     !clang_format#is_invalid() |
-        \     setlocal formatexpr=clang_format#replace(v:lnum,v:lnum+v:count-1) |
-        \ endif
-augroup END
-autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
-autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
-au FileType cpp nmap <localleader>a :FSHere<cr>
-au FileType c nmap <localleader>a :FSHere<cr>
-"
 
 """i3 / rofi / polybar / ...
 aug i3config_ft_detection
@@ -321,99 +224,10 @@ aug i3config_ft_detection
 aug end
 "
 
-"""fzf
-"TODO
-" let g:fzf_action = {
-"   \ 'ctrl-b': 'split',
-"   \ 'ctrl-v': 'vsplit' }
-let g:fzf_tags_command = 'ctags -R'
-let g:fzf_layout = {'up':'~80%', 'window': { 'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5 } }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Normal'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+""" caddyfile
+aug i3config_ft_detection
+  au!
+  au BufNewFile,BufRead *.Caddyfile,Caddyfile set filetype=caddyfile
+aug end
 "
-
-"""startify
-" SSave
-let g:startify_session_dir = '~/.config/nvim/session'
-
-let g:startify_lists = [
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
-          \ ]
-          " \ { 'type': 'files',     'header': ['   Files']            },
-
-let g:startify_bookmarks = [
-            \ { 'hw': '~/hashira/app/wasm' },
-            \ { 'hc': '~/hashira/cloud' },
-            \ { 'hi': '~/hashira/infra' },
-            \ { 'kr': '~/oh/krab' },
-            \ { 'ci': '~/.config/i3/config' },
-            \ { 'cr': '~/.config/rofi/config.rasi' },
-            \ { 'cp': '~/.config/polybar/config.ini' },
-            \ { 'v': '~/.config/nvim/init.vim' },
-            \ { 'b': '~/.bashrc' },
-            \ ]
-
-let g:startify_session_autoload = 1
-let g:startify_session_persistence = 1
-let g:startify_change_to_vcs_root = 1
-let g:startify_session_delete_buffers = 1
-"
-
-""""status line
-"hi User1 guifg=#0a665a guibg=#111111
-"hi User2 guifg=#69697c guibg=#111111
-"hi User3 guifg=#ff66ff guibg=#111111
-"hi User4 guifg=#0a665a guibg=#111111
-"hi User5 guifg=#A843A8 guibg=#111111
-
-"""status line
-hi User1 guifg=#69697c guibg=#111111
-hi User2 guifg=#69697c guibg=#111111
-hi User3 guifg=#18ffe0 guibg=#111111
-hi User4 guifg=#0a665a guibg=#111111
-hi User5 guifg=#0a665a guibg=#111111
-
-set statusline=
-set statusline=%3*%5l%*            "lines
-set statusline+=%2*/%L%1*%2*:%*            
-set statusline+=%4*%-3v\ %*             "column
-set statusline+=%1*%=
-set statusline+=%5*\ \ %f\ \ %*            "path
-set statusline+=%1*%=      
-set statusline+=%2*\ \ %{&ft}\ \ %{&encoding}\ \ %1*            "file info
-set statusline+=%3*\%{CurrentMode()}\ %*
-set fillchars=stl:-,stlnc:-,fold:-,diff:-  "https://vimhelp.org/options.txt.html#%27fillchars%27
-
-" statusline
-function! CurrentMode()
-  let l:mode = mode()
-
-  if l:mode==#"n"
-    return "N"
-  elseif l:mode==?"v"
-    return "V"
-  elseif l:mode==?"V"
-    return "V"
-  elseif l:mode==#"i"
-    return "I"
-  elseif l:mode==#"R"
-    return "R"
-  elseif l:mode==#"Ctrl-V"
-    return "B"
-  endif
-endfunction
 
