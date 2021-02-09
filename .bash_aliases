@@ -96,6 +96,7 @@ alias gg='git switch $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"
 alias wip='git commit -m "wip"'
 
 # terraform
+alias tf='terraform'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfaaa='terraform apply -auto-approve'
@@ -107,6 +108,7 @@ tfmod() {
 
 # go
 alias gohot='air -c air.conf'
+alias khr='dev ssh known-hosts reset'
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"

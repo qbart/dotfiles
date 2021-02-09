@@ -17,7 +17,7 @@ let g:startify_bookmarks = [
             \ { 'ci': '~/.config/i3/config' },
             \ { 'cr': '~/.config/rofi/config.rasi' },
             \ { 'cp': '~/.config/polybar/config.ini' },
-            \ { 'v': '~/.config/nvim/init.vim' },
+            \ { 'v': '~/.config/nvim/' },
             \ { 'b': '~/.bashrc' },
             \ ]
 

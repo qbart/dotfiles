@@ -14,9 +14,13 @@ let g:go_highlight_structs = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 
-" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-" autocmd BufWritePre *.go :call CocAction('organizeImport')
 let g:go_fmt_command = "goimports"
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 0
+let g:go_metalinter_deadline = "5s"
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+
 autocmd FileType go nmap <localleader>c :GoRemoveTags<cr>
 autocmd FileType go nmap <localleader>y :GoAddTags yaml<cr>
 autocmd FileType go nmap <localleader>j :GoAddTags json<cr>
@@ -27,9 +31,14 @@ autocmd FileType go nmap <localleader>d :GoDoc
 au FileType go nmap <localleader>g :GoDeclsDir<cr>
 au FileType go nmap <localleader>a :GoAlternate<cr>
 au FileType go nmap <localleader>t :GoTest -short<cr>
-" au FileType go nmap <localleader>( :cprevious<cr>
-" au FileType go nmap <localleader>& :cnext<cr>
+
+au FileType go nmap <localleader>[ :lnext<cr>
+au FileType go nmap <localleader>{ :lprevious<cr>
+au FileType go nmap <localleader>u :GoReferrers<cr>
+au FileType go nmap <localleader>i :GoImpl 
 " GoCoverageToggle -short
 " K
 " [[ ]]
 
+" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocAction('organizeImport')
