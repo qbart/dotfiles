@@ -11,6 +11,7 @@ sudo pacman -S bat xclip copyq exa alacritty tmux httpie peek clipit screen ripg
 sudo pacman -S go cmake clang neovim
 sudo pacman -S docker
 sudo pacman -S rofimoji 
+sudo pacman -S xorg-input
 
 sudo systemctl enable docker
 sudo systemctl start docker

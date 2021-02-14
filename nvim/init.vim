@@ -22,6 +22,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'juliosueiras/terraform-lsp'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
@@ -30,6 +31,7 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'francoiscabrol/ranger.vim'  
 Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 Plug 'machakann/vim-highlightedyank' " highlight yank
+Plug 'SirVer/ultisnips'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': [
@@ -54,15 +56,17 @@ source $HOME/.config/nvim/cpp.vim
 source $HOME/.config/nvim/coc.vim
 source $HOME/.config/nvim/theme.vim
 source $HOME/.config/nvim/startup.vim
+source $HOME/.config/nvim/caddy.vim
+source $HOME/.config/nvim/hashistack.vim
+source $HOME/.config/nvim/i3.vim
+source $HOME/.config/nvim/ruby.vim
+
 
 "TODO
 " https://github.com/dense-analysis/ale
-"Plug 'SirVer/ultisnips'
 "tabularize
 "ctags -R .
 "snippets
-"nnoremap ,html :-1read $HOME/.config/nvim/tpl/cpp_class.cc<CR>3jwf>a
-"tf lsp
 "Plug 'editorconfig/editorconfig-vim'
 
 " vim-prettier
@@ -195,13 +199,6 @@ nmap <C-m> :messages<CR>
 "neoformat
 let g:neoformat_verbose = 0
 
-
-"""hashistack 
-let g:terraform_align=1
-let g:terraform_fold_sections=0
-let g:terraform_fmt_on_save=1
-au BufWritePre {*.hcl,*.nomad} call terraform#fmt()
-
 set hidden "https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set nobackup
 set nowritebackup
@@ -209,25 +206,4 @@ set cmdheight=1
 " set autoindent
 set updatetime=400
 set shortmess=ac "http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
-
-
-"""ruby
-let g:ruby_operators=1
-let g:ruby_pseudo_operators=1
-
-
-"""i3 / rofi / polybar / ...
-aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead *.rasi set filetype=css
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
-aug end
-"
-
-""" caddyfile
-aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead *.Caddyfile,Caddyfile set filetype=caddyfile
-aug end
-"
 
