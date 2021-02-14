@@ -31,6 +31,7 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'francoiscabrol/ranger.vim'  
 Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 Plug 'machakann/vim-highlightedyank' " highlight yank
+Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
@@ -61,14 +62,6 @@ source $HOME/.config/nvim/hashistack.vim
 source $HOME/.config/nvim/i3.vim
 source $HOME/.config/nvim/ruby.vim
 
-
-"TODO
-" https://github.com/dense-analysis/ale
-"tabularize
-"ctags -R .
-"snippets
-"Plug 'editorconfig/editorconfig-vim'
-
 " vim-prettier
 augroup plugin_prettier
   autocmd!
@@ -97,7 +90,6 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set history=10000
 set undolevels=2000
 set wildignore=+*.o,*.obj,*.bak,*.exe,*.pyc,*.class,**/node_modules/**
-nmap Q <Nop> "disable ex mode
 set nowrap
 set textwidth=0 " no wordwrap
 set wrapmargin=0
@@ -110,6 +102,14 @@ set smartindent
 set smartcase
 
 set clipboard=unnamedplus
+
+set hidden "https://medium.com/usevim/vim-101-set-hidden-f78800142855
+set nobackup
+set nowritebackup
+set cmdheight=1
+" set autoindent
+set updatetime=400
+set shortmess=ac "http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
 "zen
 let g:goyo_width="80%"
@@ -147,6 +147,7 @@ let mapleader = ","
 let maplocalleader = "\<Space>"
 
 nmap K <nop>
+nmap Q <Nop> "disable ex mode
 
 " natural order consistent with i3
 noremap ; l
@@ -162,7 +163,7 @@ nnoremap <C-M-j>    :vertical resize -2<CR>
 nnoremap VIMKBRESR  :vertical resize +2<CR>
 
 " buffers
-nnoremap <TAB> :FZFMru<CR>
+" nnoremap <TAB> :FZFMru<CR>
 " nnoremap <TAB> :bn<CR>
 nnoremap <S-TAB> :bp<CR>
 nmap <leader>d :bd!<cr>
@@ -178,7 +179,6 @@ vnoremap <S-l> :m-2<CR>gv=gv
 noremap <C-k> 5j
 noremap <C-l> 5k
 
-" nmap <C-e> :NERDTreeFind<CR>
 nmap <C-e> :Ranger<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
@@ -196,14 +196,10 @@ nmap <C-w>r :so $MYVIMRC<CR>
 nmap <C-m> :messages<CR>
 "
 
-"neoformat
-let g:neoformat_verbose = 0
+" snippets
+let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_prev = '<s-tab>'
 
-set hidden "https://medium.com/usevim/vim-101-set-hidden-f78800142855
-set nobackup
-set nowritebackup
-set cmdheight=1
-" set autoindent
-set updatetime=400
-set shortmess=ac "http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
-
+" https://github.com/editorconfig/editorconfig-vim
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+au FileType gitcommit let b:EditorConfig_disable = 1

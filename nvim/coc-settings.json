@@ -8,6 +8,12 @@
         "json",
         "tf"
     ],
+    "snippets.loadFromExtensions": true,
+    "snippets.ultisnips.enable": true,
+    "snippets.ultisnips.directories": [
+        "UltiSnips",
+        "~/.config/nvim/snips"
+    ],
     "suggest.enablePreselect": false,
     "suggest.numberSelect": false,
     "suggest.languageSourcePriority": 99,

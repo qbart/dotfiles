@@ -1,0 +1,27 @@
+snippet ts "type <name> struct {...}"
+type ${1:name} struct {
+	$0
+}
+endsnippet
+
+snippet mas "<name> := make([]<slicetype>, 0)"
+${2:varname} := make([]${1:type}, 0)
+$0
+endsnippet
+
+snippet mam "<name> := make(map[<key>]<value>, 0)"
+${3:varname} := make(map[${1:key}]${2:value}, 0)
+$0
+endsnippet
+
+snippet fn "func (s *S) name() {}"
+func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
+	$0
+}
+endsnippet
+
+snippet fnr "func (s *S) name() {}"
+func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
+	return $0
+}
+endsnippet
