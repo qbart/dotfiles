@@ -14,6 +14,8 @@ ln -s "$(pwd)/alacritty" ~/.config/alacritty -f
 ln -s "$(pwd)/dunst" ~/.config/dunst -f
 ln -s "$(pwd)/byhost" ~/.config/byhost -f
 
+ln -s "$(pwd)/.bash_ps1" ~/.bash_ps1 -f
+ln -s "$(pwd)/.bash_theme" ~/.bash_theme -f
 ln -s "$(pwd)/.bash_aliases" ~/.bash_aliases -f
 ln -s "$(pwd)/.bashrc" ~/.bashrc -f
 
