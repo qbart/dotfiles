@@ -33,6 +33,7 @@ Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 Plug 'machakann/vim-highlightedyank' " highlight yank
 Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " show colors in vim
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': [
