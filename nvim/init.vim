@@ -22,6 +22,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'} " does not support custom motion
 Plug 'juliosueiras/terraform-lsp'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
@@ -62,6 +63,7 @@ source $HOME/.config/nvim/hashistack.vim
 source $HOME/.config/nvim/i3.vim
 source $HOME/.config/nvim/ruby.vim
 source $HOME/.config/nvim/theme.vim
+
 
 " vim-prettier
 augroup plugin_prettier
@@ -146,6 +148,13 @@ omap /  <Plug>Commentary
 """keybindings
 let mapleader = ","
 let maplocalleader = "\<Space>"
+
+" does not support custom motion
+" let g:VM_maps = {}
+" let g:VM_maps["Skip Region"] = '<C-x>'
+
+nmap <C-p>i :PlugInstall<Cr>
+nmap <C-p>u :PlugUpdate<Cr>
 
 nmap K <nop>
 nmap Q <Nop> "disable ex mode
