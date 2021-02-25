@@ -54,3 +54,7 @@ function! CurrentMode()
   endif
 endfunction
 
+aug bash_ft_detection
+  au!
+  au BufRead .bash_theme,.bash_aliases,.bash_ps1,.bashrc set filetype=bash
+aug end
