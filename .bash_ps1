@@ -1,5 +1,5 @@
 function ps1_git_branch {
-    git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed -e 's/.*/🦖 &/g'
+    git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed -e 's/.*/🌵 &/g'
 }
 
 function ps1_go_version {
