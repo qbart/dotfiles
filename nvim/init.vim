@@ -1,5 +1,5 @@
 let g:polyglot_disabled = ['cpp', 'go']
-let g:highlightedyank_highlight_duration = 200
+let g:highlightedyank_highlight_duration = 120
 
 call plug#begin()
 
@@ -55,12 +55,12 @@ source $HOME/.config/nvim/fzf.vim
 source $HOME/.config/nvim/go.vim
 source $HOME/.config/nvim/cpp.vim
 source $HOME/.config/nvim/coc.vim
-source $HOME/.config/nvim/theme.vim
 source $HOME/.config/nvim/startup.vim
 source $HOME/.config/nvim/caddy.vim
 source $HOME/.config/nvim/hashistack.vim
 source $HOME/.config/nvim/i3.vim
 source $HOME/.config/nvim/ruby.vim
+source $HOME/.config/nvim/theme.vim
 
 " vim-prettier
 augroup plugin_prettier
@@ -83,7 +83,7 @@ set sidescrolloff=1
 set scrolloff=9
 set ttyfast
 
-set nonumber " show line nums
+set nonumber " no line nums on init
 syntax on
 set cursorline " highlight current line
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab

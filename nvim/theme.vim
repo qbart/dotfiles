@@ -7,8 +7,8 @@ let g:vim_current_word#enabled = 1
 let g:vim_current_word#highlight_delay = 200 "ms
 let g:vim_current_word#highlight_twins = 1
 let g:vim_current_word#highlight_current_word = 0
-colorscheme aurora
 
+colorscheme aurora
 
 """"status line
 "hi User1 guifg=#0a665a guibg=#111111
