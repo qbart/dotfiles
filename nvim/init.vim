@@ -3,7 +3,7 @@ let g:highlightedyank_highlight_duration = 120
 
 call plug#begin()
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'qbart/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'sebdah/vim-delve'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -18,6 +18,7 @@ Plug 'mhinz/vim-startify'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-commentary'
+Plug 'vim-crystal/vim-crystal'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
@@ -62,6 +63,7 @@ source $HOME/.config/nvim/caddy.vim
 source $HOME/.config/nvim/hashistack.vim
 source $HOME/.config/nvim/i3.vim
 source $HOME/.config/nvim/ruby.vim
+source $HOME/.config/nvim/crystal.vim
 source $HOME/.config/nvim/theme.vim
 
 
@@ -202,7 +204,7 @@ nmap <C-b> :Marks<CR>
 nmap <C-g> :Rg<CR>
 
 map <C-w>z :Goyo<CR>
-nmap <C-w>r :so $MYVIMRC<CR>
+nmap <C-w>r :so $MYVIMRC<CR>:e!<CR>
 nmap <C-m> :messages<CR>
 "
 
