@@ -22,6 +22,11 @@ endsnippet
 
 snippet fnr "func (s *S) name() {}"
 func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
-	return $0
+	$0
+	return $6
 }
+endsnippet
+
+snippet date "2006-01-02T15:04:05Z07:00 (RFC3339)"
+"2006-01-02T15:04:05Z07:00"
 endsnippet
