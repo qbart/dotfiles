@@ -58,9 +58,8 @@ source $HOME/.config/nvim/go.vim
 source $HOME/.config/nvim/cpp.vim
 source $HOME/.config/nvim/coc.vim
 source $HOME/.config/nvim/startup.vim
-source $HOME/.config/nvim/caddy.vim
+source $HOME/.config/nvim/filetypes.vim
 source $HOME/.config/nvim/hashistack.vim
-source $HOME/.config/nvim/i3.vim
 source $HOME/.config/nvim/ruby.vim
 source $HOME/.config/nvim/crystal.vim
 source $HOME/.config/nvim/theme.vim
