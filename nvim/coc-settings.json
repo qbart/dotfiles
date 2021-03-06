@@ -25,11 +25,16 @@
     "suggest.minTriggerInputLength": 1,
     "languageserver": {
         "terraform": {
-            "command": "~/.config/nvim/plugged/terraform-lsp/terraform-lsp",
-            "filetypes": [
-                "terraform"
+            "command": "terraform-ls",
+            "args": [
+                "serve"
             ],
-            "initializationOptions": {}
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {}
         }
     }
 }

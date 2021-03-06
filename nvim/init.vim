@@ -24,7 +24,6 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
 " Plug 'mg979/vim-visual-multi', {'branch': 'master'} " does not support custom motion
-Plug 'juliosueiras/terraform-lsp'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
