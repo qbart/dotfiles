@@ -1,15 +1,15 @@
-snippet ts "type <name> struct {...}"
+snippet type "type <name> struct {...}"
 type ${1:name} struct {
 	$0
 }
 endsnippet
 
-snippet mas "<name> := make([]<slicetype>, 0)"
+snippet makes "<name> := make([]<slicetype>, 0)"
 ${2:varname} := make([]${1:type}, 0)
 $0
 endsnippet
 
-snippet mam "<name> := make(map[<key>]<value>, 0)"
+snippet makem "<name> := make(map[<key>]<value>, 0)"
 ${3:varname} := make(map[${1:key}]${2:value}, 0)
 $0
 endsnippet
@@ -29,4 +29,27 @@ endsnippet
 
 snippet date "2006-01-02T15:04:05Z07:00 (RFC3339)"
 "2006-01-02T15:04:05Z07:00"
+endsnippet
+
+snippet gracefulshutdown "Graceful shutdown with deadline"
+// graceful shutdown with deadline
+c := make(chan os.Signal, 1)
+signal.Notify(c, os.Interrupt)
+<-c
+
+ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+defer cancel()
+srv.Shutdown(ctx)
+endsnippet
+
+snippet httphandler "stdlib HTTP handler"
+func $1(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "$0")
+}
+endsnippet
+
+snippet jsonencode "json encode map[string]interface{}"
+	json.NewEncoder($1).Encode(map[string]interface{}{
+		$0,
+	})
 endsnippet
