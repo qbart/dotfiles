@@ -128,10 +128,12 @@ alias megm='mix ecto.gen.migration'
 alias phx.new='mix phx.new --no-webpack --no-ecto --no-html'
 
 # tools
-alias asdfu='asdf plugin update --all'
+alias asdfc='asdf current'
 alias asdfg='asdf global'
+alias asdfi='asdf install'
 alias asdfl='asdf local'
 alias asdfr='asdf reshim'
+alias asdfu='asdf plugin update --all'
 alias vv='nvim .'
 alias tt='tmux'
 alias uuid4='uuid -v4'
