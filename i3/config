@@ -2,7 +2,7 @@ set $mod Mod4
 set $alt Mod1
 set $TERMINAL=alacritty
 
-font pango:Hack 12
+font pango:"Hack Nerd Font" 12
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 

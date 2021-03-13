@@ -56,7 +56,7 @@ endfunction
 
 " colors https://github.com/RRethy/vim-hexokinase
 let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
-let g:Hexokinase_ftEnabled = ['css', 'html', 'javascript', 'vim']
+let g:Hexokinase_ftEnabled = ['css', 'html', 'javascript', 'vim', 'dosini']
 let g:Hexokinase_highlighters = [
 \   'virtual',
 \ ]

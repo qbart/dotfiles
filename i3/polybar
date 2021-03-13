@@ -33,10 +33,10 @@ padding-right = 2
 module-margin-left = 2
 module-margin-right = 2
 
-font-0 = Hack:pixelsize=14;1
-font-1 = "NotoEmoji:pixelsize=14:scale=6;1"
-font-2 = "FontAwesome5Free:style=solid:pixelsize=14"
-font-3 = "FontAwesome5Brands:style=solid:pixelsize=14"
+font-0 = "Hack Nerd Font":pixelsize=14;1
+font-1 = "Hack Nerd Font":pixelsize=14:scale=6;1"
+font-2 = "Hack Nerd Font":style=solid:pixelsize=14"
+font-3 = "Hack Nerd Font:style=solid:pixelsize=14"
 
 modules-left =  filesystem memory cpu xwindow xkeyboard
 modules-center = i3
@@ -86,6 +86,7 @@ type = internal/fs
 interval = 60
 mount-0 = /
 mount-1 = /home
+mount-2 = /mnt
 
 label-prefix = "a "
 label-mounted = %{F#0a81f5}%fsname% %mountpoint%%{F-}: %percentage_used%%

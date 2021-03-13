@@ -14,7 +14,6 @@ complete -F _fzf_complete_edit e
 complete -C $HOME/.asdf/shims/vault vault
 complete -C $HOME/.asdf/shims/consul consul
 complete -C $HOME/.asdf/shims/nomad nomad
-source ~/.config/timelog/autocomplete.sh
 which hcloud &> /dev/null && source <(hcloud completion bash)
 
 # Bash won't get SIGWINCH if another process is in the foreground.

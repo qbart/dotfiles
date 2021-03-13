@@ -16,16 +16,16 @@ window:
     y: 3
 
 font:
-  size: 10
+  size: 12
 
   normal:
-    family: "Hack"
+    family: "Hack Nerd Font"
 
   italic:
-    family: "Hack"
+    family: "Hack Nerd Font"
 
   bold:
-    family: "Hack"
+    family: "Hack Nerd Font"
 
   # size: 14
 
