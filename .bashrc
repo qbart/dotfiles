@@ -64,7 +64,7 @@ _fzf_complete_edit() {
 }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # ----- 3rd party - z -----
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+[ -f /usr/share/z/z.sh ] && . /usr/share/z/z.sh
 
 # ----- 3rd party - asdf -----
 . $HOME/.asdf/asdf.sh

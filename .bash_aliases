@@ -40,6 +40,11 @@ alias lsexfat='sudo fdisk -l | rg exFAT'
 alias cdprints='cd /var/spool/cups-pdf/$USER'
 alias cdf='cd $(z | awk "{print \$2}" | fzf)'
 
+# keyboards
+alias flash_moonlander='make moonlander:qbart:flash'
+alias flash_redox='make redox_w:qbart:avrdude'
+alias flash_ergodox='make ergodox_ez:qbart:flash'
+
 # c++
 alias pmake=premake5
 
