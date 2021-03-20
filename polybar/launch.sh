@@ -10,3 +10,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar1 and bar2
 polybar main -c ~/.config/polybar/config.ini &
+
+sleep 0.1
+
+polybar-msg cmd hide

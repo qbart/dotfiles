@@ -171,7 +171,7 @@ card = intel_backlight
 type = internal/cpu
 format = <label>
 interval = 2
-format-prefix = ""
+format-prefix = ""
 format-prefix-foreground = #ccffad00
 format-underline =
 label = %percentage:2%%
@@ -179,7 +179,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " " 
+format-prefix = " " 
 format-prefix-foreground = #cc10ff8c
 format-underline = 
 label = %percentage_used%%
