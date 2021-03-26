@@ -1,4 +1,4 @@
-let g:polyglot_disabled = ['cpp', 'go']
+let g:polyglot_disabled = ['cpp', 'go', 'ruby']
 let g:highlightedyank_highlight_duration = 120
 
 call plug#begin()
