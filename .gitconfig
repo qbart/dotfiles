@@ -3,7 +3,10 @@
 	name = qbart
 
 [core]
-    pager = delta --plus-color="#1F4945" --plus-emph-color="#008049" --minus-color="#764B4D" --minus-emph-color="#C63F37" --theme='Monokai Extended'
+    ; pager = delta --plus-color="#004900" --plus-emph-color="#008000" --minus-color="#760000" --minus-emph-color="#C60000" --theme='Monokai Extended'
+    pager = delta --plus-color="#004900" --plus-emph-color="#008000" --minus-color="#760000" --minus-emph-color="#C60000" --theme='Dracula'
 
 [interactive]
     diffFilter = delta --color-only
+[pull]
+	ff = only
