@@ -40,7 +40,7 @@ bindsym --release Print exec --no-startup-id flameshot gui
 bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons true
 bindsym $mod+i exec --no-startup-id rofimoji --skin-tone neutral 
 bindsym $mod+m exec --no-startup-id rofi -show calc -no-show-match -no-sort  -calc-command "echo -n '{result}' | xclip -selection clipboard"
-bindsym $mod+Shift+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+bindsym $mod+Shift+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 bindsym $mod+Shift+Return split v; exec --no-startup-id ~/.config/alacritty/launch.sh
 bindsym $mod+Return split h; exec --no-startup-id ~/.config/alacritty/launch.sh
@@ -177,7 +177,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)

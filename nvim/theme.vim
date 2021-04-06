@@ -33,7 +33,6 @@ set statusline+=%5*\ \ %f\ \ %*            "path
 set statusline+=%1*%=      
 set statusline+=%2*\ \ %{&ft}\ \ %{&encoding}\ \ %1*            "file info
 set statusline+=%3*\%{CurrentMode()}\ %*
-set fillchars=stl:-,stlnc:-,fold:-,diff:-  "https://vimhelp.org/options.txt.html#%27fillchars%27
 
 " statusline
 function! CurrentMode()
@@ -67,5 +66,11 @@ let g:Hexokinase_optInPatterns = [
 \     'rgba',
 \     'hsl',
 \     'hsla',
-\     'colour_names'
 \ ]
+" \     'colour_names'
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END

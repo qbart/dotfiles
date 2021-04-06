@@ -27,3 +27,10 @@ aug krab_ft_detection
   au!
   au BufNewFile,BufRead *.krab.hcl set filetype=hcl
 aug end
+
+" crystal
+"
+aug crystal_ft_detection
+  au!
+  au BufRead shard.lock set filetype=yaml
+aug end
