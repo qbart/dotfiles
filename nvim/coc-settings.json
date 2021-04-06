@@ -5,8 +5,7 @@
     "coc.preferences.hoverTarget": "float",
     "coc.preferences.formatOnSaveFiletypes": [
         "yaml",
-        "json",
-        "tf"
+        "json"
     ],
     "snippets.loadFromExtensions": true,
     "snippets.ultisnips.enable": true,
