@@ -1,6 +1,6 @@
 "TODO after installation
 "
-":CocInstall coc-json coc-tsserver coc-solargraph
+"CocInstall coc-json coc-tsserver coc-solargraph coc-snippets coc-go coc-html coc-css
 
 
 " Always show the signcolumn, otherwise it would shift the text each time
