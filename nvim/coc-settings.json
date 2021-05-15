@@ -22,6 +22,9 @@
     "suggest.snippetIndicator": " →",
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.minTriggerInputLength": 1,
+    "go.goplsOptions": {
+        "staticcheck": true
+    },
     "languageserver": {
         "go": {
             "command": "gopls",

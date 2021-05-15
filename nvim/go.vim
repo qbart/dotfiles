@@ -15,9 +15,13 @@ let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 
 let g:go_fmt_command = "goimports"
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_deadline = "5s"
+
+let g:go_diagnostics_enabled = 0
+let g:go_metalinter_enabled = []
+let g:go_jump_to_error = 0
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
