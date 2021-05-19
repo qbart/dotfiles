@@ -28,4 +28,5 @@ autocmd BufEnter *.cc nmap <C-k><C-j> :<C-u>e %:r.hh<CR>
 autocmd BufEnter *.hh nmap <C-k><C-j> :<C-u>e %:r.cc<CR>
 au FileType cpp nmap <localleader>a :FSHere<cr>
 au FileType c nmap <localleader>a :FSHere<cr>
-"
+
+autocmd FileType c,cpp setlocal commentstring=//\ %s

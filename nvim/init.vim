@@ -21,9 +21,10 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-crystal/vim-crystal'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish' " also case converison crs, ...
 Plug 'terryma/vim-multiple-cursors'
 " Plug 'mg979/vim-visual-multi', {'branch': 'master'} " does not support custom motion
+Plug 'christianrondeau/vim-base64'
 Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
@@ -50,6 +51,7 @@ Plug 'prettier/vim-prettier', {
       \ 'python' ] }
 
 Plug 'isobit/vim-caddyfile'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
