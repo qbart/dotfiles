@@ -200,12 +200,11 @@ nmap <C-w><C-l> :vs<CR>
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
-nmap <C-b> :Marks<CR>
+nmap <C-m> :Marks<CR>
 nmap <C-g> :Rg<CR>
 
 map <C-w>z :Goyo<CR>
 nmap <C-w>r :so $MYVIMRC<CR>:e!<CR>
-nmap <C-m> :messages<CR>
 "
 
 " snippets

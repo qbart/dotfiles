@@ -194,3 +194,5 @@ mode "windows" {
     bindsym Escape mode "default"
     bindsym Return mode "default"
 }
+
+for_window [class="feh"] floating enable

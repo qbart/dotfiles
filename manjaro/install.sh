@@ -18,6 +18,8 @@ sudo systemctl start docker
 sudo usermod -aG docker $USER
 
 xdg-settings set default-web-browser firefox.desktop
+xdg-mime default firefox.desktop x-scheme-handler/https
+xdg-mime default firefox.desktop x-scheme-handler/http
 pip3 install pynvim
 
 yay -S git-delta polybar

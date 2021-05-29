@@ -14,17 +14,45 @@ ${3:varname} := make(map[${1:key}]${2:value}, 0)
 $0
 endsnippet
 
-snippet fn "func (s *S) name() {}"
+snippet fn "func name() {} free function"
+func ${1:Name}($2) $3 {
+	$0
+	return $4
+}
+endsnippet
+
+snippet fns "func (s *S) name() {} struct function"
 func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
 	$0
 }
 endsnippet
 
-snippet fnr "func (s *S) name() {}"
+snippet fnsr "func (s *S) name() {} struct function with return"
 func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
 	$0
 	return $6
 }
+endsnippet
+
+snippet test "func Test_(t *testing.T) goblin test"
+func Test_${1}(t *testing.T) {
+	g := goblin.Goblin(t)
+	$0
+}
+endsnippet
+
+snippet describe "g.Describe(...) goblin test block"
+g.Describe("$1", func() {
+	g.It("$2", func() {
+		$0
+	})
+})
+endsnippet
+
+snippet it "g.It(...) goblin test block"
+g.It("$1", func() {
+	$0
+})
 endsnippet
 
 snippet date "2006-01-02T15:04:05Z07:00 (RFC3339)"

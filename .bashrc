@@ -56,6 +56,8 @@ export BAT_THEME='Monokai Extended'
 export CC=clang
 export CXX=clang++
 
+export PICO_SDK_PATH=~/sdk/pico
+
 # ----- 3rd party - fzf -----
 _fzf_complete_edit() {
   _fzf_complete --multi --reverse --prompt="edit> " --preview 'bat --style=numbers --color=always {} | head -100' -- "$@" < <(
