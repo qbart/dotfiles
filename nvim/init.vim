@@ -8,6 +8,7 @@ Plug 'qbart/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
@@ -29,7 +30,6 @@ Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
 Plug 'rhysd/clever-f.vim'
-Plug 'pbogut/fzf-mru.vim'
 Plug 'francoiscabrol/ranger.vim'  
 Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
 Plug 'machakann/vim-highlightedyank' " highlight yank
@@ -200,7 +200,7 @@ nmap <C-w><C-l> :vs<CR>
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
-nmap <C-m> :Marks<CR>
+nmap <C-m> :FZFMru<CR>
 nmap <C-g> :Rg<CR>
 
 map <C-w>z :Goyo<CR>
