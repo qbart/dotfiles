@@ -22,6 +22,12 @@ ln -s "$(pwd)/.bash_theme" ~/.bash_theme -f
 ln -s "$(pwd)/.bash_aliases" ~/.bash_aliases -f
 ln -s "$(pwd)/.bashrc" ~/.bashrc -f
 
+ln -s "$(pwd)/.zshrc" ~/.zshrc -f
+ln -s "$(pwd)/.zshenv" ~/.zshenv -f
+ln -s "$(pwd)/.zprofile" ~/.zprofile -f
+ln -s "$(pwd)/.zlogin" ~/.zlogin -f
+ln -s "$(pwd)/.zlogout" ~/.zlogout -f
+
 ln -s "$(pwd)/manjaro/mimeapps.list" ~/.config/mimeapps.list -f
 ln -s "$(pwd)/greenclip.cfg" ~/.config/greenclip.cfg -f
 ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf -f
