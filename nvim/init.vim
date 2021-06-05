@@ -171,12 +171,12 @@ noremap j h
 nnoremap <C-M-k>    :resize -2<CR>
 nnoremap <C-M-l>    :resize +2<CR>
 nnoremap <C-M-j>    :vertical resize -2<CR>
-"        <C-M-;> (alacritty)
+"        <C-M-;> (alacritty/kitty)
 nnoremap VIMKBRESR  :vertical resize +2<CR>
 
 " buffers
 " nnoremap <TAB> :FZFMru<CR>
-" nnoremap <TAB> :bn<CR>
+nnoremap <TAB> :bn<CR>
 nnoremap <S-TAB> :bp<CR>
 nmap <leader>d :bd!<cr>
 
@@ -200,8 +200,8 @@ nmap <C-w><C-l> :vs<CR>
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
-nmap <C-m> :FZFMru<CR>
 nmap <C-g> :Rg<CR>
+nmap <CR> :noh<CR>
 
 map <C-w>z :Goyo<CR>
 nmap <C-w>r :so $MYVIMRC<CR>:e!<CR>
