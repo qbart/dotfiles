@@ -49,6 +49,10 @@ Plug 'prettier/vim-prettier', {
       \ 'lua',
       \ 'python' ] }
 
+" tabs
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'romgrk/barbar.nvim'
+
 Plug 'isobit/vim-caddyfile'
 Plug 'vim-ruby/vim-ruby'
 Plug 'dhruvasagar/vim-table-mode'
@@ -202,6 +206,7 @@ nmap <C-w><C-l> :vs<CR>
 nmap <C-f> :BLines<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-j> :Files<CR>
+nmap <C-b> :Buffers<CR>
 nmap <C-g> :Rg<CR>
 nmap <CR> :noh<CR>
 
