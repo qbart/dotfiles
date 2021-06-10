@@ -8,7 +8,6 @@ Plug 'qbart/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
@@ -52,6 +51,10 @@ Plug 'prettier/vim-prettier', {
 
 Plug 'isobit/vim-caddyfile'
 Plug 'vim-ruby/vim-ruby'
+Plug 'dhruvasagar/vim-table-mode'
+
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 
@@ -65,7 +68,6 @@ source $HOME/.config/nvim/hashistack.vim
 source $HOME/.config/nvim/ruby.vim
 source $HOME/.config/nvim/crystal.vim
 source $HOME/.config/nvim/theme.vim
-
 
 " vim-prettier
 augroup plugin_prettier

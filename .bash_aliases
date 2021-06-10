@@ -5,6 +5,7 @@ alias free='free -m'                      # show sizes in MB
 alias o='thunar .'
 alias v='nvim'
 alias e='nvim'
+alias ps='ps -u'
 alias edit='nvim'
 alias sc='sudo systemctl'
 alias scu='systemctl --user'
