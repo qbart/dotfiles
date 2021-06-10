@@ -21,16 +21,16 @@ let g:go_metalinter_deadline = "5s"
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
-autocmd FileType go nmap <localleader>c :GoRemoveTags<cr>
-autocmd FileType go nmap <localleader>y :GoAddTags yaml<cr>
-autocmd FileType go nmap <localleader>j :GoAddTags json<cr>
-autocmd FileType go nmap <localleader>h :GoAddTags hcl<cr>
+autocmd FileType go nmap <localleader>tc :GoRemoveTags<cr>
+autocmd FileType go nmap <localleader>ty :GoAddTags yaml<cr>
+autocmd FileType go nmap <localleader>tj :GoAddTags json<cr>
+autocmd FileType go nmap <localleader>th :GoAddTags hcl<cr>
 autocmd FileType go nmap <localleader>d :GoDoc
 " autocmd FileType go nmap <localleader>b :DlvToggleBreakpoint<cr>
 " autocmd FileType go nmap <localleader>d :DlvDebug<cr>
 au FileType go nmap <localleader>g :GoDeclsDir<cr>
 au FileType go nmap <localleader>a :GoAlternate<cr>
-au FileType go nmap <localleader>t :GoTest -short<cr>
+au FileType go nmap <localleader>rt :GoTest -short<cr>
 
 au FileType go nmap <localleader>[ :lnext<cr>
 au FileType go nmap <localleader>{ :lprevious<cr>

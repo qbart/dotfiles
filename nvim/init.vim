@@ -203,11 +203,11 @@ nmap <C-q> :q<CR>
 nmap <C-w><C-k> :sp<CR>
 nmap <C-w><C-l> :vs<CR>
 
-nmap <C-f> :BLines<CR>
-nmap <C-t> :Tags<CR>
-nmap <C-j> :Files<CR>
-nmap <C-b> :Buffers<CR>
-nmap <C-g> :Rg<CR>
+nmap <leader>s :Snippets<cr>
+nmap <leader>f :BLines<CR>
+nmap <leader>j :Files<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>g :Rg<CR>
 nmap <CR> :noh<CR>
 
 map <C-w>z :Goyo<CR>
