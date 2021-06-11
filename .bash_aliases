@@ -42,6 +42,7 @@ alias lsexfat='sudo fdisk -l | rg exFAT'
 alias cdprints='cd /var/spool/cups-pdf/$USER'
 alias cdf='cd $(z | awk "{print \$2}" | fzf)'
 alias bye='poweroff' 
+alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
