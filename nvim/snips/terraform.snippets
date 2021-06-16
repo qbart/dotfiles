@@ -1,0 +1,10 @@
+snippet awskey "AWS key pair"
+resource "aws_key_pair" "$0" {
+	key_name   = $1
+	public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
+}
+endsnippet
+
+snippet refawskey "AWS key pair ref"
+aws_key_pair.$0.key_name
+endsnippet
