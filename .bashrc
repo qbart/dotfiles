@@ -65,8 +65,8 @@ _fzf_complete_edit() {
   )
 }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# ----- 3rd party - z -----
-[ -f /usr/share/z/z.sh ] && . /usr/share/z/z.sh
+# # ----- 3rd party - zoxide - z-alternative -----
+eval "$(zoxide init bash)"
 
 # ----- 3rd party - asdf -----
 . $HOME/.asdf/asdf.sh
