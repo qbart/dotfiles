@@ -25,6 +25,7 @@ autocmd FileType go nmap <localleader>tc :GoRemoveTags<cr>
 autocmd FileType go nmap <localleader>ty :GoAddTags yaml<cr>
 autocmd FileType go nmap <localleader>tj :GoAddTags json<cr>
 autocmd FileType go nmap <localleader>th :GoAddTags hcl<cr>
+autocmd FileType go nmap <localleader>td :GoAddTags db<cr>
 autocmd FileType go nmap <localleader>d :GoDoc
 " autocmd FileType go nmap <localleader>b :DlvToggleBreakpoint<cr>
 " autocmd FileType go nmap <localleader>d :DlvDebug<cr>

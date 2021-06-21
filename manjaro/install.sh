@@ -12,6 +12,7 @@ sudo pacman -S go cmake clang neovim pavucontrol
 sudo pacman -S docker
 sudo pacman -S rofimoji 
 sudo pacman -S ttf-hack
+sudo pacman -S pacman-static
 
 sudo systemctl enable docker
 sudo systemctl start docker

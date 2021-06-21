@@ -81,3 +81,13 @@ snippet jsonencode "json encode map[string]interface{}"
 		$0,
 	})
 endsnippet
+
+snippet logoutput "set log output"
+f, err := os.OpenFile("$0test.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+if err != nil {
+	panic("Can't create log file")
+}
+defer f.Close()
+
+log.SetOutput(f)
+endsnippet
