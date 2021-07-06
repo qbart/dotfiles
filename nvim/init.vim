@@ -200,8 +200,8 @@ noremap <C-l> 5k
 nmap <C-e> :Ranger<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
-nmap <C-w><C-k> :sp<CR>
-nmap <C-w><C-l> :vs<CR>
+nmap <C-w><C-k> :sp<CR> :Files<CR>
+nmap <C-w><C-l> :vs<CR> :Files<CR>
 
 nmap <leader>s :Snippets<cr>
 nmap <leader>f :BLines<CR>

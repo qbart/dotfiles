@@ -66,6 +66,7 @@ _fzf_complete_edit() {
 }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # # ----- 3rd party - zoxide - z-alternative -----
+export _ZO_DATA_DIR=~/.cache/zoxide
 eval "$(zoxide init bash)"
 
 # ----- 3rd party - asdf -----
