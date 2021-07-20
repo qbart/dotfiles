@@ -110,6 +110,8 @@ alias gg='git switch $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"
 alias wip='git commit -m "wip"'
 
 # terraform
+alias tg='terragrunt'
+alias tgr='terragrunt run-all'
 alias tf='terraform'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
