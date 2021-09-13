@@ -12,3 +12,13 @@ endsnippet
 snippet vpcid "VPC id from module"
 module.$0.vpc_id
 endsnippet
+
+snippet dependencydeclaration "Terragrunt dependency"
+dependency "vpc" {
+  config_path = "../vpc"
+}
+endsnippet
+
+snippet dependencyusage "Terragrunt dependency usage"
+dependency.vpc.outputs.vpc_id
+endsnippet
