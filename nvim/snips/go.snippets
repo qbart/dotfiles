@@ -91,3 +91,12 @@ defer f.Close()
 
 log.SetOutput(f)
 endsnippet
+
+snippet testhttp "test http"
+req := httptest.NewRequest(http.MethodGet, "/", nil)
+w := httptest.NewRecorder()
+handler(w, req)
+res := w.Result()
+defer res.Body.Close()
+data, err := ioutil.ReadAll(res.Body)
+endsnippet

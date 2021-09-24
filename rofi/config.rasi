@@ -22,8 +22,8 @@ configuration {
 	kb-remove-to-eol: "";
     kb-move-front: "Control+a,Home,KP_Home";
     kb-move-end: "Control+e,End,KP_End";
-	kb-row-down: "Down,Control+k";
-	kb-row-up: "Up,Control+l";
+	/* kb-row-down: "Down,Control+k"; */
+	/* kb-row-up: "Up,Control+l"; */
 	kb-row-left: "Control+j";
 	kb-row-right: "Control+semicolon";
 	kb-accept-entry: "Return,KP_Enter";
