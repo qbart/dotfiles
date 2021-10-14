@@ -51,6 +51,7 @@ alias flash_ergodox='make ergodox_ez:qbart:flash'
 
 # c++
 alias pmake=premake5
+alias uml='java -jar ~/bin/plantuml.jar'
 
 # ruby
 alias rr='bundle exec rails'

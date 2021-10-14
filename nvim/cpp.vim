@@ -6,7 +6,7 @@ let g:cpp_posix_standard = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
-let g:clang_format#auto_format=0
+let g:clang_format#auto_format=1
 let g:clang_format#detect_style_file=1
 
 augroup plugin-clang-format-auto-format

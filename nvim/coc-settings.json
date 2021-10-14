@@ -23,6 +23,31 @@
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.minTriggerInputLength": 1,
     "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "cc",
+                "h",
+                "hh",
+                "hpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
         "go": {
             "command": "gopls",
             "rootPatterns": [
