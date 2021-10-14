@@ -1,6 +1,8 @@
 let g:polyglot_disabled = ['cpp', 'go', 'ruby']
 let g:highlightedyank_highlight_duration = 120
 
+let g:lf_map_keys = 0
+
 call plug#begin()
 
 Plug 'qbart/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -29,8 +31,10 @@ Plug 'qbart/vim-aurora'
 Plug 'qbart/vim-cpp-modern'
 Plug 'airblade/vim-rooter'
 Plug 'rhysd/clever-f.vim'
-Plug 'francoiscabrol/ranger.vim'  
-Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
+" Plug 'francoiscabrol/ranger.vim'  
+" Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
+Plug 'ptzz/lf.vim'
+Plug 'voldikss/vim-floaterm'
 Plug 'machakann/vim-highlightedyank' " highlight yank
 Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips'
@@ -197,7 +201,7 @@ vnoremap <S-l> :m-2<CR>gv=gv
 noremap <C-k> 5j
 noremap <C-l> 5k
 
-nmap <C-e> :Ranger<CR>
+nmap <C-e> :Lf<CR>
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
 nmap <C-w><C-k> :sp<CR> :Files<CR>

@@ -12,6 +12,7 @@ ln -s "$(pwd)/polybar" ~/.config/polybar -f
 ln -s "$(pwd)/rofi" ~/.config/rofi -f
 ln -s "$(pwd)/flameshot" ~/.config/flameshot -f
 ln -s "$(pwd)/ranger" ~/.config/ranger -f
+ln -s "$(pwd)/lf" ~/.config/lf -f
 ln -s "$(pwd)/alacritty" ~/.config/alacritty -f
 ln -s "$(pwd)/kitty" ~/.config/kitty -f
 ln -s "$(pwd)/dunst" ~/.config/dunst -f
@@ -36,6 +37,7 @@ rm ~/.config/rofi/rofi
 rm ~/.config/flameshot/flameshot
 rm ~/.config/polybar/polybar
 rm ~/.config/ranger/ranger
+rm ~/.config/lf/lf
 rm ~/.config/alacritty/alacritty
 rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim
