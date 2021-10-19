@@ -21,8 +21,10 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
-# use enter for shell commands
-map <enter> shell-pipe
+map ':' shell-pipe
+map <enter> open
+map <delete> delete
+map d cut
 
 # execute current file (must be executable)
 map x $$f
