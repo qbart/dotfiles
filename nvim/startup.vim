@@ -15,10 +15,10 @@ let g:startify_bookmarks = [
             \ { 'kr': '~/oh/krab/main.go' },
             \ { 'ci': '~/.config/i3/config' },
             \ { 'cr': '~/.config/rofi/config.rasi' },
-            \ { 'ca': '~/.config/alacritty/alacritty.yml' },
             \ { 'ck': '~/.config/kitty/kitty.conf' },
             \ { 'cp': '~/.config/polybar/config.ini' },
             \ { 'cv': '~/.config/nvim/init.vim' },
+            \ { 'cl': '~/.config/lf/lfrc' },
             \ { 'vs': '~/.config/nvim/snips' },
             \ { 'b': '~/.bashrc' },
             \ ]
