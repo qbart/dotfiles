@@ -1,0 +1,5 @@
+function ps1_git_branch {
+    git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed -e 's/.*/ &/g'
+}
+
+PS1='%~%F{green}$(ps1_git_branch)%f %F{yellow}\$%f '

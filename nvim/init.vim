@@ -33,6 +33,7 @@ Plug 'airblade/vim-rooter'
 Plug 'rhysd/clever-f.vim'
 " Plug 'francoiscabrol/ranger.vim'  
 " Plug 'rbgrouleff/bclose.vim' " ranger dep for nvim
+Plug 'fladson/vim-kitty'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'machakann/vim-highlightedyank' " highlight yank

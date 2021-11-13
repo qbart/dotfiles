@@ -29,6 +29,7 @@ alias aptr='sudo apt remove'
 alias aptug='sudo apt upgrade'
 alias addppa='sudo add-apt-repository'
 alias srcbrc='source ~/.bashrc'
+alias rz='source ~/.zshrc'
 alias mkdirtoday1='mkdir $(date -I)'
 alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
 alias cat='bat -p'
@@ -164,9 +165,9 @@ alias dc='docker-compose'
 alias dcdev='docker-compose -f docker-compose.dev.yml'
 
 # kubernetes
-alias k='kubectl'
-alias ka='kubectl apply'
-alias kd='kubectl describe'
+alias kc='kubectl'
+alias kca='kubectl apply'
+alias kcd='kubectl describe'
 
 # crystal
 alias cspec='crystal spec'

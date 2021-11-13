@@ -9,7 +9,46 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt PROMPT_SUBST
 
 setopt CORRECT
 
+source ~/.config/byhost/$(hostname).sh
+
+# ----- aliases -----
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.zsh_ps1 ] && source ~/.zsh_ps1
+
+# ----- envs -----
+fpath+=$HOME/go/bin
+fpath+=$HOME/.asdf/shims:$HOME/.asdf/bin
+fpath+=$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
+fpath+=$HOME/Applications/nvim/bin
+export VISUAL=nvim 
+export EDITOR=nvim
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export BAT_THEME='Monokai Extended'
+
+export PICO_SDK_PATH=~/sdk/pico
+
+# ----- 3rd party - fzf -----
+_fzf_complete_edit() {
+  _fzf_complete --multi --reverse --prompt="edit> " --preview 'bat --style=numbers --color=always {} | head -100' -- "$@" < <(
+    $FZF_DEFAULT_COMMAND
+  )
+}
+# # ----- 3rd party - zoxide - z-alternative -----
+export _ZO_DATA_DIR=~/.cache/zoxide
+eval "$(zoxide init zsh)"
+
+# ----- 3rd party - asdf -----
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.config/lf/lficons.sh ] && source ~/.config/lf/lficons.sh
+
+# ----- secrets -----
+[ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
+

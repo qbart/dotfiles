@@ -19,8 +19,9 @@ let g:startify_bookmarks = [
             \ { 'cp': '~/.config/polybar/config.ini' },
             \ { 'cv': '~/.config/nvim/init.vim' },
             \ { 'cl': '~/.config/lf/lfrc' },
-            \ { 'vs': '~/.config/nvim/snips' },
+            \ { 's': '~/.config/nvim/snips' },
             \ { 'b': '~/.bashrc' },
+            \ { 'z': '~/.zshrc' },
             \ ]
 
 let g:startify_session_autoload = 1
