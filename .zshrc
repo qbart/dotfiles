@@ -13,17 +13,17 @@ setopt PROMPT_SUBST
 
 setopt CORRECT
 
-source ~/.config/byhost/$(hostname).sh
+[ -f ~/.config/byhost/$(hostname).sh ] && source ~/.config/byhost/$(hostname).sh
 
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.zsh_ps1 ] && source ~/.zsh_ps1
 
 # ----- envs -----
-fpath+=$HOME/go/bin
-fpath+=$HOME/.asdf/shims:$HOME/.asdf/bin
-fpath+=$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
-fpath+=$HOME/Applications/nvim/bin
+PATH=$PATH:$HOME/go/bin
+PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
+PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
+PATH=$PATH:$HOME/Applications/nvim/bin
 export VISUAL=nvim 
 export EDITOR=nvim
 
