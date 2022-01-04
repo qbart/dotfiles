@@ -34,25 +34,10 @@ func (${1:this} *${2:Struct}) ${3:Name}($4) $5 {
 }
 endsnippet
 
-snippet test "func Test_(t *testing.T) goblin test"
+snippet test "func Test_(t *testing.T) test"
 func Test_${1}(t *testing.T) {
-	g := goblin.Goblin(t)
 	$0
 }
-endsnippet
-
-snippet describe "g.Describe(...) goblin test block"
-g.Describe("$1", func() {
-	g.It("$2", func() {
-		$0
-	})
-})
-endsnippet
-
-snippet it "g.It(...) goblin test block"
-g.It("$1", func() {
-	$0
-})
 endsnippet
 
 snippet date "2006-01-02T15:04:05Z07:00 (RFC3339)"
@@ -82,6 +67,12 @@ snippet jsonencode "json encode map[string]interface{}"
 	})
 endsnippet
 
+snippet ife "if err != nil {"
+	if err != nil {
+		return fmt.Errorf("$0")
+	}
+endsnippet
+
 snippet logoutput "set log output"
 f, err := os.OpenFile("$0test.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 if err != nil {
@@ -99,4 +90,8 @@ handler(w, req)
 res := w.Result()
 defer res.Body.Close()
 data, err := ioutil.ReadAll(res.Body)
+endsnippet
+
+snippet fmtctc "debug string"
+fmt.Println(ctc.ForegroundYellow, $0, ctc.Reset)
 endsnippet

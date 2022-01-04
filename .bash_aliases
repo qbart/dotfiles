@@ -153,7 +153,8 @@ alias vv='nvim .'
 alias tt='tmux'
 alias uuid4='uuid -v4'
 alias removedash='sed '"'"'s/-//g'"'"''
-alias fui='ranger' 
+alias fui='lf' 
+alias icat="kitty +kitten icat"
 
 # docker
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'

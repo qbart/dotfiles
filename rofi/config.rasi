@@ -3,9 +3,10 @@
  * rofi --help
  * */
 
+@theme "slate"
+
 configuration {
     modi: "drun,calc";
-    theme: "slate";
     icon-theme: "Paper";
     font: "hack 18";
     show-icons: false;   
