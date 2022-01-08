@@ -25,6 +25,7 @@ set scrolloff 10
 map ':' shell-pipe
 map <enter> open
 map <delete> delete
+map <backspace2> delete
 map d cut
 
 # execute current file (must be executable)
