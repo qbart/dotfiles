@@ -67,6 +67,10 @@ snippet jsonencode "json encode map[string]interface{}"
 	})
 endsnippet
 
+snippet fmterr "fmt.Errorf"
+fmt.Errorf("$0: %w", err)
+endsnippet
+
 snippet ife "if err != nil {"
 if err != nil {
 	return fmt.Errorf("$0: %w", err)
