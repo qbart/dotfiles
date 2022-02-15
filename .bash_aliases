@@ -75,6 +75,7 @@ alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active
 # ssh
 alias sshh='ssh -i $HOME/.ssh/$HCLOUD_PEM root@$(hcloud server list | grep -v "IPV" | fzf | awk '"'"'{print $4}'"'"'  )'
 alias scph='scp -i $HOME/.ssh/$HCLOUD_PEM' 
+alias sshnostrict='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=accept-new'
 
 # python
 alias py='python3'

@@ -3,10 +3,23 @@
 	name = qbart
 
 [core]
-    ; pager = delta --plus-color="#004900" --plus-emph-color="#008000" --minus-color="#760000" --minus-emph-color="#C60000" --theme='Monokai Extended'
-    pager = delta --plus-color="#004900" --plus-emph-color="#008000" --minus-color="#760000" --minus-emph-color="#C60000" --theme='Dracula'
+    pager = delta 
 
 [interactive]
     diffFilter = delta --color-only
+
 [pull]
-	ff = only
+    ff = only
+
+[init]
+    defaultBranch = master
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
