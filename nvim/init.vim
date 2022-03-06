@@ -135,7 +135,7 @@ let g:goyo_width="80%"
 let g:ranger_map_keys = 0
 
 """rooter
-let g:rooter_patterns = [ 'main.cc', 'main.go', '.git/', '.git', 'LICENSE' ]
+let g:rooter_patterns = [ 'main.cc', 'go.mod', '.git/', '.git', 'LICENSE' ]
 "
 
 " ranger
