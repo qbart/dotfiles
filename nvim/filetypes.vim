@@ -34,3 +34,10 @@ aug crystal_ft_detection
   au!
   au BufRead shard.lock set filetype=yaml
 aug end
+
+" hashistack
+"
+aug hashistack_ft_detection
+  au!
+  au BufRead *.nomad,*.nomad.tpl set filetype=hcl
+aug end

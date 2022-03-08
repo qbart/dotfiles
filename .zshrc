@@ -52,3 +52,4 @@ eval "$(zoxide init zsh)"
 # ----- secrets -----
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
 
+
