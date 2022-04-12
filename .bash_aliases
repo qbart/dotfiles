@@ -121,6 +121,7 @@ alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfaaa='terraform apply -auto-approve'
 alias tfi='terraform init'
+alias tfiu='terraform init -upgrade'
 alias tfv='terraform validate'
 tfmod() {
   mkdir -p "$1" && touch "$1"/{main.tf,variables.tf,output.tf} && echo -e "# $1\n\n## Usage\n\n## Output" >> "$1/README.md"
