@@ -40,9 +40,6 @@ _fzf_complete_edit() {
     $FZF_DEFAULT_COMMAND
   )
 }
-# # ----- 3rd party - zoxide - z-alternative -----
-export _ZO_DATA_DIR=~/.cache/zoxide
-eval "$(zoxide init zsh)"
 
 # ----- 3rd party - asdf -----
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
