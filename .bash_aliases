@@ -45,6 +45,7 @@ alias cdf='cd $(z | awk "{print \$2}" | fzf)'
 alias bye='poweroff' 
 alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 alias ok='echo -e "\e[32mok\e[0m"'
+alias gensecretkeybase='openssl rand -hex 64'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
