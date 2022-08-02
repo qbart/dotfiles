@@ -1,0 +1,8 @@
+{
+    "window.zoomLevel": 2,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/kiwi/d/dotfiles/nvim-vscode/init.vim",
+    "go.useLanguageServer": true,
+    "explorer.confirmDelete": false,
+    "vscode-neovim.useCtrlKeysForNormalMode": false
+}
