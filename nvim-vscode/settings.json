@@ -10,5 +10,7 @@
     "workbench.colorTheme": "Noctis",
     "files.associations": {
         "*.hcl": "terraform"
-    }
+    },
+    "workbench.activityBar.visible": false,
+    "editor.minimap.enabled": false
 }
