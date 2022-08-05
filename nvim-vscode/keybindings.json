@@ -1,8 +1,8 @@
-// Place your key bindings in this file to override the defaultsauto[]
 [
     {
         "key": ", j",
-        "command": "workbench.action.quickOpen"
+        "command": "workbench.action.quickOpen",
+        "when": "neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+p",
@@ -10,7 +10,8 @@
     },
     {
         "key": ", g",
-        "command": "workbench.action.findInFiles"
+        "command": "workbench.action.findInFiles",
+        "when": "neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+shift+f",
@@ -63,7 +64,7 @@
     {
         "key": ", f",
         "command": "actions.find",
-        "when": "editorFocus || editorIsOpen"
+        "when": "neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+f",
@@ -72,7 +73,8 @@
     },
     {
         "key": ", s",
-        "command": "workbench.action.gotoSymbol"
+        "command": "workbench.action.gotoSymbol",
+        "when": "neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+shift+o",
@@ -80,7 +82,8 @@
     },
     {
         "key": ", a",
-        "command": "workbench.action.showAllSymbols"
+        "command": "workbench.action.showAllSymbols",
+        "when": "neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+t",

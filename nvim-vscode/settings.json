@@ -7,10 +7,10 @@
     "vscode-neovim.useCtrlKeysForNormalMode": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/Users/kiwi/Applications/nvim/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/kiwi/d/dotfiles/nvim-vscode/init.vim",
-    "workbench.colorTheme": "Noctis",
     "files.associations": {
         "*.hcl": "terraform"
     },
     "workbench.activityBar.visible": false,
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Aura Dark"
 }
