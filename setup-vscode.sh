@@ -6,7 +6,7 @@ if [[ "$OSTYPE" == 'darwin'* ]]; then
 
     defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 else
-    ln -sf "$(pwd)/nvim-vscode/settings.json" ~/.config/"Code - OSS"/User/settings.json
-    ln -sf "$(pwd)/nvim-vscode/keybindings.json" ~/.config/"Code - OSS"/User/keybindings.json
+    ln -sf "$(pwd)/nvim-vscode/settings.json" ~/.config/Code/User/settings.json
+    ln -sf "$(pwd)/nvim-vscode/keybindings.json" ~/.config/Code/User/keybindings.json
 fi
 
