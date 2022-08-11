@@ -2,7 +2,7 @@
     {
         "key": ", j",
         "command": "workbench.action.quickOpen",
-        "when": "neovim.mode != 'insert'"
+        "when": "neovim.mode != 'insert' && neovim.mode != 'replace'"
     },
     {
         "key": "ctrl+p",
@@ -11,7 +11,7 @@
     {
         "key": ", g",
         "command": "workbench.action.findInFiles",
-        "when": "neovim.mode != 'insert'"
+        "when": "neovim.mode != 'insert' && neovim.mode != 'replace'"
     },
     {
         "key": "ctrl+shift+f",
@@ -64,7 +64,7 @@
     {
         "key": ", f",
         "command": "actions.find",
-        "when": "neovim.mode != 'insert'"
+        "when": "neovim.mode != 'insert' && neovim.mode != 'replace'"
     },
     {
         "key": "ctrl+f",
@@ -74,7 +74,7 @@
     {
         "key": ", s",
         "command": "workbench.action.gotoSymbol",
-        "when": "neovim.mode != 'insert'"
+        "when": "neovim.mode != 'insert' && neovim.mode != 'replace'"
     },
     {
         "key": "ctrl+shift+o",
@@ -83,7 +83,7 @@
     {
         "key": ", a",
         "command": "workbench.action.showAllSymbols",
-        "when": "neovim.mode != 'insert'"
+        "when": "neovim.mode != 'insert' && neovim.mode != 'replace'"
     },
     {
         "key": "ctrl+t",
