@@ -47,10 +47,12 @@ bindsym $mod+minus move scratchpad
 bindsym $mod+plus scratchpad show
 
 # resize
-bindsym $mod+Shift+minus    gaps inner current plus  10
-bindsym $mod+Shift+plus     gaps inner current minus 10
-bindsym $mod+$alt+minus     gaps outer current plus  10
-bindsym $mod+$alt+plus      gaps outer current minus 10
+bindsym $mod+Shift+minus          gaps inner current plus  10
+bindsym $mod+Shift+plus           gaps inner current minus 10
+bindsym $mod+$alt+minus           gaps outer current plus  10
+bindsym $mod+$alt+plus            gaps outer current minus 10
+bindsym $mod+$alt+Shift+minus     gaps horizontal current plus  10
+bindsym $mod+$alt+Shift+plus      gaps horizontal current minus 10
 
 bindsym $mod+$alt+j         resize shrink width  10 px or 10 ppt
 bindsym $mod+$alt+k         resize shrink height 10 px or 10 ppt

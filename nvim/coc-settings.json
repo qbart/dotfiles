@@ -7,8 +7,6 @@
     "coc.preferences.hoverTarget": "float",
     "coc.preferences.formatOnSaveFiletypes": [
         "yaml",
-        "json",
-        "html",
         "css",
         "js"
     ],
