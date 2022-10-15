@@ -1,5 +1,6 @@
 .tags
 /nvim/plugged/
 /nvim/site/
+/nvim/plugin/
 .netrwhist
 /ranger/plugins/
