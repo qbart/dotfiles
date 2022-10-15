@@ -37,6 +37,7 @@ require('packer').startup(function(use)
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'                                                          
 
+    -- Ranger like file manager but written in Go, no python 🙏
     use { "lmburns/lf.nvim",
         requires = {
             "nvim-lua/plenary.nvim",
@@ -44,11 +45,32 @@ require('packer').startup(function(use)
         }
     }
 
+    -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+    use { 'tpope/vim-surround' }
+
+    -- case converison crs, ...
+    use { 'tpope/vim-abolish' } 
+
+    -- Detect tabstop and shiftwidth automatically
+    use 'tpope/vim-sleuth'
+
+    -- fuzzy finder
+    use { 'junegunn/fzf',
+        dir = '~/.fzf',
+        run = './install -- all',
+    }
+
+    -- better f
+    use { 'rhysd/clever-f.vim' }
+
     -- auto close brackets
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
+
+    -- show colors
+    use { 'norcalli/nvim-colorizer.lua' }
 
     -- commentary
     use { 'numToStr/Comment.nvim' }
@@ -61,6 +83,9 @@ require('packer').startup(function(use)
         end
     }
 
+    -- multi cursor 
+    use { 'terryma/vim-multiple-cursors' }
+
     -- statusline
     use {
         'nvim-lualine/lualine.nvim',
@@ -72,6 +97,10 @@ require('packer').startup(function(use)
 
     -- theme
     use 'Mofiqul/dracula.nvim'
+
+    -- golang support
+    use 'ray-x/go.nvim'
+    use 'ray-x/guihua.lua' -- recommanded if need floating window support
 
     if is_bootstrap then
         require('packer').sync()
@@ -318,6 +347,21 @@ require("lf").setup({
     layout_mapping = "<A-u>" -- resize window with this key
 })
 
+require('go').setup()
+
+require('colorizer').setup({
+    '*'
+},{
+    RGB      = true,         -- #RGB hex codes
+    RRGGBB   = true,         -- #RRGGBB hex codes
+    names    = false,         -- "Name" codes like Blue
+    RRGGBBAA = true,        -- #RRGGBBAA hex codes
+    rgb_fn   = true,        -- CSS rgb() and rgba() functions
+    hsl_fn   = true,        -- CSS hsl() and hsla() functions
+    css      = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    css_fn   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
+    mode     = 'background', -- Set the display mode.
+})
 
 ----
 -- keys
