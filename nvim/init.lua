@@ -69,6 +69,9 @@ require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
+    -- better file types
+    use { 'nathom/filetype.nvim' }
+
     -- show colors
     use { 'norcalli/nvim-colorizer.lua' }
 
