@@ -34,6 +34,7 @@ require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
+    use { 'nvim-lua/lsp-status.nvim' }
     use { 'williamboman/nvim-lsp-installer' }
     -- display arguments names while typing
     use { 'ray-x/lsp_signature.nvim' }
@@ -43,6 +44,12 @@ require('packer').startup(function(use)
     use 'williamboman/mason.nvim'
     -- Automatically install language servers to stdpath
     use 'williamboman/mason-lspconfig.nvim'
+
+    -- ts
+    use { 'jose-elias-alvarez/typescript.nvim' }
+
+    -- json schemas for various configs
+    use { 'b0o/schemastore.nvim' }
 
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use { 'jose-elias-alvarez/null-ls.nvim' }
@@ -75,6 +82,9 @@ require('packer').startup(function(use)
         },
     }
 
+    -- visualize what lsp does
+    use { 'j-hui/fidget.nvim' }
+
     -- completion
     use {
         "hrsh7th/nvim-cmp",
@@ -89,6 +99,12 @@ require('packer').startup(function(use)
             "lukas-reineke/cmp-rg",
         }
     }
+
+    -- lsp ui
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+    })
 
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter',
@@ -190,12 +206,16 @@ require('packer').startup(function(use)
     -- show idents
     use "lukas-reineke/indent-blankline.nvim"
 
-    -- theme
-    use 'Mofiqul/dracula.nvim'
-
     -- golang support
     use 'ray-x/go.nvim'
     use 'ray-x/guihua.lua' -- recommanded if need floating window support
+
+    -- theme
+    use {
+        "catppuccin/nvim",
+        as = "catppuccin",
+    }
+
 
     if is_bootstrap then
         require('packer').sync()
@@ -215,9 +235,9 @@ end
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
+    command = 'source <afile> | PackerCompile',
+    group = packer_group,
+    pattern = vim.fn.expand '$MYVIMRC',
 })
 
 ----
@@ -229,8 +249,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- colors/sytnax
 vim.o.syntax = "ON"
 vim.o.termguicolors = true
--- colorscheme
-vim.api.nvim_command('colorscheme dracula')
 
 -- share clipboard
 vim.o.clipboard = 'unnamedplus'
@@ -266,7 +284,7 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
 vim.o.compatible=false -- forget about vi compatibility
-vim.o.number = false -- no line nums on init
+-- vim.o.number = false -- no line nums on init
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 vim.o.langmenu = 'en_US.utf-8'
@@ -299,15 +317,193 @@ vim.o.cmdheight=1
 -- vim.o.autoindent = true
 vim.o.shortmess="ac" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
+----
+-- keys
+----
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
+})
+
+-- finders
+vim.api.nvim_set_keymap('n', '<leader>j', [[:Telescope find_files<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>g', [[:Telescope live_grep<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], {})
+-- TODO snippets
+-- line
+vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
+-- packer
+vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
+vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
+-- silence
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], {})
+vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], {})
+-- natural order consistent with i3
+vim.keymap.set({'n','v'}, ';', 'l', {noremap=true})
+vim.keymap.set({'n','v'}, 'l', 'k', {noremap=true})
+vim.keymap.set({'n','v'}, 'k', 'j', {noremap=true})
+vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
+-- faster nav
+vim.api.nvim_set_keymap('n', '<C-k>', '5j', {noremap=true})
+vim.api.nvim_set_keymap('n', '<C-l>', '5k', {noremap=true})
+-- open LF file manager (external dep)
+vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
+-- save file
+vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
+-- quit
+vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], {})
+-- splits 
+vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
+vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
+-- resize panes
+vim.api.nvim_set_keymap('n', '<C-M-k>', [[:resize -3<CR>]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], {noremap=true})
+vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], {noremap=true}) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
+-- reload config
+vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
+-- buffers
+vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>d', ':bd!<CR>', {})
+-- line swapping
+vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<S-l>', [[:m-2<CR>==]], {noremap=true})
+vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
+vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
+vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
+vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
 
 ----
 -- plugins setup
 ----
+--
+vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+require("catppuccin").setup({
+    transparent_background = false,
+    dim_inactive = {
+        enabled = true,
+        shade = "dark",
+        percentage = 0.3,
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        treesitter = true,
+        fidget = true,
+        aerial = false,
+        barbar = false,
+        beacon = false,
+        coc_nvim = false,
+        dashboard = false,
+        fern = false,
+        gitgutter = false,
+        harpoon = false,
+        hop = true,
+        illuminate = true,
+        leap = false,
+        lightspeed = false,
+        lsp_saga = true,
+        lsp_trouble = true,
+        mason = true,
+        markdown = true,
+        mini = false,
+        neogit = false,
+        neotest = false,
+        neotree = false,
+        notify = true,
+        overseer = false,
+        pounce = false,
+        symbols_outline = false,
+        telekasten = false,
+        treesitter_context = true,
+        ts_rainbow = true,
+        vim_sneak = false,
+        vimwiki = false,
+        which_key = false,
+
+        dap = {
+            enabled = false,
+            enable_ui = false,
+        },
+        indent_blankline = {
+            enabled = true,
+            colored_indent_levels = false,
+        },
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+            underlines = {
+                errors = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" },
+                information = { "underline" },
+            },
+        },
+        navic = {
+            enabled = false,
+            custom_bg = "NONE",
+        },
+    },
+})
+vim.api.nvim_command "colorscheme catppuccin"
 
 require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = 'dracula-nvim',
+        theme = 'catppuccin',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+
+    },
+    sections = {
+        lualine_a = {'location'},
+        lualine_b = {},
+        lualine_c = {'diagnostics', 'filename'},
+        lualine_x = {'encoding', 'filetype', 'branch', 'diff'},
+        lualine_y = {},
+        lualine_z = {'mode'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
     },
 }
 require("nvim-autopairs").setup {}
@@ -451,33 +647,6 @@ require('nvim-treesitter.configs').setup {
 }
 require('hlargs').setup()
 
-local lsp_servers = {
-    'clangd',
-    'rust_analyzer',
-    'pyright',
-    'tsserver',
-    "gopls",
-    "pyright",
-    'dockerls',
-    'graphql',
-    'html',
-    'jsonls',
-    -- 'solargraph', -- install manually
-    'solidity_ls',
-    'sqlls',
-    'sqls',
-    'stylelint_lsp',
-    'sumneko_lua',
-    'tailwindcss',
-    'terraformls',
-    'vimls',
-    'vuels',
-    'yamlls',
-}
-require('mason').setup()
-require('mason-lspconfig').setup {
-  ensure_installed = lsp_servers,
-}
 require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = true,
@@ -552,83 +721,34 @@ require('illuminate').configure({
 })
 
 require('nvim-ts-autotag').setup()
+require('lspkind').init({
+    mode = 'symbol_text',
+    preset = 'codicons',
+})
 
 vim.g.did_load_filetypes = 1
 require('filetype').setup({
-  overrides = {
-    literal = {
-      gitconfig = 'gitconfig',
+    overrides = {
+        literal = {
+            gitconfig = 'gitconfig',
+        },
+        complex = {
+            ['%.env%.*'] = 'sh',
+            ['.pryrc'] = 'ruby',
+        },
     },
-    complex = {
-      ['%.env%.*'] = 'sh',
-      ['.pryrc'] = 'ruby',
-    },
-  },
 })
 
-----
--- keys
-----
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
+require("fidget").setup{
+    window = {
+        blend = 0,
+    },
+}
+
+local saga = require("lspsaga")
+saga.init_lsp_saga({
+    -- your configuration
 })
 
--- finders
-vim.api.nvim_set_keymap('n', '<leader>j', [[:Telescope find_files<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>g', [[:Telescope live_grep<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], {})
--- TODO snippets
--- line
-vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
--- packer
-vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
-vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
--- silence
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], {})
-vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], {})
--- natural order consistent with i3
-vim.keymap.set({'n','v'}, ';', 'l', {noremap=true})
-vim.keymap.set({'n','v'}, 'l', 'k', {noremap=true})
-vim.keymap.set({'n','v'}, 'k', 'j', {noremap=true})
-vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
--- faster nav
-vim.api.nvim_set_keymap('n', '<C-k>', '5j', {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-l>', '5k', {noremap=true})
--- open LF file manager (external dep)
-vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
--- save file
-vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
--- quit
-vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], {})
--- splits 
-vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
-vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
--- resize panes
-vim.api.nvim_set_keymap('n', '<C-M-k>', [[:resize -3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], {noremap=true}) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
--- reload config
-vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
--- buffers
-vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', {noremap=true})
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', {noremap=true})
-vim.api.nvim_set_keymap('n', '<leader>d', ':bd!<CR>', {})
--- line swapping
-vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<S-l>', [[:m-2<CR>==]], {noremap=true})
-vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
-vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
-vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
-vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
+require("lsp")
+
