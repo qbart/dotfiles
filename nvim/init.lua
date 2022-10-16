@@ -31,18 +31,18 @@ require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
     -- Additional textobjects for treesitter
-    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } } 
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
     -- Collection of configurations for built-in LSP client
-    use 'neovim/nvim-lspconfig'                                                          
+    use 'neovim/nvim-lspconfig'
     use { 'williamboman/nvim-lsp-installer' }
     -- display arguments names while typing
-    use { 'ray-x/lsp_signature.nvim' }  
+    use { 'ray-x/lsp_signature.nvim' }
     -- lsp icons
-    use { 'onsails/lspkind-nvim'} 
+    use { 'onsails/lspkind-nvim'}
     -- Manage external editor tooling i.e LSP servers
-    use 'williamboman/mason.nvim'                                                      
+    use 'williamboman/mason.nvim'
     -- Automatically install language servers to stdpath
-    use 'williamboman/mason-lspconfig.nvim'         
+    use 'williamboman/mason-lspconfig.nvim'
 
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use { 'jose-elias-alvarez/null-ls.nvim' }
@@ -68,8 +68,11 @@ require('packer').startup(function(use)
     }
 
     -- lsp integration utils (better go to def etc)
-    use { 'RishabhRD/nvim-lsputils', requires = { 'RishabhRD/popfix' },
-        requires = { 'nvim-lua/plenary.nvim' },
+    use { 'RishabhRD/nvim-lsputils',
+        requires = {
+            'RishabhRD/popfix',
+            'nvim-lua/plenary.nvim'
+        },
     }
 
     -- completion
@@ -104,10 +107,10 @@ require('packer').startup(function(use)
     }
 
     -- convert between oneliner/multiline statement
-    use { 'AndrewRadev/splitjoin.vim' } 
+    use { 'AndrewRadev/splitjoin.vim' }
 
     -- auto tag closing and changing matching tag
-    use { 'windwp/nvim-ts-autotag' }      
+    use { 'windwp/nvim-ts-autotag' }
 
     -- easymoition like navigation
     use {
@@ -124,7 +127,7 @@ require('packer').startup(function(use)
     use { 'RRethy/vim-illuminate' }
 
     -- fancy notifications 
-    use { 'rcarriga/nvim-notify' }  
+    use { 'rcarriga/nvim-notify' }
 
     -- Ranger like file manager but written in Go, no python 🙏
     use { "lmburns/lf.nvim",
@@ -141,7 +144,7 @@ require('packer').startup(function(use)
     use { 'tpope/vim-surround' }
 
     -- case converison, cru, ...
-    use { 'tpope/vim-abolish' } 
+    use { 'tpope/vim-abolish' }
 
     -- Detect tabstop and shiftwidth automatically
     use 'tpope/vim-sleuth'
@@ -224,10 +227,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 --
 
 -- colors/sytnax
-vim.o.syntax = "ON"     
-vim.o.termguicolors = true  
+vim.o.syntax = "ON"
+vim.o.termguicolors = true
 -- colorscheme
-vim.api.nvim_command('colorscheme dracula') 
+vim.api.nvim_command('colorscheme dracula')
 
 -- share clipboard
 vim.o.clipboard = 'unnamedplus'
@@ -617,7 +620,7 @@ vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], {noremap=true})
 vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], {noremap=true})
 vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], {noremap=true}) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
 -- reload config
-vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {}) 
+vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
 -- buffers
 vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', {noremap=true})
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', {noremap=true})
