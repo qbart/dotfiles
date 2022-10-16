@@ -30,12 +30,101 @@ require('packer').startup(function(use)
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
-    -- Highlight, edit, and navigate code
-    use 'nvim-treesitter/nvim-treesitter' 
     -- Additional textobjects for treesitter
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } } 
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'                                                          
+    use { 'williamboman/nvim-lsp-installer' }
+    -- display arguments names while typing
+    use { 'ray-x/lsp_signature.nvim' }  
+    -- lsp icons
+    use { 'onsails/lspkind-nvim'} 
+    -- Manage external editor tooling i.e LSP servers
+    use 'williamboman/mason.nvim'                                                      
+    -- Automatically install language servers to stdpath
+    use 'williamboman/mason-lspconfig.nvim'         
+
+    -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    use { 'jose-elias-alvarez/null-ls.nvim' }
+
+    -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing.
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    }
+    -- quickfix code actions
+    use {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu',
+    }
+
+    -- unused words
+    use {
+        "narutoxy/dim.lua",
+        requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+        config = function()
+            require('dim').setup({})
+        end
+    }
+
+    -- lsp integration utils (better go to def etc)
+    use { 'RishabhRD/nvim-lsputils', requires = { 'RishabhRD/popfix' },
+        requires = { 'nvim-lua/plenary.nvim' },
+    }
+
+    -- completion
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "quangnguyen30192/cmp-nvim-ultisnips",
+            "hrsh7th/cmp-nvim-lsp",
+            "f3fora/cmp-spell",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-omni",
+            "hrsh7th/cmp-nvim-lsp-document-symbol",
+            "lukas-reineke/cmp-rg",
+        }
+    }
+
+    -- syntax
+    use { 'nvim-treesitter/nvim-treesitter',
+        requires = {
+            { 'nvim-treesitter/playground' },
+            { 'p00f/nvim-ts-rainbow' },
+            { 'nvim-treesitter/nvim-treesitter-textobjects' },
+            -- { 'romgrk/nvim-treesitter-context' },
+        },
+        run = ':TSUpdate',
+    }
+
+    -- highlight arguments definitaions and usages 
+    use { 'm-demare/hlargs.nvim',
+        requires = { 'nvim-treesitter/nvim-treesitter' },
+    }
+
+    -- convert between oneliner/multiline statement
+    use { 'AndrewRadev/splitjoin.vim' } 
+
+    -- auto tag closing and changing matching tag
+    use { 'windwp/nvim-ts-autotag' }      
+
+    -- easymoition like navigation
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v2',
+    }
+    -- switch tags, values, hash style etc.
+    use { 'andrewradev/switch.vim' }
+
+    -- align text, ascii tables
+    use { 'godlygeek/tabular' }
+
+    -- highlight current workd
+    use { 'RRethy/vim-illuminate' }
+
+    -- fancy notifications 
+    use { 'rcarriga/nvim-notify' }  
 
     -- Ranger like file manager but written in Go, no python 🙏
     use { "lmburns/lf.nvim",
@@ -45,10 +134,13 @@ require('packer').startup(function(use)
         }
     }
 
+    -- scrollbar
+    use("petertriho/nvim-scrollbar")
+
     -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
     use { 'tpope/vim-surround' }
 
-    -- case converison crs, ...
+    -- case converison, cru, ...
     use { 'tpope/vim-abolish' } 
 
     -- Detect tabstop and shiftwidth automatically
@@ -64,10 +156,7 @@ require('packer').startup(function(use)
     use { 'rhysd/clever-f.vim' }
 
     -- auto close brackets
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
+    use { "windwp/nvim-autopairs" }
 
     -- better file types
     use { 'nathom/filetype.nvim' }
@@ -120,6 +209,13 @@ if is_bootstrap then
     return
 end
 
+-- Automatically source and re-compile packer whenever you save this init.lua
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | PackerCompile',
+  group = packer_group,
+  pattern = vim.fn.expand '$MYVIMRC',
+})
 
 ----
 -- options
@@ -227,14 +323,13 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
-require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
-}
+require("trouble").setup {}
+
+require("nvim-autopairs").setup {}
 
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 
+    ensure_installed = {
         'c',
         'cpp',
         'go',
@@ -262,18 +357,49 @@ require('nvim-treesitter.configs').setup {
         'sql',
         'proto',
     },
-
-    highlight = { enable = true },
+    highlight = {
+        enable = true,
+        disable = { "fzf", "fugitive" },
+        additional_vim_regex_highlighting = false,
+    },
     indent = { enable = true },
+    autopairs = {
+        enable = true,
+    },
+    autotag = {
+        enable = true,
+    },
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            -- TODO: I'm not sure for this one.
-            scope_incremental = '<c-s>',
-            node_decremental = '<c-backspace>',
+            -- init_selection = '<CR>',
+            -- scope_incremental = '<CR>',
+            node_incremental = 'v',
+            node_decremental = 'V',
         },
+    },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+        config = {
+            javascript = {
+                __default = '// %s',
+                jsx_element = '{/* %s */}',
+                jsx_fragment = '{/* %s */}',
+                jsx_attribute = '// %s',
+                comment = '// %s'
+            },
+            typescriptreact = {
+                __default = '// %s',
+                jsx_element = '{/* %s */}',
+                jsx_fragment = '{/* %s */}',
+                jsx_attribute = '// %s',
+                comment = '// %s'
+            },
+            toml = {
+                __default = '# %s'
+            },
+        }
     },
     textobjects = {
         select = {
@@ -281,10 +407,12 @@ require('nvim-treesitter.configs').setup {
             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["aC"] = "@class.outer",
+                ["iC"] = "@class.inner",
+                ["ac"] = "@conditional.outer",
+                ["ic"] = "@conditional.inner",
             },
         },
         move = {
@@ -317,6 +445,39 @@ require('nvim-treesitter.configs').setup {
             },
         },
     },
+}
+require('hlargs').setup()
+
+local lsp_servers = {
+    'clangd',
+    'rust_analyzer',
+    'pyright',
+    'tsserver',
+    "gopls",
+    "pyright",
+    'dockerls',
+    'graphql',
+    'html',
+    'jsonls',
+    -- 'solargraph', -- install manually
+    'solidity_ls',
+    'sqlls',
+    'sqls',
+    'stylelint_lsp',
+    'sumneko_lua',
+    'tailwindcss',
+    'terraformls',
+    'vimls',
+    'vuels',
+    'yamlls',
+}
+require('mason').setup()
+require('mason-lspconfig').setup {
+  ensure_installed = lsp_servers,
+}
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
 }
 
 require('Comment').setup {
@@ -355,15 +516,51 @@ require('go').setup()
 require('colorizer').setup({
     '*'
 },{
-    RGB      = true,         -- #RGB hex codes
-    RRGGBB   = true,         -- #RRGGBB hex codes
-    names    = false,         -- "Name" codes like Blue
-    RRGGBBAA = true,        -- #RRGGBBAA hex codes
-    rgb_fn   = true,        -- CSS rgb() and rgba() functions
-    hsl_fn   = true,        -- CSS hsl() and hsla() functions
-    css      = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-    css_fn   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
-    mode     = 'background', -- Set the display mode.
+        RGB      = true,         -- #RGB hex codes
+        RRGGBB   = true,         -- #RRGGBB hex codes
+        names    = false,         -- "Name" codes like Blue
+        RRGGBBAA = true,        -- #RRGGBBAA hex codes
+        rgb_fn   = true,        -- CSS rgb() and rgba() functions
+        hsl_fn   = true,        -- CSS hsl() and hsla() functions
+        css      = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        mode     = 'background', -- Set the display mode.
+    })
+
+require("scrollbar").setup()
+
+require("hop").setup()
+
+require("notify").setup()
+vim.notify = require('notify')
+
+require('illuminate').configure({
+    providers = {
+        'lsp',
+        'treesitter',
+        'regex',
+    },
+    delay = 100,
+    filetypes_denylist = {
+        'dirvish',
+        'fugitive',
+    },
+    under_cursor = true,
+})
+
+require('nvim-ts-autotag').setup()
+
+vim.g.did_load_filetypes = 1
+require('filetype').setup({
+  overrides = {
+    literal = {
+      gitconfig = 'gitconfig',
+    },
+    complex = {
+      ['%.env%.*'] = 'sh',
+      ['.pryrc'] = 'ruby',
+    },
+  },
 })
 
 ----
@@ -432,8 +629,3 @@ vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
-
--- " https://github.com/editorconfig/editorconfig-vim
--- let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
--- au FileType gitcommit let b:EditorConfig_disable = 1
-
