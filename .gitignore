@@ -4,3 +4,4 @@
 /nvim/plugin/
 .netrwhist
 /ranger/plugins/
+.luarc.json
