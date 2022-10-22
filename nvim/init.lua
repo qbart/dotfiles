@@ -106,6 +106,7 @@ require('packer').startup(function(use)
         branch = "main",
     })
 
+
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter',
         requires = {
@@ -213,6 +214,12 @@ require('packer').startup(function(use)
     use 'ray-x/go.nvim'
     use 'ray-x/guihua.lua' -- recommanded if need floating window support
 
+    -- ui for file peeking
+    use { 'skywind3000/vim-quickui' }
+
+    -- more than just a sort
+    use { 'inkarkat/vim-AdvancedSorters' }
+
     -- theme
     use {
         "catppuccin/nvim",
@@ -284,7 +291,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ','
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '<Space>'
 
 vim.o.compatible=false -- forget about vi compatibility
 -- vim.o.number = false -- no line nums on init
@@ -341,7 +348,6 @@ vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], {})
--- TODO snippets
 -- line
 vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
 -- packer
@@ -386,10 +392,23 @@ vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
+-- diagnostic and list of references
+vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`l", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`q", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`u", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+-- peeks
+vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
+vim.keymap.set("n", "gu", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 
 ----
 -- plugins setup
 ----
+local symbols = require('utils.symbols')
 --
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 require("catppuccin").setup({
@@ -526,7 +545,53 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
-require("trouble").setup {}
+require("trouble").setup {
+    position = "bottom", -- position of the list can be: bottom, top, left, right
+    height = 12, -- height of the trouble list when position is top or bottom
+    width = 50, -- width of the list when position is left or right
+    icons = true, -- use devicons for filenames
+    mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+    fold_open = "", -- icon used for open folds
+    fold_closed = "", -- icon used for closed folds
+    group = true, -- group results by file
+    padding = true, -- add an extra new line on top of the list
+    action_keys = { -- key mappings for actions in the trouble list
+        -- map to {} to remove a mapping, for example:
+        -- close = {},
+        close = "q", -- close the list
+        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+        refresh = "r", -- manually refresh
+        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        open_split = { "<c-x>" }, -- open buffer in new split
+        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+        open_tab = { "<c-t>" }, -- open buffer in new tab
+        jump_close = {"o"}, -- jump to the diagnostic and close the list
+        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+        toggle_preview = "P", -- toggle auto_preview
+        hover = "K", -- opens a small popup with the full multiline message
+        preview = "p", -- preview the diagnostic location
+        close_folds = {"zM", "zm"}, -- close all folds
+        open_folds = {"zR", "zr"}, -- open all folds
+        toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        previous = "l", -- previous item
+        next = "k" -- next item
+    },
+    indent_lines = true, -- add an indent guide below the fold icons
+    auto_open = false, -- automatically open the list when you have diagnostics
+    auto_close = false, -- automatically close the list when you have no diagnostics
+    auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
+    auto_fold = false, -- automatically fold a file trouble list at creation
+    auto_jump = {"lsp_definitions"}, -- for the given modes, automatically jump if there is only a single result
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+}
 
 require("nvim-autopairs").setup {}
 
@@ -707,7 +772,15 @@ require("scrollbar").setup()
 
 require("hop").setup()
 
-require("notify").setup()
+require("notify").setup({
+    symbols = {
+        ERROR = symbols.error,
+        WARN = symbols.warning,
+        INFO = symbols.information,
+        DEBUG = symbols.debug,
+        TRACE = symbols.trace,
+    },
+})
 vim.notify = require('notify')
 
 require('illuminate').configure({
@@ -749,9 +822,37 @@ require("fidget").setup{
     },
 }
 
-local saga = require("lspsaga")
-saga.init_lsp_saga({
-    -- your configuration
+require("lspsaga").init_lsp_saga({
+    diagnostic_header = { " ", " ", " ", " " },
+    max_preview_lines = 15,
+    code_action_icon = "💡",
+    code_action_num_shortcut = true,
+    code_action_lightbulb = {
+        enable = true,
+        sign = true,
+        enable_in_insert = true,
+        sign_priority = 20,
+        virtual_text = false,
+    },
+    finder_icons = {
+        def = '  ',
+        ref = ' ',
+        link = '  ',
+    },
+    max_preview_lines = 15,
+    rename_action_quit = "<C-q>",
+    show_outline = {
+        win_position = 'right',
+        --set special filetype win that outline window split.like NvimTree neotree
+        -- defx, db_ui
+        win_with = '',
+        win_width = 30,
+        auto_enter = true,
+        auto_preview = true,
+        virt_text = '┃',
+        jump_key = 'o',
+        auto_refresh = true,
+    },
 })
 
 require("lsp")

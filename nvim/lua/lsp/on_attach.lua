@@ -8,17 +8,14 @@ local on_attach = function(client, bufnr)
   -- else
   --   navic.attach(client, bufnr)
   -- end
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   vim.wo.signcolumn = 'yes:1'
   require('lsp-status').on_attach(client)
 
   if tab_contains({ 'css', 'scss', 'sass' }, vim.bo.filetype) then
-    buf_set_option('omnifunc', 'csscomplete#CompleteCSS')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'csscomplete#CompleteCSS')
   else
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   end
   -- Mappings.
   local opts = { noremap = true, silent = true }
@@ -43,27 +40,14 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap("n", "gh", "<cmd>lua require('lsp.functions').PeekDefinition()<CR>", opts)
   -- buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap("v", "<C-m><C-f>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  buf_set_keymap("v", "<CR><C-f>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+  -- buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  -- buf_set_keymap("v", "<C-m><C-f>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  -- buf_set_keymap("v", "<CR><C-f>", "", opts)
 
-  if (vim.fn.has('nvim-0.8') == 1) then
-    buf_set_keymap("n", "<C-m><C-f>", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-    buf_set_keymap("n", "<CR><C-f>", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-    buf_set_keymap("n", "<leader>mf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-    buf_set_keymap("n", "<CR>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-    buf_set_keymap("n", "<C-m>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-    buf_set_keymap("n", "<leader>mF", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-  else
-    buf_set_keymap("n", "<C-m><C-f>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    buf_set_keymap("n", "<CR><C-f>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    buf_set_keymap("n", "<leader>mf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    buf_set_keymap("n", "<CR>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
-    buf_set_keymap("n", "<C-m>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
-    buf_set_keymap("n", "<leader>mF", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
-  end
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {noremap = true, silent = true})
+  -- vim.api.nvim_buf_set_keymap(bufnr, "v", "f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", {noremap = true, silent = true})
 
   set_default_formatter_for_filetypes('solargraph', { 'ruby' })
   set_default_formatter_for_filetypes('null-ls', { 'javascript', 'vue' })
@@ -82,8 +66,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_feedkeys('g@', 'n', false)
   end
 
-  buf_set_keymap("n", "gm", "<cmd>lua format_range_operator()<CR>", opts)
-
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gm", "<cmd>lua format_range_operator()<CR>", {noremap = true, silent = true})
 end
 
 return on_attach

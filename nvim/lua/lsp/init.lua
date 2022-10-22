@@ -76,10 +76,10 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     -- { name = 'cmp_tabnine', priority = 95 },
     -- { name = 'copilot', priority = 100 },
-    { name = 'ultisnips', priority = 99 },
-    { name = 'nvim_lsp', priority = 98 },
-    { name = 'path', priority = 97},
-    { name = 'buffer', priority = 96, option = {
+    { name = 'ultisnips', priority = 70 },
+    { name = 'nvim_lsp', priority = 80 },
+    { name = 'path', priority = 60},
+    { name = 'buffer', priority = 50, option = {
       keyword_pattern = [[\k\+]],
       get_bufnrs = function()
         return vim.api.nvim_list_bufs()

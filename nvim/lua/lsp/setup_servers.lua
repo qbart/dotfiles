@@ -1,14 +1,7 @@
 local on_attach = require('lsp/on_attach')
 local lspconfig = require('lspconfig')
-local native_capabilities = vim.lsp.protocol.make_client_capabilities()
-local loaded_cmp, capabilities = pcall(require, 'cmp_nvim_lsp')
 
-if loaded_cmp then
-  capabilities = capabilities.update_capabilities(native_capabilities)
-else
-  print('cmp_nvim_lsp not installed')
-  capabilities = native_capabilities
-end
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -29,7 +22,6 @@ local servers = {
   'jsonls',
   'pyright',
   'rust_analyzer',
-  'solidity_ls',
   'sqlls',
   'sqls',
   'stylelint_lsp',
