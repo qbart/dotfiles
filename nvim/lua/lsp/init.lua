@@ -24,14 +24,15 @@ local cmp = require('cmp')
 local compare = require('cmp.config.compare')
 local lspkind = require('lspkind')
 local cmp_buffer = require('cmp_buffer')
+local luasnip = require("luasnip")
 
 vim.cmd[[
   set pumheight=10
 ]]
 
-local is_prior_char_whitespace = function()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+local has_words_before = function()
+  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local t = function(str)
@@ -76,7 +77,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     -- { name = 'cmp_tabnine', priority = 95 },
     -- { name = 'copilot', priority = 100 },
-    { name = 'ultisnips', priority = 70 },
+    { name = 'luasnip', priority = 70 },
     { name = 'nvim_lsp', priority = 80 },
     { name = 'path', priority = 60},
     { name = 'buffer', priority = 50, option = {
@@ -105,38 +106,33 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      require'luasnip'.lsp_expand(args.body)
     end,
   },
   mapping = {
-    ['<C-j>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete(),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-        vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippet()<CR>"))
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.select_next_item()
-      elseif is_prior_char_whitespace() then
-        vim.fn.feedkeys(t("<tab>"), "n")
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
-    end, {
-        "i",
-        "s",
-      }),
+    end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-        return vim.fn.feedkeys(t("<C-R>=UltiSnips#JumpBackwards()<CR>"))
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
-    end, {
-        "i",
-        "s",
-      }),
-    ['<CR>'] = cmp.mapping.confirm()
+    end, { "i", "s" }),
+    ['<Esc>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({select = false}), -- accept only if select so you can create new line normally
   },
   experimental = {
     ghost_text = true,
@@ -214,7 +210,7 @@ augroup cmp_config
 autocmd!
 autocmd FileType css,scss,sass lua require'cmp'.setup.buffer {
 \  sources = {
-\    { name = "ultisnips" },
+\    { name = "luasnip" },
 \    { name = 'nvim_lsp' },
 \    { name = 'omni' },
 \    { name = 'path' },

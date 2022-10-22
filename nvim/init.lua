@@ -35,7 +35,6 @@ require('packer').startup(function(use)
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
     use { 'nvim-lua/lsp-status.nvim' }
-    use { 'williamboman/nvim-lsp-installer' }
     -- display arguments names while typing
     use { 'ray-x/lsp_signature.nvim' }
     -- lsp icons
@@ -89,12 +88,12 @@ require('packer').startup(function(use)
     use {
         "hrsh7th/nvim-cmp",
         requires = {
-            "quangnguyen30192/cmp-nvim-ultisnips",
             "hrsh7th/cmp-nvim-lsp",
             "f3fora/cmp-spell",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-omni",
+            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "lukas-reineke/cmp-rg",
         }
@@ -130,7 +129,10 @@ require('packer').startup(function(use)
     use { 'windwp/nvim-ts-autotag' }
 
     -- snippets
-    use { 'SirVer/ultisnips' }
+    use({"L3MON4D3/LuaSnip", tag = "v*", requires = {
+        {'saadparwaiz1/cmp_luasnip'},
+        {"rafamadriz/friendly-snippets"},
+    }})
 
     -- easymoition like navigation
     use {
@@ -213,9 +215,6 @@ require('packer').startup(function(use)
     -- golang support
     use 'ray-x/go.nvim'
     use 'ray-x/guihua.lua' -- recommanded if need floating window support
-
-    -- ui for file peeking
-    use { 'skywind3000/vim-quickui' }
 
     -- more than just a sort
     use { 'inkarkat/vim-AdvancedSorters' }
@@ -398,16 +397,18 @@ vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silen
 vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`l", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`q", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "`u", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "gu", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
 -- peeks
 vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
-vim.keymap.set("n", "gu", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 
 ----
 -- plugins setup
 ----
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local symbols = require('utils.symbols')
 --
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
@@ -801,6 +802,33 @@ require('nvim-ts-autotag').setup()
 require('lspkind').init({
     mode = 'symbol_text',
     preset = 'codicons',
+    symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+    },
 })
 
 vim.g.did_load_filetypes = 1
@@ -839,7 +867,6 @@ require("lspsaga").init_lsp_saga({
         ref = ' ',
         link = '  ',
     },
-    max_preview_lines = 15,
     rename_action_quit = "<C-q>",
     show_outline = {
         win_position = 'right',
