@@ -145,7 +145,7 @@ require('packer').startup(function(use)
     -- align text, ascii tables
     use { 'godlygeek/tabular' }
 
-    -- highlight current workd
+    -- highlight current word
     use { 'RRethy/vim-illuminate' }
 
     -- fancy notifications 
@@ -193,12 +193,7 @@ require('packer').startup(function(use)
     use { 'numToStr/Comment.nvim' }
 
     -- git signs
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup()
-        end
-    }
+    use { 'lewis6991/gitsigns.nvim' }
 
     -- multi cursor 
     use { 'terryma/vim-multiple-cursors' }
@@ -391,18 +386,18 @@ vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
--- diagnostic and list of references
+-- diagnostic, refs
 vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`l", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`q", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "gu", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
--- peeks
 vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 
 ----
 -- plugins setup
@@ -530,7 +525,6 @@ require('lualine').setup {
         lualine_z = {}
     },
 }
-require("nvim-autopairs").setup {}
 require('gitsigns').setup {}
 
 require('telescope').setup {
@@ -853,7 +847,7 @@ require("fidget").setup{
 require("lspsaga").init_lsp_saga({
     diagnostic_header = { " ", " ", " ", " " },
     max_preview_lines = 15,
-    code_action_icon = "💡",
+    code_action_icon = symbols.action,
     code_action_num_shortcut = true,
     code_action_lightbulb = {
         enable = true,
