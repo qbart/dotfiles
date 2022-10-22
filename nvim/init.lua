@@ -128,6 +128,9 @@ require('packer').startup(function(use)
     -- auto tag closing and changing matching tag
     use { 'windwp/nvim-ts-autotag' }
 
+    -- snippets
+    use { 'SirVer/ultisnips' }
+
     -- easymoition like navigation
     use {
         'phaazon/hop.nvim',
@@ -492,8 +495,9 @@ require('lualine').setup {
     sections = {
         lualine_a = {'location'},
         lualine_b = {},
-        lualine_c = {'diagnostics', 'filename'},
-        lualine_x = {'encoding', 'filetype', 'branch', 'diff'},
+        lualine_c = {'diff', 'filename'},
+        -- lualine_x = {'encoding', 'filetype', 'branch', 'diagnostics'},
+        lualine_x = {'diagnostics'},
         lualine_y = {},
         lualine_z = {'mode'}
     },
@@ -690,7 +694,7 @@ require('colorizer').setup({
 },{
         RGB      = true,         -- #RGB hex codes
         RRGGBB   = true,         -- #RRGGBB hex codes
-        names    = false,         -- "Name" codes like Blue
+        names    = false,       -- "Name" codes like Blue
         RRGGBBAA = true,        -- #RRGGBBAA hex codes
         rgb_fn   = true,        -- CSS rgb() and rgba() functions
         hsl_fn   = true,        -- CSS hsl() and hsla() functions
