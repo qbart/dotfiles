@@ -22,7 +22,13 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- start secreen
-    use { 'mhinz/vim-startify' }
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+    }
+
+    -- profiler
+    use 'lewis6991/impatient.nvim'
 
     -- Fuzzy Finder (files, lsp, etc)
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -317,9 +323,9 @@ vim.o.smartcase=true
 vim.o.hidden = true -- https://medium.com/usevim/vim-101-set-hidden-f78800142855
 vim.o.backup = false
 vim.o.writebackup = false
-vim.o.cmdheight=1
+vim.o.cmdheight=0
 -- vim.o.autoindent = true
-vim.o.shortmess="ac" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
+vim.o.shortmess="Ot" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
 ----
 -- keys
@@ -357,8 +363,8 @@ vim.keymap.set({'n','v'}, 'l', 'k', {noremap=true})
 vim.keymap.set({'n','v'}, 'k', 'j', {noremap=true})
 vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
 -- faster nav
-vim.api.nvim_set_keymap('n', '<C-k>', '5j', {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-l>', '5k', {noremap=true})
+vim.keymap.set({'n', 'v'}, '<C-k>', '5j', {noremap=true})
+vim.keymap.set({'n', 'v'}, '<C-l>', '5k', {noremap=true})
 -- open LF file manager (external dep)
 vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
 -- save file
@@ -387,6 +393,7 @@ vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
 -- diagnostic, refs
+vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
@@ -402,7 +409,50 @@ vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { sile
 ----
 -- plugins setup
 ----
+require('impatient')
+
 require("luasnip.loaders.from_vscode").lazy_load()
+
+local alpha = require'alpha'
+local startify = require'alpha.themes.startify'
+startify.section.header.val = {
+[[  ▒▒▒▒▒     ▄████▄     ]],
+[[ ▒ ▄▒ ▄▒   ███▄█▀      ]],
+[[ ▒▒▒▒▒▒▒  ▐████  █  █  ]],
+[[ ▒▒▒▒▒▒▒   █████▄      ]],
+[[ ▒ ▒ ▒ ▒    ▀████▀     ]],
+}
+startify.section.top_buttons.val = {
+    startify.button( "c", "Configuration" , ":e ~/d/dotfiles/nvim/init.lua<CR>"),
+    startify.button( "ok", "Oh, Krab!" , ":e ~/oh/krab/main.go<CR>"),
+}
+-- disable MRU
+startify.section.mru.val = {
+    { type = "padding", val = 1 },
+    { type = "text", val = "MRU", opts = { hl = "SpecialComment" } },
+    { type = "padding", val = 1 },
+    {
+        type = "group",
+        val = function()
+            return { startify.mru(1, nil, 5) }
+        end,
+    },
+}
+-- disable MRU cwd
+startify.section.mru_cwd.val = { { type = "padding", val = 0 } }
+startify.nvim_web_devicons.enabled = true
+--
+startify.section.bottom_buttons.val = {
+    { type = "text", val = "Actions", opts = { hl = "SpecialComment" } },
+    { type = "padding", val = 1 },
+    startify.button( "t", "Create todo.txt" , ":e todo.txt<CR>"),
+    startify.button( "e", "New empty file" , ":ene <BAR> startinsert <CR>"),
+    startify.button( "q", "Quit" , ":qa<CR>"),
+}
+startify.section.footer = {
+    { type = "text", val = "footer" },
+}
+alpha.setup(startify.config)
 
 local symbols = require('utils.symbols')
 --
@@ -875,6 +925,7 @@ require("lspsaga").init_lsp_saga({
         auto_refresh = true,
     },
 })
+
 
 require("lsp")
 
