@@ -1,9 +1,7 @@
-local tab_contains = require('utils.tables').contains
-
 local M = {}
 
 function M.set_default_formatter_for_filetypes(language_server_name, filetypes)
-  if not tab_contains(filetypes, vim.bo.filetype) then
+  if not vim.tbl_contains(filetypes, vim.bo.filetype) then
     return
   end
 
@@ -13,7 +11,7 @@ function M.set_default_formatter_for_filetypes(language_server_name, filetypes)
     table.insert(active_servers, client.config.name)
   end)
 
-  if not tab_contains(active_servers, language_server_name) then
+  if not vim.tbl_contains(active_servers, language_server_name) then
     return
   end
 

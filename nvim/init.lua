@@ -27,6 +27,12 @@ require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons' },
     }
 
+    -- shortcuts
+    use { "folke/which-key.nvim" }
+
+    -- switch cwd based on patterns
+    use { 'notjedi/nvim-rooter.lua' }
+
     -- profiler
     use 'lewis6991/impatient.nvim'
 
@@ -49,6 +55,8 @@ require('packer').startup(function(use)
     use 'williamboman/mason.nvim'
     -- Automatically install language servers to stdpath
     use 'williamboman/mason-lspconfig.nvim'
+    -- symbols tree
+    use 'simrat39/symbols-outline.nvim'
 
     -- ts
     use { 'jose-elias-alvarez/typescript.nvim' }
@@ -111,6 +119,9 @@ require('packer').startup(function(use)
         branch = "main",
     })
 
+-- use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+--   require('git-conflict').setup()
+-- end}
 
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter',
@@ -212,6 +223,9 @@ require('packer').startup(function(use)
 
     -- show idents
     use "lukas-reineke/indent-blankline.nvim"
+
+    -- visual debugger
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text"} }
 
     -- golang support
     use 'ray-x/go.nvim'
@@ -349,7 +363,7 @@ vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], {})
 -- line
-vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
+-- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
 -- packer
 vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
@@ -365,6 +379,7 @@ vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
 -- faster nav
 vim.keymap.set({'n', 'v'}, '<C-k>', '5j', {noremap=true})
 vim.keymap.set({'n', 'v'}, '<C-l>', '5k', {noremap=true})
+vim.keymap.set({'n'}, '<C-j>', ':HopPattern<CR>', {noremap=true})
 -- open LF file manager (external dep)
 vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
 -- save file
@@ -392,7 +407,7 @@ vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
--- diagnostic, refs
+-- diagnostic, refs, navigation outline
 vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
@@ -405,6 +420,9 @@ vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.api.nvim_set_keymap('n', 'n', [[:SymbolsOutline<CR>]], { noremap = true, silent = true })
+-- help
+vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], {noremap=true})
 
 ----
 -- plugins setup
@@ -510,17 +528,16 @@ require("catppuccin").setup({
         notify = true,
         overseer = false,
         pounce = false,
-        symbols_outline = false,
+        symbols_outline = true,
         telekasten = false,
         treesitter_context = true,
         ts_rainbow = true,
         vim_sneak = false,
         vimwiki = false,
         which_key = false,
-
         dap = {
-            enabled = false,
-            enable_ui = false,
+            enabled = true,
+            enable_ui = true,
         },
         indent_blankline = {
             enabled = true,
@@ -893,6 +910,151 @@ require("fidget").setup{
         blend = 0,
     },
 }
+
+require("which-key").setup {
+    layout = {
+        height = { min = 4, max = 50 }, -- min and max height of the columns
+        width = { min = 20, max = 80 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
+        align = "center", -- align columns left, center or right
+    },
+}
+
+require('nvim-rooter').setup {
+  rooter_patterns = { '.git', '.hg', '.svn' },
+  trigger_patterns = { '*' },
+  manual = false,
+}
+require("symbols-outline").setup({
+    auto_close = true,
+    keymaps = { -- These keymaps can be a string or a table for multiple keys
+        close = {"<Esc>", "q"},
+        goto_location = "<Cr>",
+        focus_location = "o",
+        hover_symbol = "<C-space>",
+        toggle_preview = "K",
+        rename_symbol = "r",
+        code_actions = "a",
+        fold = "h",
+        unfold = "l",
+        fold_all = "W",
+        unfold_all = "E",
+        fold_reset = "R",
+    },
+    symbols = {
+        File = {icon = "", hl = "TSURI"},
+        Module = {icon = "", hl = "TSNamespace"},
+        Namespace = {icon = "", hl = "TSNamespace"},
+        Package = {icon = "", hl = "TSNamespace"},
+        Class = {icon = "𝓒", hl = "TSType"},
+        Method = {icon = "ƒ", hl = "TSMethod"},
+        Property = {icon = "", hl = "TSMethod"},
+        Field = {icon = "", hl = "TSField"},
+        Constructor = {icon = "", hl = "TSConstructor"},
+        Enum = {icon = "ℰ", hl = "TSType"},
+        Interface = {icon = "ﰮ", hl = "TSType"},
+        Function = {icon = "", hl = "TSFunction"},
+        Variable = {icon = "", hl = "TSConstant"},
+        Constant = {icon = "", hl = "TSConstant"},
+        String = {icon = "𝓐", hl = "TSString"},
+        Number = {icon = "#", hl = "TSNumber"},
+        Boolean = {icon = "⊨", hl = "TSBoolean"},
+        Array = {icon = "", hl = "TSConstant"},
+        Object = {icon = "⦿", hl = "TSType"},
+        Key = {icon = "🔐", hl = "TSType"},
+        Null = {icon = "NULL", hl = "TSType"},
+        EnumMember = {icon = "", hl = "TSField"},
+        Struct = {icon = symbols.Struct, hl = "TSType"},
+        Event = {icon = "🗲", hl = "TSType"},
+        Operator = {icon = "+", hl = "TSOperator"},
+        TypeParameter = {icon = "𝙏", hl = "TSParameter"}
+    }
+})
+
+require("dapui").setup({
+  icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+    repl = "r",
+    toggle = "t",
+  },
+  -- Expand lines larger than the window
+  -- Requires >= 0.7
+  expand_lines = true,
+  -- Layouts define sections of the screen to place windows.
+  -- The position can be "left", "right", "top" or "bottom".
+  -- The size specifies the height/width depending on position. It can be an Int
+  -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
+  -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
+  -- Elements are the elements shown in the layout (in order).
+  -- Layouts are opened in order so that earlier layouts take priority in window sizing.
+  layouts = {
+    {
+      elements = {
+      -- Elements can be strings or table with id and size keys.
+        { id = "scopes", size = 0.25 },
+        "breakpoints",
+        "stacks",
+        "watches",
+      },
+      size = 40, -- 40 columns
+      position = "left",
+    },
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.25, -- 25% of total lines
+      position = "bottom",
+    },
+  },
+  controls = {
+    -- Requires Neovim nightly (or 0.8 when released)
+    enabled = true,
+    -- Display controls in this element
+    element = "repl",
+    icons = {
+      pause = "",
+      play = "",
+      step_into = "",
+      step_over = "",
+      step_out = "",
+      step_back = "",
+      run_last = "↻",
+      terminate = "□",
+    },
+  },
+  floating = {
+    max_height = nil, -- These can be integers or a float between 0 and 1.
+    max_width = nil, -- Floats will be treated as percentage of your screen.
+    border = "single", -- Border style. Can be "single", "double" or "rounded"
+    mappings = {
+      close = { "q", "<Esc>" },
+    },
+  },
+  windows = { indent = 1 },
+  render = {
+    max_type_length = nil, -- Can be integer or nil.
+    max_value_lines = 100, -- Can be integer or nil.
+  }
+})
+
+require('go').setup({
+    icons = {breakpoint = '🧘', currentpos = '🏃'},  -- setup to `false` to disable icons setup
+    dap_debug = true, -- set to false to disable dap
+    dap_debug_keymap = true, -- true: use keymap for debugger defined in go/dap.lua
+    -- false: do not use keymap in go/dap.lua.  you must define your own.
+    -- windows: use visual studio keymap
+    dap_debug_gui = true, -- set to true to enable dap gui, highly recommend
+    dap_debug_vt = true, -- set to true to enable dap virtual text
+    trouble = true, -- true: use trouble to open quickfix
+    luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
+})
 
 require("lspsaga").init_lsp_saga({
     diagnostic_header = { " ", " ", " ", " " },

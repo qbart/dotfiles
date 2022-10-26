@@ -1,4 +1,3 @@
-local tab_contains = require('utils.tables').contains
 local set_default_formatter_for_filetypes = require('lsp.functions').set_default_formatter_for_filetypes
 -- local navic_loaded, navic = pcall(require, "nvim-navic")
 
@@ -12,7 +11,7 @@ local on_attach = function(client, bufnr)
   vim.wo.signcolumn = 'yes:1'
   require('lsp-status').on_attach(client)
 
-  if tab_contains({ 'css', 'scss', 'sass' }, vim.bo.filetype) then
+  if vim.tbl_contains({ 'css', 'scss', 'sass' }, vim.bo.filetype) then
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'csscomplete#CompleteCSS')
   else
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
