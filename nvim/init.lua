@@ -95,9 +95,6 @@ require('packer').startup(function(use)
         },
     }
 
-    -- visualize what lsp does
-    use { 'j-hui/fidget.nvim' }
-
     -- completion
     use {
         "hrsh7th/nvim-cmp",
@@ -169,7 +166,45 @@ require('packer').startup(function(use)
     use { 'RRethy/vim-illuminate' }
 
     -- fancy notifications 
-    use { 'rcarriga/nvim-notify' }
+    use({
+        "folke/noice.nvim",
+        event = "VimEnter",
+        config = function()
+            require("noice").setup({
+                views = {
+                    cmdline_popup = {
+                        border = {
+                            style = "none",
+                            padding = { 1, 2 },
+                        },
+                        filter_options = {},
+                        win_options = {
+                            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+                        },
+                    },
+                },
+                messages = {
+                    -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+                    -- This is a current Neovim limitation.
+                    enabled = true, -- enables the Noice messages UI
+                    view = "mini", -- default view for messages
+                    view_error = "mini", -- view for errors
+                    view_warn = "mini", -- view for warnings
+                    view_history = "split", -- view for :messages
+                    view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+                },
+                routes = {
+                    {
+                        filter = { event = "msg_show", kind = "", find = " lines --" },
+                        opts = { skip = true },
+                    },
+                },
+            })
+        end,
+        requires = {
+            "MunifTanjim/nui.nvim",
+        }
+    })
 
     -- Ranger like file manager but written in Go, no python 🙏
     use { "lmburns/lf.nvim",
@@ -228,7 +263,10 @@ require('packer').startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
 
     -- visual debugger
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text"} }
+    use { "rcarriga/nvim-dap-ui", requires = {
+        "mfussenegger/nvim-dap",
+        "theHamsta/nvim-dap-virtual-text",
+    }}
 
     -- golang support
     use 'ray-x/go.nvim'
@@ -340,7 +378,7 @@ vim.o.smartcase=true
 vim.o.hidden = true -- https://medium.com/usevim/vim-101-set-hidden-f78800142855
 vim.o.backup = false
 vim.o.writebackup = false
-vim.o.cmdheight=0
+vim.o.cmdheight=1
 -- vim.o.autoindent = true
 vim.o.shortmess="Ot" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
@@ -504,10 +542,10 @@ require("catppuccin").setup({
     integrations = {
         cmp = true,
         gitsigns = true,
-        nvimtree = true,
+        nvimtree = false,
         telescope = true,
         treesitter = true,
-        fidget = true,
+        fidget = false,
         aerial = false,
         barbar = false,
         beacon = false,
@@ -524,7 +562,7 @@ require("catppuccin").setup({
         lsp_trouble = true,
         mason = true,
         markdown = true,
-        mini = false,
+        mini = true,
         neogit = false,
         neotest = false,
         neotree = false,
@@ -537,7 +575,7 @@ require("catppuccin").setup({
         ts_rainbow = true,
         vim_sneak = false,
         vimwiki = false,
-        which_key = false,
+        which_key = true,
         dap = {
             enabled = true,
             enable_ui = true,
@@ -837,17 +875,6 @@ require("scrollbar").setup()
 
 require("hop").setup()
 
-require("notify").setup({
-    symbols = {
-        ERROR = symbols.error,
-        WARN = symbols.warning,
-        INFO = symbols.information,
-        DEBUG = symbols.debug,
-        TRACE = symbols.trace,
-    },
-})
-vim.notify = require('notify')
-
 require('illuminate').configure({
     providers = {
         'lsp',
@@ -907,12 +934,6 @@ require('filetype').setup({
         },
     },
 })
-
-require("fidget").setup{
-    window = {
-        blend = 0,
-    },
-}
 
 require("which-key").setup {
     layout = {
