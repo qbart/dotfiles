@@ -88,6 +88,8 @@ cmp.setup({
     } },
     -- { name = 'cmp_tabnine', priority = 90 },
     { name = 'spell' },
+    { name = 'calc' },
+    { name = 'nvim_lua' },
   },
   sorting = {
     priority_weight = 2,
@@ -131,7 +133,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-    ['<Esc>'] = cmp.mapping.abort(),
+    -- ['<Esc>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({select = false}), -- accept only if select so you can create new line normally
   },
   experimental = {

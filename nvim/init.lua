@@ -106,7 +106,9 @@ require('packer').startup(function(use)
             "f3fora/cmp-spell",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
+            { "hrsh7th/cmp-nvim-lua", ft = 'lua' }, -- nvim-cmp source for nvim lua
             "hrsh7th/cmp-omni",
+            "hrsh7th/cmp-calc",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "lukas-reineke/cmp-rg",
@@ -122,6 +124,7 @@ require('packer').startup(function(use)
 -- use {'akinsho/git-conflict.nvim', tag = "*", config = function()
 --   require('git-conflict').setup()
 -- end}
+    --https://github.com/akinsho/bufferline.nvim
 
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter',
