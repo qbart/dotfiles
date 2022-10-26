@@ -251,7 +251,7 @@ require('packer').startup(function(use)
     use { 'lewis6991/gitsigns.nvim' }
 
     -- multi cursor 
-    use { 'terryma/vim-multiple-cursors' }
+    use { 'mg979/vim-visual-multi' }
 
     -- statusline
     use {
@@ -421,6 +421,12 @@ vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
 vim.keymap.set({'n', 'v'}, '<C-k>', '5j', {noremap=true})
 vim.keymap.set({'n', 'v'}, '<C-l>', '5k', {noremap=true})
 vim.keymap.set({'n'}, '<C-j>', ':HopPattern<CR>', {noremap=true})
+vim.g.VM_maps = {
+  ["Skip Region"] = '<C-x>',
+  -- ["Select Cursor Down"] = '∆', -- Option+J,
+  -- ["Select Cursor Up"]   = 'Ż', --  Option+K
+}
+vim.g.VM_theme = 'purplegray'
 -- open LF file manager (external dep)
 vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
 -- save file
