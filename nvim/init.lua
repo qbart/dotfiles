@@ -1,8 +1,5 @@
--- TOC:
--- plugins
--- options
--- setup
--- keys
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 ----
 -- plugins
@@ -863,8 +860,10 @@ require("lf").setup({
 
 require('go').setup()
 
+-- disable names needs to disable css:
+-- https://github.com/norcalli/nvim-colorizer.lua/blob/36c610a9717cc9ec426a07c8e6bf3b3abcb139d6/lua/colorizer.lua#L376
 require('colorizer').setup({
-    '*'
+    '*';
 },{
         RGB      = true,         -- #RGB hex codes
         RRGGBB   = true,         -- #RRGGBB hex codes
@@ -872,8 +871,8 @@ require('colorizer').setup({
         RRGGBBAA = true,        -- #RRGGBBAA hex codes
         rgb_fn   = true,        -- CSS rgb() and rgba() functions
         hsl_fn   = true,        -- CSS hsl() and hsla() functions
-        css      = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        css      = false,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fns   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
         mode     = 'background', -- Set the display mode.
     })
 
