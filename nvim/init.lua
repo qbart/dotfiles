@@ -28,7 +28,7 @@ require('packer').startup(function(use)
     use { "folke/which-key.nvim" }
 
     -- switch cwd based on patterns
-    use { 'notjedi/nvim-rooter.lua' }
+    use { "ahmedkhalf/project.nvim" }
 
     -- profiler
     use 'lewis6991/impatient.nvim'
@@ -126,9 +126,21 @@ require('packer').startup(function(use)
         branch = "main",
     })
 
--- use {'akinsho/git-conflict.nvim', tag = "*", config = function()
---   require('git-conflict').setup()
--- end}
+    -- git conflicts visualizer
+    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+      require('git-conflict').setup()
+    end}
+
+    -- run tests from editor
+    use {
+        "nvim-neotest/neotest",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim"
+        }
+    }
+
     --https://github.com/akinsho/bufferline.nvim
 
     -- syntax
@@ -182,7 +194,6 @@ require('packer').startup(function(use)
                 views = {
                     cmdline_popup = {
                         border = {
-                            style = "none",
                             padding = { 1, 2 },
                         },
                         filter_options = {},
@@ -1048,10 +1059,24 @@ require("which-key").setup {
     },
 }
 
-require('nvim-rooter').setup {
-  rooter_patterns = { '.git', '.hg', '.svn', '.sln', 'Makefile' },
-  trigger_patterns = { '*' },
-  manual = false,
+require("project_nvim").setup {
+  manual_mode = false,
+
+  detection_methods = { "lsp", "pattern" },
+
+  patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+
+  ignore_lsp = {},
+
+  -- Don't calculate root dir on specific directories
+  -- Ex: { "~/.cargo/*", ... }
+  exclude_dirs = {},
+
+  show_hidden = false,
+
+  silent_chdir = true,
+
+  scope_chdir = 'global',
 }
 
 require("symbols-outline").setup({

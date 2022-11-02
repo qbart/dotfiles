@@ -15,24 +15,26 @@ setopt CORRECT
 
 [ -f ~/.config/byhost/$(hostname).sh ] && source ~/.config/byhost/$(hostname).sh
 
+export VISUAL=nvim 
+export EDITOR=nvim
+
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.zsh_ps1 ] && source ~/.zsh_ps1
 
 # ----- envs -----
-PATH=$PATH:$HOME/go/bin
 PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
-PATH=$PATH:$HOME/Applications/nvim/bin
-export VISUAL=nvim 
-export EDITOR=nvim
+
+
+if [ -d "/opt/apache-maven-3.8.5/bin" ]; then 
+  PATH=$PATH:/opt/apache-maven-3.8.5/bin
+fi
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_THEME='Monokai Extended'
-
-export PICO_SDK_PATH=~/sdk/pico
 
 # ----- 3rd party - fzf -----
 _fzf_complete_edit() {
@@ -50,3 +52,9 @@ _fzf_complete_edit() {
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
 
 
+# ----- sdk ----
+if [ -f "$HOME/sdk/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -d "$HOME/sdk/pico" ]; then 
+  export PICO_SDK_PATH=$HOME/sdk/pico
+fi
