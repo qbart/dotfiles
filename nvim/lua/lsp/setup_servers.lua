@@ -28,10 +28,12 @@ local servers = {
   'sumneko_lua',
   'tailwindcss',
   'terraformls',
+  'tflint',
   'tsserver',
   'vimls',
   'vuels',
   'yamlls',
+
   -- 'bashls',
   -- 'solargraph', -- install manually
 }
@@ -44,25 +46,27 @@ require('mason-lspconfig').setup(
 
 local M = {}
 
--- local configs = require 'lspconfig.configs'
--- configs['ruby-lsp'] = {
---   default_config = {
---     cmd = { "ruby-lsp" },
---     filetypes = { "ruby" },
---     root_dir = vim.loop.cwd,
---   }
--- }
-
+-- vim.api.nvim_create_autocmd({"BufWritePre"}, {
+--   pattern = {"*.tf", "*.tfvars"},
+--   callback = vim.lsp.buf.formatting_sync,
+-- })
 M.setup_servers = function()
 
-  -- lspconfig['ruby-lsp'].setup({
-  --   capabilities = capabilities,
-  --   on_attach = on_attach,
-  --   root_dir = vim.loop.cwd,
-  --   flags = {
-  --     debounce_text_changes = 150,
-  --   },
-  -- })
+  lspconfig['tflint'].setup({
+    root_dir = vim.loop.cwd,
+    filetypes = { "terraform", "tf", "hcl" },
+  })
+  lspconfig['terraformls'].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    root_dir = vim.loop.cwd,
+    filetypes = { "terraform", "tf", "hcl" },
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+    }
+  })
 
   lspconfig['solargraph'].setup({
     capabilities = capabilities,

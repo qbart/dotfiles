@@ -1040,6 +1040,9 @@ require('lspkind').init({
 vim.g.did_load_filetypes = 1
 require('filetype').setup({
     overrides = {
+        extensions = {
+            tf = "hcl",
+        },
         literal = {
             gitconfig = 'gitconfig',
         },
@@ -1063,8 +1066,18 @@ require("project_nvim").setup {
   manual_mode = false,
 
   detection_methods = { "lsp", "pattern" },
-
-  patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+  -- root dir / root patterns
+    patterns = {
+        ".git",
+        "_darcs",
+        ".hg",
+        ".bzr",
+        ".svn",
+        "Makefile",
+        "package.json",
+        ".terraform",
+        ".tflint.hcl",
+    },
 
   ignore_lsp = {},
 
