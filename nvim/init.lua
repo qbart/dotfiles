@@ -34,10 +34,21 @@ require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
 
     -- Fuzzy Finder (files, lsp, etc)
-    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+    use { 
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { "otavioschwanck/telescope-alternate" },
+            { "ANGkeith/telescope-terraform-doc.nvim" },
+        },
+    }
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+
+    -- emoji
+    use { 'xiyaowong/telescope-emoji.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
 
     -- Additional textobjects for treesitter
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
@@ -213,6 +224,10 @@ require('packer').startup(function(use)
 
     -- scrollbar
     use("petertriho/nvim-scrollbar")
+
+    -- highlight todo/hack/note/perf/warn/fix comments
+    use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
+
 
     -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
     use { 'tpope/vim-surround' }
@@ -418,6 +433,7 @@ vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
 vim.keymap.set({'n', 'v'}, '<C-k>', '5j', {noremap=true})
 vim.keymap.set({'n', 'v'}, '<C-l>', '5k', {noremap=true})
 vim.keymap.set({'n'}, '<C-j>', ':HopPattern<CR>', {noremap=true})
+vim.keymap.set({'n'}, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], {noremap=true})
 vim.g.VM_maps = {
   ["Skip Region"] = '<C-x>',
   -- ["Select Cursor Down"] = '∆', -- Option+J,
@@ -454,6 +470,7 @@ vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
 -- diagnostic, refs, navigation outline
 vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "`l", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
@@ -467,6 +484,8 @@ vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { sile
 vim.api.nvim_set_keymap('n', 'n', [[:SymbolsOutline<CR>]], { noremap = true, silent = true })
 -- help
 vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], {noremap=true})
+-- extras
+vim.api.nvim_set_keymap('n', '<leader>ie', [[:Telescope emoji<CR>]], {noremap=true})
 
 ----
 -- plugins setup
@@ -610,6 +629,37 @@ require("catppuccin").setup({
 })
 vim.api.nvim_command "colorscheme catppuccin"
 
+require("todo-comments").setup {
+    signs = true, -- show icons in the signs column
+    sign_priority = 8, -- sign priority
+    keywords = {
+        FIX = {
+            icon = " ", -- icon used for the sign, and in search results
+            color = "error", -- can be a hex color, or a named color (see below)
+            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+            -- signs = false, -- configure signs for some keywords individually
+        },
+        TODO = { icon = " ", color = "info" },
+        HACK = { icon = " ", color = "error" },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+    },
+    gui_style = {
+        fg = "NONE", -- The gui style to use for the fg highlight group.
+        bg = "BOLD", -- The gui style to use for the bg highlight group.
+    },
+    colors = {
+        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+        warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
+        info = { "DiagnosticInfo", "#2563EB" },
+        hint = { "DiagnosticHint", "#10B981" },
+        default = { "Identifier", "#7C3AED" },
+        test = { "Identifier", "#FF00FF" }
+    },
+}
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
@@ -639,6 +689,26 @@ require('lualine').setup {
 require('gitsigns').setup {}
 
 require('telescope').setup {
+    pickers = {
+        find_files = {
+            theme = "ivy",
+        },
+        live_grep = {
+            theme = "ivy",
+        },
+        buffers = {
+            theme = "ivy",
+        },
+        help_tags = {
+            theme = "ivy",
+        },
+        current_buffer_fuzzy_find = {
+            theme = "ivy",
+        },
+        lsp_workspace_symbols = {
+            theme = "ivy",
+        },
+    },
     defaults = {
         mappings = {
             i = {
@@ -647,9 +717,38 @@ require('telescope').setup {
             },
         },
     },
+    extensions = {
+        emoji = {
+            action = function(emoji)
+                -- argument emoji is a table.
+                -- {name="", value="", cagegory="", description=""}
+
+                vim.fn.setreg("*", emoji.value)
+                print([[Press "*p to paste ]] .. emoji.value)
+            end,
+        }
+    },
 }
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+require("telescope").load_extension("emoji")
+require('telescope').load_extension('terraform_doc')
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('telescope-alternate')
+
+require('telescope-alternate').setup({
+    mappings = {
+        { '(.*).go', { 
+            { '[1]_test.go', 'Test' } 
+        }},
+        { '(.*)_test.go', { 
+            { '[1].go', 'Implementation' } 
+        }},
+    },
+    presets = { 'rails', 'rspec', 'nestjs' }, -- Telescope pre-defined mapping presets
+    transformers = { -- custom transformers
+    }
+  })
+
+-- On your telescope:
 
 require("trouble").setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right
@@ -812,10 +911,10 @@ require('nvim-treesitter.configs').setup {
         swap = {
             enable = true,
             swap_next = {
-                ['<leader>a'] = '@parameter.inner',
+                ['<leader>e'] = '@parameter.inner',
             },
             swap_previous = {
-                ['<leader>A'] = '@parameter.inner',
+                ['<leader>b'] = '@parameter.inner',
             },
         },
     },
@@ -950,10 +1049,11 @@ require("which-key").setup {
 }
 
 require('nvim-rooter').setup {
-  rooter_patterns = { '.git', '.hg', '.svn' },
+  rooter_patterns = { '.git', '.hg', '.svn', '.sln', 'Makefile' },
   trigger_patterns = { '*' },
   manual = false,
 }
+
 require("symbols-outline").setup({
     auto_close = true,
     keymaps = { -- These keymaps can be a string or a table for multiple keys
