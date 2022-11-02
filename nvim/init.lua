@@ -149,7 +149,6 @@ require('packer').startup(function(use)
             { 'nvim-treesitter/playground' },
             { 'p00f/nvim-ts-rainbow' },
             { 'nvim-treesitter/nvim-treesitter-textobjects' },
-            -- { 'romgrk/nvim-treesitter-context' },
         },
         run = ':TSUpdate',
     }
@@ -945,6 +944,8 @@ require('Comment').setup {
         line = '/',
     },
 }
+local comment_ft = require('Comment.ft')
+comment_ft.set({'hcl', 'terraform', 'tf'}, '#%s')
 
 vim.g.lf_netrw = 1
 require("lf").setup({
