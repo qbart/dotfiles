@@ -53,6 +53,7 @@ local M = {}
 M.setup_servers = function()
 
   lspconfig['tflint'].setup({
+    capabilities = capabilities,
     root_dir = vim.loop.cwd,
     filetypes = { "terraform", "tf", "hcl" },
   })

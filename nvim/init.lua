@@ -945,7 +945,9 @@ require('Comment').setup {
     },
 }
 local comment_ft = require('Comment.ft')
-comment_ft.set({'hcl', 'terraform', 'tf'}, '#%s')
+comment_ft.set('hcl', '#%s')
+comment_ft.set('terraform', '#%s')
+comment_ft.set('tf', '#%s')
 
 vim.g.lf_netrw = 1
 require("lf").setup({
