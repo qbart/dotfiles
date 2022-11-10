@@ -368,7 +368,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ','
-vim.g.maplocalleader = '<Space>'
+vim.g.maplocalleader = [[ ]]
 
 vim.o.compatible=false -- forget about vi compatibility
 -- vim.o.number = false -- no line nums on init

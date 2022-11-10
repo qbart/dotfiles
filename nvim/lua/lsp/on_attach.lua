@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap("v", "<C-m><C-f>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   -- buf_set_keymap("v", "<CR><C-f>", "", opts)
 
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {noremap = true, silent = true})
   -- vim.api.nvim_buf_set_keymap(bufnr, "v", "f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", {noremap = true, silent = true})
 
   set_default_formatter_for_filetypes('solargraph', { 'ruby' })
