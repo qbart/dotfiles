@@ -44,8 +44,11 @@ require('packer').startup(function(use)
         },
     }
 
-    -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+    -- telescope alternative
+    use { 'ibhagwan/fzf-lua',
+        -- optional for icon support
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 
     -- emoji
     use { 'xiyaowong/telescope-emoji.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
@@ -214,6 +217,14 @@ require('packer').startup(function(use)
                 routes = {
                     {
                         filter = { event = "msg_show", kind = "", find = " lines --" },
+                        opts = { skip = true },
+                    },
+                    {
+                        filter = { event = "msg_show", kind = "", find = " line --" },
+                        opts = { skip = true },
+                    },
+                    {
+                        filter = { event = "msg_show", kind = "", find = "Already at oldest change" },
                         opts = { skip = true },
                     },
                 },
@@ -419,12 +430,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- finders
-vim.api.nvim_set_keymap('n', '<leader>j', [[:Telescope find_files<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>g', [[:Telescope live_grep<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
-vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], {})
+-- vim.api.nvim_set_keymap('n', '<leader>j', [[:Telescope find_files<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>j', [[:lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>g', [[:Telescope live_grep<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>g', [[:lua require('fzf-lua').live_grep_native()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>b', [[:lua require('fzf-lua').buffers()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
+vim.api.nvim_set_keymap('n', '<leader>f', [[:lua require('fzf-lua').blines()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>c', [[:lua require('fzf-lua').git_commits()<CR>]], { noremap = true, silent = true })
 -- line
 -- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
 -- packer
@@ -696,6 +714,10 @@ require('lualine').setup {
 }
 require('gitsigns').setup {}
 
+require('fzf-lua').setup{
+    fzf_opts = {['--layout'] = 'reverse-list'},
+}
+
 require('telescope').setup {
     pickers = {
         find_files = {
@@ -739,7 +761,6 @@ require('telescope').setup {
 }
 require("telescope").load_extension("emoji")
 require('telescope').load_extension('terraform_doc')
-require('telescope').load_extension('fzf')
 require('telescope').load_extension('telescope-alternate')
 
 require('telescope-alternate').setup({
@@ -919,10 +940,10 @@ require('nvim-treesitter.configs').setup {
         swap = {
             enable = true,
             swap_next = {
-                ['<leader>e'] = '@parameter.inner',
+                ['<leader>.'] = '@parameter.inner',
             },
             swap_previous = {
-                ['<leader>b'] = '@parameter.inner',
+                ['<leader>,'] = '@parameter.inner',
             },
         },
     },
