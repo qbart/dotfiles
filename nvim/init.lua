@@ -27,6 +27,9 @@ require('packer').startup(function(use)
     -- shortcuts
     use { "folke/which-key.nvim" }
 
+    -- sqlite for storage
+    use { "kkharji/sqlite.lua" }
+
     -- switch cwd based on patterns
     use { "ahmedkhalf/project.nvim" }
 
@@ -48,6 +51,14 @@ require('packer').startup(function(use)
     use { 'ibhagwan/fzf-lua',
         -- optional for icon support
         requires = { 'kyazdani42/nvim-web-devicons' }
+    }
+
+    -- clipboard manager
+    use {
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+            {'ibhagwan/fzf-lua'},
+        },
     }
 
     -- emoji
@@ -715,7 +726,103 @@ require('lualine').setup {
 require('gitsigns').setup {}
 
 require('fzf-lua').setup{
-    fzf_opts = {['--layout'] = 'reverse-list'},
+    winopts = {
+        -- split         = "belowright new",-- open in a split instead?
+        -- "belowright new"  : split below
+        -- "aboveleft new"   : split above
+        -- "belowright vnew" : split right
+        -- "aboveleft vnew   : split left
+        -- Only valid when using a float window
+        -- (i.e. when 'split' is not defined, default)
+        height           = 0.85,            -- window height
+        width            = 0.80,            -- window width
+        row              = 0.35,            -- window row position (0=top, 1=bottom)
+        col              = 0.50,            -- window col position (0=left, 1=right)
+        -- border argument passthrough to nvim_open_win(), also used
+        -- to manually draw the border characters around the preview
+        -- window, can be set to 'false' to remove all borders or to
+        -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
+        border           = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        fullscreen       = false,           -- start fullscreen?
+        -- highlights should optimally be set by the colorscheme using
+        -- FzfLuaXXX highlights. If your colorscheme doesn't set these
+        -- or you wish to override its defaults use these:
+        --[[ hl = {
+        normal         = 'Normal',        -- window normal color (fg+bg)
+        border         = 'FloatBorder',   -- border color
+        help_normal    = 'Normal',        -- <F1> window normal
+        help_border    = 'FloatBorder',   -- <F1> window border
+        -- Only used with the builtin previewer:
+        cursor         = 'Cursor',        -- cursor highlight (grep/LSP matches)
+        cursorline     = 'CursorLine',    -- cursor line
+        cursorlinenr   = 'CursorLineNr',  -- cursor line number
+        search         = 'IncSearch',     -- search matches (ctags|help)
+        title          = 'Normal',        -- preview border title (file/buffer)
+        -- Only used with 'winopts.preview.scrollbar = 'float'
+        scrollfloat_e  = 'PmenuSbar',     -- scrollbar "empty" section highlight
+        scrollfloat_f  = 'PmenuThumb',    -- scrollbar "full" section highlight
+        -- Only used with 'winopts.preview.scrollbar = 'border'
+        scrollborder_e = 'FloatBorder',   -- scrollbar "empty" section highlight
+        scrollborder_f = 'FloatBorder',   -- scrollbar "full" section highlight
+        }, ]]
+        preview = {
+            -- default     = 'bat',           -- override the default previewer?
+            -- default uses the 'builtin' previewer
+            border         = 'border',        -- border|noborder, applies only to
+            -- native fzf previewers (bat/cat/git/etc)
+            wrap           = 'nowrap',        -- wrap|nowrap
+            hidden         = 'nohidden',      -- hidden|nohidden
+            vertical       = 'down:50%',      -- up|down:size
+            horizontal     = 'right:50%',     -- right|left:size
+            layout         = 'vertical',          -- horizontal|vertical|flex
+            flip_columns   = 120,             -- #cols to switch to horizontal on flex
+            -- Only used with the builtin previewer:
+            title          = true,            -- preview border title (file/buf)?
+            title_align    = "left",          -- left|center|right, title alignment
+            scrollbar      = 'float',         -- `false` or string:'float|border'
+            -- float:  in-window floating border
+            -- border: in-border chars (see below)
+            scrolloff      = '-2',            -- float scrollbar offset from right
+            -- applies only when scrollbar = 'float'
+            scrollchars    = {'█', '' },      -- scrollbar chars ({ <full>, <empty> }
+            -- applies only when scrollbar = 'border'
+            delay          = 100,             -- delay(ms) displaying the preview
+            -- prevents lag on fast scrolling
+            winopts = {                       -- builtin previewer window options
+                number            = true,
+                relativenumber    = false,
+                cursorline        = true,
+                cursorlineopt     = 'both',
+                cursorcolumn      = false,
+                signcolumn        = 'no',
+                list              = false,
+                foldenable        = false,
+                foldmethod        = 'manual',
+            },
+        },
+        on_create = function()
+            -- called once upon creation of the fzf main window
+            -- can be used to add custom fzf-lua mappings, e.g:
+            --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
+            --     { silent = true, noremap = true })
+        end,
+        previewers = {
+            builtin = {
+                syntax          = true,         -- preview syntax highlight?
+                syntax_limit_l  = 0,            -- syntax limit (lines), 0=nolimit
+                syntax_limit_b  = 1024*1024*10,    -- syntax limit (bytes), 0=nolimit
+                limit_b         = 1024*1024*50, -- preview limit (bytes), 0=nolimit
+                -- preview extensions using a custom shell command:
+                -- for example, use `viu` for image previews
+                -- will do nothing if `viu` isn't executable
+                extensions      = {
+                    ["ico"]       = { "viu", "-b" },
+                    ["png"]       = { "viu", "-b" },
+                    ["jpg"]       = { "viu", "-b" },
+                },
+            },
+        },
+    }
 }
 
 require('telescope').setup {
@@ -1071,6 +1178,35 @@ require('filetype').setup({
         complex = {
             ['%.env%.*'] = 'sh',
             ['.pryrc'] = 'ruby',
+        },
+    },
+})
+
+require('neoclip').setup({
+    history = 5000,
+    enable_persistent_history = true,
+    length_limit = 1048576,
+    continuous_sync = false,
+    db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+    filter = nil,
+    preview = true,
+    prompt = nil,
+    default_register = '"',
+    default_register_macros = 'q',
+    enable_macro_history = true,
+    content_spec_column = false,
+    on_paste = {
+        set_reg = false,
+    },
+    on_replay = {
+        set_reg = false,
+    },
+    keys = {
+        fzf = {
+            select = 'default',
+            paste = 'ctrl-p',
+            paste_behind = 'ctrl-k',
+            custom = {},
         },
     },
 })
