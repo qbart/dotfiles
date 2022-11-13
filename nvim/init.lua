@@ -140,10 +140,8 @@ require('packer').startup(function(use)
         branch = "main",
     })
 
-    -- git conflicts visualizer
-    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
-      require('git-conflict').setup()
-    end}
+    -- git visualizer and merge tool
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- run tests from editor
     use {
@@ -441,19 +439,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- finders
--- vim.api.nvim_set_keymap('n', '<leader>j', [[:Telescope find_files<CR>]], {})
+--
 vim.api.nvim_set_keymap('n', '<leader>j', [[:lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>g', [[:Telescope live_grep<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>g', [[:lua require('fzf-lua').live_grep_native()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>b', [[:Telescope buffers<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>b', [[:lua require('fzf-lua').buffers()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>h', [[:Telescope help_tags<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>f', [[:Telescope current_buffer_fuzzy_find<CR>]], {})
 vim.api.nvim_set_keymap('n', '<leader>f', [[:lua require('fzf-lua').blines()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>s', [[:Telescope lsp_workspace_symbols<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>c', [[:lua require('fzf-lua').git_commits()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>y', [[:lua require('neoclip.fzf')()<CR>]], { noremap = true, silent = true })
 -- line
 -- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
 -- packer
@@ -1413,6 +1407,7 @@ require("lspsaga").init_lsp_saga({
     },
 })
 
+require("diffview").setup()
 
 require("lsp")
 
