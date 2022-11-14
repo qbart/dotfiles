@@ -574,6 +574,7 @@ local symbols = require('utils.symbols')
 --
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 require("catppuccin").setup({
+    compile_path = vim.fn.stdpath "cache" .. "/catppuccin",
     transparent_background = false,
     dim_inactive = {
         enabled = true,
@@ -619,7 +620,7 @@ require("catppuccin").setup({
         lsp_trouble = true,
         mason = true,
         markdown = true,
-        mini = true,
+        mini = false,
         neogit = false,
         neotest = false,
         neotree = false,
@@ -694,7 +695,6 @@ require("todo-comments").setup {
         test = { "Identifier", "#FF00FF" }
     },
 }
-
 require('lualine').setup {
     options = {
         icons_enabled = true,
