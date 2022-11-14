@@ -100,6 +100,9 @@ require('packer').startup(function(use)
         cmd = 'CodeActionMenu',
     }
 
+    -- structural replace
+    use { "cshuaimin/ssr.nvim" }
+
     -- unused words
     use {
         "narutoxy/dim.lua",
@@ -513,6 +516,7 @@ vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.api.nvim_set_keymap('n', 'n', [[:SymbolsOutline<CR>]], { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
 -- help
 vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], {noremap=true})
 -- extras
@@ -718,6 +722,17 @@ require('lualine').setup {
     },
 }
 require('gitsigns').setup {}
+
+require("ssr").setup {
+    min_width = 50,
+    min_height = 5,
+    keymaps = {
+        close = "q",
+        next_match = "n",
+        prev_match = "N",
+        replace_all = "<leader><cr>",
+    },
+}
 
 require('fzf-lua').setup{
     winopts = {
