@@ -1295,22 +1295,55 @@ comment_ft.set('hcl', '#%s')
 comment_ft.set('terraform', '#%s')
 comment_ft.set('tf', '#%s')
 
+-- sort_by = "case_sensitive",
 require("nvim-tree").setup({
-    -- sort_by = "case_sensitive",
-    view = {
+    view                = {
         adaptive_size = true,
         mappings = {
+            custom_only = true,
             list = {
                 { key = "u", action = "dir_up" },
+                { key = "j", action = "close_node" },
+                { key = ";", action = "open_node" },
+                { key = "<Tab>", action = "preview" },
+                { key = "h", action = "toggle_dotfiles" },
+                { key = "a", action = "create" },
+                { key = "d", action = "remove" },
+                { key = "r", action = "rename" },
+                { key = "x", action = "cut" },
+                { key = "c", action = "copy" },
+                { key = "p", action = "paste" },
+                { key = "y", action = "copy_path" },
+                { key = "Y", action = "copy_name" },
+                { key = "f", action = "live_filter" },
+                { key = "F", action = "clear_live_filter" },
             },
         },
     },
-    renderer = {
+    renderer            = {
         group_empty = true,
     },
-    filters = {
+    filters             = {
         dotfiles = true,
     },
+    git                 = { ignore = false, },
+    update_focused_file = {
+        enable      = true,
+        update_cwd  = false,
+        ignore_list = {}
+    },
+    disable_netrw       = true,
+    hijack_netrw        = true,
+    ignore_ft_on_setup  = {},
+    update_cwd          = false,
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+        if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+            vim.cmd "quit"
+        end
+    end
 })
 
 require('go').setup()
@@ -1397,6 +1430,20 @@ require('filetype').setup({
         },
     },
 })
+require("nvim-web-devicons").set_icon {
+    zsh = {
+        icon = "",
+        color = "#428850",
+        cterm_color = "65",
+        name = "Zsh"
+    },
+    bash = {
+        icon = "",
+        color = "#428850",
+        cterm_color = "65",
+        name = "bash"
+    },
+}
 
 require('neoclip').setup({
     history = 5000,
