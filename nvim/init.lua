@@ -247,12 +247,13 @@ require('packer').startup(function(use)
         }
     })
 
-    -- Ranger like file manager but written in Go, no python 🙏
-    use { "lmburns/lf.nvim",
+    -- file manager
+    use {
+        'nvim-tree/nvim-tree.lua',
         requires = {
-            "nvim-lua/plenary.nvim",
-            "akinsho/toggleterm.nvim"
-        }
+            'nvim-tree/nvim-web-devicons',
+        },
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
 
     -- scrollbar
@@ -480,8 +481,7 @@ vim.g.VM_maps = {
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
 vim.g.VM_theme = 'purplegray'
--- open LF file manager (external dep)
-vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>:NvimTreeFindFile<CR>", { noremap = true })
 -- save file
 vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
 -- quit
@@ -606,7 +606,7 @@ require("catppuccin").setup({
     integrations = {
         cmp = true,
         gitsigns = true,
-        nvimtree = false,
+        nvimtree = true,
         telescope = true,
         treesitter = true,
         fidget = false,
@@ -1295,26 +1295,22 @@ comment_ft.set('hcl', '#%s')
 comment_ft.set('terraform', '#%s')
 comment_ft.set('tf', '#%s')
 
-vim.g.lf_netrw = 1
-require("lf").setup({
-    default_actions = { -- default action keybindings
-        ["<C-k>"] = "split",
-        ["<C-l>"] = "vsplit",
+require("nvim-tree").setup({
+    -- sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+            },
+        },
     },
-
-    winblend = 10, -- psuedotransparency level
-    dir = "", -- directory where `lf` starts ('gwd' is git-working-directory, "" is CWD)
-    direction = "float", -- window type: float horizontal vertical
-    border = "curved", -- border kind: single double shadow curved
-    height = 0.80, -- height of the *floating* window
-    width = 0.80, -- width of the *floating* window
-    escape_quit = true, -- map escape to the quit command (so it doesn't go into a meta normal mode)
-    focus_on_open = true, -- focus the current file when opening Lf (experimental)
-    mappings = true, -- whether terminal buffer mapping is enabled
-    tmux = false, -- tmux statusline can be disabled on opening of Lf
-
-    -- Layout configurations
-    layout_mapping = "<A-u>" -- resize window with this key
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
 })
 
 require('go').setup()
