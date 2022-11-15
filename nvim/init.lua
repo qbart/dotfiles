@@ -37,7 +37,7 @@ require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
 
     -- Fuzzy Finder (files, lsp, etc)
-    use { 
+    use {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         requires = {
@@ -57,7 +57,7 @@ require('packer').startup(function(use)
     use {
         "AckslD/nvim-neoclip.lua",
         requires = {
-            {'ibhagwan/fzf-lua'},
+            { 'ibhagwan/fzf-lua' },
         },
     }
 
@@ -72,7 +72,7 @@ require('packer').startup(function(use)
     -- display arguments names while typing
     use { 'ray-x/lsp_signature.nvim' }
     -- lsp icons
-    use { 'onsails/lspkind-nvim'}
+    use { 'onsails/lspkind-nvim' }
     -- Manage external editor tooling i.e LSP servers
     use 'williamboman/mason.nvim'
     -- Automatically install language servers to stdpath
@@ -168,7 +168,7 @@ require('packer').startup(function(use)
         run = ':TSUpdate',
     }
 
-    -- highlight arguments definitaions and usages 
+    -- highlight arguments definitaions and usages
     use { 'm-demare/hlargs.nvim',
         requires = { 'nvim-treesitter/nvim-treesitter' },
     }
@@ -180,10 +180,10 @@ require('packer').startup(function(use)
     use { 'windwp/nvim-ts-autotag' }
 
     -- snippets
-    use({"L3MON4D3/LuaSnip", tag = "v*", requires = {
-        {'saadparwaiz1/cmp_luasnip'},
-        {"rafamadriz/friendly-snippets"},
-    }})
+    use({ "L3MON4D3/LuaSnip", tag = "v*", requires = {
+        { 'saadparwaiz1/cmp_luasnip' },
+        { "rafamadriz/friendly-snippets" },
+    } })
 
     -- easymoition like navigation
     use {
@@ -199,7 +199,7 @@ require('packer').startup(function(use)
     -- highlight current word
     use { 'RRethy/vim-illuminate' }
 
-    -- fancy notifications 
+    -- fancy notifications
     use({
         "folke/noice.nvim",
         event = "VimEnter",
@@ -295,10 +295,11 @@ require('packer').startup(function(use)
     -- git signs
     use { 'lewis6991/gitsigns.nvim' }
 
-    -- multi cursor 
+    -- multi cursor
     use { 'mg979/vim-visual-multi' }
 
     -- statusline
+    use 'feline-nvim/feline.nvim'
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' }
@@ -311,7 +312,7 @@ require('packer').startup(function(use)
     use { "rcarriga/nvim-dap-ui", requires = {
         "mfussenegger/nvim-dap",
         "theHamsta/nvim-dap-virtual-text",
-    }}
+    } }
 
     -- golang support
     use 'ray-x/go.nvim'
@@ -393,39 +394,39 @@ vim.o.completeopt = 'menuone,noselect'
 vim.g.mapleader = ','
 vim.g.maplocalleader = [[ ]]
 
-vim.o.compatible=false -- forget about vi compatibility
+vim.o.compatible = false -- forget about vi compatibility
 -- vim.o.number = false -- no line nums on init
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 vim.o.langmenu = 'en_US.utf-8'
-vim.o.sidescroll=1
-vim.o.sidescrolloff=1
-vim.o.scrolloff=9
+vim.o.sidescroll = 1
+vim.o.sidescrolloff = 1
+vim.o.scrolloff = 9
 vim.o.ttyfast = true
 vim.o.cursorline = true -- highliht current line
-vim.o.tabstop=4
-vim.o.softtabstop=0
-vim.o.expandtab=true
-vim.o.shiftwidth=4
-vim.o.smarttab=true
-vim.o.history=10000
-vim.o.undolevels=2000
-vim.o.wildignore='+*.o,*.obj,*.bak,*.exe,*.pyc,*.class,**/node_modules/**'
+vim.o.tabstop = 4
+vim.o.softtabstop = 0
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.smarttab = true
+vim.o.history = 10000
+vim.o.undolevels = 2000
+vim.o.wildignore = '+*.o,*.obj,*.bak,*.exe,*.pyc,*.class,**/node_modules/**'
 vim.o.wrap = false
-vim.o.textwidth=0 -- no wordwrap
-vim.o.wrapmargin=0
-vim.o.splitright=true
-vim.o.splitbelow=true
-vim.o.swapfile=false
-vim.o.visualbell=false
-vim.o.smartindent=true
-vim.o.smartcase=true
+vim.o.textwidth = 0 -- no wordwrap
+vim.o.wrapmargin = 0
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.swapfile = false
+vim.o.visualbell = false
+vim.o.smartindent = true
+vim.o.smartcase = true
 vim.o.hidden = true -- https://medium.com/usevim/vim-101-set-hidden-f78800142855
 vim.o.backup = false
 vim.o.writebackup = false
-vim.o.cmdheight=1
+vim.o.cmdheight = 1
 -- vim.o.autoindent = true
-vim.o.shortmess="Ot" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
+vim.o.shortmess = "Ot" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
 
 ----
 -- keys
@@ -444,12 +445,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- finders
 --
 vim.api.nvim_set_keymap('n', '<leader>j', [[:lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>g', [[:lua require('fzf-lua').live_grep_native()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>g', [[:lua require('fzf-lua').live_grep_native()<CR>]],
+    { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>b', [[:lua require('fzf-lua').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', [[:lua require('fzf-lua').blines()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>c', [[:lua require('fzf-lua').git_commits()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]],
+    { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>c', [[:lua require('fzf-lua').git_commits()<CR>]],
+    { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>y', [[:lua require('neoclip.fzf')()<CR>]], { noremap = true, silent = true })
 -- line
 -- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
@@ -461,19 +465,19 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], {})
 vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], {})
 -- natural order consistent with i3
-vim.keymap.set({'n','v'}, ';', 'l', {noremap=true})
-vim.keymap.set({'n','v'}, 'l', 'k', {noremap=true})
-vim.keymap.set({'n','v'}, 'k', 'j', {noremap=true})
-vim.keymap.set({'n','v'}, 'j', 'h', {noremap=true})
+vim.keymap.set({ 'n', 'v' }, ';', 'l', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'l', 'k', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'k', 'j', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'j', 'h', { noremap = true })
 -- faster nav
-vim.keymap.set({'n', 'v'}, '<C-k>', '5j', {noremap=true})
-vim.keymap.set({'n', 'v'}, '<C-l>', '5k', {noremap=true})
-vim.keymap.set({'n'}, '<C-j>', ':HopPattern<CR>', {noremap=true})
-vim.keymap.set({'n'}, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], {noremap=true})
+vim.keymap.set({ 'n', 'v' }, '<C-k>', '5j', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, '<C-l>', '5k', { noremap = true })
+vim.keymap.set({ 'n' }, '<C-j>', ':HopPattern<CR>', { noremap = true })
+vim.keymap.set({ 'n' }, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
 vim.g.VM_maps = {
-  ["Skip Region"] = '<C-x>',
-  -- ["Select Cursor Down"] = '∆', -- Option+J,
-  -- ["Select Cursor Up"]   = 'Ż', --  Option+K
+    ["Skip Region"] = '<C-x>',
+    -- ["Select Cursor Down"] = '∆', -- Option+J,
+    -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
 vim.g.VM_theme = 'purplegray'
 -- open LF file manager (external dep)
@@ -482,45 +486,45 @@ vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>lua require('lf').start()<CR>", { no
 vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
 -- quit
 vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], {})
--- splits 
+-- splits
 vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
 -- resize panes
-vim.api.nvim_set_keymap('n', '<C-M-k>', [[:resize -3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], {noremap=true})
-vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], {noremap=true}) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
+vim.api.nvim_set_keymap('n', '<C-M-k>', [[:resize -3<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], { noremap = true }) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
 -- reload config
 vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
 -- buffers
-vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', {noremap=true})
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>d', ':bd!<CR>', {})
 -- line swapping
-vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], {noremap=true})
-vim.api.nvim_set_keymap('n', '<S-l>', [[:m-2<CR>==]], {noremap=true})
-vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], {noremap=true})
-vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], {noremap=true})
-vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], {noremap=true})
-vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<S-l>', [[:m-2<CR>==]], { noremap = true })
+vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], { noremap = true })
+vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
-vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "gu", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gu", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-vim.keymap.set({"n","v"}, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.api.nvim_set_keymap('n', 'n', [[:SymbolsOutline<CR>]], { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
 -- help
-vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], { noremap = true })
 -- extras
-vim.api.nvim_set_keymap('n', '<leader>ie', [[:Telescope emoji<CR>]], {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>ie', [[:Telescope emoji<CR>]], { noremap = true })
 
 ----
 -- plugins setup
@@ -529,18 +533,20 @@ require('impatient')
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local alpha = require'alpha'
-local startify = require'alpha.themes.startify'
+local colors = require("catppuccin.palettes").get_palette "mocha"
+
+local alpha = require 'alpha'
+local startify = require 'alpha.themes.startify'
 startify.section.header.val = {
-[[  ▒▒▒▒▒     ▄████▄     ]],
-[[ ▒ ▄▒ ▄▒   ███▄█▀      ]],
-[[ ▒▒▒▒▒▒▒  ▐████  █  █  ]],
-[[ ▒▒▒▒▒▒▒   █████▄      ]],
-[[ ▒ ▒ ▒ ▒    ▀████▀     ]],
+    [[  ▒▒▒▒▒     ▄████▄     ]],
+    [[ ▒ ▄▒ ▄▒   ███▄█▀      ]],
+    [[ ▒▒▒▒▒▒▒  ▐████  █  █  ]],
+    [[ ▒▒▒▒▒▒▒   █████▄      ]],
+    [[ ▒ ▒ ▒ ▒    ▀████▀     ]],
 }
 startify.section.top_buttons.val = {
-    startify.button( "c", "Configuration" , ":e ~/d/dotfiles/nvim/init.lua<CR>"),
-    startify.button( "ok", "Oh, Krab!" , ":e ~/oh/krab/main.go<CR>"),
+    startify.button("c", "Configuration", ":e ~/d/dotfiles/nvim/init.lua<CR>"),
+    startify.button("ok", "Oh, Krab!", ":e ~/oh/krab/main.go<CR>"),
 }
 -- disable MRU
 startify.section.mru.val = {
@@ -561,9 +567,9 @@ startify.nvim_web_devicons.enabled = true
 startify.section.bottom_buttons.val = {
     { type = "text", val = "Actions", opts = { hl = "SpecialComment" } },
     { type = "padding", val = 1 },
-    startify.button( "t", "Create todo.txt" , ":e todo.txt<CR>"),
-    startify.button( "e", "New empty file" , ":ene <BAR> startinsert <CR>"),
-    startify.button( "q", "Quit" , ":qa<CR>"),
+    startify.button("t", "Create todo.txt", ":e todo.txt<CR>"),
+    startify.button("e", "New empty file", ":ene <BAR> startinsert <CR>"),
+    startify.button("q", "Quit", ":qa<CR>"),
 }
 startify.section.footer = {
     { type = "text", val = "footer" },
@@ -687,40 +693,245 @@ require("todo-comments").setup {
         bg = "BOLD", -- The gui style to use for the bg highlight group.
     },
     colors = {
-        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-        warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
-        info = { "DiagnosticInfo", "#2563EB" },
-        hint = { "DiagnosticHint", "#10B981" },
-        default = { "Identifier", "#7C3AED" },
+        error = { "DiagnosticError", "ErrorMsg", colors.red },
+        warning = { "DiagnosticWarning", "WarningMsg", colors.peach },
+        info = { "DiagnosticInfo", colors.blue },
+        hint = { "DiagnosticHint", colors.teal },
+        default = { "Identifier", colors.mauve },
         test = { "Identifier", "#FF00FF" }
     },
 }
-require('lualine').setup {
-    options = {
-        icons_enabled = true,
-        theme = 'catppuccin',
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
+local feline = require "feline"
 
+local vi_mode_utils = require 'feline.providers.vi_mode'
+local vi_mode_colors = {
+    NORMAL = colors.green,
+    OP = colors.green,
+    INSERT = colors.yellow,
+    VISUAL = colors.mauve,
+    LINES = colors.peach,
+    BLOCK = colors.maroon,
+    REPLACE = colors.red,
+    COMMAND = colors.sapphire,
+}
+
+local feline_config = {
+    vim_mode = {
+        provider = function()
+            return vi_mode_utils.get_vim_mode()
+        end,
+        hl = function()
+            return {
+                fg = vi_mode_utils.get_mode_color(),
+                bg = colors.mantle,
+                name = vi_mode_utils.get_mode_highlight_name(),
+            }
+        end,
+        -- left_sep = "block",
+        -- right_sep = "block",
     },
-    sections = {
-        lualine_a = {'location'},
-        lualine_b = {},
-        lualine_c = {'diff', 'filename'},
-        -- lualine_x = {'encoding', 'filetype', 'branch', 'diagnostics'},
-        lualine_x = {'diagnostics'},
-        lualine_y = {},
-        lualine_z = {'mode'}
+    gitBranch = {
+        provider = "git_branch",
+        hl = {
+            fg = colors.teal,
+            bg = colors.mantle,
+            -- style = "bold",
+        },
+        -- left_sep = "block",
+        -- right_sep = "block",
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
-        lualine_y = {},
-        lualine_z = {}
+    gitDiffAdded = {
+        provider = "git_diff_added",
+        hl = {
+            fg = colors.green,
+            bg = colors.mantle,
+        },
+        -- left_sep = "block",
+        -- right_sep = "block",
+    },
+    gitDiffRemoved = {
+        provider = "git_diff_removed",
+        hl = {
+            fg = colors.red,
+            bg = colors.mantle,
+        },
+        -- left_sep = "block",
+        -- right_sep = "block",
+    },
+    gitDiffChanged = {
+        provider = "git_diff_changed",
+        hl = {
+            fg = colors.yellow,
+            bg = colors.mantle,
+        },
+        -- left_sep = "block",
+        -- right_sep = "block",
+    },
+    separator = {
+        provider = " ",
+        hl = {
+            bg = colors.mantle,
+        },
+    },
+    left_mid = {
+        provider = " ",
+        hl = {
+            bg = colors.mantle,
+        },
+        left_sep = "left_rounded"
+    },
+    right_mid = {
+        provider = " ",
+        hl = {
+            bg = colors.mantle,
+        },
+        right_sep = "right_rounded"
+    },
+    fileinfo = {
+        provider = {
+            name = "file_info",
+            opts = {
+                type = "relative-short",
+            },
+        },
+        hl = {
+            bg = colors.mantle,
+            -- style = "bold",
+        },
+        left_sep = "block",
+        right_sep = "block",
+        icon = "",
+    },
+    diagnostic_errors = {
+        provider = "diagnostic_errors",
+        hl = {
+            fg = colors.red,
+            bg = colors.mantle,
+        },
+    },
+    diagnostic_warnings = {
+        provider = "diagnostic_warnings",
+        hl = {
+            fg = colors.peach,
+            bg = colors.mantle,
+        },
+    },
+    diagnostic_hints = {
+        provider = "diagnostic_hints",
+        hl = {
+            fg = colors.sky,
+            bg = colors.mantle,
+        },
+    },
+    diagnostic_info = {
+        provider = "diagnostic_info",
+        hl = {
+            fg = colors.teal,
+            bg = colors.mantle,
+        },
+    },
+    position = {
+        provider = "position",
+        hl = {
+            fg = colors.mauve,
+            bg = colors.mantle,
+            style = "bold",
+        },
+        -- left_sep = "left_rounded",
+        -- right_sep = "right_rounded",
+    },
+    file_type = {
+        provider = {
+            name = "file_type",
+            opts = {
+                filetype_icon = true,
+                case = "lowercase",
+            },
+        },
+        hl = {
+            fg = colors.text,
+            bg = colors.mantle,
+            -- style = "bold",
+        },
+        left_sep = "block",
+        right_sep = "block",
     },
 }
+
+local left = {
+    feline_config.left_mid,
+    feline_config.position,
+    feline_config.separator,
+    feline_config.vim_mode,
+    feline_config.right_mid,
+}
+
+local middle = {
+    feline_config.left_mid,
+    feline_config.fileinfo,
+    feline_config.diagnostic_errors,
+    feline_config.diagnostic_warnings,
+    feline_config.diagnostic_info,
+    feline_config.diagnostic_hints,
+    feline_config.right_mid,
+}
+
+local right = {
+    feline_config.left_mid,
+    feline_config.file_type,
+    feline_config.separator,
+    feline_config.gitDiffAdded,
+    feline_config.gitDiffRemoved,
+    feline_config.gitDiffChanged,
+    feline_config.separator,
+    feline_config.separator,
+    feline_config.gitBranch,
+    feline_config.right_mid,
+}
+
+local components = {
+    active = {
+        left,
+        middle,
+        right,
+    },
+    inactive = {
+        {},
+        {},
+        {},
+    },
+}
+
+local feline_properties = {
+    force_inactive = {
+        filetypes = {
+            '^NvimTree$',
+            '^packer$',
+            '^startify$',
+            '^fugitive$',
+            '^fugitiveblame$',
+            '^qf$',
+            '^help$',
+            '^Trouble$',
+        },
+        buftypes = {
+            '^terminal$',
+        },
+        bufnames = {}
+    }
+}
+
+feline.setup({
+    default_bg = colors.base,
+    default_fg = colors.lavender,
+    properties = feline_properties,
+    components = components,
+    theme = {
+        bg = colors.base,
+    },
+    vi_mode_colors = vi_mode_colors,
+})
+
 require('gitsigns').setup {}
 
 require("ssr").setup {
@@ -734,7 +945,7 @@ require("ssr").setup {
     },
 }
 
-require('fzf-lua').setup{
+require('fzf-lua').setup {
     winopts = {
         -- split         = "belowright new",-- open in a split instead?
         -- "belowright new"  : split below
@@ -743,16 +954,16 @@ require('fzf-lua').setup{
         -- "aboveleft vnew   : split left
         -- Only valid when using a float window
         -- (i.e. when 'split' is not defined, default)
-        height           = 0.85,            -- window height
-        width            = 0.80,            -- window width
-        row              = 0.35,            -- window row position (0=top, 1=bottom)
-        col              = 0.50,            -- window col position (0=left, 1=right)
+        height     = 0.85, -- window height
+        width      = 0.80, -- window width
+        row        = 0.35, -- window row position (0=top, 1=bottom)
+        col        = 0.50, -- window col position (0=left, 1=right)
         -- border argument passthrough to nvim_open_win(), also used
         -- to manually draw the border characters around the preview
         -- window, can be set to 'false' to remove all borders or to
         -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
-        border           = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        fullscreen       = false,           -- start fullscreen?
+        border     = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        fullscreen = false, -- start fullscreen?
         -- highlights should optimally be set by the colorscheme using
         -- FzfLuaXXX highlights. If your colorscheme doesn't set these
         -- or you wish to override its defaults use these:
@@ -774,42 +985,42 @@ require('fzf-lua').setup{
         scrollborder_e = 'FloatBorder',   -- scrollbar "empty" section highlight
         scrollborder_f = 'FloatBorder',   -- scrollbar "full" section highlight
         }, ]]
-        preview = {
+        preview    = {
             -- default     = 'bat',           -- override the default previewer?
             -- default uses the 'builtin' previewer
-            border         = 'border',        -- border|noborder, applies only to
+            border       = 'border', -- border|noborder, applies only to
             -- native fzf previewers (bat/cat/git/etc)
-            wrap           = 'nowrap',        -- wrap|nowrap
-            hidden         = 'nohidden',      -- hidden|nohidden
-            vertical       = 'down:50%',      -- up|down:size
-            horizontal     = 'right:50%',     -- right|left:size
-            layout         = 'vertical',          -- horizontal|vertical|flex
-            flip_columns   = 120,             -- #cols to switch to horizontal on flex
+            wrap         = 'nowrap', -- wrap|nowrap
+            hidden       = 'nohidden', -- hidden|nohidden
+            vertical     = 'down:50%', -- up|down:size
+            horizontal   = 'right:50%', -- right|left:size
+            layout       = 'vertical', -- horizontal|vertical|flex
+            flip_columns = 120, -- #cols to switch to horizontal on flex
             -- Only used with the builtin previewer:
-            title          = true,            -- preview border title (file/buf)?
-            title_align    = "left",          -- left|center|right, title alignment
-            scrollbar      = 'float',         -- `false` or string:'float|border'
+            title        = true, -- preview border title (file/buf)?
+            title_align  = "left", -- left|center|right, title alignment
+            scrollbar    = 'float', -- `false` or string:'float|border'
             -- float:  in-window floating border
             -- border: in-border chars (see below)
-            scrolloff      = '-2',            -- float scrollbar offset from right
+            scrolloff    = '-2', -- float scrollbar offset from right
             -- applies only when scrollbar = 'float'
-            scrollchars    = {'█', '' },      -- scrollbar chars ({ <full>, <empty> }
+            scrollchars  = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
             -- applies only when scrollbar = 'border'
-            delay          = 100,             -- delay(ms) displaying the preview
+            delay        = 100, -- delay(ms) displaying the preview
             -- prevents lag on fast scrolling
-            winopts = {                       -- builtin previewer window options
-                number            = true,
-                relativenumber    = false,
-                cursorline        = true,
-                cursorlineopt     = 'both',
-                cursorcolumn      = false,
-                signcolumn        = 'no',
-                list              = false,
-                foldenable        = false,
-                foldmethod        = 'manual',
+            winopts      = { -- builtin previewer window options
+                number         = true,
+                relativenumber = false,
+                cursorline     = true,
+                cursorlineopt  = 'both',
+                cursorcolumn   = false,
+                signcolumn     = 'no',
+                list           = false,
+                foldenable     = false,
+                foldmethod     = 'manual',
             },
         },
-        on_create = function()
+        on_create  = function()
             -- called once upon creation of the fzf main window
             -- can be used to add custom fzf-lua mappings, e.g:
             --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
@@ -817,17 +1028,17 @@ require('fzf-lua').setup{
         end,
         previewers = {
             builtin = {
-                syntax          = true,         -- preview syntax highlight?
-                syntax_limit_l  = 0,            -- syntax limit (lines), 0=nolimit
-                syntax_limit_b  = 1024*1024*10,    -- syntax limit (bytes), 0=nolimit
-                limit_b         = 1024*1024*50, -- preview limit (bytes), 0=nolimit
+                syntax         = true, -- preview syntax highlight?
+                syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
+                syntax_limit_b = 1024 * 1024 * 10, -- syntax limit (bytes), 0=nolimit
+                limit_b        = 1024 * 1024 * 50, -- preview limit (bytes), 0=nolimit
                 -- preview extensions using a custom shell command:
                 -- for example, use `viu` for image previews
                 -- will do nothing if `viu` isn't executable
-                extensions      = {
-                    ["ico"]       = { "viu", "-b" },
-                    ["png"]       = { "viu", "-b" },
-                    ["jpg"]       = { "viu", "-b" },
+                extensions     = {
+                    ["ico"] = { "viu", "-b" },
+                    ["png"] = { "viu", "-b" },
+                    ["jpg"] = { "viu", "-b" },
                 },
             },
         },
@@ -881,17 +1092,17 @@ require('telescope').load_extension('telescope-alternate')
 
 require('telescope-alternate').setup({
     mappings = {
-        { '(.*).go', { 
-            { '[1]_test.go', 'Test' } 
-        }},
-        { '(.*)_test.go', { 
-            { '[1].go', 'Implementation' } 
-        }},
+        { '(.*).go', {
+            { '[1]_test.go', 'Test' }
+        } },
+        { '(.*)_test.go', {
+            { '[1].go', 'Implementation' }
+        } },
     },
     presets = { 'rails', 'rspec', 'nestjs' }, -- Telescope pre-defined mapping presets
     transformers = { -- custom transformers
     }
-  })
+})
 
 -- On your telescope:
 
@@ -911,18 +1122,18 @@ require("trouble").setup {
         close = "q", -- close the list
         cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
         refresh = "r", -- manually refresh
-        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
         open_split = { "<c-x>" }, -- open buffer in new split
         open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
         open_tab = { "<c-t>" }, -- open buffer in new tab
-        jump_close = {"o"}, -- jump to the diagnostic and close the list
+        jump_close = { "o" }, -- jump to the diagnostic and close the list
         toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
         toggle_preview = "P", -- toggle auto_preview
         hover = "K", -- opens a small popup with the full multiline message
         preview = "p", -- preview the diagnostic location
-        close_folds = {"zM", "zm"}, -- close all folds
-        open_folds = {"zR", "zr"}, -- open all folds
-        toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        close_folds = { "zM", "zm" }, -- close all folds
+        open_folds = { "zR", "zr" }, -- open all folds
+        toggle_fold = { "zA", "za" }, -- toggle fold of current file
         previous = "l", -- previous item
         next = "k" -- next item
     },
@@ -931,7 +1142,7 @@ require("trouble").setup {
     auto_close = false, -- automatically close the list when you have no diagnostics
     auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
     auto_fold = false, -- automatically fold a file trouble list at creation
-    auto_jump = {"lsp_definitions"}, -- for the given modes, automatically jump if there is only a single result
+    auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
     signs = {
         -- icons / text used for a diagnostic
         error = "",
@@ -1112,17 +1323,17 @@ require('go').setup()
 -- https://github.com/norcalli/nvim-colorizer.lua/blob/36c610a9717cc9ec426a07c8e6bf3b3abcb139d6/lua/colorizer.lua#L376
 require('colorizer').setup({
     '*';
-},{
-        RGB      = true,         -- #RGB hex codes
-        RRGGBB   = true,         -- #RRGGBB hex codes
-        names    = false,       -- "Name" codes like Blue
-        RRGGBBAA = true,        -- #RRGGBBAA hex codes
-        rgb_fn   = true,        -- CSS rgb() and rgba() functions
-        hsl_fn   = true,        -- CSS hsl() and hsla() functions
-        css      = false,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fns   = true,        -- Enable all CSS *functions*: rgb_fn, hsl_fn
-        mode     = 'background', -- Set the display mode.
-    })
+}, {
+    RGB      = true, -- #RGB hex codes
+    RRGGBB   = true, -- #RRGGBB hex codes
+    names    = false, -- "Name" codes like Blue
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    rgb_fn   = true, -- CSS rgb() and rgba() functions
+    hsl_fn   = true, -- CSS hsl() and hsla() functions
+    css      = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    css_fns  = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+    mode     = 'background', -- Set the display mode.
+})
 
 require("scrollbar").setup()
 
@@ -1230,10 +1441,10 @@ require("which-key").setup {
 }
 
 require("project_nvim").setup {
-  manual_mode = false,
+    manual_mode = false,
 
-  detection_methods = { "lsp", "pattern" },
-  -- root dir / root patterns
+    detection_methods = { "lsp", "pattern" },
+    -- root dir / root patterns
     patterns = {
         ".git",
         "_darcs",
@@ -1246,23 +1457,23 @@ require("project_nvim").setup {
         ".tflint.hcl",
     },
 
-  ignore_lsp = {},
+    ignore_lsp = {},
 
-  -- Don't calculate root dir on specific directories
-  -- Ex: { "~/.cargo/*", ... }
-  exclude_dirs = {},
+    -- Don't calculate root dir on specific directories
+    -- Ex: { "~/.cargo/*", ... }
+    exclude_dirs = {},
 
-  show_hidden = false,
+    show_hidden = false,
 
-  silent_chdir = true,
+    silent_chdir = true,
 
-  scope_chdir = 'global',
+    scope_chdir = 'global',
 }
 
 require("symbols-outline").setup({
     auto_close = true,
     keymaps = { -- These keymaps can be a string or a table for multiple keys
-        close = {"<Esc>", "q"},
+        close = { "<Esc>", "q" },
         goto_location = "<Cr>",
         focus_location = "o",
         hover_symbol = "<C-space>",
@@ -1276,110 +1487,110 @@ require("symbols-outline").setup({
         fold_reset = "R",
     },
     symbols = {
-        File = {icon = "", hl = "TSURI"},
-        Module = {icon = "", hl = "TSNamespace"},
-        Namespace = {icon = "", hl = "TSNamespace"},
-        Package = {icon = "", hl = "TSNamespace"},
-        Class = {icon = "𝓒", hl = "TSType"},
-        Method = {icon = "ƒ", hl = "TSMethod"},
-        Property = {icon = "", hl = "TSMethod"},
-        Field = {icon = "", hl = "TSField"},
-        Constructor = {icon = "", hl = "TSConstructor"},
-        Enum = {icon = "ℰ", hl = "TSType"},
-        Interface = {icon = "ﰮ", hl = "TSType"},
-        Function = {icon = "", hl = "TSFunction"},
-        Variable = {icon = "", hl = "TSConstant"},
-        Constant = {icon = "", hl = "TSConstant"},
-        String = {icon = "𝓐", hl = "TSString"},
-        Number = {icon = "#", hl = "TSNumber"},
-        Boolean = {icon = "⊨", hl = "TSBoolean"},
-        Array = {icon = "", hl = "TSConstant"},
-        Object = {icon = "⦿", hl = "TSType"},
-        Key = {icon = "🔐", hl = "TSType"},
-        Null = {icon = "NULL", hl = "TSType"},
-        EnumMember = {icon = "", hl = "TSField"},
-        Struct = {icon = symbols.Struct, hl = "TSType"},
-        Event = {icon = "🗲", hl = "TSType"},
-        Operator = {icon = "+", hl = "TSOperator"},
-        TypeParameter = {icon = "𝙏", hl = "TSParameter"}
+        File = { icon = "", hl = "TSURI" },
+        Module = { icon = "", hl = "TSNamespace" },
+        Namespace = { icon = "", hl = "TSNamespace" },
+        Package = { icon = "", hl = "TSNamespace" },
+        Class = { icon = "𝓒", hl = "TSType" },
+        Method = { icon = "ƒ", hl = "TSMethod" },
+        Property = { icon = "", hl = "TSMethod" },
+        Field = { icon = "", hl = "TSField" },
+        Constructor = { icon = "", hl = "TSConstructor" },
+        Enum = { icon = "ℰ", hl = "TSType" },
+        Interface = { icon = "ﰮ", hl = "TSType" },
+        Function = { icon = "", hl = "TSFunction" },
+        Variable = { icon = "", hl = "TSConstant" },
+        Constant = { icon = "", hl = "TSConstant" },
+        String = { icon = "𝓐", hl = "TSString" },
+        Number = { icon = "#", hl = "TSNumber" },
+        Boolean = { icon = "⊨", hl = "TSBoolean" },
+        Array = { icon = "", hl = "TSConstant" },
+        Object = { icon = "⦿", hl = "TSType" },
+        Key = { icon = "🔐", hl = "TSType" },
+        Null = { icon = "NULL", hl = "TSType" },
+        EnumMember = { icon = "", hl = "TSField" },
+        Struct = { icon = symbols.Struct, hl = "TSType" },
+        Event = { icon = "🗲", hl = "TSType" },
+        Operator = { icon = "+", hl = "TSOperator" },
+        TypeParameter = { icon = "𝙏", hl = "TSParameter" }
     }
 })
 
-require("dapui").setup({
-  icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
-  mappings = {
-    -- Use a table to apply multiple mappings
-    expand = { "<CR>", "<2-LeftMouse>" },
-    open = "o",
-    remove = "d",
-    edit = "e",
-    repl = "r",
-    toggle = "t",
-  },
-  -- Expand lines larger than the window
-  -- Requires >= 0.7
-  expand_lines = true,
-  -- Layouts define sections of the screen to place windows.
-  -- The position can be "left", "right", "top" or "bottom".
-  -- The size specifies the height/width depending on position. It can be an Int
-  -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
-  -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
-  -- Elements are the elements shown in the layout (in order).
-  -- Layouts are opened in order so that earlier layouts take priority in window sizing.
-  layouts = {
-    {
-      elements = {
-      -- Elements can be strings or table with id and size keys.
-        { id = "scopes", size = 0.25 },
-        "breakpoints",
-        "stacks",
-        "watches",
-      },
-      size = 40, -- 40 columns
-      position = "left",
-    },
-    {
-      elements = {
-        "repl",
-        "console",
-      },
-      size = 0.25, -- 25% of total lines
-      position = "bottom",
-    },
-  },
-  controls = {
-    -- Requires Neovim nightly (or 0.8 when released)
-    enabled = true,
-    -- Display controls in this element
-    element = "repl",
-    icons = {
-      pause = "",
-      play = "",
-      step_into = "",
-      step_over = "",
-      step_out = "",
-      step_back = "",
-      run_last = "↻",
-      terminate = "□",
-    },
-  },
-  floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
-    border = "single", -- Border style. Can be "single", "double" or "rounded"
-    mappings = {
-      close = { "q", "<Esc>" },
-    },
-  },
-  windows = { indent = 1 },
-  render = {
-    max_type_length = nil, -- Can be integer or nil.
-    max_value_lines = 100, -- Can be integer or nil.
-  }
-})
-
+-- require("dapui").setup({
+--     icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+--     mappings = {
+--         -- Use a table to apply multiple mappings
+--         expand = { "<CR>", "<2-LeftMouse>" },
+--         open = "o",
+--         remove = "d",
+--         edit = "e",
+--         repl = "r",
+--         toggle = "t",
+--     },
+--     -- Expand lines larger than the window
+--     -- Requires >= 0.7
+--     expand_lines = true,
+--     -- Layouts define sections of the screen to place windows.
+--     -- The position can be "left", "right", "top" or "bottom".
+--     -- The size specifies the height/width depending on position. It can be an Int
+--     -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
+--     -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
+--     -- Elements are the elements shown in the layout (in order).
+--     -- Layouts are opened in order so that earlier layouts take priority in window sizing.
+--     layouts = {
+--         {
+--             elements = {
+--                 -- Elements can be strings or table with id and size keys.
+--                 { id = "scopes", size = 0.25 },
+--                 "breakpoints",
+--                 "stacks",
+--                 "watches",
+--             },
+--             size = 40, -- 40 columns
+--             position = "left",
+--         },
+--         {
+--             elements = {
+--                 "repl",
+--                 "console",
+--             },
+--             size = 0.25, -- 25% of total lines
+--             position = "bottom",
+--         },
+--     },
+--     controls = {
+--         -- Requires Neovim nightly (or 0.8 when released)
+--         enabled = true,
+--         -- Display controls in this element
+--         element = "repl",
+--         icons = {
+--             pause = "",
+--             play = "",
+--             step_into = "",
+--             step_over = "",
+--             step_out = "",
+--             step_back = "",
+--             run_last = "↻",
+--             terminate = "□",
+--         },
+--     },
+--     floating = {
+--         max_height = nil, -- These can be integers or a float between 0 and 1.
+--         max_width = nil, -- Floats will be treated as percentage of your screen.
+--         border = "single", -- Border style. Can be "single", "double" or "rounded"
+--         mappings = {
+--             close = { "q", "<Esc>" },
+--         },
+--     },
+--     windows = { indent = 1 },
+--     render = {
+--         max_type_length = nil, -- Can be integer or nil.
+--         max_value_lines = 100, -- Can be integer or nil.
+--     }
+-- })
+--
 require('go').setup({
-    icons = {breakpoint = '🧘', currentpos = '🏃'},  -- setup to `false` to disable icons setup
+    icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
     dap_debug = true, -- set to false to disable dap
     dap_debug_keymap = true, -- true: use keymap for debugger defined in go/dap.lua
     -- false: do not use keymap in go/dap.lua.  you must define your own.
@@ -1425,4 +1636,3 @@ require("lspsaga").init_lsp_saga({
 require("diffview").setup()
 
 require("lsp")
-
