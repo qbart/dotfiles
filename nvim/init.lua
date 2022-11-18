@@ -27,6 +27,9 @@ require('packer').startup(function(use)
     -- shortcuts
     use { "folke/which-key.nvim" }
 
+    -- go to line
+    use 'nacro90/numb.nvim'
+
     -- sqlite for storage
     use { "kkharji/sqlite.lua" }
 
@@ -156,6 +159,12 @@ require('packer').startup(function(use)
         }
     }
 
+    -- pick window by char
+    use {
+        's1n7ax/nvim-window-picker',
+        tag = 'v1.*',
+    }
+
     --https://github.com/akinsho/bufferline.nvim
 
     -- syntax
@@ -167,6 +176,8 @@ require('packer').startup(function(use)
         },
         run = ':TSUpdate',
     }
+    -- sticky context
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     -- highlight arguments definitaions and usages
     use { 'm-demare/hlargs.nvim',
@@ -249,11 +260,13 @@ require('packer').startup(function(use)
 
     -- file manager
     use {
-        'nvim-tree/nvim-tree.lua',
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
         requires = {
-            'nvim-tree/nvim-web-devicons',
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        }
     }
 
     -- scrollbar
@@ -481,7 +494,9 @@ vim.g.VM_maps = {
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
 vim.g.VM_theme = 'purplegray'
-vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>:NvimTreeFindFile<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', "<tab>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
 -- save file
 vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
 -- quit
@@ -497,8 +512,8 @@ vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], { noremap
 -- reload config
 vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
 -- buffers
-vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>d', ':bd!<CR>', {})
 -- line swapping
 vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], { noremap = true })
@@ -606,7 +621,7 @@ require("catppuccin").setup({
     integrations = {
         cmp = true,
         gitsigns = true,
-        nvimtree = true,
+        nvimtree = false,
         telescope = true,
         treesitter = true,
         fidget = false,
@@ -629,7 +644,7 @@ require("catppuccin").setup({
         mini = false,
         neogit = false,
         neotest = false,
-        neotree = false,
+        neotree = true,
         notify = true,
         overseer = false,
         pounce = false,
@@ -943,6 +958,84 @@ require("ssr").setup {
         prev_match = "N",
         replace_all = "<leader><cr>",
     },
+}
+
+require 'treesitter-context'.setup {
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        -- Note that setting an entry here replaces all other patterns for this entry.
+        -- By setting the 'default' entry below, you can control which nodes you want to
+        -- appear in the context window.
+        default = {
+            'class',
+            'function',
+            'method',
+            'for',
+            'while',
+            'if',
+            'switch',
+            'case',
+        },
+        -- Patterns for specific filetypes
+        -- If a pattern is missing, *open a PR* so everyone can benefit.
+        tex = {
+            'chapter',
+            'section',
+            'subsection',
+            'subsubsection',
+        },
+        rust = {
+            'impl_item',
+            'struct',
+            'enum',
+        },
+        scala = {
+            'object_definition',
+        },
+        vhdl = {
+            'process_statement',
+            'architecture_body',
+            'entity_declaration',
+        },
+        markdown = {
+            'section',
+        },
+        elixir = {
+            'anonymous_function',
+            'arguments',
+            'block',
+            'do_block',
+            'list',
+            'map',
+            'tuple',
+            'quoted_content',
+        },
+        json = {
+            'pair',
+        },
+        yaml = {
+            'block_mapping_pair',
+        },
+    },
+    exact_patterns = {
+        -- Example for a specific filetype with Lua patterns
+        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+        -- exactly match "impl_item" only)
+        -- rust = true,
+    },
+
+    -- [!] The options below are exposed but shouldn't require your attention,
+    --     you can safely ignore them.
+
+    zindex = 20, -- The Z-index of the context window
+    mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+    -- Separator between context and content. Should be a single character string, like '-'.
+    -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+    separator = nil,
 }
 
 require('fzf-lua').setup {
@@ -1295,57 +1388,278 @@ comment_ft.set('hcl', '#%s')
 comment_ft.set('terraform', '#%s')
 comment_ft.set('tf', '#%s')
 
--- sort_by = "case_sensitive",
-require("nvim-tree").setup({
-    view                = {
-        adaptive_size = true,
-        mappings = {
-            custom_only = true,
-            list = {
-                { key = "u", action = "dir_up" },
-                { key = "j", action = "close_node" },
-                { key = ";", action = "open_node" },
-                { key = "<Tab>", action = "preview" },
-                { key = "h", action = "toggle_dotfiles" },
-                { key = "a", action = "create" },
-                { key = "d", action = "remove" },
-                { key = "r", action = "rename" },
-                { key = "x", action = "cut" },
-                { key = "c", action = "copy" },
-                { key = "p", action = "paste" },
-                { key = "y", action = "copy_path" },
-                { key = "Y", action = "copy_name" },
-                { key = "f", action = "live_filter" },
-                { key = "F", action = "clear_live_filter" },
-            },
+require('window-picker').setup({
+    autoselect_one = true,
+    include_current_win = true,
+    selection_chars = '123456789',
+    use_winbar = 'winbar',
+    filter_rules = {
+        -- filter using buffer options
+        bo = {
+            -- if the file type is one of following, the window will be ignored
+            filetype = { 'NvimTree', "neo-tree", "notify" },
+
+            -- if the buffer type is one of following, the window will be ignored
+            buftype = { 'terminal' },
         },
+
+        -- filter using window options
+        wo = {},
+
+        -- if the file path contains one of following names, the window
+        -- will be ignored
+        file_path_contains = {},
+
+        -- if the file name contains one of following names, the window will be
+        -- ignored
+        file_name_contains = {},
     },
-    renderer            = {
-        group_empty = true,
-    },
-    filters             = {
-        dotfiles = true,
-    },
-    git                 = { ignore = false, },
-    update_focused_file = {
-        enable      = true,
-        update_cwd  = false,
-        ignore_list = {}
-    },
-    disable_netrw       = true,
-    hijack_netrw        = true,
-    ignore_ft_on_setup  = {},
-    update_cwd          = false,
-})
-vim.api.nvim_create_autocmd("BufEnter", {
-    nested = true,
-    callback = function()
-        if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-            vim.cmd "quit"
-        end
-    end
+
+    -- the foreground (text) color of the picker
+    fg_color = colors.surface0,
+
+    -- if you have include_current_win == true, then current_win_hl_color will
+    -- be highlighted using this background color
+    current_win_hl_color = colors.teal,
+
+    -- all the windows except the curren window will be highlighted using this
+    -- color
+    other_win_hl_color = colors.teal,
 })
 
+require("neo-tree").setup({
+    enable_git_status = true,
+    enable_diagnostics = true,
+    sources = {
+        "filesystem",
+        "buffers",
+        "git_status",
+    },
+    source_selector = {
+        winbar = false,
+    },
+    event_handlers = {
+        {
+            event = "file_opened",
+            handler = function(file_path)
+                --auto close
+                require("neo-tree").close_all()
+            end
+        },
+    },
+    close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+    popup_border_style = "rounded",
+    sort_case_insensitive = false, -- used when sorting files and directories in the tree
+    sort_function = nil, -- use a custom function for sorting files and directories in the tree
+    -- sort_function = function (a,b)
+    --       if a.type == b.type then
+    --           return a.path > b.path
+    --       else
+    --           return a.type > b.type
+    --       end
+    --   end , -- this sorts files and directories descendantly
+    default_component_configs = {
+        container = {
+            enable_character_fade = true
+        },
+        indent = {
+            indent_size = 2,
+            padding = 1, -- extra padding on left hand side
+            -- indent guides
+            with_markers = true,
+            indent_marker = "│",
+            last_indent_marker = "└",
+            highlight = "NeoTreeIndentMarker",
+            -- expander config, needed for nesting files
+            with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+            expander_collapsed = "",
+            expander_expanded = "",
+            expander_highlight = "NeoTreeExpander",
+        },
+        icon = {
+            folder_closed = "",
+            folder_open = "",
+            folder_empty = "ﰊ",
+            -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+            -- then these will never be used.
+            default = "*",
+            highlight = "NeoTreeFileIcon"
+        },
+        modified = {
+            symbol = "[+]",
+            highlight = "NeoTreeModified",
+        },
+        name = {
+            trailing_slash = false,
+            use_git_status_colors = true,
+            highlight = "NeoTreeFileName",
+        },
+        git_status = {
+            symbols = {
+                -- Change type
+                added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+                deleted   = "", -- this can only be used in the git_status source
+                renamed   = "", -- this can only be used in the git_status source
+                -- Status type
+                untracked = "",
+                ignored   = "",
+                unstaged  = "",
+                staged    = "",
+                conflict  = "",
+            }
+        },
+    },
+    window = {
+        position = "left",
+        width = 50,
+        mapping_options = {
+            noremap = true,
+            nowait = true,
+        },
+        mappings = {
+            ["<space>"] = {
+                "toggle_node",
+                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+            },
+            -- ["<2-LeftMouse>"] = "open",
+            [";"] = "open",
+            ["<esc>"] = "revert_preview",
+            ["P"] = { "toggle_preview", config = { use_float = true } },
+            ["S"] = "open_split",
+            ["s"] = "open_vsplit",
+            -- ["S"] = "split_with_window_picker",
+            -- ["s"] = "vsplit_with_window_picker",
+            -- ["t"] = "open_tabnew",
+            -- ["<cr>"] = "open_drop",
+            -- ["t"] = "open_tab_drop",
+            ["w"] = "open_with_window_picker",
+            ["j"] = "close_node",
+            ["z"] = "close_all_nodes",
+            --["Z"] = "expand_all_nodes",
+            ["a"] = {
+                "add",
+                -- some commands may take optional config options, see `:h neo-tree-mappings` for details
+                config = {
+                    show_path = "relative" -- "none", "relative", "absolute"
+                }
+            },
+            ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
+            ["d"] = "delete",
+            ["r"] = "rename",
+            ["c"] = "copy_to_clipboard",
+            ["x"] = "cut_to_clipboard",
+            ["p"] = "paste_from_clipboard",
+            ["y"] = {
+                "copy",
+                config = {
+                    show_path = "relative" -- "none", "relative", "absolute"
+                }
+            },
+            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            ["q"] = "close_window",
+            ["R"] = "refresh",
+            ["?"] = "show_help",
+            ["<"] = "prev_source",
+            [">"] = "next_source",
+        }
+    },
+    nesting_rules = {},
+    filesystem = {
+        filtered_items = {
+            visible = false, -- when true, they will just be displayed differently than normal items
+            hide_dotfiles = true,
+            hide_gitignored = true,
+            hide_hidden = true, -- only works on Windows for hidden files/directories
+            hide_by_name = {
+                "node_modules"
+            },
+            hide_by_pattern = { -- uses glob style patterns
+                "*.log",
+                --"*/src/*/tsconfig.json",
+            },
+            always_show = { -- remains visible even if other settings would normally hide it
+                ".gitignore",
+                ".terraformignore",
+                ".dockerignore",
+            },
+            never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+                ".DS_Store",
+                "thumbs.db",
+            },
+            never_show_by_pattern = { -- uses glob style patterns
+                --".null-ls_*",
+            },
+        },
+        follow_current_file = false, -- This will find and focus the file in the active buffer every
+        -- time the current file is changed while the tree is open.
+        group_empty_dirs = false, -- when true, empty folders will be grouped together
+        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+        -- in whatever position is specified in window.position
+        -- "open_current",  -- netrw disabled, opening a directory opens within the
+        -- window like netrw would, regardless of window.position
+        -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
+        use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+        -- instead of relying on nvim autocmd events.
+        window = {
+            mappings = {
+                -- ["<bs>"] = "navigate_up",
+                ["."] = "set_root",
+                ["h"] = "toggle_hidden",
+                -- ["/"] = "fuzzy_finder",
+                -- ["D"] = "fuzzy_finder_directory",
+                ["f"] = "filter_on_submit",
+                ["<esc>"] = "clear_filter",
+                -- ["[g"] = "prev_git_modified",
+                -- ["]g"] = "next_git_modified",
+            }
+        }
+    },
+    buffers = {
+        follow_current_file = true, -- This will find and focus the file in the active buffer every
+        -- time the current file is changed while the tree is open.
+        group_empty_dirs = true, -- when true, empty folders will be grouped together
+        show_unloaded = true,
+        window = {
+            mappings = {
+                ["d"] = "buffer_delete",
+                ["u"] = "navigate_up",
+                ["."] = "set_root",
+            }
+        },
+    },
+    git_status = {
+        window = {
+            position = "float",
+            mappings = {
+                ["A"]  = "git_add_all",
+                ["gu"] = "git_unstage_file",
+                ["ga"] = "git_add_file",
+                -- ["gr"] = "git_revert_file",
+                ["gc"] = "git_commit",
+                ["gp"] = "git_push",
+                -- ["gg"] = "git_commit_and_push",
+            }
+        }
+    }
+})
+--     { key = "u", action = "dir_up" },
+--     { key = "j", action = "close_node" },
+--     { key = ";", action = "open_node" },
+--     { key = "<Tab>", action = "preview" },
+--     { key = "h", action = "toggle_dotfiles" },
+--     { key = "a", action = "create" },
+--     { key = "d", action = "remove" },
+--     { key = "r", action = "rename" },
+--     { key = "x", action = "cut" },
+--     { key = "c", action = "copy" },
+--     { key = "p", action = "paste" },
+--     { key = "y", action = "copy_path" },
+--     { key = "Y", action = "copy_name" },
+--     { key = "f", action = "live_filter" },
+--     { key = "F", action = "clear_live_filter" },
+-- },
+--
 require('go').setup()
 
 -- disable names needs to disable css:
@@ -1677,5 +1991,12 @@ require("lspsaga").init_lsp_saga({
 })
 
 require("diffview").setup()
+
+require('numb').setup {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+    number_only = true, -- Peek only when the command is only a number instead of when it starts with a number
+    centered_peeking = true, -- Peeked line will be centered relative to window
+}
 
 require("lsp")
