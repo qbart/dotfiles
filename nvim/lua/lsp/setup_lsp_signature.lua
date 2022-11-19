@@ -14,12 +14,12 @@ M.setup_lsp_signature = function()
     hint_prefix = "",
     hint_scheme = "",
     hi_parameter = "LspSignatureActiveParameter",
-    max_height = 4,
+    max_height = 5,
     max_width = 1000,
     handler_opts = {
       border = "single"
     },
-    toggle_key = nil
+    toggle_key = nil,
   })
 end
 
