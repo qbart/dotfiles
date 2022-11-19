@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# center kitty
+i3-msg [class="kitty"] resize set 3200 2100 
+i3-msg [class="kitty"] move position center

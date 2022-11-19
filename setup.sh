@@ -13,7 +13,6 @@ ln -s "$(pwd)/rofi" ~/.config/rofi -f
 ln -s "$(pwd)/flameshot" ~/.config/flameshot -f
 ln -s "$(pwd)/ranger" ~/.config/ranger -f
 ln -s "$(pwd)/lf" ~/.config/lf -f
-ln -s "$(pwd)/alacritty" ~/.config/alacritty -f
 ln -s "$(pwd)/kitty" ~/.config/kitty -f
 ln -s "$(pwd)/dunst" ~/.config/dunst -f
 ln -s "$(pwd)/byhost" ~/.config/byhost -f
@@ -33,12 +32,14 @@ ln -s "$(pwd)/manjaro/mimeapps.list" ~/.config/mimeapps.list -f
 ln -s "$(pwd)/greenclip.cfg" ~/.config/greenclip.cfg -f
 ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf -f
 
+ln -s -f "$(pwd)/bin/open" ~/bin/open
+ln -s -f "$(pwd)/bin/ck" ~/bin/ck
+
 rm ~/.config/rofi/rofi
 rm ~/.config/flameshot/flameshot
 rm ~/.config/polybar/polybar
 rm ~/.config/ranger/ranger
 rm ~/.config/lf/lf
-rm ~/.config/alacritty/alacritty
 rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim
 rm ~/.i3/i3
