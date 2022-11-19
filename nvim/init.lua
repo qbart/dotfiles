@@ -491,7 +491,7 @@ vim.keymap.set({ 'n', 'v' }, 'j', 'h', { noremap = true })
 -- faster nav
 vim.keymap.set({ 'n', 'v' }, '<C-k>', '5j', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-l>', '5k', { noremap = true })
-vim.keymap.set({ 'n' }, '<C-j>', ':HopPattern<CR>', { noremap = true })
+vim.keymap.set({ 'n' }, '<C-f>', ':HopPattern<CR>', { noremap = true })
 vim.keymap.set({ 'n' }, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
 vim.g.VM_maps = {
     ["Skip Region"] = '<C-x>',
@@ -507,8 +507,7 @@ vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], { noremap = true })
 -- quit
 vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], { noremap = true, silent = true })
 -- splits
--- vim.api.nvim_set_keymap('n', '<C-w>', [[:sp<CR>]], {})
-vim.keymap.set("n", "<C-w>w", function()
+vim.keymap.set("n", "<M-w>", function()
     local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
 end, { desc = "Pick a window" })
@@ -533,17 +532,15 @@ vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
-vim.keymap.set("n", "<C-m>", "<cmd>:messages<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "``", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<C-m>", "<cmd>:NoiceHistory<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "``", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "`w", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "`d", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gu", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "`u", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-vim.keymap.set({ "n", "v" }, "<leader><cr>", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set("n", "<C-j>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
+vim.keymap.set({"n","v"}, "<localleader><localleader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set("n", "<C-;>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap('n', 'n', [[:SymbolsOutline<CR>]], { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
 -- help
@@ -1991,7 +1988,8 @@ require('go').setup({
 
 require("lspsaga").init_lsp_saga({
     diagnostic_header = { " ", " ", " ", " " },
-    max_preview_lines = 15,
+    preview_lines_above = 0,
+    max_preview_lines = 25,
     code_action_icon = symbols.action,
     code_action_num_shortcut = true,
     code_action_lightbulb = {
@@ -2006,13 +2004,12 @@ require("lspsaga").init_lsp_saga({
         ref = ' ',
         link = '  ',
     },
-    rename_action_quit = "<C-q>",
     show_outline = {
         win_position = 'right',
         --set special filetype win that outline window split.like NvimTree neotree
         -- defx, db_ui
         win_with = '',
-        win_width = 30,
+        win_width = 40,
         auto_enter = true,
         auto_preview = true,
         virt_text = '┃',
@@ -2021,10 +2018,7 @@ require("lspsaga").init_lsp_saga({
     },
 })
 
-vim.diagnostic.config({
-  virtual_lines = { only_current_line = true }
-})
-require("lsp_lines").setup({})
+require("lsp_lines").setup()
 
 require("diffview").setup()
 
