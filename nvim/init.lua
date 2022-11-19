@@ -258,6 +258,11 @@ require('packer').startup(function(use)
         }
     })
 
+    -- better virtualtext diagnostic, rendered as a tree
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    })
+
     -- file manager
     use {
         "nvim-neo-tree/neo-tree.nvim",
@@ -2015,6 +2020,12 @@ require("lspsaga").init_lsp_saga({
         auto_refresh = true,
     },
 })
+
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = { only_current_line = true }
+})
+require("lsp_lines").setup({})
 
 require("diffview").setup()
 
