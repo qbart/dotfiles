@@ -2022,7 +2022,6 @@ require("lspsaga").init_lsp_saga({
 })
 
 vim.diagnostic.config({
-  virtual_text = true,
   virtual_lines = { only_current_line = true }
 })
 require("lsp_lines").setup({})
