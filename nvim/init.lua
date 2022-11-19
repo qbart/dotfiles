@@ -476,8 +476,8 @@ vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
 -- silence
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], {})
-vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], {})
+vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], { silent = true })
+vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], { silent = true })
 -- natural order consistent with i3
 vim.keymap.set({ 'n', 'v' }, ';', 'l', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'l', 'k', { noremap = true })
@@ -498,9 +498,9 @@ vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=tru
 vim.api.nvim_set_keymap('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
 vim.api.nvim_set_keymap('n', "<tab>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
 -- save file
-vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
+vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], { noremap = true })
 -- quit
-vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], {})
+vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], { noremap = true, silent = true })
 -- splits
 -- vim.api.nvim_set_keymap('n', '<C-w>', [[:sp<CR>]], {})
 vim.keymap.set("n", "<C-w>w", function()
