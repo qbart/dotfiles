@@ -50,7 +50,7 @@ require('packer').startup(function(use)
         },
     }
 
-    -- telescope alternative
+    -- file/buffer/... fuzzy finder
     use { 'ibhagwan/fzf-lua',
         -- optional for icon support
         requires = { 'kyazdani42/nvim-web-devicons' }
@@ -502,6 +502,11 @@ vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], {})
 -- quit
 vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], {})
 -- splits
+-- vim.api.nvim_set_keymap('n', '<C-w>', [[:sp<CR>]], {})
+vim.keymap.set("n", "<C-w>w", function()
+    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_win(picked_window_id)
+end, { desc = "Pick a window" })
 vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
 -- resize panes
@@ -696,11 +701,11 @@ require("todo-comments").setup {
             alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
             -- signs = false, -- configure signs for some keywords individually
         },
-        TODO = { icon = " ", color = "info" },
-        HACK = { icon = " ", color = "error" },
-        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        TODO = { icon = "", color = "info" },
+        HACK = { icon = "", color = "error" },
+        WARN = { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
+        PERF = { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        NOTE = { icon = "", color = "hint", alt = { "INFO" } },
         TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
     gui_style = {
@@ -1420,7 +1425,7 @@ require('window-picker').setup({
 
     -- if you have include_current_win == true, then current_win_hl_color will
     -- be highlighted using this background color
-    current_win_hl_color = colors.teal,
+    current_win_hl_color = colors.maroon,
 
     -- all the windows except the curren window will be highlighted using this
     -- color
@@ -1430,6 +1435,7 @@ require('window-picker').setup({
 require("neo-tree").setup({
     enable_git_status = true,
     enable_diagnostics = true,
+    use_default_mappings = false,
     sources = {
         "filesystem",
         "buffers",
@@ -1442,8 +1448,9 @@ require("neo-tree").setup({
         {
             event = "file_opened",
             handler = function(file_path)
-                --auto close
-                require("neo-tree").close_all()
+                local nt = require("neo-tree")
+                -- nt.clear_filter() -- clear file filters
+                nt.close_all() -- auto close window
             end
         },
     },
@@ -1536,7 +1543,7 @@ require("neo-tree").setup({
             ["w"] = "open_with_window_picker",
             ["j"] = "close_node",
             ["z"] = "close_all_nodes",
-            --["Z"] = "expand_all_nodes",
+            ["Z"] = "expand_all_nodes",
             ["a"] = {
                 "add",
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -1547,16 +1554,34 @@ require("neo-tree").setup({
             ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
             ["d"] = "delete",
             ["r"] = "rename",
-            ["c"] = "copy_to_clipboard",
-            ["x"] = "cut_to_clipboard",
-            ["p"] = "paste_from_clipboard",
-            ["y"] = {
-                "copy",
+            ["c"] = {
+                "copy_to_clipboard",
                 config = {
-                    show_path = "relative" -- "none", "relative", "absolute"
+                    show_path = "relative"
                 }
             },
-            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            ["x"] = {
+                "cut_to_clipboard",
+                config = {
+                    show_path = "relative"
+                }
+            },
+            ["p"] = "paste_from_clipboard",
+            ["y"] = function(state)
+                local node = state.tree:get_node()
+                local filepath = node:get_id()
+                local relative_to_cwd = vim.fn.fnamemodify(filepath, ':.')
+
+                vim.fn.setreg('"', relative_to_cwd)
+                vim.fn.setreg('+', relative_to_cwd)
+
+                print("Path copied: " .. relative_to_cwd)
+            end,
+            ["m"] = { "move",
+                config = {
+                    show_path = "relative"
+                }
+            },
             ["q"] = "close_window",
             ["R"] = "refresh",
             ["?"] = "show_help",
@@ -1582,6 +1607,7 @@ require("neo-tree").setup({
                 ".gitignore",
                 ".terraformignore",
                 ".dockerignore",
+                ".goreleaser.yml",
             },
             never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
                 ".DS_Store",
@@ -1591,7 +1617,7 @@ require("neo-tree").setup({
                 --".null-ls_*",
             },
         },
-        follow_current_file = false, -- This will find and focus the file in the active buffer every
+        follow_current_file = true, -- This will find and focus the file in the active buffer every
         -- time the current file is changed while the tree is open.
         group_empty_dirs = false, -- when true, empty folders will be grouped together
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
