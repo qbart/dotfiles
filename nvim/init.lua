@@ -579,8 +579,8 @@ vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = tru
 vim.keymap.set("n", "<localleader>u", "<cmd>lua require('fzf-lua').lsp_references()<CR>",
     { silent = true, noremap = true })
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", ":CodeActionMenu<CR>", { silent = true })
-vim.keymap.set("n", "]y", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "]h", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "]j", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "];", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "n", function()
     require("aerial").toggle()
     -- TODO: sync windows so they do not overlap
