@@ -30,6 +30,9 @@ require('packer').startup(function(use)
     -- go to line
     use 'nacro90/numb.nvim'
 
+    -- minimap
+    use { 'gorbit99/codewindow.nvim' }
+
     -- sqlite for storage
     use { "kkharji/sqlite.lua" }
 
@@ -46,6 +49,9 @@ require('packer').startup(function(use)
             { "ANGkeith/telescope-terraform-doc.nvim" },
         },
     }
+
+    -- nvim api
+    use "folke/neodev.nvim"
 
     -- file/buffer/... fuzzy finder
     use { 'ibhagwan/fzf-lua',
@@ -71,6 +77,7 @@ require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
+    -- lsp status
     use { 'nvim-lua/lsp-status.nvim' }
     -- display arguments names while typing
     use { 'ray-x/lsp_signature.nvim' }
@@ -108,7 +115,6 @@ require('packer').startup(function(use)
         'kosayoda/nvim-lightbulb',
         requires = 'antoinemadec/FixCursorHold.nvim',
     }
-
 
     -- structural replace
     use { "cshuaimin/ssr.nvim" }
@@ -269,6 +275,9 @@ require('packer').startup(function(use)
     use({
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     })
+
+    -- show closing context as virtualtext
+    use "haringsrob/nvim_context_vt"
 
     -- color picker and colorizer
     use "uga-rosa/ccc.nvim"
@@ -554,7 +563,12 @@ vim.keymap.set("n", "<localleader>u", "<cmd>lua require('fzf-lua').lsp_reference
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", ":CodeActionMenu<CR>", { silent = true })
 vim.keymap.set("n", "<C-j>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-;>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap('n', 'n', [[:AerialToggle<CR>]], { noremap = true, silent = true })
+vim.keymap.set("n", "n", function()
+    require("aerial").toggle()
+    -- TODO: sync windows so they do not overlap
+    -- require("codewindow").toggle_minimap()
+end, { noremap = true, silent = true })
+
 vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
 -- help
 vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], { noremap = true })
@@ -1679,7 +1693,7 @@ ccc.setup({
     disable_default_mappings = false,
     highlighter = {
         auto_enable = true
-    }, 
+    },
     mappings = {
         ["<CR>"] = ccc.mapping.complete,
         ["<Tab>"] = ccc.mapping.toggle_input_mode,
@@ -2312,4 +2326,55 @@ require('numb').setup {
     centered_peeking = true, -- Peeked line will be centered relative to window
 }
 
+local codewindow = require('codewindow')
+codewindow.setup(
+    {
+        active_in_terminals = false, -- Should the minimap activate for terminal buffers
+        auto_enable = false, -- Automatically open the minimap when entering a (non-excluded) buffer (accepts a table of filetypes)
+        exclude_filetypes = {
+            "aerial",
+            "neo-tree",
+            "Trouble",
+        }, -- Choose certain filetypes to not show minimap on
+        max_minimap_height = nil, -- The maximum height the minimap can take (including borders)
+        max_lines = nil, -- If auto_enable is true, don't open the minimap for buffers which have more than this many lines.
+        minimap_width = 10, -- The width of the text part of the minimap
+        use_lsp = true, -- Use the builtin LSP to show errors and warnings
+        use_treesitter = true, -- Use nvim-treesitter to highlight the code
+        use_git = true, -- Show small dots to indicate git additions and deletions
+        width_multiplier = 5, -- How many characters one dot represents
+        z_index = 1, -- The z-index the floating window will be on
+        show_cursor = false, -- Show the cursor position in the minimap
+        window_border = 'none' -- The border style of the floating window (accepts all usual options)
+    }
+)
+
+require('nvim_context_vt').setup({
+    enabled = true,
+    prefix = '',
+    highlight = 'ContextVt',
+    disable_ft = { 'markdown' },
+    disable_virtual_lines = false,
+    disable_virtual_lines_ft = { 'yaml' },
+    -- How many lines required after starting position to show virtual text
+    -- Default: 1 (equals two lines total)
+    min_rows = 3,
+    min_rows_ft = {},
+
+    custom_parser = function(node, ft, opts)
+        local utils = require('nvim_context_vt.utils')
+        local type = node:type()
+
+        -- If you return `nil`, no virtual text will be displayed.
+        if type == 'function' or type == "function_declaration" or type == "method_declaration" then
+            return nil
+        end
+
+        -- This is the standard text
+        return opts.prefix .. " " .. utils.get_node_text(node)[1]
+    end,
+})
+vim.api.nvim_set_hl(0, 'ContextVt', { fg = colors.surface0 })
+
+require("neodev").setup({})
 require("lsp")
