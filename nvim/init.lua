@@ -24,6 +24,12 @@ require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons' },
     }
 
+    -- editorconfig
+    use "gpanders/editorconfig.nvim"
+
+    -- whitespace trim
+    use 'cappyzawa/trim.nvim'
+
     -- shortcuts
     use { "folke/which-key.nvim" }
 
@@ -49,6 +55,9 @@ require('packer').startup(function(use)
             { "ANGkeith/telescope-terraform-doc.nvim" },
         },
     }
+
+    -- region selection with hop
+    use { "mfussenegger/nvim-treehopper", requires = { { 'phaazon/hop.nvim' } } }
 
     -- nvim api
     use "folke/neodev.nvim"
@@ -162,6 +171,14 @@ require('packer').startup(function(use)
     -- git visualizer and merge tool
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
+    -- git in editor
+    use {
+        'tanvirtin/vgit.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
+    }
+
     -- run tests from editor
     use {
         "nvim-neotest/neotest",
@@ -197,8 +214,12 @@ require('packer').startup(function(use)
         requires = { 'nvim-treesitter/nvim-treesitter' },
     }
 
-    -- convert between oneliner/multiline statement
+    -- convert between oneliner/multiline statement split/join
     use { 'AndrewRadev/splitjoin.vim' }
+
+    --  FIX: hard to configure
+    -- join/split
+    -- use "AckslD/nvim-trevJ.lua"
 
     -- auto tag closing and changing matching tag
     use { 'windwp/nvim-ts-autotag' }
@@ -491,10 +512,6 @@ vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<
 vim.api.nvim_set_keymap('n', '<leader>f', [[:lua require('fzf-lua').blines()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]],
     { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gc', [[:lua require('fzf-lua').git_commits()<CR>]],
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gb', [[:lua require('fzf-lua').git_branches()<CR>]],
-    { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>y', [[:lua require('neoclip.fzf')()<CR>]], { noremap = true, silent = true })
 -- line
 -- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
@@ -520,6 +537,11 @@ vim.g.VM_maps = {
     -- ["Select Cursor Down"] = '∆', -- Option+J,
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
+-- region selection
+vim.keymap.set("o", "<leader>v", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
+vim.keymap.set("x", "<leader>v", ":lua require('tsht').nodes()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>v", ":lua require('tsht').nodes()<CR>", { silent = true })
+
 vim.g.VM_theme = 'purplegray'
 vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
 vim.api.nvim_set_keymap('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
@@ -528,11 +550,11 @@ vim.api.nvim_set_keymap('n', "<tab>", "<cmd>Neotree source=buffers reveal=true p
 vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], { noremap = true })
 -- quit
 vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], { noremap = true, silent = true })
--- splits
 vim.keymap.set("n", "<M-w>", function()
     local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
 end, { desc = "Pick a window" })
+-- splits
 vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
 -- resize panes
@@ -561,8 +583,8 @@ vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = tru
 vim.keymap.set("n", "<localleader>u", "<cmd>lua require('fzf-lua').lsp_references()<CR>",
     { silent = true, noremap = true })
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", ":CodeActionMenu<CR>", { silent = true })
-vim.keymap.set("n", "<C-j>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "<C-;>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "]y", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "]h", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "n", function()
     require("aerial").toggle()
     -- TODO: sync windows so they do not overlap
@@ -574,6 +596,31 @@ vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
 vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], { noremap = true })
 -- extras
 vim.api.nvim_set_keymap('n', '<leader>ie', [[:Telescope emoji<CR>]], { noremap = true })
+-- git
+vim.api.nvim_set_keymap('n', '<leader>gl', [[:lua require('fzf-lua').git_commits()<CR>]], {
+    noremap = true,
+    silent = true,
+})
+vim.api.nvim_set_keymap('n', '<leader>gbr', [[:lua require('fzf-lua').git_branches()<CR>]], {
+    noremap = true,
+    silent = true,
+})
+vim.api.nvim_set_keymap('n', '<leader>gb', [[:VGit buffer_blame_preview()<CR>]], {
+    noremap = true,
+    silent = true,
+})
+vim.api.nvim_set_keymap('n', '<leader>gap', [[:VGit buffer_diff_preview<CR>]], {
+    noremap = true,
+    silent = true,
+})
+vim.api.nvim_set_keymap('n', '<C-j>', [[:lua require('vgit').hunk_up()<CR>]], {
+    noremap = true,
+    silent = true,
+})
+vim.api.nvim_set_keymap('n', '<C-;>', [[:lua require('vgit').hunk_down()<CR>]], {
+    noremap = true,
+    silent = true,
+})
 
 ----
 -- plugins setup
@@ -1725,7 +1772,6 @@ require('illuminate').configure({
     under_cursor = true,
 })
 
-require('nvim-ts-autotag').setup()
 require('lspkind').init({
     mode = 'symbol_text',
     preset = 'codicons',
@@ -2254,7 +2300,7 @@ require("lspsaga").init_lsp_saga({
     },
 })
 
-require("lsp_lines").setup()
+-- require("lsp_lines").setup()
 
 require('nvim-lightbulb').setup({
     -- LSP client names to ignore
@@ -2374,7 +2420,87 @@ require('nvim_context_vt').setup({
         return opts.prefix .. " " .. utils.get_node_text(node)[1]
     end,
 })
-vim.api.nvim_set_hl(0, 'ContextVt', { fg = colors.surface0 })
+vim.api.nvim_set_hl(0, 'ContextVt', { fg = colors.crust, bg = "" })
+vim.api.nvim_set_hl(0, 'GitComment', { fg = colors.crust, bg = "" })
+
+require('trim').setup({
+    disable = { "markdown" },
+})
+require('vgit').setup({
+    keymaps = {},
+    settings = {
+        hls = {
+            GitBackground = 'Normal',
+            GitHeader = 'NormalFloat',
+            GitFooter = 'NormalFloat',
+            GitBorder = 'LineNr',
+            GitLineNr = 'LineNr',
+            GitComment = 'GitComment',
+            GitSignsAdd = {
+                gui = nil,
+                fg = '#d7ffaf',
+                bg = nil,
+                sp = nil,
+                override = false,
+            },
+            GitSignsChange = {
+                gui = nil,
+                fg = '#7AA6DA',
+                bg = nil,
+                sp = nil,
+                override = false,
+            },
+            GitSignsDelete = {
+                gui = nil,
+                fg = '#e95678',
+                bg = nil,
+                sp = nil,
+                override = false,
+            },
+            GitSignsAddLn = 'DiffAdd',
+            GitSignsDeleteLn = 'DiffDelete',
+            GitWordAdd = {
+                gui = nil,
+                fg = nil,
+                bg = '#5d7a22',
+                sp = nil,
+                override = false,
+            },
+            GitWordDelete = {
+                gui = nil,
+                fg = nil,
+                bg = '#960f3d',
+                sp = nil,
+                override = false,
+            },
+        },
+        live_gutter = {
+            enabled = false, -- diable signs conflicting with gitsigns
+            edge_navigation = true, -- This allows users to navigate within a hunk
+        },
+        authorship_code_lens = {
+            enabled = false,
+        },
+        scene = {
+            diff_preference = 'split', -- unified or split
+            keymaps = {
+                quit = 'q'
+            }
+        },
+        diff_preview = {
+            keymaps = {
+                buffer_stage = 'S',
+                buffer_unstage = 'U',
+                buffer_hunk_stage = 's',
+                buffer_hunk_unstage = 'u',
+                toggle_view = 't',
+            },
+        },
+        symbols = {
+            void = '⣿',
+        },
+    }
+})
 
 require("neodev").setup({})
 require("lsp")
