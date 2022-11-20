@@ -284,6 +284,10 @@ require('packer').startup(function(use)
                         filter = { event = "msg_show", kind = "", find = "Already at oldest change" },
                         opts = { skip = true },
                     },
+                    {
+                        filter = { event = "msg_show", kind = "", find = "--No lines in" },
+                        opts = { skip = true },
+                    },
                 },
             })
         end,
@@ -1023,7 +1027,9 @@ feline.setup({
     vi_mode_colors = vi_mode_colors,
 })
 
+require("scrollbar").setup()
 require('gitsigns').setup {}
+require("scrollbar.handlers.gitsigns").setup()
 
 require("ssr").setup {
     min_width = 50,
@@ -1750,8 +1756,6 @@ ccc.setup({
         q = ccc.mapping.quit,
     }
 })
-
-require("scrollbar").setup()
 
 require("hop").setup()
 
