@@ -360,10 +360,6 @@ require('packer').startup(function(use)
 
     -- statusline
     use 'feline-nvim/feline.nvim'
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' }
-    }
 
     -- show idents
     use "lukas-reineke/indent-blankline.nvim"
@@ -886,7 +882,7 @@ local feline_config = {
         provider = {
             name = "file_info",
             opts = {
-                type = "relative-short",
+                type = "relative",
             },
         },
         hl = {
