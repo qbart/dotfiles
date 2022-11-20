@@ -1003,8 +1003,10 @@ local components = {
     },
 }
 
-local feline_properties = {
-    force_inactive = {
+feline.setup({
+    default_bg = colors.base,
+    default_fg = colors.lavender,
+    disable = {
         filetypes = {
             '^NvimTree$',
             '^packer$',
@@ -1014,18 +1016,13 @@ local feline_properties = {
             '^qf$',
             '^help$',
             '^Trouble$',
+            "^aerial$",
         },
         buftypes = {
             '^terminal$',
         },
         bufnames = {}
-    }
-}
-
-feline.setup({
-    default_bg = colors.base,
-    default_fg = colors.lavender,
-    properties = feline_properties,
+    },
     components = components,
     theme = {
         bg = colors.base,
@@ -1459,7 +1456,12 @@ require('window-picker').setup({
         -- filter using buffer options
         bo = {
             -- if the file type is one of following, the window will be ignored
-            filetype = { 'NvimTree', "neo-tree", "notify" },
+            filetype = {
+                'NvimTree',
+                "neo-tree",
+                "notify",
+                "aerial",
+            },
 
             -- if the buffer type is one of following, the window will be ignored
             buftype = { 'terminal' },
@@ -2104,6 +2106,7 @@ require("aerial").setup({
 
     -- Call this function when aerial attaches to a buffer.
     on_attach = function(bufnr)
+
     end,
 
     -- Call this function when aerial first sets symbols on a buffer.
