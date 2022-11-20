@@ -18,6 +18,9 @@ end
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
+    -- install socket, needed for "sleep"
+    use_rocks "luasocket"
+
     -- start secreen
     use {
         'goolord/alpha-nvim',
@@ -518,6 +521,7 @@ vim.api.nvim_set_keymap('n', '<leader>y', [[:lua require('neoclip.fzf')()<CR>]],
 -- packer
 vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
 vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
+vim.api.nvim_set_keymap('n', '<C-p>s', [[:PackerSync<CR>]], {})
 -- silence
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], { silent = true })
@@ -586,9 +590,10 @@ vim.keymap.set({ "n", "v" }, "<localleader><localleader>", ":CodeActionMenu<CR>"
 vim.keymap.set("n", "]j", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "];", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "n", function()
+    require("codewindow").toggle_minimap()
+    -- HACK: cheat with small delay
+    require("socket").sleep(0.1)
     require("aerial").toggle()
-    -- TODO: sync windows so they do not overlap
-    -- require("codewindow").toggle_minimap()
 end, { noremap = true, silent = true })
 
 vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
@@ -1810,10 +1815,12 @@ vim.g.did_load_filetypes = 1
 require('filetype').setup({
     overrides = {
         extensions = {
-            tf = "hcl",
+            tf = "terraform",
+            Caddyfile = "caddyfile",
         },
         literal = {
             gitconfig = 'gitconfig',
+            Caddyfile = 'caddyfile',
         },
         complex = {
             ['%.env%.*'] = 'sh',
@@ -2390,7 +2397,7 @@ codewindow.setup(
         use_lsp = true, -- Use the builtin LSP to show errors and warnings
         use_treesitter = true, -- Use nvim-treesitter to highlight the code
         use_git = true, -- Show small dots to indicate git additions and deletions
-        width_multiplier = 5, -- How many characters one dot represents
+        width_multiplier = 4, -- How many characters one dot represents
         z_index = 1, -- The z-index the floating window will be on
         show_cursor = false, -- Show the cursor position in the minimap
         window_border = 'none' -- The border style of the floating window (accepts all usual options)
