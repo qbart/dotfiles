@@ -591,8 +591,8 @@ vim.keymap.set("n", "]j", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = 
 vim.keymap.set("n", "];", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "n", function()
     require("codewindow").toggle_minimap()
-    -- HACK: cheat with small delay
-    require("socket").sleep(0.15)
+    -- -- HACK: cheat with small delay
+    -- require("socket").sleep(0.15)
     require("aerial").toggle()
 end, { noremap = true, silent = true })
 
@@ -1926,7 +1926,7 @@ require("aerial").setup({
         -- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
         -- min_width and max_width can be a list of mixed types.
         -- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
-        max_width = { 40, 0.2 },
+        max_width = { 60, 0.3 },
         width = nil,
         min_width = 20,
 
@@ -1937,7 +1937,7 @@ require("aerial").setup({
         -- options will open the window in the other direction *if* there is a
         -- different buffer in the way of the preferred direction
         -- Enum: prefer_right, prefer_left, right, left, float
-        default_direction = "prefer_right",
+        default_direction = "left",
 
         -- Determines where the aerial window will be opened
         --   edge   - open aerial at the far right/left of the editor
@@ -1962,20 +1962,20 @@ require("aerial").setup({
     -- it will use the mapping at require("aerial.action").<name>
     -- Set to `false` to remove a keymap
     keymaps = {
+        -- ["<CR>"] = "actions.jump",
+        -- ["q"] = "actions.close",
+        ["k"] = "actions.down_and_scroll",
+        ["l"] = "actions.up_and_scroll",
         -- ["?"] = "actions.show_help",
         -- ["g?"] = "actions.show_help",
-        ["<CR>"] = "actions.jump",
         -- ["<2-LeftMouse>"] = "actions.jump",
         -- ["<C-v>"] = "actions.jump_vsplit",
         -- ["<C-s>"] = "actions.jump_split",
         -- ["p"] = "actions.scroll",
-        ["k"] = "actions.down_and_scroll",
-        ["l"] = "actions.up_and_scroll",
         -- ["{"] = "actions.prev",
         -- ["}"] = "actions.next",
         -- ["[["] = "actions.prev_up",
         -- ["]]"] = "actions.next_up",
-        ["q"] = "actions.close",
         -- ["o"] = "actions.tree_toggle",
         -- ["za"] = "actions.tree_toggle",
         -- ["O"] = "actions.tree_toggle_recursive",
@@ -2120,7 +2120,7 @@ require("aerial").setup({
     post_jump_cmd = "normal! zz",
 
     -- When true, aerial will automatically close after jumping to a symbol
-    close_on_select = true,
+    close_on_select = false,
 
     -- The autocmds that trigger symbols update (not used for LSP backend)
     update_events = "TextChanged,InsertLeave",
@@ -2393,6 +2393,9 @@ codewindow.setup(
             "aerial",
             "neo-tree",
             "Trouble",
+            "fugitive",
+            "startify",
+            "help",
         }, -- Choose certain filetypes to not show minimap on
         max_minimap_height = nil, -- The maximum height the minimap can take (including borders)
         max_lines = nil, -- If auto_enable is true, don't open the minimap for buffers which have more than this many lines.
