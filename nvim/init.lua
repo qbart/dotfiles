@@ -627,6 +627,7 @@ vim.api.nvim_set_keymap('n', '<C-;>', [[:lua require('vgit').hunk_down()<CR>]], 
 ----
 
 require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_snipmate").lazy_load()
 
 local symbols = require('utils.symbols')
 local colors = require("catppuccin.palettes").get_palette "mocha"
