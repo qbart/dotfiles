@@ -592,7 +592,7 @@ vim.keymap.set("n", "];", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = 
 vim.keymap.set("n", "n", function()
     require("codewindow").toggle_minimap()
     -- HACK: cheat with small delay
-    require("socket").sleep(0.1)
+    require("socket").sleep(0.15)
     require("aerial").toggle()
 end, { noremap = true, silent = true })
 
