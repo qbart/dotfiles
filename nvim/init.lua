@@ -501,7 +501,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- finders
 --
 vim.api.nvim_set_keymap('n', '<leader>j', [[:lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>g', [[:lua require('fzf-lua').live_grep_native()<CR>]],
+vim.api.nvim_set_keymap('n', '<leader>F', [[:lua require('fzf-lua').live_grep_native()<CR>]],
     { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>b', [[:lua require('fzf-lua').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<CR>]], { noremap = true, silent = true })
