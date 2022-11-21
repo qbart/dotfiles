@@ -1817,17 +1817,43 @@ vim.g.did_load_filetypes = 1
 require('filetype').setup({
     overrides = {
         extensions = {
-            tf = "terraform",
+            tf = "terraform", -- tf extension to terraform type
             Caddyfile = "caddyfile",
         },
         literal = {
+            -- name = type
             gitconfig = 'gitconfig',
             Caddyfile = 'caddyfile',
         },
         complex = {
             ['%.env%.*'] = 'sh',
             ['.pryrc'] = 'ruby',
+            ["i3/config"] = 'i3config',
         },
+        -- function_extensions = {
+        --     ["cpp"] = function()
+        --         vim.bo.filetype = "cpp"
+        --         -- Remove annoying indent jumping
+        --         vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
+        --     end,
+        --     ["pdf"] = function()
+        --         vim.bo.filetype = "pdf"
+        --         -- Open in PDF viewer (Skim.app) automatically
+        --         vim.fn.jobstart(
+        --         "open -a skim " .. '"' .. vim.fn.expand("%") .. '"'
+        --         )
+        --     end,
+        -- },
+        -- function_literal = {
+        --     Brewfile = function()
+        --         vim.cmd("syntax off")
+        --     end,
+        -- },
+        -- function_complex = {
+        --     ["*.math_notes/%w+"] = function()
+        --         vim.cmd("iabbrev $ $$")
+        --     end,
+        -- },
     },
 })
 require("nvim-web-devicons").set_icon {
