@@ -625,6 +625,7 @@ startify.section.header.val = {
 }
 startify.section.top_buttons.val = {
     startify.button("c", "Configuration", ":cd ~/d/dotfiles/nvim<CR>:e init.lua<CR>"),
+    startify.button("s", "Snippets", ":cd ~/d/dotfiles/nvim<CR>:e snippets/<CR>"),
     startify.button("ok", "Oh, Krab!", ":cd ~/oh/krab/<CR>:e main.go<CR>"),
 }
 -- disable MRU
