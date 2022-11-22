@@ -507,25 +507,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- finders
 --
-vim.api.nvim_set_keymap('n', '<leader>j', [[:lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>F', [[:lua require('fzf-lua').live_grep_native()<CR>]],
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>b', [[:lua require('fzf-lua').buffers()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>h', [[:lua require('fzf-lua').help_tags()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f', [[:lua require('fzf-lua').blines()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>s', [[:lua require('fzf-lua').lsp_live_workspace_symbols()<CR>]],
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>y', [[:lua require('neoclip.fzf')()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>j', require('fzf-lua').files, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>F', require('fzf-lua').live_grep_native, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>b', require('fzf-lua').buffers, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>h', require('fzf-lua').help_tags, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>f', require('fzf-lua').blines, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>s', require('fzf-lua').lsp_live_workspace_symbols, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>y', require('neoclip.fzf'), { noremap = true, silent = true })
 -- line
 -- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
 -- packer
-vim.api.nvim_set_keymap('n', '<C-p>i', [[:PackerInstall<CR>]], {})
-vim.api.nvim_set_keymap('n', '<C-p>u', [[:PackerUpdate<CR>]], {})
-vim.api.nvim_set_keymap('n', '<C-p>s', [[:PackerSync<CR>]], {})
+vim.keymap.set('n', '<C-p>i', [[<cmd>PackerInstall<CR>]], {})
+vim.keymap.set('n', '<C-p>u', [[<cmd>PackerUpdate<CR>]], {})
+vim.keymap.set('n', '<C-p>s', [[<cmd>PackerSync<CR>]], {})
 -- silence
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.api.nvim_set_keymap('n', 'Q', [[<Nop>]], { silent = true })
-vim.api.nvim_set_keymap('n', '<CR>', [[:noh<CR>]], { silent = true })
+vim.keymap.set('n', 'Q', [[<Nop>]], { silent = true })
+vim.keymap.set('n', '<CR>', [[<cmd>noh<CR>]], { silent = true })
 -- natural order consistent with i3
 vim.keymap.set({ 'n', 'v' }, ';', 'l', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'l', 'k', { noremap = true })
@@ -534,7 +532,7 @@ vim.keymap.set({ 'n', 'v' }, 'j', 'h', { noremap = true })
 -- faster nav
 vim.keymap.set({ 'n', 'v' }, '<C-k>', '5j', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-l>', '5k', { noremap = true })
-vim.keymap.set({ 'n' }, '<C-f>', ':HopPattern<CR>', { noremap = true })
+vim.keymap.set({ 'n' }, '<C-f>', '<cmd>HopPattern<CR>', { noremap = true })
 vim.keymap.set({ 'n' }, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
 vim.g.VM_maps = {
     ["Skip Region"] = '<C-x>',
@@ -543,52 +541,51 @@ vim.g.VM_maps = {
 }
 -- region selection
 vim.keymap.set("o", "<leader>v", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
-vim.keymap.set("x", "<leader>v", ":lua require('tsht').nodes()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>v", ":lua require('tsht').nodes()<CR>", { silent = true })
+vim.keymap.set("x", "<leader>v", require('tsht').nodes, { silent = true })
+vim.keymap.set("n", "<leader>v", require('tsht').nodes, { silent = true })
 
 vim.g.VM_theme = 'purplegray'
-vim.api.nvim_set_keymap('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
-vim.api.nvim_set_keymap('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
-vim.api.nvim_set_keymap('n', "<tab>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
+vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
+vim.keymap.set('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
+vim.keymap.set('n', "<tab>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
 -- save file
-vim.api.nvim_set_keymap('n', '<C-s>', [[:w<CR>]], { noremap = true })
+vim.keymap.set('n', '<C-s>', [[<cmd>w<CR>]], { noremap = true })
 -- quit
-vim.api.nvim_set_keymap('n', '<C-q>', [[:q<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-q>', [[<cmd>q<CR>]], { noremap = true, silent = true })
 vim.keymap.set("n", "<M-w>", function()
     local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
 end, { desc = "Pick a window" })
 -- splits
-vim.api.nvim_set_keymap('n', '<C-w><C-k>', [[:sp<CR>]], {})
-vim.api.nvim_set_keymap('n', '<C-w><C-l>', [[:vs<CR>]], {})
+vim.keymap.set('n', '<C-w><C-k>', [[<cmd>sp<CR>]], {})
+vim.keymap.set('n', '<C-w><C-l>', [[<cmd>vs<CR>]], {})
 -- resize panes
-vim.api.nvim_set_keymap('n', '<C-M-k>', [[:resize -3<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-M-l>', [[:resize +3<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-M-j>', [[:vertical resize -3<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', 'VIMKBRESR', [[:vertical resize +3<CR>]], { noremap = true }) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
+vim.keymap.set('n', '<C-M-k>', [[<cmd>resize -3<CR>]], { noremap = true })
+vim.keymap.set('n', '<C-M-l>', [[<cmd>resize +3<CR>]], { noremap = true })
+vim.keymap.set('n', '<C-M-j>', [[<cmd>vertical resize -3<CR>]], { noremap = true })
+vim.keymap.set('n', 'VIMKBRESR', [[<cmd>vertical resize +3<CR>]], { noremap = true }) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
 -- reload config
-vim.api.nvim_set_keymap('n', '<C-w>r', [[:so $MYVIMRC<CR>:e!<CR>]], {})
+vim.keymap.set('n', '<C-w>r', [[<cmd>so $MYVIMRC<CR><cmd>e!<CR>]], {})
 -- buffers
--- vim.api.nvim_set_keymap('n', '<TAB>', ':bn<CR>', { noremap = true })
--- vim.api.nvim_set_keymap('n', '<S-TAB>', ':bp<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>d', ':bd!<CR>', {})
+-- vim.keymap.set('n', '<TAB>', ':bn<CR>', { noremap = true })
+-- vim.keymap.set('n', '<S-TAB>', ':bp<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>d', '<cmd>bd!<CR>', {})
 -- line swapping
-vim.api.nvim_set_keymap('n', '<S-k>', [[:m+<CR>==]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<S-l>', [[:m-2<CR>==]], { noremap = true })
-vim.api.nvim_set_keymap('v', '<S-k>', [[:m'>+<CR>gv=gv]], { noremap = true })
-vim.api.nvim_set_keymap('v', '<S-l>', [[:m-2<CR>gv=gv]], { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-S-k>', [[<Esc>:m+<CR>==gi]], { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-S-l>', [[<Esc>:m-2<CR>==gi]], { noremap = true })
+vim.keymap.set('n', '<S-k>', [[<cmd>m+<CR>==]], { noremap = true })
+vim.keymap.set('n', '<S-l>', [[<cmd>m-2<CR>==]], { noremap = true })
+vim.keymap.set('v', '<S-k>', [[<cmd>m'>+<CR>gv=gv]], { noremap = true })
+vim.keymap.set('v', '<S-l>', [[<cmd>m-2<CR>gv=gv]], { noremap = true })
+vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
+vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
-vim.keymap.set("n", "<C-m>", "<cmd>:NoiceHistory<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<C-m>", "<cmd>NoiceHistory<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "`d", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "``", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
-vim.keymap.set("n", "<localleader>u", "<cmd>lua require('fzf-lua').lsp_references()<CR>",
-    { silent = true, noremap = true })
-vim.keymap.set({ "n", "v" }, "<localleader><localleader>", ":CodeActionMenu<CR>", { silent = true })
-vim.keymap.set("n", "]j", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "];", "<cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silent = true, noremap = true })
+vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>CodeActionMenu<CR>", { silent = true })
+vim.keymap.set("n", "]j", vim.diagnostic.goto_prev, { silent = true, noremap = true })
+vim.keymap.set("n", "];", vim.diagnostic.goto_next, { silent = true, noremap = true })
 vim.keymap.set("n", "n", function()
     require("codewindow").toggle_minimap()
     -- -- HACK: cheat with small delay
@@ -596,36 +593,21 @@ vim.keymap.set("n", "n", function()
     require("aerial").toggle()
 end, { noremap = true, silent = true })
 
-vim.keymap.set({ "n", "x" }, "<leader>r", function() require("ssr").open() end)
+vim.keymap.set({ "n", "x" }, "<leader>r", require("ssr").open)
 -- help
-vim.api.nvim_set_keymap('n', '<F1>', [[:WhichKey<CR>]], { noremap = true })
+vim.keymap.set('n', '<F1>', [[<cmd>WhichKey<CR>]], { noremap = true })
 -- extras
-vim.api.nvim_set_keymap('n', '<leader>ie', [[:Telescope emoji<CR>]], { noremap = true })
+vim.keymap.set('n', '<leader>ie', [[<cmd>Telescope emoji<CR>]], { noremap = true })
 -- git
-vim.api.nvim_set_keymap('n', '<leader>gl', [[:lua require('fzf-lua').git_commits()<CR>]], {
+vim.keymap.set('n', '<leader>gl', require('fzf-lua').git_commits, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gbr', require('fzf-lua').git_branches, {
     noremap = true,
     silent = true,
 })
-vim.api.nvim_set_keymap('n', '<leader>gbr', [[:lua require('fzf-lua').git_branches()<CR>]], {
-    noremap = true,
-    silent = true,
-})
-vim.api.nvim_set_keymap('n', '<leader>gb', [[:VGit buffer_blame_preview()<CR>]], {
-    noremap = true,
-    silent = true,
-})
-vim.api.nvim_set_keymap('n', '<leader>gap', [[:VGit buffer_diff_preview<CR>]], {
-    noremap = true,
-    silent = true,
-})
-vim.api.nvim_set_keymap('n', '<C-j>', [[:lua require('vgit').hunk_up()<CR>]], {
-    noremap = true,
-    silent = true,
-})
-vim.api.nvim_set_keymap('n', '<C-;>', [[:lua require('vgit').hunk_down()<CR>]], {
-    noremap = true,
-    silent = true,
-})
+vim.keymap.set('n', '<leader>gb', require('vgit').buffer_blame_preview, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gap', require('vgit').buffer_diff_preview, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-j>', require('vgit').hunk_up, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-;>', require('vgit').hunk_down, { noremap = true, silent = true })
 
 ----
 -- plugins setup
