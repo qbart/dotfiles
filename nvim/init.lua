@@ -19,7 +19,7 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- install socket, needed for "sleep"
-    use_rocks "luasocket"
+    -- use_rocks "luasocket"
 
     -- start secreen
     use {
@@ -586,13 +586,8 @@ vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silen
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>CodeActionMenu<CR>", { silent = true })
 vim.keymap.set("n", "]j", vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set("n", "];", vim.diagnostic.goto_next, { silent = true, noremap = true })
-vim.keymap.set("n", "n", function()
-    require("codewindow").toggle_minimap()
-    -- -- HACK: cheat with small delay
-    -- require("socket").sleep(0.15)
-    require("aerial").toggle()
-end, { noremap = true, silent = true })
-
+vim.keymap.set("n", "n", require("aerial").toggle, { noremap = true, silent = true })
+vim.keymap.set("n", "M", require("codewindow").toggle_minimap, { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<leader>r", require("ssr").open)
 -- help
 vim.keymap.set('n', '<F1>', [[<cmd>WhichKey<CR>]], { noremap = true })
