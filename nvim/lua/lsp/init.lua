@@ -3,17 +3,17 @@ local setup_lsp_signature = require('lsp.setup_lsp_signature').setup_lsp_signatu
 local setup_diagnostics = require('lsp.setup_diagnostics').setup_diagnostics
 local setup_lsp_status = require('lsp.plugins.lsp-status').setup_lsp_status
 
-local lsp_handlers_hover = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'single'
-})
-
-vim.lsp.handlers['textDocument/hover'] = function(err, result, ctx, config)
-  local bufnr, winnr = lsp_handlers_hover(err, result, ctx, config)
-  if winnr ~= nil then
-    vim.api.nvim_win_set_option(winnr, 'winblend', 20)  -- opacity for hover
-  end
-  return bufnr, winnr
-end
+-- local lsp_handlers_hover = vim.lsp.with(vim.lsp.handlers.hover, {
+--   border = 'single'
+-- })
+--
+-- vim.lsp.handlers['textDocument/hover'] = function(err, result, ctx, config)
+--   local bufnr, winnr = lsp_handlers_hover(err, result, ctx, config)
+--   if winnr ~= nil then
+--     vim.api.nvim_win_set_option(winnr, 'winblend', 20)  -- opacity for hover
+--   end
+--   return bufnr, winnr
+-- end
 
 setup_servers()
 setup_diagnostics()
@@ -74,7 +74,7 @@ cmp.setup({
   preselect = cmp.PreselectMode.None,
   completion = {},
   sources = {
-    { name = 'nvim_lsp_signature_help' },
+    -- { name = 'nvim_lsp_signature_help' },
     -- { name = 'cmp_tabnine', priority = 95 },
     -- { name = 'copilot', priority = 100 },
     { name = 'luasnip', priority = 70 },
@@ -179,6 +179,13 @@ cmp.setup({
       border = 'rounded',
     },
     documentation = cmp.config.window.bordered(),
+ -- border = opts.border or 'rounded',
+ --    winhighlight = opts.winhighlight or 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None',
+ --    zindex = opts.zindex or 1001,
+ --    scrolloff = opts.scrolloff or 0,
+ --    col_offset = opts.col_offset or 0,
+ --    side_padding = opts.side_padding or 1,
+ --    scrollbar = opts.scrollbar == nil and true or opts.scrollbar,
   },
 })
 

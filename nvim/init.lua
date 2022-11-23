@@ -161,6 +161,7 @@ require('packer').startup(function(use)
             "hrsh7th/cmp-calc",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-document-symbol",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "lukas-reineke/cmp-rg",
         }
     }
@@ -1966,8 +1967,8 @@ require("aerial").setup({
     -- it will use the mapping at require("aerial.action").<name>
     -- Set to `false` to remove a keymap
     keymaps = {
-        -- ["<CR>"] = "actions.jump",
-        -- ["q"] = "actions.close",
+        ["<CR>"] = "actions.jump",
+        ["q"] = "actions.close",
         ["k"] = "actions.down_and_scroll",
         ["l"] = "actions.up_and_scroll",
         -- ["?"] = "actions.show_help",
@@ -2039,7 +2040,7 @@ require("aerial").setup({
     highlight_closest = true,
 
     -- Highlight the symbol in the source buffer when cursor is in the aerial win
-    highlight_on_hover = false,
+    highlight_on_hover = true,
 
     -- When jumping to a symbol, highlight the line for this many ms.
     -- Set to false to disable
@@ -2124,7 +2125,7 @@ require("aerial").setup({
     post_jump_cmd = "normal! zz",
 
     -- When true, aerial will automatically close after jumping to a symbol
-    close_on_select = false,
+    close_on_select = true,
 
     -- The autocmds that trigger symbols update (not used for LSP backend)
     update_events = "TextChanged,InsertLeave",
@@ -2292,7 +2293,7 @@ require("lspsaga").init_lsp_saga({
     code_action_num_shortcut = true,
     code_action_lightbulb = {
         enable = false,
-        sign = true,
+        sign = false,
         enable_in_insert = true,
         sign_priority = 20,
         virtual_text = false,

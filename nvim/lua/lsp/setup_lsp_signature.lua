@@ -10,6 +10,9 @@ M.setup_lsp_signature = function()
 
   lsp_signature.setup({
     bind = false,
+    floating_window_off_y = -1,
+    floating_window_off_x = -1,
+    padding = " ",
     doc_lines = 0,
     hint_prefix = "",
     hint_scheme = "",
@@ -17,7 +20,7 @@ M.setup_lsp_signature = function()
     max_height = 5,
     max_width = 1000,
     handler_opts = {
-      border = "single"
+      border = "rounded"   -- double, rounded, single, shadow, none
     },
     toggle_key = nil,
   })
