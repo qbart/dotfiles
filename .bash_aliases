@@ -43,7 +43,8 @@ alias mountexfat='sudo mount -t exfat'
 alias lsexfat='sudo fdisk -l | rg exFAT'
 alias cdprints='cd /var/spool/cups-pdf/$USER'
 alias cdf='cd $(z | awk "{print \$2}" | fzf)'
-alias bye='poweroff' 
+alias cdd='cd ~/d/dotfiles'
+alias bye='poweroff'
 alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 alias ok='echo -e "\e[32mok\e[0m"'
 alias gensecretkeybase='openssl rand -hex 64'
@@ -76,13 +77,13 @@ alias rornew='rails new --database=postgresql --skip-action-mailer --skip-active
 
 # ssh
 alias sshh='ssh -i $HOME/.ssh/$HCLOUD_PEM root@$(hcloud server list | grep -v "IPV" | fzf | awk '"'"'{print $4}'"'"'  )'
-alias scph='scp -i $HOME/.ssh/$HCLOUD_PEM' 
+alias scph='scp -i $HOME/.ssh/$HCLOUD_PEM'
 alias sshnostrict='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=accept-new'
 
 # python
 alias py='python3'
 # git
-alias rebase='git pull --rebase --autostash origin' 
+alias rebase='git pull --rebase --autostash origin'
 alias rebasem='git pull --rebase --autostash origin master'
 alias rebasec='git rebase --continue'
 alias rebasebff='git pull --rebase --autostash origin $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"'"'  )'
