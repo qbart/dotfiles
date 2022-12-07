@@ -1643,6 +1643,7 @@ require("neo-tree").setup({
             },
             always_show = { -- remains visible even if other settings would normally hide it
                 ".gitignore",
+                ".github",
                 ".terraformignore",
                 ".dockerignore",
                 ".goreleaser.yml",
