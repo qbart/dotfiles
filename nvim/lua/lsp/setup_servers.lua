@@ -20,6 +20,7 @@ local servers = {
   'graphql',
   'html',
   'jsonls',
+  'marksman',
   'pyright',
   'rust_analyzer',
   'sqlls',
