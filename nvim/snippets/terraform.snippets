@@ -17,3 +17,35 @@ snippet dependencydeclaration "Terragrunt dependency"
 
 snippet dependencyusage "Terragrunt dependency usage"
     dependency.vpc.outputs.vpc_id
+
+snippet providerrandom "Provider random"
+    random = {
+        source  = "hashicorp/random"
+        version = "3.4.3"
+    }
+
+snippet providertls "Provider TLS"
+    tls = {
+        source  = "hashicorp/tls"
+        version = "4.0.4"
+    }
+
+snippet terraform "Terraform block"
+    terraform {
+        required_version = "~> 1.0"
+
+        cloud {
+            organization = "TODO"
+
+            workspaces {
+                name = "TODO"
+            }
+        }
+
+        required_providers {
+            aws = {
+                source  = "hashicorp/aws"
+                version = "~> 4.0"
+            }
+        }
+    }
