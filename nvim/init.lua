@@ -2286,7 +2286,7 @@ require('go').setup({
     luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
 })
 
-require("lspsaga").init_lsp_saga({
+require("lspsaga").setup({
     diagnostic_header = { " ", " ", " ", " " },
     preview_lines_above = 0,
     max_preview_lines = 25,
