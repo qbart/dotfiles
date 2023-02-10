@@ -135,6 +135,7 @@ tfmod() {
 alias gohot='air -c air.conf'
 alias khr='dev ssh known-hosts reset'
 alias hsd='hugo serve -D'
+alias igo='yaegi'
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
