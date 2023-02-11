@@ -116,17 +116,6 @@ require('packer').startup(function(use)
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
     }
-    -- quickfix code actions
-    use {
-        'weilbith/nvim-code-action-menu',
-        cmd = 'CodeActionMenu',
-    }
-
-    -- code action light bulb
-    use {
-        'kosayoda/nvim-lightbulb',
-        requires = 'antoinemadec/FixCursorHold.nvim',
-    }
 
     -- structural replace
     use { "cshuaimin/ssr.nvim" }
@@ -580,11 +569,11 @@ vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
 vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
 vim.keymap.set("n", "<C-m>", "<cmd>NoiceHistory<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "`d", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "`<CR>", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "``", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silent = true, noremap = true })
-vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>CodeActionMenu<CR>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.keymap.set("n", "]j", vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set("n", "];", vim.diagnostic.goto_next, { silent = true, noremap = true })
 vim.keymap.set("n", "n", require("aerial").toggle, { noremap = true, silent = true })
@@ -602,8 +591,10 @@ vim.keymap.set('n', '<leader>gbr', require('fzf-lua').git_branches, {
 })
 vim.keymap.set('n', '<leader>gb', require('vgit').buffer_blame_preview, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gap', require('vgit').buffer_diff_preview, { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>', require('vgit').hunk_up, { noremap = true, silent = true })
-vim.keymap.set('n', '<C-;>', require('vgit').hunk_down, { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-j>', require('vgit').hunk_up, { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-;>', require('vgit').hunk_down, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-j>', [[<cmd>Lspsaga diagnostic_jump_prev<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-;>', [[<cmd>Lspsaga diagnostic_jump_next<CR>]], { noremap = true, silent = true })
 
 ----
 -- plugins setup
@@ -2288,16 +2279,29 @@ require('go').setup({
 
 require("lspsaga").setup({
     diagnostic_header = { " ", " ", " ", " " },
-    preview_lines_above = 0,
-    max_preview_lines = 25,
-    code_action_icon = symbols.action,
-    code_action_num_shortcut = true,
-    code_action_lightbulb = {
+    preview = {
+        lines_above = 0,
+        line_below = 0,
+    },
+    -- diagnostic = {
+    --
+    -- },
+    symbol_in_winbar = {
         enable = false,
-        sign = false,
+    },
+    code_action = {
+        num_shortcut = false,
+        show_server_name = true,
+    },
+    lightbulb = {
+        enable = true,
+        sign = true,
         enable_in_insert = true,
         sign_priority = 20,
         virtual_text = false,
+    },
+    ui = {
+        code_action = symbols.action,
     },
     finder_icons = {
         def = '  ',
@@ -2319,65 +2323,6 @@ require("lspsaga").setup({
 })
 
 -- require("lsp_lines").setup()
-
-require('nvim-lightbulb').setup({
-    -- LSP client names to ignore
-    -- Example: {"sumneko_lua", "null-ls"}
-    ignore = {},
-    sign = {
-        enabled = true,
-        -- Priority of the gutter sign
-        priority = 10,
-    },
-    float = {
-        enabled = false,
-        -- Text to show in the popup float
-        text = symbols.action,
-        -- Available keys for window options:
-        -- - height     of floating window
-        -- - width      of floating window
-        -- - wrap_at    character to wrap at for computing height
-        -- - max_width  maximal width of floating window
-        -- - max_height maximal height of floating window
-        -- - pad_left   number of columns to pad contents at left
-        -- - pad_right  number of columns to pad contents at right
-        -- - pad_top    number of lines to pad contents at top
-        -- - pad_bottom number of lines to pad contents at bottom
-        -- - offset_x   x-axis offset of the floating window
-        -- - offset_y   y-axis offset of the floating window
-        -- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
-        -- - winblend   transparency of the window (0-100)
-        win_opts = {},
-    },
-    virtual_text = {
-        enabled = false,
-        -- Text to show at virtual text
-        text = symbols.action,
-        -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-        hl_mode = "replace",
-    },
-    status_text = {
-        enabled = false,
-        -- Text to provide when code actions are available
-        text = symbols.action,
-        -- Text to provide when no actions are available
-        text_unavailable = ""
-    },
-    autocmd = {
-        enabled = true,
-        -- see :help autocmd-pattern
-        pattern = { "*" },
-        -- see :help autocmd-events
-        events = { "CursorHold", "CursorHoldI" }
-    }
-})
-vim.fn.sign_define('LightBulbSign', { text = symbols.action, texthl = "LightBulbSign", linehl = "", numhl = "" })
-vim.api.nvim_set_hl(0, 'LightBulbSign', { fg = colors.yellow })
-
--- CodeActionMenu
-vim.g.code_action_menu_show_details = false
-vim.g.code_action_menu_show_diff = true
-vim.g.code_action_menu_window_border = 'single'
 
 -- require('lint').linters_by_ft = { }
 
