@@ -9,4 +9,3 @@ else
     ln -sf "$(pwd)/nvim-vscode/settings.json" ~/.config/Code/User/settings.json
     ln -sf "$(pwd)/nvim-vscode/keybindings.json" ~/.config/Code/User/keybindings.json
 fi
-

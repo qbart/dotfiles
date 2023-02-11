@@ -1,5 +1,3 @@
 #!/bin/sh
 
-cargo install git-delta
-cargo install ripgrep
-cargo install bat
+cargo install git-delta exa bat fd ripgrep

@@ -31,7 +31,8 @@ bindsym $mod+c exec --no-startup-id gcolor2
 bindsym $mod+a exec --no-startup-id pavucontrol
 bindsym $mod+n exec --no-startup-id alacritty -e nmtui
 bindsym $mod+p exec --no-startup-id polybar-msg cmd toggle
-bindsym $mod+e exec --no-startup-id ~/.config/ranger/launch.sh
+bindsym $mod+e exec --no-startup-id thunar
+
 # screenshot tool (rectangular selection)
 bindsym --release Print exec --no-startup-id flameshot gui
 bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons true
