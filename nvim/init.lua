@@ -48,6 +48,9 @@ require('packer').startup(function(use)
     -- switch cwd based on patterns
     use { "ahmedkhalf/project.nvim" }
 
+    -- url views in buffer
+    use("axieax/urlview.nvim")
+
     -- Fuzzy Finder (files, lsp, etc)
     use {
         'nvim-telescope/telescope.nvim',
@@ -2327,6 +2330,10 @@ require("lspsaga").setup({
 -- require('lint').linters_by_ft = { }
 
 require("diffview").setup()
+
+require("urlview").setup({
+    default_picker = "telescope"
+})
 
 require('numb').setup {
     show_numbers = true, -- Enable 'number' for the window while peeking
