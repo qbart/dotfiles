@@ -540,7 +540,7 @@ vim.keymap.set("n", "<leader>v", require('tsht').nodes, { silent = true })
 vim.g.VM_theme = 'purplegray'
 vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
 vim.keymap.set('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
-vim.keymap.set('n', "<tab>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
+vim.keymap.set('n', "<M-k>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
 -- save file
 vim.keymap.set('n', '<C-s>', [[<cmd>w<CR>]], { noremap = true })
 -- quit
@@ -1937,7 +1937,7 @@ require("aerial").setup({
         -- options will open the window in the other direction *if* there is a
         -- different buffer in the way of the preferred direction
         -- Enum: prefer_right, prefer_left, right, left, float
-        default_direction = "left",
+        default_direction = "float",
 
         -- Determines where the aerial window will be opened
         --   edge   - open aerial at the far right/left of the editor
