@@ -26,16 +26,17 @@ local servers = {
   'sqlls',
   'sqls',
   'stylelint_lsp',
-  'sumneko_lua',
+  'lua_ls',
   'tailwindcss',
   'terraformls',
-  'tflint',
   'tsserver',
   'vimls',
-  'vuels',
   'yamlls',
-
-  -- 'bashls',
+  'wgsl_analyzer',
+  'bashls',
+  -- linters
+  'golangci_lint_ls',
+  'tflint',
   -- 'solargraph', -- install manually
 }
 
