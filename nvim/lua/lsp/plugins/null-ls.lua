@@ -7,6 +7,7 @@ null_ls.setup({
     -- null_ls.builtins.diagnostics.codespell,
 
     null_ls.builtins.diagnostics.write_good,
+    require("typescript.extensions.null-ls.code-actions"),
 
     null_ls.builtins.formatting.stylua,
     -- null_ls.builtins.completion.spell,

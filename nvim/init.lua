@@ -221,10 +221,14 @@ require('packer').startup(function(use)
     use { 'windwp/nvim-ts-autotag' }
 
     -- snippets
-    use({ "L3MON4D3/LuaSnip", tag = "v*", requires = {
-        { 'saadparwaiz1/cmp_luasnip' },
-        { "rafamadriz/friendly-snippets" },
-    } })
+    use({
+        "L3MON4D3/LuaSnip",
+        tag = "v*",
+        requires = {
+            { 'saadparwaiz1/cmp_luasnip' },
+            { "rafamadriz/friendly-snippets" },
+        }
+    })
 
     -- easymoition like navigation
     use {
@@ -572,8 +576,8 @@ vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
 vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
 vim.keymap.set("n", "<C-m>", "<cmd>NoiceHistory<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "`<CR>", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "``", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "``", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silent = true, noremap = true })
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
@@ -626,7 +630,7 @@ startify.section.top_buttons.val = {
 -- disable MRU
 startify.section.mru.val = {
     { type = "padding", val = 1 },
-    { type = "text", val = "MRU", opts = { hl = "SpecialComment" } },
+    { type = "text",    val = "MRU", opts = { hl = "SpecialComment" } },
     { type = "padding", val = 1 },
     {
         type = "group",
@@ -640,7 +644,7 @@ startify.section.mru_cwd.val = { { type = "padding", val = 0 } }
 startify.nvim_web_devicons.enabled = true
 --
 startify.section.bottom_buttons.val = {
-    { type = "text", val = "Actions", opts = { hl = "SpecialComment" } },
+    { type = "text",    val = "Actions", opts = { hl = "SpecialComment" } },
     { type = "padding", val = 1 },
     startify.button("t", "Create todo.txt", ":e todo.txt<CR>"),
     startify.button("e", "New empty file", ":ene <BAR> startinsert <CR>"),
@@ -1451,14 +1455,11 @@ require('window-picker').setup({
         -- ignored
         file_name_contains = {},
     },
-
     -- the foreground (text) color of the picker
     fg_color = colors.surface0,
-
     -- if you have include_current_win == true, then current_win_hl_color will
     -- be highlighted using this background color
     current_win_hl_color = colors.maroon,
-
     -- all the windows except the curren window will be highlighted using this
     -- color
     other_win_hl_color = colors.teal,
@@ -1655,6 +1656,7 @@ require("neo-tree").setup({
         -- time the current file is changed while the tree is open.
         group_empty_dirs = false, -- when true, empty folders will be grouped together
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+        -- hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the
         -- window like netrw would, regardless of window.position
@@ -1920,7 +1922,6 @@ require("aerial").setup({
     -- Priority list of preferred backends for aerial.
     -- This can be a filetype map (see :help aerial-filetype-map)
     backends = { "treesitter", "lsp", "markdown", "man" },
-
     layout = {
         -- These control the width of the aerial window.
         -- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -1944,18 +1945,15 @@ require("aerial").setup({
         --   window - open aerial to the right/left of the current window
         placement = "window",
     },
-
     -- Determines how the aerial window decides which buffer to display symbols for
     --   window - aerial window will display symbols for the buffer in the window from which it was opened
     --   global - aerial window will display symbols for the current window
     attach_mode = "window",
-
     -- List of enum values that configure when to auto-close the aerial window
     --   unfocus       - close aerial when you leave the original source window
     --   switch_buffer - close aerial when you change buffers in the source window
     --   unsupported   - close aerial when attaching to a buffer that has no symbol source
     close_automatic_events = {},
-
     -- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
     -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
     -- Additionally, if it is a string that matches "aerial.<name>",
@@ -1995,17 +1993,13 @@ require("aerial").setup({
         -- ["zx"] = "actions.tree_sync_folds",
         -- ["zX"] = "actions.tree_sync_folds",
     },
-
     -- When true, don't load aerial until a command or function is called
     -- Defaults to true, unless `on_attach` is provided, then it defaults to false
     lazy_load = true,
-
     -- Disable aerial on files with this many lines
     disable_max_lines = 10000,
-
     -- Disable aerial on files this size or larger (in bytes)
     disable_max_size = 2000000, -- Default 2MB
-
     -- A list of all symbols to display. Set to false to display all symbols.
     -- This can be a filetype map (see :help aerial-filetype-map)
     -- To see all available values, see :help SymbolKind
@@ -2019,7 +2013,6 @@ require("aerial").setup({
         "Method",
         "Struct",
     },
-
     -- Determines line highlighting mode when multiple splits are visible.
     -- split_width   Each open window will have its cursor location marked in the
     --               aerial buffer. Each line will only be partially highlighted
@@ -2030,17 +2023,13 @@ require("aerial").setup({
     --               marked in the aerial buffer.
     -- none          Do not show the cursor locations in the aerial window.
     highlight_mode = "split_width",
-
     -- Highlight the closest symbol if the cursor is not exactly on one.
     highlight_closest = true,
-
     -- Highlight the symbol in the source buffer when cursor is in the aerial win
     highlight_on_hover = true,
-
     -- When jumping to a symbol, highlight the line for this many ms.
     -- Set to false to disable
     highlight_on_jump = 300,
-
     -- Define symbol icons. You can also specify "<Symbol>Collapsed" to change the
     -- icon when the tree is collapsed at that symbol, or "Collapsed" to specify a
     -- default collapsed icon. The default icon set is determined by the
@@ -2048,7 +2037,6 @@ require("aerial").setup({
     -- If you have lspkind-nvim installed, it will be the default icon set.
     -- This can be a filetype map (see :help aerial-filetype-map)
     icons = {},
-
     -- Control which windows and buffers aerial should ignore.
     -- If attach_mode is "global", focusing an ignored window/buffer will
     -- not cause the aerial window to update.
@@ -2086,48 +2074,37 @@ require("aerial").setup({
         --                Takes two arguments, `winid` and `wintype`.
         wintypes = "special",
     },
-
     -- Use symbol tree for folding. Set to true or false to enable/disable
     -- Set to "auto" to manage folds if your previous foldmethod was 'manual'
     -- This can be a filetype map (see :help aerial-filetype-map)
     manage_folds = false,
-
     -- When you fold code with za, zo, or zc, update the aerial tree as well.
     -- Only works when manage_folds = true
     link_folds_to_tree = false,
-
     -- Fold code when you open/collapse symbols in the tree.
     -- Only works when manage_folds = true
     link_tree_to_folds = true,
-
     -- Set default symbol icons to use patched font icons (see https://www.nerdfonts.com/)
     -- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
     nerd_font = "auto",
-
     -- Call this function when aerial attaches to a buffer.
     on_attach = function(bufnr)
 
     end,
-
     -- Call this function when aerial first sets symbols on a buffer.
-    on_first_symbols = function(bufnr) end,
-
+    on_first_symbols = function(bufnr)
+    end,
     -- Automatically open aerial when entering supported buffers.
     -- This can be a function (see :help aerial-open-automatic)
     open_automatic = false,
-
     -- Run this command after jumping to a symbol (false will disable)
     post_jump_cmd = "normal! zz",
-
     -- When true, aerial will automatically close after jumping to a symbol
     close_on_select = true,
-
     -- The autocmds that trigger symbols update (not used for LSP backend)
     update_events = "TextChanged,InsertLeave",
-
     -- Show box drawing characters for the tree hierarchy
     show_guides = true,
-
     -- Customize the characters used when show_guides = true
     guides = {
         -- When the child item has a sibling below it
@@ -2139,7 +2116,6 @@ require("aerial").setup({
         -- Raw indentation
         whitespace = "  ",
     },
-
     -- Options for opening aerial in a floating win
     float = {
         -- Controls border appearance. Passed to nvim_open_win
@@ -2165,7 +2141,6 @@ require("aerial").setup({
             return conf
         end,
     },
-
     lsp = {
         -- Fetch document symbols when LSP diagnostics update.
         -- If false, will update on buffer changes.
@@ -2178,17 +2153,14 @@ require("aerial").setup({
         -- Only used when diagnostics_trigger_update = false
         update_delay = 300,
     },
-
     treesitter = {
         -- How long to wait (in ms) after a buffer change before updating
         update_delay = 300,
     },
-
     markdown = {
         -- How long to wait (in ms) after a buffer change before updating
         update_delay = 300,
     },
-
     man = {
         -- How long to wait (in ms) after a buffer change before updating
         update_delay = 300,
@@ -2379,7 +2351,6 @@ require('nvim_context_vt').setup({
     -- Default: 1 (equals two lines total)
     min_rows = 3,
     min_rows_ft = {},
-
     custom_parser = function(node, ft, opts)
         local utils = require('nvim_context_vt.utils')
         local type = node:type()
