@@ -3,6 +3,63 @@ local setup_lsp_signature = require('lsp.setup_lsp_signature').setup_lsp_signatu
 local setup_diagnostics = require('lsp.setup_diagnostics').setup_diagnostics
 local setup_lsp_status = require('lsp.plugins.lsp-status').setup_lsp_status
 
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    debug = true,
+    sources = {
+
+        null_ls.builtins.code_actions.gomodifytags,
+        -- null_ls.builtins.code_actions.gitsigns,
+        -- null_ls.builtins.code_actions.refactoring,
+        null_ls.builtins.diagnostics.golangci_lint,
+        -- null_ls.builtins.diagnostics.gospel,
+        null_ls.builtins.diagnostics.rubocop,
+        --
+        -- null_ls.builtins.diagnostics.tsc,
+        require("typescript.extensions.null-ls.code-actions"),
+
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.sqlfluff.with({
+            extra_args = { "--dialect", "postgres" }, -- change to your dialect
+        }),
+        null_ls.builtins.diagnostics.terraform_validate,
+        null_ls.builtins.diagnostics.tfsec,
+
+        -- null_ls.builtins.formatting.codespell,
+        -- null_ls.builtins.diagnostics.codespell,
+        -- null_ls.builtins.diagnostics.write_good,
+        -- null_ls.builtins.completion.spell,
+
+        -- null_ls.builtins.formatting.rubocop.with({
+        --   extra_args = { "--force-exclusion" }
+        -- }),
+        -- null_ls.builtins.diagnostics.rubocop.with({
+        --   extra_args = { "--force-exclusion" }
+        -- }),
+        -- null_ls.builtins.formatting.standardrb.with({
+        --   condition = function()  end
+        -- })
+        -- null_ls.builtins.diagnostics.standardrb.with({
+        --   condition = function()  end
+        -- })
+
+        -- null_ls.builtins.diagnostics.eslint,
+        -- null_ls.builtins.formatting.eslint,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.formatting.eslint_d,
+        null_ls.builtins.formatting.stylelint,
+        null_ls.builtins.diagnostics.stylelint,
+
+        null_ls.builtins.formatting.prettier.with({
+            prefer_local = "node_modules/.bin",
+        }),
+    },
+})
+
+-- pip3 install codespell
+-- npm install -g write-good
+
 -- lsp handlers
 -- callHierarchy/incomingCalls
 -- callHierarchy/outgoingCalls
