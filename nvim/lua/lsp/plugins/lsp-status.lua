@@ -22,7 +22,7 @@ M.setup_lsp_status = function()
 
   -- LspStatus(): status string for airline
   _G.LspStatus = function()
-    if #vim.lsp.buf_get_clients() > 0 then
+    if #vim.lsp.get_active_clients() > 0 then
       return lsp_status.status()
     end
     return ''

@@ -248,58 +248,9 @@ require('packer').startup(function(use)
     -- fancy notifications
     use({
         "folke/noice.nvim",
-        event = "VimEnter",
-        config = function()
-            require("noice").setup({
-                views = {
-                    cmdline_popup = {
-                        border = {
-                            padding = { 1, 2 },
-                        },
-                        filter_options = {},
-                        win_options = {
-                            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-                        },
-                    },
-                },
-                messages = {
-                    -- NOTE: If you enable messages, then the cmdline is enabled automatically.
-                    -- This is a current Neovim limitation.
-                    enabled = true, -- enables the Noice messages UI
-                    view = "mini", -- default view for messages
-                    view_error = "mini", -- view for errors
-                    view_warn = "mini", -- view for warnings
-                    view_history = "split", -- view for :messages
-                    view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-                },
-                routes = {
-                    {
-                        filter = { event = "msg_show", kind = "", find = " lines --" },
-                        opts = { skip = true },
-                    },
-                    {
-                        filter = { event = "msg_show", kind = "", find = " line --" },
-                        opts = { skip = true },
-                    },
-                    {
-                        filter = { event = "msg_show", kind = "", find = "Already at oldest change" },
-                        opts = { skip = true },
-                    },
-                    {
-                        filter = { event = "msg_show", kind = "", find = "--No lines in" },
-                        opts = { skip = true },
-                    },
-                },
-            })
-        end,
         requires = {
             "MunifTanjim/nui.nvim",
         }
-    })
-
-    -- better virtualtext diagnostic, rendered as a tree
-    use({
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     })
 
     -- show closing context as virtualtext
@@ -2446,6 +2397,62 @@ require('vgit').setup({
             void = '⣿',
         },
     }
+})
+
+
+require("noice").setup({
+    lsp = {
+        override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+        },
+    },
+    views = {
+        cmdline_popup = {
+            border = {
+                padding = { 1, 1 },
+            },
+            filter_options = {},
+            win_options = {
+                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+            },
+        },
+        mini = {
+            timeout = 1000,
+            border = {
+                padding = { 0, 1 },
+            },
+        },
+    },
+    messages = {
+        -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+        -- This is a current Neovim limitation.
+        enabled = true, -- enables the Noice messages UI
+        view = "notify", -- default view for messages
+        view_error = "mini", -- view for errors
+        view_warn = "mini", -- view for warnings
+        view_history = "split", -- view for :messages
+        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+    },
+    routes = {
+        {
+            filter = { event = "msg_show", kind = "", find = " lines --" },
+            opts = { skip = true },
+        },
+        {
+            filter = { event = "msg_show", kind = "", find = " line --" },
+            opts = { skip = true },
+        },
+        {
+            filter = { event = "msg_show", kind = "", find = "Already at oldest change" },
+            opts = { skip = true },
+        },
+        {
+            filter = { event = "msg_show", kind = "", find = "--No lines in" },
+            opts = { skip = true },
+        },
+    },
 })
 
 require("neodev").setup({})
