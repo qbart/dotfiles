@@ -161,7 +161,7 @@ require('packer').startup(function(use)
     -- lsp ui
     -- use('~/d/3/lspsaga.nvim')
     use({
-        " glepnir/lspsaga.nvim",
+        "glepnir/lspsaga.nvim",
         branch = "main",
     })
 
