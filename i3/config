@@ -89,8 +89,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-floating_maximum_size 3000 x 1800
+floating_maximum_size 3200 x 2000
 for_window [class="Thunar"] floating enable
+for_window [class="kitty"] floating enable resize set 3200 2000 move position center
 
 # kill focused window
 bindsym $mod+q kill
