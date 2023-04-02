@@ -111,9 +111,14 @@ vim.cmd [[
   set pumheight=10
 ]]
 
+-- local has_words_before = function()
+--   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
 local has_words_before = function()
-  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 local t = function(str)
@@ -137,27 +142,61 @@ cmp_helper.compare = {
     end,
 }
 
--- local tabnine = require('cmp_tabnine.config')
--- tabnine:setup({
--- 	max_lines = 1000;
--- 	max_num_results = 20;
--- 	sort = true;
--- 	run_on_every_keystroke = true;
--- 	snippet_placeholder = '..';
--- 	ignored_file_types = { -- default is not to ignore
--- 		-- uncomment to ignore in lua:
--- 		-- lua = true
--- 	};
--- 	show_prediction_strength = false;
--- })
+
+local copilot_cmp = require("copilot_cmp")
+copilot_cmp.setup()
+local copilot_cmp_comparators = require("copilot_cmp.comparators")
+local copilot_cmp_format = require("copilot_cmp.format")
+
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)
+
+local cmp_mapping_config = {
+    -- [''] = cmp.mapping.scroll_docs( -4),
+    -- [''] = cmp.mapping.scroll_docs(4),
+    -- [''] = cmp.mapping.complete({ config = { sources = { name = 'copilot' } } }),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      local copilot_suggestion = require("copilot.suggestion")
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif copilot_suggestion.is_visible() then
+        copilot_suggestion.accept()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable( -1) then
+        luasnip.jump( -1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false,
+    }), -- accept only if select so you can create new line normally
+}
+
 
 cmp.setup({
     preselect = cmp.PreselectMode.None,
     completion = {},
     sources = {
         -- { name = 'nvim_lsp_signature_help' },
-        -- { name = 'cmp_tabnine', priority = 95 },
-        -- { name = 'copilot', priority = 100 },
+        { name = 'copilot',  priority = 100 },
         { name = 'luasnip',  priority = 70 },
         { name = 'nvim_lsp', priority = 80 },
         { name = 'path',     priority = 60 },
@@ -174,16 +213,28 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            -- compare.locality,
-            -- function(...) return cmp_buffer:compare_locality(...) end,
-            -- compare.exact,
-            -- compare.recently_used,
-            compare.score,
-            -- function(...) return cmp_helper.compare.prioritize_argument(...) end,
-            -- function(...) return cmp_helper.compare.deprioritize_underscore(...) end,
-            compare.kind,
+            copilot_cmp_comparators.prioritize,
             compare.offset,
+            compare.exact,
+            compare.score,
+            function(...) return cmp_helper.compare.prioritize_argument(...) end,
+            function(...) return cmp_helper.compare.deprioritize_underscore(...) end,
+            compare.recently_used,
+            compare.locality,
+            compare.kind,
+            compare.sort_text,
+            compare.length,
             compare.order,
+            -- -- compare.locality,
+            -- -- function(...) return cmp_buffer:compare_locality(...) end,
+            -- -- compare.exact,
+            -- -- compare.recently_used,
+            -- compare.score,
+            -- -- function(...) return cmp_helper.compare.prioritize_argument(...) end,
+            -- -- function(...) return cmp_helper.compare.deprioritize_underscore(...) end,
+            -- compare.kind,
+            -- compare.offset,
+            -- compare.order,
         }
     },
     snippet = {
@@ -191,37 +242,14 @@ cmp.setup({
           require 'luasnip'.lsp_expand(args.body)
         end,
     },
-    mapping = {
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable( -1) then
-            luasnip.jump( -1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        -- ['<Esc>'] = cmp.mapping.abort(),
-        -- ['<CR>'] = cmp.mapping.confirm {
-        --   behavior = cmp.ConfirmBehavior.Replace,
-        --   select = true,
-        -- },
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- accept only if select so you can create new line normally
-    },
+    mapping = cmp_mapping_config,
     experimental = {
         ghost_text = true,
+    },
+    formatters = {
+        insert_text = copilot_cmp_format.remove_existing,
+        label = copilot_cmp_format.format_label_text,
+        preview = copilot_cmp_format.deindent,
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },

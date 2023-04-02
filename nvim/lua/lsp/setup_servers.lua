@@ -155,7 +155,6 @@ M.setup_servers = function()
         filetypes = { "terraform", "tf", "hcl" },
     })
 
-
     vim.cmd([[ do User LspAttach Buffers ]])
 end
 
