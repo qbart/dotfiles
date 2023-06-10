@@ -46,6 +46,7 @@ export PATH=$PATH:$GOPATH/bin
 export VISUAL=nvim # ranger
 export EDITOR=nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
+export STEPCI_DISABLE_ANALYTICS=1
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'

@@ -361,6 +361,10 @@ require('packer').startup(function(use)
     -- more than just a sort
     use { 'inkarkat/vim-AdvancedSorters' }
 
+    -- plantuml support
+    use { 'javiorfo/nvim-soil' }
+    use 'javiorfo/nvim-nyctophilia'
+
     -- theme
     use {
         "catppuccin/nvim",
@@ -1771,11 +1775,14 @@ require('lspkind').init({
 })
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
+-- filetypes associations
 vim.g.did_load_filetypes = 1
 require('filetype').setup({
     overrides = {
         extensions = {
+            puml = "plantuml",
             tf = "terraform", -- tf extension to terraform type
+            tftpl = "terraform", -- tf extension to terraform type
             Caddyfile = "caddyfile",
         },
         literal = {

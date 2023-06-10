@@ -131,6 +131,9 @@ tfmod() {
   mkdir -p "$1" && touch "$1"/{main.tf,variables.tf,output.tf} && echo -e "# $1\n\n## Usage\n\n## Output" >> "$1/README.md"
 }
 
+# nomad
+alias njr='nomad job run -detach'
+
 # go
 alias gohot='air -c air.conf'
 alias khr='dev ssh known-hosts reset'
