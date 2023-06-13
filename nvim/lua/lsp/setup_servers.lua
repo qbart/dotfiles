@@ -23,7 +23,6 @@ local servers = {
     'pyright',
     'rust_analyzer',
     'sqlls',
-    'sqls',
     'stylelint_lsp',
     'lua_ls',
     'tailwindcss',
