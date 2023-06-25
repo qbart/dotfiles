@@ -214,12 +214,6 @@ require('packer').startup(function(use)
         }
     }
 
-    -- pick window by char
-    use {
-        's1n7ax/nvim-window-picker',
-        tag = 'v1.*',
-    }
-
     --https://github.com/akinsho/bufferline.nvim
 
     -- syntax
@@ -329,9 +323,6 @@ require('packer').startup(function(use)
 
     -- auto close brackets
     use { "windwp/nvim-autopairs" }
-
-    -- better file types
-    use { 'nathom/filetype.nvim' }
 
     -- commentary
     use { 'numToStr/Comment.nvim' }
@@ -1408,47 +1399,6 @@ comment_ft.set('hcl', '#%s')
 comment_ft.set('terraform', '#%s')
 comment_ft.set('tf', '#%s')
 
-require('window-picker').setup({
-    autoselect_one = true,
-    include_current_win = true,
-    selection_chars = '123456789',
-    use_winbar = 'winbar',
-    filter_rules = {
-        -- filter using buffer options
-        bo = {
-            -- if the file type is one of following, the window will be ignored
-            filetype = {
-                'NvimTree',
-                "neo-tree",
-                "notify",
-                "aerial",
-            },
-
-            -- if the buffer type is one of following, the window will be ignored
-            buftype = { 'terminal' },
-        },
-
-        -- filter using window options
-        wo = {},
-
-        -- if the file path contains one of following names, the window
-        -- will be ignored
-        file_path_contains = {},
-
-        -- if the file name contains one of following names, the window will be
-        -- ignored
-        file_name_contains = {},
-    },
-    -- the foreground (text) color of the picker
-    fg_color = colors.surface0,
-    -- if you have include_current_win == true, then current_win_hl_color will
-    -- be highlighted using this background color
-    current_win_hl_color = colors.maroon,
-    -- all the windows except the curren window will be highlighted using this
-    -- color
-    other_win_hl_color = colors.teal,
-})
-
 require("neo-tree").setup({
     enable_git_status = true,
     enable_diagnostics = true,
@@ -1775,52 +1725,6 @@ require('lspkind').init({
 })
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
--- filetypes associations
-vim.g.did_load_filetypes = 1
-require('filetype').setup({
-    overrides = {
-        extensions = {
-            puml = "plantuml",
-            tf = "terraform", -- tf extension to terraform type
-            tftpl = "terraform", -- tf extension to terraform type
-            Caddyfile = "caddyfile",
-        },
-        literal = {
-            -- name = type
-            gitconfig = 'gitconfig',
-            Caddyfile = 'caddyfile',
-        },
-        complex = {
-            ['%.env%.*'] = 'sh',
-            ['.pryrc'] = 'ruby',
-            ["i3/config"] = 'i3config',
-        },
-        -- function_extensions = {
-        --     ["cpp"] = function()
-        --         vim.bo.filetype = "cpp"
-        --         -- Remove annoying indent jumping
-        --         vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
-        --     end,
-        --     ["pdf"] = function()
-        --         vim.bo.filetype = "pdf"
-        --         -- Open in PDF viewer (Skim.app) automatically
-        --         vim.fn.jobstart(
-        --         "open -a skim " .. '"' .. vim.fn.expand("%") .. '"'
-        --         )
-        --     end,
-        -- },
-        -- function_literal = {
-        --     Brewfile = function()
-        --         vim.cmd("syntax off")
-        --     end,
-        -- },
-        -- function_complex = {
-        --     ["*.math_notes/%w+"] = function()
-        --         vim.cmd("iabbrev $ $$")
-        --     end,
-        -- },
-    },
-})
 require("nvim-web-devicons").set_icon {
     zsh = {
         icon = "",
