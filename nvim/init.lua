@@ -284,10 +284,10 @@ require('packer').startup(function(use)
     -- file manager
     use {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        branch = "v3.x",
         requires = {
             "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
         }
     }
@@ -529,15 +529,15 @@ vim.keymap.set("n", "<M-w>", function()
     vim.api.nvim_set_current_win(picked_window_id)
 end, { desc = "Pick a window" })
 -- splits
-vim.keymap.set('n', '<C-w><C-k>', [[<cmd>sp<CR>]], {})
-vim.keymap.set('n', '<C-w><C-l>', [[<cmd>vs<CR>]], {})
+vim.keymap.set('n', '<leader>wk', [[<cmd>sp<CR>]], {})
+vim.keymap.set('n', '<leader>wl', [[<cmd>vs<CR>]], {})
 -- resize panes
 vim.keymap.set('n', '<C-M-k>', [[<cmd>resize -3<CR>]], { noremap = true })
 vim.keymap.set('n', '<C-M-l>', [[<cmd>resize +3<CR>]], { noremap = true })
 vim.keymap.set('n', '<C-M-j>', [[<cmd>vertical resize -3<CR>]], { noremap = true })
 vim.keymap.set('n', 'VIMKBRESR', [[<cmd>vertical resize +3<CR>]], { noremap = true }) -- <C-M-;> cant map to semicolon, so custom binding is done via alacritty/kitty
 -- reload config
-vim.keymap.set('n', '<C-w>r', [[<cmd>so $MYVIMRC<CR><cmd>e!<CR>]], {})
+vim.keymap.set('n', '<leader>wr', [[<cmd>so $MYVIMRC<CR><cmd>e!<CR>]], {})
 -- buffers
 -- vim.keymap.set('n', '<TAB>', ':bn<CR>', { noremap = true })
 -- vim.keymap.set('n', '<S-TAB>', ':bp<CR>', { noremap = true })
