@@ -5,7 +5,7 @@ HISTSIZE=50000
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST 
+setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
@@ -15,7 +15,7 @@ setopt CORRECT
 
 [ -f ~/.config/byhost/$(hostname).sh ] && source ~/.config/byhost/$(hostname).sh
 
-export VISUAL=nvim 
+export VISUAL=nvim
 export EDITOR=nvim
 
 # ----- aliases -----
@@ -27,7 +27,7 @@ PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 
 
-if [ -d "/opt/apache-maven-3.8.5/bin" ]; then 
+if [ -d "/opt/apache-maven-3.8.5/bin" ]; then
   PATH=$PATH:/opt/apache-maven-3.8.5/bin
 fi
 
@@ -55,6 +55,8 @@ _fzf_complete_edit() {
 # ----- sdk ----
 if [ -f "$HOME/sdk/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/path.zsh.inc"; fi
 if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/completion.zsh.inc"; fi
-if [ -d "$HOME/sdk/pico" ]; then 
+if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

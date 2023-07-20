@@ -1,5 +1,6 @@
 # os
-# alias cp="cp -i"                          # confirm before overwriting something
+alias cpi='cp -i'                          # confirm before overwriting something
+alias cpr='cp -R'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias o='thunar .'

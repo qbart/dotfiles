@@ -155,36 +155,36 @@ require('packer').startup(function(use)
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "lukas-reineke/cmp-rg",
-            'zbirenbaum/copilot-cmp',
+            -- 'zbirenbaum/copilot-cmp',
         }
     }
 
     -- use { "github/copilot.vim" }
-    use {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                filetypes = {
-                    yaml = false,
-                    markdown = false,
-                    help = false,
-                    gitcommit = false,
-                    gitrebase = false,
-                    hgcommit = false,
-                    svn = false,
-                    cvs = false,
-                    ["."] = false,
-                },
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                },
-                panel = { enabled = false },
-            })
-        end,
-    }
+    -- use {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({
+    --             filetypes = {
+    --                 yaml = false,
+    --                 markdown = false,
+    --                 help = false,
+    --                 gitcommit = false,
+    --                 gitrebase = false,
+    --                 hgcommit = false,
+    --                 svn = false,
+    --                 cvs = false,
+    --                 ["."] = false,
+    --             },
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true,
+    --             },
+    --             panel = { enabled = false },
+    --         })
+    --     end,
+    -- }
 
     -- lsp ui
     -- use('~/d/3/lspsaga.nvim')

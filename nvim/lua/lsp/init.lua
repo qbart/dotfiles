@@ -143,18 +143,18 @@ cmp_helper.compare = {
 }
 
 
-local copilot_cmp = require("copilot_cmp")
-copilot_cmp.setup()
-local copilot_cmp_comparators = require("copilot_cmp.comparators")
-local copilot_cmp_format = require("copilot_cmp.format")
-
-cmp.event:on("menu_opened", function()
-  vim.b.copilot_suggestion_hidden = true
-end)
-
-cmp.event:on("menu_closed", function()
-  vim.b.copilot_suggestion_hidden = false
-end)
+-- local copilot_cmp = require("copilot_cmp")
+-- copilot_cmp.setup()
+-- local copilot_cmp_comparators = require("copilot_cmp.comparators")
+-- local copilot_cmp_format = require("copilot_cmp.format")
+--
+-- cmp.event:on("menu_opened", function()
+--   vim.b.copilot_suggestion_hidden = true
+-- end)
+--
+-- cmp.event:on("menu_closed", function()
+--   vim.b.copilot_suggestion_hidden = false
+-- end)
 
 local cmp_mapping_config = {
     -- [''] = cmp.mapping.scroll_docs( -4),
@@ -162,13 +162,13 @@ local cmp_mapping_config = {
     -- [''] = cmp.mapping.complete({ config = { sources = { name = 'copilot' } } }),
     ['<C-Space>'] = cmp.mapping.complete(),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      local copilot_suggestion = require("copilot.suggestion")
+      -- local copilot_suggestion = require("copilot.suggestion")
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif copilot_suggestion.is_visible() then
-        copilot_suggestion.accept()
+      -- elseif copilot_suggestion.is_visible() then
+      --   copilot_suggestion.accept()
       elseif has_words_before() then
         cmp.complete()
       else
@@ -213,7 +213,7 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            copilot_cmp_comparators.prioritize,
+            -- copilot_cmp_comparators.prioritize,
             compare.offset,
             compare.exact,
             compare.score,
@@ -246,11 +246,11 @@ cmp.setup({
     experimental = {
         ghost_text = true,
     },
-    formatters = {
-        insert_text = copilot_cmp_format.remove_existing,
-        label = copilot_cmp_format.format_label_text,
-        preview = copilot_cmp_format.deindent,
-    },
+    -- formatters = {
+    --     insert_text = copilot_cmp_format.remove_existing,
+    --     label = copilot_cmp_format.format_label_text,
+    --     preview = copilot_cmp_format.deindent,
+    -- },
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
