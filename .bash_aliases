@@ -167,6 +167,7 @@ alias uuid4='uuid -v4'
 alias removedash='sed '"'"'s/-//g'"'"''
 alias icat="kitty +kitten icat"
 alias t='timelog'
+alias dig='dig +short'
 
 # docker
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
