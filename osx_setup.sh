@@ -20,6 +20,8 @@ ln -f -s "$(pwd)/.zlogin" ~/.zlogin
 ln -f -s "$(pwd)/.zlogout" ~/.zlogout
 ln -f -s "$(pwd)/.zsh_ps1" ~/.zsh_ps1
 
+ln -f -s "$(pwd)/.terraformrc" ~/.terraformrc
+
 rm ~/.config/lf/lf
 rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim-lua
