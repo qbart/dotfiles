@@ -3,6 +3,7 @@ alias cpi='cp -i'                          # confirm before overwriting somethin
 alias cpr='cp -R'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
+alias grep='grep --color=auto'
 alias o='thunar .'
 alias v='nvim'
 alias e='export'
