@@ -205,6 +205,10 @@ alias hr='heroku run'
 alias loc='xargs wc -l'
 alias restartpolybar='~/.config/polybar/launch.sh'
 
+dns() {
+  sudo dscacheutil -flushcache
+}
+
 #
 # utils
 #

@@ -52,6 +52,9 @@ _fzf_complete_edit() {
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
 
 
+[ -f ~/.selleo/rc.sh ] && . ~/.selleo/rc.sh
+
+
 # ----- sdk ----
 if [ -f "$HOME/sdk/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/path.zsh.inc"; fi
 if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/google-cloud-sdk/completion.zsh.inc"; fi
