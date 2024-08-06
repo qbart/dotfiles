@@ -178,8 +178,8 @@ alias dkill='docker kill $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias drm='docker rm $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias drma='docker rm $(  docker ps -a | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias d='docker'
-alias dc='docker-compose'
-alias dcdev='docker-compose -f docker-compose.dev.yml'
+alias dc='docker compose'
+alias dcdev='docker compose -f docker-compose.dev.yml'
 
 # kubernetes
 alias kc='kubectl'
