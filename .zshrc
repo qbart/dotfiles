@@ -23,7 +23,7 @@ export EDITOR=nvim
 [ -f ~/.zsh_ps1 ] && source ~/.zsh_ps1
 
 # ----- envs -----
-PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
+PATH=$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 
 
@@ -63,3 +63,6 @@ if [ -d "$HOME/sdk/pico" ]; then
 fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# bun completions
+[ -s "/Users/kiwi/.bun/_bun" ] && source "/Users/kiwi/.bun/_bun"
