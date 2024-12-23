@@ -69,7 +69,6 @@ _fzf_complete_edit() {
 
 # ----- 3rd party - asdf -----
 . $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 # ----- theme -----
 [ -f ~/.bash_theme ] && source ~/.bash_theme
