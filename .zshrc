@@ -25,6 +25,7 @@ export EDITOR=nvim
 # ----- envs -----
 PATH=$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 
 if [ -d "/opt/apache-maven-3.8.5/bin" ]; then
@@ -61,8 +62,11 @@ if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/goo
 if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
+export VCPKG_DISABLE_METRICS=true
+export VCPKG_ROOT=$HOME/sdk/vcpkg
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # bun completions
 [ -s "/Users/kiwi/.bun/_bun" ] && source "/Users/kiwi/.bun/_bun"
+
