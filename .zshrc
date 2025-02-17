@@ -26,6 +26,7 @@ export EDITOR=nvim
 PATH=$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export HOMEBREW_NO_AUTO_UPDATE=1
+export OVERMIND_NO_PORT=1
 
 
 if [ -d "/opt/apache-maven-3.8.5/bin" ]; then
@@ -64,6 +65,7 @@ if [ -d "$HOME/sdk/pico" ]; then
 fi
 export VCPKG_DISABLE_METRICS=true
 export VCPKG_ROOT=$HOME/sdk/vcpkg
+export VULKAN_SDK=$HOME/sdk/VulkanSDK/1.3.296.0/macOS
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
