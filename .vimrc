@@ -10,6 +10,22 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
+Plug 'editorconfig/editorconfig-vim'
+
+" -- convert between oneliner/multiline statement split/join
+Plug 'AndrewRadev/splitjoin.vim'
+
+    " -- highlight current word
+Plug 'RRethy/vim-illuminate'
+
+" -- case converison, cru, ...
+Plug 'tpope/vim-abolish'
+
+" -- Detect tabstop and shiftwidth automatically
+Plug 'tpope/vim-sleuth'
+
+" -- better f
+Plug 'rhysd/clever-f.vim'
 call plug#end()
 
 set number
@@ -134,13 +150,20 @@ nnoremap <C-e> :NERDTreeToggle<CR>
 "nnoremap <C-t> :NERDTreeToggle<CR>
 "nnoremap <C-f> :NERDTreeFind<CR>
 
+" commentary
+vnoremap <C-_> :Commentary<CR>
+nnoremap <C-_> :Commentary<CR>
 
 " ------------------------------------------------------------------------------------------------------
 
 " END OF KEYMAP
+
+""" NERDTREE
+let NERDTreeShowHidden=1
 
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+
