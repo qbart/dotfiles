@@ -7,6 +7,7 @@ chmod 0700 ~/.secrets
 
 
 ln -s "$(pwd)/nvim" ~/.config/nvim -f
+ln -s "$(pwd)/.vimrc" ~/.vimrc -f
 ln -s "$(pwd)/i3" ~/.i3 -f
 ln -s "$(pwd)/polybar" ~/.config/polybar -f
 ln -s "$(pwd)/rofi" ~/.config/rofi -f

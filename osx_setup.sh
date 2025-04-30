@@ -6,6 +6,7 @@ chmod +x ~/.secrets/load.sh
 chmod 0700 ~/.secrets
 
 
+ln -f -s "$(pwd)/.vimrc" ~/.vimrc
 ln -f -s "$(pwd)/nvim-lua" ~/.config/nvim
 ln -f -s "$(pwd)/lf" ~/.config/lf
 ln -f -s "$(pwd)/kitty" ~/.config/kitty
