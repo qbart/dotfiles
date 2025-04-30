@@ -51,6 +51,7 @@ alias bye='poweroff'
 alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 alias ok='echo -e "\e[32mok\e[0m"'
 alias gensecretkeybase='openssl rand -hex 64'
+alias iplocal='ifconfig -a | grep 192'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
@@ -85,6 +86,11 @@ alias sshnostrict='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=
 
 # python
 alias py='python3'
+
+# node
+alias nrd='npm run dev'
+alias brd='bun run dev'
+
 # git
 alias rebase='git pull --rebase --autostash origin'
 alias rebasem='git pull --rebase --autostash origin master'
