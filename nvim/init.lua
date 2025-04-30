@@ -21,35 +21,29 @@ require('packer').startup(function(use)
     -- install socket, needed for "sleep"
     -- use_rocks "luasocket"
 
-    -- start secreen
-    use {
-        'goolord/alpha-nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-    }
-
     -- editorconfig
     use "gpanders/editorconfig.nvim"
 
     -- whitespace trim
     use 'cappyzawa/trim.nvim'
 
-    -- shortcuts
-    use { "folke/which-key.nvim" }
-
-    -- go to line
-    use 'nacro90/numb.nvim'
-
     -- minimap
-    use { 'gorbit99/codewindow.nvim' }
+    use {
+      'gorbit99/codewindow.nvim',
+      config = function()
+        local codewindow = require('codewindow')
+        codewindow.setup({
+            screen_bounds = "background"
+        })
+        -- codewindow.apply_default_keybinds()
+      end,
+    }
 
     -- sqlite for storage
     use { "kkharji/sqlite.lua" }
 
     -- switch cwd based on patterns
     use { "ahmedkhalf/project.nvim" }
-
-    -- url views in buffer
-    use("axieax/urlview.nvim")
 
     -- Fuzzy Finder (files, lsp, etc)
     use {
@@ -62,10 +56,8 @@ require('packer').startup(function(use)
         },
     }
 
-    -- region selection with hop
-    use { "mfussenegger/nvim-treehopper", requires = { { 'phaazon/hop.nvim' } } }
-
     -- nvim api
+    -- TODO: replace with neodev.nvim
     use "folke/neodev.nvim"
 
     -- file/buffer/... fuzzy finder
@@ -193,24 +185,10 @@ require('packer').startup(function(use)
         branch = "main",
     })
 
-    -- git visualizer and merge tool
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-
-    -- git in editor
     use {
         'tanvirtin/vgit.nvim',
         requires = {
             'nvim-lua/plenary.nvim'
-        }
-    }
-
-    -- run tests from editor
-    use {
-        "nvim-neotest/neotest",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim"
         }
     }
 
@@ -253,11 +231,6 @@ require('packer').startup(function(use)
         }
     })
 
-    -- easymoition like navigation
-    use {
-        'phaazon/hop.nvim',
-        branch = 'v2',
-    }
     -- switch tags, values, hash style etc.
     use { 'andrewradev/switch.vim' }
 
@@ -266,14 +239,6 @@ require('packer').startup(function(use)
 
     -- highlight current word
     use { 'RRethy/vim-illuminate' }
-
-    -- fancy notifications
-    use({
-        "folke/noice.nvim",
-        requires = {
-            "MunifTanjim/nui.nvim",
-        }
-    })
 
     -- show closing context as virtualtext
     use "haringsrob/nvim_context_vt"
@@ -338,12 +303,6 @@ require('packer').startup(function(use)
 
     -- show idents
     use "lukas-reineke/indent-blankline.nvim"
-
-    -- visual debugger
-    use { "rcarriga/nvim-dap-ui", requires = {
-        "mfussenegger/nvim-dap",
-        "theHamsta/nvim-dap-virtual-text",
-    } }
 
     -- golang support
     use 'ray-x/go.nvim'
@@ -511,10 +470,6 @@ vim.g.VM_maps = {
     -- ["Select Cursor Down"] = '∆', -- Option+J,
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
--- region selection
-vim.keymap.set("o", "<leader>v", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
-vim.keymap.set("x", "<leader>v", require('tsht').nodes, { silent = true })
-vim.keymap.set("n", "<leader>v", require('tsht').nodes, { silent = true })
 
 vim.g.VM_theme = 'purplegray'
 vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
@@ -550,7 +505,6 @@ vim.keymap.set('v', '<S-l>', [[<cmd>m-2<CR>gv=gv]], { noremap = true })
 vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
 vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
-vim.keymap.set("n", "<C-m>", "<cmd>NoiceHistory<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "``", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
@@ -561,8 +515,6 @@ vim.keymap.set("n", "];", vim.diagnostic.goto_next, { silent = true, noremap = t
 vim.keymap.set("n", "n", require("aerial").toggle, { noremap = true, silent = true })
 vim.keymap.set("n", "M", require("codewindow").toggle_minimap, { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<leader>r", require("ssr").open)
--- help
-vim.keymap.set('n', '<F1>', [[<cmd>WhichKey<CR>]], { noremap = true })
 -- extras
 vim.keymap.set('n', '<leader>ie', [[<cmd>Telescope emoji<CR>]], { noremap = true })
 -- git
@@ -587,48 +539,6 @@ require("luasnip.loaders.from_snipmate").lazy_load()
 
 local symbols = require('utils.symbols')
 local colors = require("catppuccin.palettes").get_palette "mocha"
-
-local alpha = require 'alpha'
-local startify = require 'alpha.themes.startify'
-startify.section.header.val = {
-    [[  ▒▒▒▒▒     ▄████▄     ]],
-    [[ ▒ ▄▒ ▄▒   ███▄█▀      ]],
-    [[ ▒▒▒▒▒▒▒  ▐████  █  █  ]],
-    [[ ▒▒▒▒▒▒▒   █████▄      ]],
-    [[ ▒ ▒ ▒ ▒    ▀████▀     ]],
-}
-startify.section.top_buttons.val = {
-    startify.button("c", "Configuration", ":cd ~/d/dotfiles/nvim<CR>:e init.lua<CR>"),
-    startify.button("s", "Snippets", ":cd ~/d/dotfiles/nvim<CR>:e snippets/<CR>"),
-    startify.button("ok", "Oh, Krab!", ":cd ~/d/krab/<CR>:e main.go<CR>"),
-}
--- disable MRU
-startify.section.mru.val = {
-    { type = "padding", val = 1 },
-    { type = "text",    val = "MRU", opts = { hl = "SpecialComment" } },
-    { type = "padding", val = 1 },
-    {
-        type = "group",
-        val = function()
-            return { startify.mru(1, nil, 5) }
-        end,
-    },
-}
--- disable MRU cwd
-startify.section.mru_cwd.val = { { type = "padding", val = 0 } }
-startify.nvim_web_devicons.enabled = true
---
-startify.section.bottom_buttons.val = {
-    { type = "text",    val = "Actions", opts = { hl = "SpecialComment" } },
-    { type = "padding", val = 1 },
-    startify.button("t", "Create todo.txt", ":e todo.txt<CR>"),
-    startify.button("e", "New empty file", ":ene <BAR> startinsert <CR>"),
-    startify.button("q", "Quit", ":qa<CR>"),
-}
-startify.section.footer = {
-    { type = "text", val = "footer" },
-}
-alpha.setup(startify.config)
 
 --
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
@@ -671,7 +581,7 @@ require("catppuccin").setup({
         fern = false,
         gitgutter = false,
         harpoon = false,
-        hop = true,
+        hop = false,
         illuminate = true,
         leap = false,
         lightspeed = false,
@@ -692,7 +602,7 @@ require("catppuccin").setup({
         ts_rainbow = true,
         vim_sneak = false,
         vimwiki = false,
-        which_key = true,
+        which_key = false,
         dap = {
             enabled = true,
             enable_ui = true,
@@ -1381,9 +1291,17 @@ require('nvim-treesitter.configs').setup {
 }
 require('hlargs').setup()
 
-require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
+local highlight = {
+    "CursorColumn",
+--    "Whitespace",
+}
+require("ibl").setup {
+    indent = { highlight = highlight, char = "" },
+    whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = false },
 }
 
 require('Comment').setup {
@@ -1675,8 +1593,6 @@ ccc.setup({
     }
 })
 
-require("hop").setup()
-
 require('illuminate').configure({
     providers = {
         'lsp',
@@ -1772,14 +1688,6 @@ require('neoclip').setup({
     },
 })
 
-require("which-key").setup {
-    layout = {
-        height = { min = 4, max = 50 }, -- min and max height of the columns
-        width = { min = 20, max = 80 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "center", -- align columns left, center or right
-    },
-}
 
 require("project_nvim").setup {
     manual_mode = false,
@@ -2195,19 +2103,6 @@ require("lspsaga").setup({
 
 -- require('lint').linters_by_ft = { }
 
-require("diffview").setup()
-
-require("urlview").setup({
-    default_picker = "telescope"
-})
-
-require('numb').setup {
-    show_numbers = true, -- Enable 'number' for the window while peeking
-    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-    number_only = true, -- Peek only when the command is only a number instead of when it starts with a number
-    centered_peeking = true, -- Peeked line will be centered relative to window
-}
-
 local codewindow = require('codewindow')
 codewindow.setup(
     {
@@ -2340,61 +2235,6 @@ require('vgit').setup({
     }
 })
 
-
-require("noice").setup({
-    lsp = {
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-        },
-    },
-    views = {
-        cmdline_popup = {
-            border = {
-                padding = { 1, 1 },
-            },
-            filter_options = {},
-            win_options = {
-                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-            },
-        },
-        mini = {
-            timeout = 1000,
-            border = {
-                padding = { 0, 1 },
-            },
-        },
-    },
-    messages = {
-        -- NOTE: If you enable messages, then the cmdline is enabled automatically.
-        -- This is a current Neovim limitation.
-        enabled = true, -- enables the Noice messages UI
-        view = "notify", -- default view for messages
-        view_error = "mini", -- view for errors
-        view_warn = "mini", -- view for warnings
-        view_history = "split", -- view for :messages
-        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-    },
-    routes = {
-        {
-            filter = { event = "msg_show", kind = "", find = " lines --" },
-            opts = { skip = true },
-        },
-        {
-            filter = { event = "msg_show", kind = "", find = " line --" },
-            opts = { skip = true },
-        },
-        {
-            filter = { event = "msg_show", kind = "", find = "Already at oldest change" },
-            opts = { skip = true },
-        },
-        {
-            filter = { event = "msg_show", kind = "", find = "--No lines in" },
-            opts = { skip = true },
-        },
-    },
-})
 
 require("neodev").setup({})
 require("lsp")
