@@ -9,6 +9,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
 call plug#end()
 
 set number
@@ -126,6 +127,20 @@ vnoremap <S-l> :m-2<CR>gv=gv
 inoremap <C-S-k> <Esc>:m+<CR>==gi
 inoremap <C-S-l> <Esc>:m-2<CR>==gi
 
+" nerdtree
+"
+"nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-e> :NERDTreeToggle<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
+
+
 " ------------------------------------------------------------------------------------------------------
 
-" END OF CONFIG
+" END OF KEYMAP
+
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
