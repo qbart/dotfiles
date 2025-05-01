@@ -2,6 +2,7 @@
 
 mkdir -p ~/.config/
 
+ln -s "$(pwd)/.vimrc" ~/.vimrc -f
 ln -s "$(pwd)/nvim" ~/.config/nvim -f
 ln -s "$(pwd)/byhost" ~/.config/byhost -f
 
