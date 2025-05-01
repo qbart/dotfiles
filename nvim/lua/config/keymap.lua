@@ -4,15 +4,8 @@
 vim.keymap.set('n', '<leader>j', require('fzf-lua').files, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>F', require('fzf-lua').live_grep_native, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>b', require('fzf-lua').buffers, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>h', require('fzf-lua').help_tags, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>f', require('fzf-lua').blines, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>s', require('fzf-lua').lsp_live_workspace_symbols, { noremap = true, silent = true })
--- line
--- vim.api.nvim_set_keymap('n', 'n', [[:set number!<CR>]], {})
--- packer
-vim.keymap.set('n', '<C-p>i', [[<cmd>PackerInstall<CR>]], {})
-vim.keymap.set('n', '<C-p>u', [[<cmd>PackerUpdate<CR>]], {})
-vim.keymap.set('n', '<C-p>s', [[<cmd>PackerSync<CR>]], {})
 -- silence
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', [[<Nop>]], { silent = true })
@@ -34,17 +27,13 @@ vim.g.VM_maps = {
 }
 
 vim.g.VM_theme = 'purplegray'
-vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true position=float<CR>", { noremap = true })
+vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true<CR>", { noremap = true })
 vim.keymap.set('n', "<C-g>", "<cmd>Neotree source=git_status reveal=true position=float<CR>", { noremap = true })
 vim.keymap.set('n', "<S-TAB>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true })
 -- save file
 vim.keymap.set('n', '<C-s>', [[<cmd>w<CR>]], { noremap = true })
 -- quit
 vim.keymap.set('n', '<C-q>', [[<cmd>q<CR>]], { noremap = true, silent = true })
-vim.keymap.set("n", "<M-w>", function()
-    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
-    vim.api.nvim_set_current_win(picked_window_id)
-end, { desc = "Pick a window" })
 -- splits
 vim.keymap.set('n', '<leader>wk', [[<cmd>sp<CR>]], {})
 vim.keymap.set('n', '<leader>wl', [[<cmd>vs<CR>]], {})
@@ -72,7 +61,7 @@ vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silen
 vim.keymap.set({ "n", "v" }, "<localleader><localleader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.keymap.set("n", "]j", vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set("n", "];", vim.diagnostic.goto_next, { silent = true, noremap = true })
---vim.keymap.set("n", "n", require("aerial").toggle, { noremap = true, silent = true })
+vim.keymap.set("n", "n", "[[<cmd>AerialToggle<CR>]]", { noremap = true, silent = true })
 -- extras
 vim.keymap.set('n', '<leader>ie', [[<cmd>Telescope emoji<CR>]], { noremap = true })
 -- git
@@ -83,4 +72,3 @@ vim.keymap.set('n', '<leader>gbr', require('fzf-lua').git_branches, {
 })
 vim.keymap.set('n', '<C-j>', [[<cmd>Lspsaga diagnostic_jump_prev<CR>]], { noremap = true, silent = true })
 vim.keymap.set('n', '<C-;>', [[<cmd>Lspsaga diagnostic_jump_next<CR>]], { noremap = true, silent = true })
-

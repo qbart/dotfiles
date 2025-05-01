@@ -77,7 +77,15 @@ _fzf_complete_edit() {
 # ----- secrets -----
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
 
+# ----- wsl -----
+if [ -f /etc/wsl ]; then
+  export PATH="$PATH:/mnt/c/Users/wojto/AppData/Local/Programs/Microsoft VS Code/bin"
+fi
+
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
+
+export FLYCTL_INSTALL="/home/kiwi/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"

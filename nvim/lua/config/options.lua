@@ -4,6 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 -- colors/sytnax
 vim.o.syntax = "ON"
 vim.o.termguicolors = true
+vim.o.background=dark
 
 -- share clipboard
 vim.o.clipboard = 'unnamedplus'
@@ -72,4 +73,3 @@ vim.o.writebackup = false
 vim.o.cmdheight = 1
 -- vim.o.autoindent = true
 vim.o.shortmess = "Ot" -- http://vimdoc.sourceforge.net/htmldoc/options.html#'shortmess'
-

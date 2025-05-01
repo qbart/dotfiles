@@ -1,16 +1,13 @@
 # os
 alias cpi='cp -i'                          # confirm before overwriting something
-alias cpr='cp -R'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --color=auto'
 alias v='edit'
-alias edit='vim'
+alias edit='nvim'
 alias sc='sudo systemctl'
 alias scu='systemctl --user'
 alias jc='sudo journalctl'
-alias pac='sudo pacman'
-alias pacu='sudo pacman -Syyu'
 alias sudo='sudo '
 alias ls='eza'
 alias lst='eza -T'
@@ -28,15 +25,15 @@ alias aptu='sudo apt update'
 alias aptr='sudo apt remove'
 alias aptug='sudo apt upgrade'
 alias addppa='sudo add-apt-repository'
-alias srcbrc='source ~/.bashrc'
-alias rz='source ~/.zshrc'
+alias relbash='source ~/.bashrc'
+alias relzsh='source ~/.zshrc'
 alias mkdirtoday1='mkdir $(date -I)'
 alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
-alias md='mkdir -p'
+alias mkdir='mkdir -p'
 alias cat='bat -p'
 alias ra='source ~/.bash_aliases'
 alias ea='edit ~/.bash_aliases'
-alias c='rsync -ah --inplace --info=progress2'
+alias copy='rsync -ah --inplace --info=progress2'
 alias mountntfs='sudo mount -t ntfs -o nls=utf8,umask=0222'
 alias lsntfs='sudo fdisk -l | grep NTFS'
 alias mountexfat='sudo mount -t exfat'
@@ -44,11 +41,8 @@ alias lsexfat='sudo fdisk -l | rg exFAT'
 alias lc='launchctl'
 alias cdprints='cd /var/spool/cups-pdf/$USER'
 alias cdf='cd $(z | awk "{print \$2}" | fzf)'
-alias cdd='cd ~/d/dotfiles'
-alias bye='poweroff'
 alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 alias ok='echo -e "\e[32mok\e[0m"'
-alias gensecretkeybase='openssl rand -hex 64'
 alias iplocal='ifconfig -a | grep 192'
 
 # keyboards
@@ -61,8 +55,6 @@ alias pmake=premake5
 alias uml='java -jar ~/bin/plantuml.jar'
 
 # ruby
-alias rr='bundle exec rails'
-alias rs='bundle exec rspec'
 alias rgm='bundle exec rails g migration'
 alias rdm='bundle exec rails db:migrate'
 alias rdmd='bundle exec rails db:migrate:down'
@@ -139,9 +131,6 @@ tfmod() {
   mkdir -p "$1" && touch "$1"/{main.tf,variables.tf,outputs.tf} && echo -e "# $1\n\n## Usage\n\n## Output" >> "$1/README.md"
 }
 
-# nomad
-alias njr='nomad job run -detach'
-
 # go
 alias gohot='air -c air.conf'
 alias khr='dev ssh known-hosts reset'
@@ -169,7 +158,7 @@ alias asdfr='asdf reshim'
 alias asdfu='asdf plugin update --all'
 alias vv='edit .'
 alias tt='tmux'
-alias uuid4='uuid -v4'
+alias uuid='kiwi rand uuid7'
 alias removedash='sed '"'"'s/-//g'"'"''
 alias icat="kitty +kitten icat"
 alias t='timelog'
@@ -199,7 +188,6 @@ alias crdev='heroku local -f Procfile.dev'
 # curl
 alias postjson='curl -X POST -H "Content-Type: application/json" -d'
 alias getjson='curl -X GET -H "Content-Type: application/json"'
-alias json='curl -H "Content-Type: application/json"'
 
 # aws
 alias install-awscli='pip install awscli --upgrade --user'
