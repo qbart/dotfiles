@@ -54,7 +54,7 @@ vim.keymap.set('v', '<S-l>', [[<cmd>m-2<CR>gv=gv]], { noremap = true })
 vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
 vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
-vim.keymap.set("n", "``", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "``", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "`t", "<cmd>TodoTrouble<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-CR>", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 vim.keymap.set("n", "<localleader>u", require('fzf-lua').lsp_references, { silent = true, noremap = true })

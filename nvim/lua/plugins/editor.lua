@@ -11,6 +11,30 @@ return {
     end,
     },
 
+    -- auto pairs
+    {
+        "echasnovski/mini.pairs",
+        opts = {
+            modes = { insert = true, command = true, terminal = false },
+            -- skip autopair when next character is one of these
+            skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+            -- skip autopair when the cursor is inside these treesitter nodes
+            skip_ts = { "string" },
+            -- skip autopair when next character is closing pair
+            -- and there are more closing pairs than opening pairs
+            skip_unbalanced = true,
+            -- better deal with markdown code blocks
+            markdown = true,
+        },
+    },
+
+    -- Automatically add closing tags for HTML and JSX
+    {
+        "windwp/nvim-ts-autotag",
+        opts = {},
+    },
+
+
     -- switch cwd based on patterns
     { "ahmedkhalf/project.nvim", config = function()
         require("project_nvim").setup {
@@ -83,55 +107,40 @@ return {
     -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing.
     {
         "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-                position = "bottom", -- position of the list can be: bottom, top, left, right
-                height = 12, -- height of the trouble list when position is top or bottom
-                width = 50, -- width of the list when position is left or right
-                icons = true, -- use devicons for filenames
-                mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-                fold_open = "", -- icon used for open folds
-                fold_closed = "", -- icon used for closed folds
-                group = true, -- group results by file
-                padding = true, -- add an extra new line on top of the list
-                action_keys = { -- key mappings for actions in the trouble list
-                    -- map to {} to remove a mapping, for example:
-                    -- close = {},
-                    close = "q", -- close the list
-                    cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-                    refresh = "r", -- manually refresh
-                    jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-                    open_split = { "<c-x>" }, -- open buffer in new split
-                    open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-                    open_tab = { "<c-t>" }, -- open buffer in new tab
-                    jump_close = { "o" }, -- jump to the diagnostic and close the list
-                    toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-                    toggle_preview = "P", -- toggle auto_preview
-                    hover = "K", -- opens a small popup with the full multiline message
-                    preview = "p", -- preview the diagnostic location
-                    close_folds = { "zM", "zm" }, -- close all folds
-                    open_folds = { "zR", "zr" }, -- open all folds
-                    toggle_fold = { "zA", "za" }, -- toggle fold of current file
-                    previous = "l", -- previous item
-                    next = "k" -- next item
-                },
-                indent_lines = true, -- add an indent guide below the fold icons
-                auto_open = false, -- automatically open the list when you have diagnostics
-                auto_close = false, -- automatically close the list when you have no diagnostics
-                auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-                auto_fold = false, -- automatically fold a file trouble list at creation
-                auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
-                signs = {
-                    -- icons / text used for a diagnostic
-                    error = "",
-                    warning = "",
-                    hint = "",
-                    information = "",
-                    other = "﫠"
-                },
-                use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-            }
-        end,
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
     },
 
     -- json schemas for various configs
@@ -202,27 +211,30 @@ return {
     },
 
     -- color picker and colorizer
-    { "uga-rosa/ccc.nvim", config = function()
-        local ccc = require("ccc")
-        ccc.setup({
-            disable_default_mappings = true,
-            highlighter = {
-                auto_enable = true
-            },
-            mappings = {
-                ["<CR>"] = ccc.mapping.complete,
-                ["<Tab>"] = ccc.mapping.toggle_input_mode,
-                ["o"] = ccc.mapping.toggle_output_mode,
-                ["a"] = ccc.mapping.toggle_alpha,
-                [";"] = ccc.mapping.increase1,
-                ["j"] = ccc.mapping.decrease1,
-                ["<C-;>"] = ccc.mapping.increase10,
-                ["<C-j>"] = ccc.mapping.decrease10,
-                q = ccc.mapping.quit,
-            }
-        })
+    { "uga-rosa/ccc.nvim",
+        enabled = false,
+        config = function()
+            local ccc = require("ccc")
+            ccc.setup({
+                disable_default_mappings = true,
+                highlighter = {
+                    auto_enable = true
+                },
+                mappings = {
+                    ["<CR>"] = ccc.mapping.complete,
+                    ["<Tab>"] = ccc.mapping.toggle_input_mode,
+                    ["o"] = ccc.mapping.toggle_output_mode,
+                    ["a"] = ccc.mapping.toggle_alpha,
+                    [";"] = ccc.mapping.increase1,
+                    ["j"] = ccc.mapping.decrease1,
+                    ["<C-;>"] = ccc.mapping.increase10,
+                    ["<C-j>"] = ccc.mapping.decrease10,
+                    q = ccc.mapping.quit,
+                }
+            })
 
-    end },
+        end
+    },
 
     -- scrollbar
     { "petertriho/nvim-scrollbar", config = function()
@@ -248,14 +260,14 @@ return {
     { 'numToStr/Comment.nvim', config = function()
         require('Comment').setup {
             mappings = {
-                basic = false,
-                extra = false,
+                basic = true,
+                extra = true,
             },
             toggler = {
-                line = '/',
+                line = '<C-_>',
             },
             opleader = {
-                line = '//',
+                line = '<C-_>',
             },
         }
         local comment_ft = require('Comment.ft')
