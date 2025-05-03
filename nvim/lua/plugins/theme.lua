@@ -30,7 +30,7 @@ return {
                 },
                 integrations = {
                     cmp = true,
-                    blink_cmp = true,
+                    blink_cmp = false,
                     gitsigns = true,
                     nvimtree = false,
                     telescope = true,

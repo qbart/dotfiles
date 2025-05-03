@@ -4,7 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 -- colors/sytnax
 vim.o.syntax = "ON"
 vim.o.termguicolors = true
-vim.o.background=dark
+vim.o.background="dark"
 
 -- share clipboard
 vim.o.clipboard = 'unnamedplus'

@@ -7,6 +7,11 @@ return {
     { "cappyzawa/trim.nvim", config = function()
         require('trim').setup({
             disable = { "markdown" },
+            trim_on_write = true,
+            trim_trailing = true,
+            trim_last_line = true,
+            trim_first_line = true,
+            highlight = true,
         })
     end,
     },
@@ -31,9 +36,27 @@ return {
     -- Automatically add closing tags for HTML and JSX
     {
         "windwp/nvim-ts-autotag",
-        opts = {},
+        opts = {
+            enable_close = true,
+            enable_rename = true,
+            enable_close_on_slash = true,
+        },
+        config = function ()
+            require('nvim-ts-autotag').setup            {
+                opts = {
+                    -- Defaults
+                    enable_close = true, -- Auto close tags
+                    enable_rename = true, -- Auto rename pairs of tags
+                    enable_close_on_slash = true -- Auto close on trailing </
+                },
+                per_filetype = {
+                    -- ["html"] = {
+                    --   enable_close = false
+                    -- }
+                }
+            }
+        end
     },
-
 
     -- switch cwd based on patterns
     { "ahmedkhalf/project.nvim", config = function()
@@ -67,6 +90,63 @@ return {
             scope_chdir = 'global',
         }
     end },
+
+
+    {
+        'nvimdev/lspsaga.nvim',
+        config = function()
+            local symbols = require("utils.symbols")
+            require('lspsaga').setup({
+                diagnostic_header = { " ", " ", " ", " " },
+                preview = {
+                    lines_above = 0,
+                    line_below = 0,
+                },
+                -- diagnostic = {
+                --
+                -- },
+                symbol_in_winbar = {
+                    enable = false,
+                },
+                code_action = {
+                    num_shortcut = false,
+                    show_server_name = false,
+                    extend_gitsigns = false,
+                },
+                lightbulb = {
+                    enable = true,
+                    sign = true,
+                    enable_in_insert = true,
+                    sign_priority = 20,
+                    virtual_text = false,
+                },
+                ui = {
+                    code_action = symbols.action,
+                },
+                finder_icons = {
+                    def = '  ',
+                    ref = ' ',
+                    link = '  ',
+                },
+                show_outline = {
+                    win_position = 'right',
+                    --set special filetype win that outline window split.like NvimTree neotree
+                    -- defx, db_ui
+                    win_with = '',
+                    win_width = 40,
+                    auto_enter = true,
+                    auto_preview = true,
+                    virt_text = '┃',
+                    jump_key = 'o',
+                    auto_refresh = true,
+                },
+            })
+        end,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter', -- optional
+            'nvim-tree/nvim-web-devicons',     -- optional
+        }
+    },
 
     -- comments
     { "folke/todo-comments.nvim", opts = {}, config = function()
@@ -103,30 +183,6 @@ return {
             },
         }
     end},
-
-    -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing.
-    {
-        "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
-        keys = {
-            -- {
-            --     "`",
-            --     "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            --     desc = "Diagnostics",
-            -- },
-            {
-                "`",
-                "<cmd>Trouble diagnostics<cr>",
-                desc = "Diagnostics",
-            },
-            {
-                "<localleader>n",
-                "<cmd>Trouble symbols toggle focus=true<cr>",
-                desc = "Symbols",
-            },
-        },
-    },
 
     -- json schemas for various configs
     { 'b0o/schemastore.nvim' },
@@ -182,8 +238,8 @@ return {
                         return opts.prefix .. " " .. utils.get_node_text(node)[1]
                     end,
                 })
-                vim.api.nvim_set_hl(0, 'ContextVt', { fg = colors.crust, bg = "" })
-                vim.api.nvim_set_hl(0, 'GitComment', { fg = colors.crust, bg = "" })
+                vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.crust, bg = "" })
+                vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.crust, bg = "" })
             end },
     },
 

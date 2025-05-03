@@ -21,6 +21,7 @@ return {
       local cmp = require('cmp')
 
       cmp.setup({
+        preselect = cmp.PreselectMode.Item,
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -71,7 +72,7 @@ return {
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lsOpts = {
-        capabilities = capabilites,
+        capabilities = capabilities,
         on_attach = function(client, buffer)
           keymap.on_attach(client, buffer)
         end,
