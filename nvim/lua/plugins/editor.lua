@@ -58,44 +58,46 @@ return {
     },
 
     -- switch cwd based on patterns
-    { "ahmedkhalf/project.nvim", config = function()
-        require("project_nvim").setup {
-            manual_mode = false,
+    { "ahmedkhalf/project.nvim",
+        enabled = false,
+        config = function()
+            require("project_nvim").setup {
+                manual_mode = false,
 
-            detection_methods = { "lsp", "pattern" },
-            -- root dir / root patterns
-            patterns = {
-                ".git",
-                "_darcs",
-                ".hg",
-                ".bzr",
-                ".svn",
-                "Makefile",
-                "package.json",
-                ".terraform",
-                ".tflint.hcl",
-            },
+                detection_methods = { "lsp", "pattern" },
+                -- root dir / root patterns
+                patterns = {
+                    ".git",
+                    "_darcs",
+                    ".hg",
+                    ".bzr",
+                    ".svn",
+                    "Makefile",
+                    "package.json",
+                    ".terraform",
+                    ".tflint.hcl",
+                },
 
-            ignore_lsp = {},
+                ignore_lsp = {},
 
-            -- Don't calculate root dir on specific directories
-            -- Ex: { "~/.cargo/*", ... }
-            exclude_dirs = {},
+                -- Don't calculate root dir on specific directories
+                -- Ex: { "~/.cargo/*", ... }
+                exclude_dirs = {},
 
-            show_hidden = false,
+                show_hidden = false,
 
-            silent_chdir = true,
+                silent_chdir = true,
 
-            scope_chdir = 'global',
-        }
-    end },
+                scope_chdir = 'global',
+            }
+        end },
 
     -- dynamic dispaly of current argument in function as vt (and more)
     {
         "ray-x/lsp_signature.nvim",
         event = "InsertEnter",
         opts = {
-           -- cfg options
+            -- cfg options
         },
     },
 
@@ -122,7 +124,7 @@ return {
                     extend_gitsigns = false,
                 },
                 lightbulb = {
-                    enable = true,
+                    enable = false,
                     sign = true,
                     enable_in_insert = true,
                     sign_priority = 20,
