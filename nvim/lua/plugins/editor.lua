@@ -261,10 +261,10 @@ return {
 
     -- color picker and colorizer
     { "uga-rosa/ccc.nvim",
-        enabled = false,
         config = function()
             local ccc = require("ccc")
             ccc.setup({
+                lsp = false,
                 disable_default_mappings = true,
                 highlighter = {
                     auto_enable = true
