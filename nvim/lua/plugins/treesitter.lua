@@ -110,7 +110,7 @@ return {
                     },
                 },
                 context_commentstring = {
-                    enable = false,
+                    enable = true,
                     enable_autocmd = false,
                     config = {
                         javascript = {

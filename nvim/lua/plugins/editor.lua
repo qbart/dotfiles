@@ -93,6 +93,14 @@ return {
 
 
     {
+        "ray-x/lsp_signature.nvim",
+        event = "InsertEnter",
+        opts = {
+           -- cfg options
+        },
+    },
+
+    {
         'nvimdev/lspsaga.nvim',
         config = function()
             local symbols = require("utils.symbols")

@@ -1,10 +1,15 @@
 local keymap = require('plugins.lsp.keymap')
 
 return {
-  -- lspconfig
+  -- formatter
   {
     'stevearc/conform.nvim',
-    opts = {},
+    opts = {
+      formatters_by_ft = {
+        go = { "gofmt"},
+        lua = { "stylua" },
+      }
+    },
   },
 
   {
