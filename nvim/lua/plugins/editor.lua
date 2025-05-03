@@ -90,7 +90,7 @@ return {
         }
     end },
 
-
+    -- dynamic dispaly of current argument in function as vt (and more)
     {
         "ray-x/lsp_signature.nvim",
         event = "InsertEnter",
@@ -99,6 +99,7 @@ return {
         },
     },
 
+    -- some diagnostics and preview LSP
     {
         'nvimdev/lspsaga.nvim',
         config = function()
@@ -155,7 +156,7 @@ return {
         }
     },
 
-    -- comments
+    -- "TODO" comments
     { "folke/todo-comments.nvim", opts = {}, config = function()
         local palette = require("sequoia.palette")
         require("todo-comments").setup {
@@ -337,18 +338,8 @@ return {
     -- show idents
     { "lukas-reineke/indent-blankline.nvim",
         config = function()
-
-            local highlight = {
-                "CursorColumn",
-                "Whitespace",
-            }
             require("ibl").setup {
-                indent = { highlight = highlight, char = "" },
-                whitespace = {
-                    highlight = highlight,
-                    remove_blankline_trail = false,
-                },
-                scope = { enabled = false },
+                -- scope = { enabled = false },
             }
         end
     },

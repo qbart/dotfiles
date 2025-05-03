@@ -20,6 +20,7 @@ return {
         },
     },
 
+    -- pick window by letter
     {
         's1n7ax/nvim-window-picker',
         name = 'window-picker',
