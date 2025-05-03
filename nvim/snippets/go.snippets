@@ -3,12 +3,11 @@ snippet type "type <name> struct {...}"
 	    $0
     }
 
-snippet makes "<name> := make([]<slicetype>, 0)"
-    ${2:varname} := make([]${1:type}, 0)
-    $0
+snippet makes "make([]<T>, 0)"
+    make([]$0, 0)
 
-snippet makem "<name> := make(map[<key>]<value>, 0)"
-    ${3:varname} := make(map[${1:key}]${2:value}, 0)
+snippet makem "make(map[<key>]<value>, 0)"
+    make(map[${1:key}]${2:value}, 0)
     $0
 
 snippet fn "func name() {} free function"

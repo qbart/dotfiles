@@ -32,12 +32,22 @@ function M.on_attach(client, bufnr)
   -- vim.keymap.set('v', '<localleader>f', vim.lsp.buf.range_formatting, opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
-  -- vim.keymap.set('n', '<localleader>e', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.code_action, opts)
   -- vim.lsp.buf.declaration
   -- vim.lsp.buf.implementation
   -- vim.lsp.buf.type_definition
   -- vim.lsp.buf.references
   -- vim.lsp.buf.code_action
+  --
+  --
+  -- Open snippet file for current filetype
+  vim.keymap.set("n", "<leader>es", function()
+    local filetype = vim.bo.filetype
+    local snippet_path = vim.fn.stdpath("config") .. "/snippets/" .. filetype .. ".snippets"
+
+    -- Open the file
+    vim.cmd("edit " .. snippet_path)
+  end, { desc = "Edit snippets for current filetype" })
 end
 
 return M

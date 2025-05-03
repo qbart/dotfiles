@@ -62,11 +62,9 @@ vim.keymap.set('v', '<S-l>', [[<cmd>m-2<CR>gv=gv]], { noremap = true })
 vim.keymap.set('i', '<C-S-k>', [[<Esc><cmd>m+<CR>==gi]], { noremap = true })
 vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- diagnostic, refs, navigation outline
--- TODO: fix peek
-vim.keymap.set('n', '<C-CR>', [[<cmd>Lspsaga peek_definition<CR>]], { silent = true, noremap = true })
+vim.keymap.set('n', '<leader><CR>', [[<cmd>Lspsaga peek_definition<CR>]], { silent = true, noremap = true })
 vim.keymap.set('n', '`', [[<cmd>Lspsaga outline<CR>]], { silent = true, noremap = true })
 -- vim.keymap.set('n', '`', [[/@]], { silent = false, noremap = true })
-vim.keymap.set({ 'n', 'v' }, "<leader><leader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.keymap.set('n', '}}', vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set('n', ']]', vim.diagnostic.goto_next, { silent = true, noremap = true })
 -- vim.keymap.set("n", "<localleader>n", "[[<cmd>AerialToggle<CR>]]", { noremap = true, silent = true })

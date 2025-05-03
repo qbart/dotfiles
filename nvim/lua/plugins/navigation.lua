@@ -8,7 +8,7 @@ return {
     {
         "folke/flash.nvim",
         vscode = false,
-        enabled = false,
+        -- enabled = false,
         opts = {},
         -- stylua: ignore
         keys = {
