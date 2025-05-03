@@ -1,10 +1,10 @@
 local M = {}
 
-M.action = ""
-M.error = ""
-M.warning = ""
-M.information = ""
-M.hint = ""
+M.error = "󰅚"
+M.action = "󰌶"
+M.warning = "󰀪"
+M.information = "󰋽"
+M.hint = "󰌶"
 M.branch = ""
 
 M.Text = ''
