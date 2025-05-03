@@ -1,4 +1,3 @@
--- INFO:
 return {
     -- editorconfig
     { "gpanders/editorconfig.nvim" },
