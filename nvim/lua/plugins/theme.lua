@@ -37,7 +37,7 @@ return {
             lualine_c = {'filename', 'diagnostics'},
             lualine_x = {'filetype'},
             lualine_y = {},
-            lualine_z = { 'branch','mode'}
+            lualine_z = {'branch', 'mode'}
         },
         inactive_sections = {
             lualine_a = {},
