@@ -157,8 +157,7 @@ return {
 
     -- comments
     { "folke/todo-comments.nvim", opts = {}, config = function()
-
-        local colors = require("catppuccin.palettes.init").get_palette()
+        local palette = require("sequoia.palette")
         require("todo-comments").setup {
             signs = true, -- show icons in the signs column
             sign_priority = 8, -- sign priority
@@ -172,8 +171,8 @@ return {
                 TODO = { icon = "", color = "info" },
                 HACK = { icon = "", color = "error" },
                 WARN = { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
-                PERF = { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-                NOTE = { icon = "", color = "hint", alt = { "INFO" } },
+                PERF = { icon = " ", color = "warning", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                NOTE = { icon = " ", color = "hint", alt = { "INFO", "HINT" } },
                 TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
             },
             gui_style = {
@@ -181,12 +180,12 @@ return {
                 bg = "BOLD", -- The gui style to use for the bg highlight group.
             },
             colors = {
-                error = { "DiagnosticError", "ErrorMsg", colors.red },
-                warning = { "DiagnosticWarning", "WarningMsg", colors.peach },
-                info = { "DiagnosticInfo", colors.blue },
-                hint = { "DiagnosticHint", colors.teal },
-                default = { "Identifier", colors.mauve },
-                test = { "Identifier", "#FF00FF" }
+                error = { "DiagnosticError", "ErrorMsg", palette.error },
+                warning = { "DiagnosticWarn", "WarningMsg", palette.honey },
+                info = { "DiagnosticInfo", palette.baja },
+                hint = { "DiagnosticHint", palette.grass },
+                default = { "Identifier", palette.lily },
+                test = { "Identifier", palette.lily },
             },
         }
     end},
@@ -218,36 +217,37 @@ return {
 
     -- show closing context as virtualtext
     { "haringsrob/nvim_context_vt",
-        dependencies = { 'nvim-treesitter/nvim-treesitter',
-            config = function()
-                local palette = require("catppuccin.palettes.init").get_palette()
-                require('nvim_context_vt').setup({
-                    enabled = true,
-                    prefix = '',
-                    highlight = 'ContextVt',
-                    disable_ft = { 'markdown' },
-                    disable_virtual_lines = false,
-                    disable_virtual_lines_ft = { 'yaml' },
-                    -- How many lines required after starting position to show virtual text
-                    -- Default: 1 (equals two lines total)
-                    min_rows = 3,
-                    min_rows_ft = {},
-                    custom_parser = function(node, ft, opts)
-                        local utils = require('nvim_context_vt.utils')
-                        local type = node:type()
+        dependencies = { 'nvim-treesitter/nvim-treesitter', },
+        config = function()
+            local palette = require("sequoia.palette")
+            require('nvim_context_vt').setup({
+                enabled = true,
+                prefix = '//',
+                -- prefix = '',
+                highlight = 'ContextVt',
+                disable_ft = { 'markdown' },
+                disable_virtual_lines = false,
+                disable_virtual_lines_ft = { 'yaml' },
+                -- How many lines required after starting position to show virtual text
+                -- Default: 1 (equals two lines total)
+                min_rows = 3,
+                min_rows_ft = {},
+                custom_parser = function(node, ft, opts)
+                    local utils = require('nvim_context_vt.utils')
+                    local type = node:type()
 
-                        -- If you return `nil`, no virtual text will be displayed.
-                        if type == 'function' or type == "function_declaration" or type == "method_declaration" then
-                            return nil
-                        end
+                    -- If you return `nil`, no virtual text will be displayed.
+                    if type == 'function' or type == "function_declaration" or type == "method_declaration" then
+                        return nil
+                    end
 
-                        -- This is the standard text
-                        return opts.prefix .. " " .. utils.get_node_text(node)[1]
-                    end,
-                })
-                vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.crust, bg = "" })
-                vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.crust, bg = "" })
-            end },
+                    -- This is the standard text
+                    return opts.prefix .. " " .. utils.get_node_text(node)[1]
+                end,
+            })
+            vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.subtle, bg = "" })
+            vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
+        end ,
     },
 
     -- highlight arguments definitaions and usages

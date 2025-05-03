@@ -18,18 +18,24 @@ vim.keymap.set({ 'n', 'v' }, 'j', 'h', { noremap = true })
 -- faster nav
 vim.keymap.set({ 'n', 'v' }, '<C-k>', '5j', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-l>', '5k', { noremap = true })
-vim.keymap.set({ 'n' }, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
+vim.keymap.set({ 'n' }, '<leader>aa', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
 vim.g.VM_maps = {
     ["Skip Region"] = '<C-x>',
     -- ["Select Cursor Down"] = '∆', -- Option+J,
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
+-- window
+vim.keymap.set('n', '<leader>ww',  function()
+    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_win(picked_window_id)
+end, { noremap = true, silent = true })
 -- text edit
 vim.keymap.set('n', '<leader>cs', [[<cmd>SplitjoinSplit<CR>]], { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>cS', [[<cmd>SplitjoinJoin<CR>]], { noremap = true, silent = false })
 
 vim.g.VM_theme = 'purplegray'
 vim.keymap.set('n', "<C-e>", "<cmd>Neotree source=filesystem reveal=true<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', "<C-b>", "<cmd>Neotree toggle<CR>", { noremap = true, silent = true })
 vim.keymap.set('n', "<S-TAB>", "<cmd>Neotree source=buffers reveal=true position=float<CR>", { noremap = true , silent = true})
 -- save file
 vim.keymap.set('n', '<C-s>', [[<cmd>w<CR>]], { noremap = true })
@@ -59,6 +65,7 @@ vim.keymap.set('i', '<C-S-l>', [[<Esc><cmd>m-2<CR>==gi]], { noremap = true })
 -- TODO: fix peek
 vim.keymap.set('n', '<C-CR>', [[<cmd>Lspsaga peek_definition<CR>]], { silent = true, noremap = true })
 vim.keymap.set('n', '`', [[<cmd>Lspsaga outline<CR>]], { silent = true, noremap = true })
+-- vim.keymap.set('n', '`', [[/@]], { silent = false, noremap = true })
 vim.keymap.set({ 'n', 'v' }, "<leader><leader>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.keymap.set('n', '}}', vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set('n', ']]', vim.diagnostic.goto_next, { silent = true, noremap = true })

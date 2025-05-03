@@ -1,4 +1,16 @@
 return {
+    {
+        "forest-nvim/sequoia.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd("colorscheme sequoia") -- or 'sequoia-night' / 'sequoia-rise'
+        end
+    },
+
+
+    { "nyoom-engineering/oxocarbon.nvim" },
+
     { "catppuccin/nvim", name = "catppuccin", priority = 1000,
         config = function()
             require("catppuccin").setup({
@@ -94,7 +106,7 @@ return {
                         custom_bg = "NONE",
                     },
                 },
-                vim.api.nvim_command "colorscheme catppuccin-macchiato"
+                -- vim.api.nvim_command "colorscheme catppuccin-macchiato"
             })
         end
     },
@@ -102,7 +114,8 @@ return {
     { 'nvim-lualine/lualine.nvim', opts = {
         options = {
             icons_enabled = true,
-            theme = 'catppuccin-macchiato',
+            -- theme = 'catppuccin-macchiato',
+            theme = 'sequoia',
             component_separators = { left = '', right = ''},
             section_separators = { left = '', right = ''},
             disabled_filetypes = {
@@ -124,11 +137,11 @@ return {
         },
         sections = {
             lualine_a = {},
-            lualine_b = {'branch'},
-            lualine_c = {'diagnostics', 'filename', 'location'},
+            lualine_b = {'location'},
+            lualine_c = {'filename', 'diagnostics'},
             lualine_x = {'filetype'},
             lualine_y = {},
-            lualine_z = {'mode'}
+            lualine_z = { 'branch','mode'}
         },
         inactive_sections = {
             lualine_a = {},

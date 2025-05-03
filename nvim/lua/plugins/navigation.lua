@@ -20,6 +20,15 @@ return {
         },
     },
 
+    {
+        's1n7ax/nvim-window-picker',
+        name = 'window-picker',
+        event = 'VeryLazy',
+        version = '2.*',
+        config = function()
+            require'window-picker'.setup()
+        end,
+    },
 
     -- find in files
     {
@@ -58,7 +67,7 @@ return {
                     handler = function(_file_path)
                         local nt = require("neo-tree")
                         -- nt.clear_filter() -- clear file filters
-                        nt.close_all() -- auto close window
+                        -- nt.close_all() -- auto close window
                     end
                 },
             },
@@ -94,7 +103,7 @@ return {
                 icon = {
                     folder_closed = "",
                     folder_open = "",
-                    folder_empty = "ﰊ",
+                    folder_empty = "",
                     -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
                     -- then these will never be used.
                     default = "*",
