@@ -40,8 +40,10 @@ vim.o.completeopt = 'menuone,noselect'
 vim.g.mapleader = ','
 vim.g.maplocalleader = [[ ]]
 
+
 vim.o.compatible = false -- forget about vi compatibility
 -- vim.o.number = false -- no line nums on init
+vim.opt.foldenable = false
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 vim.o.langmenu = 'en_US.utf-8'
