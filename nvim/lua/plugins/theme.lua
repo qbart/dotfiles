@@ -4,6 +4,13 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
+            local palette = require("sequoia.palette")
+            require('sequoia').setup({
+                highlight_groups = {
+                    NeoTreeDirectoryIcon = { fg = palette.baja },
+                    NeoTreeDirectoryName = { fg = palette.baja },
+                },
+            })
             vim.cmd("colorscheme sequoia") -- or 'sequoia-night' / 'sequoia-rise'
         end
     },
@@ -53,5 +60,12 @@ return {
         extensions = {}
     }},
 
-    { 'nvim-tree/nvim-web-devicons' },
+    {
+        'nvim-tree/nvim-web-devicons',
+        config = function ()
+            require('nvim-web-devicons').setup({
+                color_icons = true,
+            })
+        end
+    },
 }
