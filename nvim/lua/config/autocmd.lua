@@ -40,3 +40,18 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+
+
+
+-- vim.api.nvim_create_autocmd('ColorScheme', {
+--   -- pattern = 'sequoia',
+--   pattern = '*',
+--   -- group = ...,
+--   callback = function()
+--     vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
+--       fg = '#ff00ff',
+--       ctermfg = 8,
+--       force = true
+--     })
+--   end
+-- })

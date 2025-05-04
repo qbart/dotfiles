@@ -1,4 +1,6 @@
 return {
+    { 'github/copilot.vim' },
+
     -- editorconfig
     { "gpanders/editorconfig.nvim" },
 

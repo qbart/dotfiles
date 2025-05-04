@@ -68,3 +68,9 @@ vim.keymap.set('n', '`', [[<cmd>Lspsaga outline<CR>]], { silent = true, noremap 
 vim.keymap.set('n', '}}', vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set('n', ']]', vim.diagnostic.goto_next, { silent = true, noremap = true })
 -- vim.keymap.set("n", "<localleader>n", "[[<cmd>AerialToggle<CR>]]", { noremap = true, silent = true })
+--
+-- ai
+vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})

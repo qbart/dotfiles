@@ -1,6 +1,9 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- set copilot to manual trigger
+vim.g.copilot_no_tab_map = true
+
 -- colors/sytnax
 vim.o.syntax = "ON"
 vim.o.termguicolors = true
