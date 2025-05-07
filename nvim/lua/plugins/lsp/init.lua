@@ -220,6 +220,10 @@ return {
 
   {
     "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      { 'williamboman/mason.nvim' },
+      { 'neovim/nvim-lspconfig' },
+    },
     opts = {
       ensure_installed = {
         'bashls',
@@ -252,6 +256,7 @@ return {
 
     config = function(_, opts)
       require("mason-lspconfig").setup {
+        automatic_enable = false,
         ensure_installed = opts.ensure_installed
       }
     end

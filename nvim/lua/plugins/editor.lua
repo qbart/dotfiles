@@ -317,10 +317,10 @@ return {
                 extra = true,
             },
             toggler = {
-                line = '<C-_>',
+                line = '<leader>cc',
             },
             opleader = {
-                line = '<C-_>',
+                line = '<leader>c',
             },
         }
         local comment_ft = require('Comment.ft')
