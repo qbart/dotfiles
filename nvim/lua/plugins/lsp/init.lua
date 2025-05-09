@@ -8,6 +8,7 @@ return {
       formatters_by_ft = {
         go = { "gofmt"},
         lua = { "stylua" },
+        terraform = { "terraform_fmt" },
       }
     },
   },
@@ -196,7 +197,6 @@ return {
       lspconfig.terraformls.setup(lsOpts)
       lspconfig.tflint.setup({
         capabilities = capabilities,
-        root_dir = vim.loop.cwd,
         filetypes = { "terraform", "tf", "hcl" },
       })
       lspconfig.ts_ls.setup(lsOpts)
