@@ -55,8 +55,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_THEME='Monokai Extended'
 
 # c++
-export CC=clang
-export CXX=clang++
+#export CC=clang
+#export CXX=clang++
 
 export PICO_SDK_PATH=~/sdk/pico
 
@@ -68,8 +68,11 @@ _fzf_complete_edit() {
 }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# cargo
+[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"
+
 # ----- 3rd party - asdf -----
-. $HOME/.asdf/asdf.sh
+[ -f ~/.asdf/asdf.sh ] && source $HOME/.asdf/asdf.sh
 
 # ----- theme -----
 [ -f ~/.bash_theme ] && source ~/.bash_theme
