@@ -23,7 +23,7 @@ export EDITOR=nvim
 [ -f ~/.zsh_ps1 ] && source ~/.zsh_ps1
 
 # ----- envs -----
-PATH=$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH
+PATH=$HOME/.asdf/shims:$PATH
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export HOMEBREW_NO_AUTO_UPDATE=1
 export OVERMIND_NO_PORT=1
@@ -46,9 +46,7 @@ _fzf_complete_edit() {
 }
 
 # ----- 3rd party - asdf -----
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.config/lf/lficons.sh ] && source ~/.config/lf/lficons.sh
 
 # ----- secrets -----
 [ -f ~/.secrets/load.sh ] && source ~/.secrets/load.sh
@@ -71,4 +69,3 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # bun completions
 [ -s "/Users/kiwi/.bun/_bun" ] && source "/Users/kiwi/.bun/_bun"
-
