@@ -166,6 +166,7 @@ alias dig='dig +short'
 alias ws='websocat'
 
 # docker
+alias docker='podman'
 alias dsh='podman exec -it $(  podman ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
 alias dbash='podman exec -it $(  podman ps | fzf | awk '"'"'{print $1;}'"'"'  ) bash'
 alias dkill='podman kill $(  podman ps | fzf | awk '"'"'{print $1;}'"'"'  )'
