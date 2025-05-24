@@ -41,13 +41,15 @@ export VCPKG_DISABLE_METRICS=1
 export VCPKG_ROOT=$HOME/d/3/vcpkg
 export FLYCTL_INSTALL="$HOME/.fly"
 export PICO_SDK_PATH=$HOME/sdk/pico
+export LLVM_ROOT=$HOME/d/3/llvm-project/build
 
 export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin
 export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/opt/cmake/bin:$HOME/d/3/llvm-project/build/bin:$VULKAN_SDK/bin
+export PATH=$LLVM_ROOT/bin:$VULKAN_SDK/bin:$PATH
+export PATH=/opt/cmake/bin:$PATH
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # fzf
