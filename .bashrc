@@ -43,11 +43,13 @@ export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/opt/cmake/bin
 export VISUAL=nvim # ranger
 export EDITOR=nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export STEPCI_DISABLE_ANALYTICS=1
 export OVERMIND_NO_PORT=1
+export VCPKG_DISABLE_METRICS=1
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'
