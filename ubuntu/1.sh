@@ -3,7 +3,7 @@
 sudo apt install \
      vim git cargo make fd-find curl cmake build-essential \
      htop tmux bat kitty podman podman-compose flatpak qemu-system \
-     xclip xsel peek flameshot
+     xclip xsel peek flameshot pkg-config
 
 [ ! -f ~/.gitconfig ] && cp ../.gitconfig ~/.gitconfig
 [ ! -f ~/bin/fd ] && ln -s $(which fdfind) ~/bin/fd
