@@ -43,13 +43,14 @@ export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/opt/cmake/bin
+export PATH=$PATH:/opt/cmake/bin:$HOME/d/3/llvm-project/build/bin
 export VISUAL=nvim # ranger
 export EDITOR=nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export STEPCI_DISABLE_ANALYTICS=1
 export OVERMIND_NO_PORT=1
 export VCPKG_DISABLE_METRICS=1
+export VCPKG_ROOT=$HOME/d/3/vcpkg
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .fzf --exclude .cache --exclude node_modules'
@@ -57,9 +58,13 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BAT_THEME='Monokai Extended'
 
 # c++
-#export CC=clang
-#export CXX=clang++
+if command -v clang 2>&1 >/dev/null
+then
+  export CC=clang
+  export CXX=clang++
+fi
 
+# sdk
 export PICO_SDK_PATH=~/sdk/pico
 
 # ----- 3rd party - fzf -----
