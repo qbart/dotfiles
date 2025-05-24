@@ -1,14 +1,19 @@
 #!/bin/bash
 
-sudo apt install vim git cargo make fd-find curl cmake build-essential htop tmux bat kitty podman
+sudo apt install \
+     vim git cargo make fd-find curl cmake build-essential \
+     htop tmux bat kitty podman podman-compose flatpak qemu-system \
+     xclip xsel peek flameshot
+
 [ ! -f ~/.gitconfig ] && cp ../.gitconfig ~/.gitconfig
+[ ! -f ~/bin/fd ] && ln -s $(which fdfind) ~/bin/fd
 
-ln -s $(which fdfind) ~/bin/fd
 
+echo "Manually install:"
+echo "  - eza from apt source"
+echo "  - asdf as binary"
+echo "  - git-delta via deb"
+echo "  - nvim compile"
 
-echo "Manually:"
-echo "TODO: install eza from apt source"
-echo "TODO: install asdf as binary"
-echo "TODO: install git-delta via deb"
-echo "TODO: compile nvim"
-echo "TODO: edit ~/.gitconfig and update missing"
+echo "Edit these files:"
+echo "  - ~/.gitconfig and update missing"
