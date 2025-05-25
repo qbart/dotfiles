@@ -37,6 +37,8 @@ export VISUAL=nvim # ranger
 export EDITOR=nvim
 export GOPATH=$HOME/go
 export VULKAN_SDK=$HOME/sdk/vulkan
+export VK_ADD_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d
+
 export VCPKG_DISABLE_METRICS=1
 export VCPKG_ROOT=$HOME/d/3/vcpkg
 export FLYCTL_INSTALL="$HOME/.fly"

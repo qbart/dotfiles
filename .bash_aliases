@@ -116,6 +116,8 @@ alias brm='git branch -D'
 alias br='echo && git branch -r'
 alias gg='git switch $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias wip='git commit -m "wip"'
+alias erc='edit ~/.bashrc'
+alias rrc='source ~/.bashrc'
 
 # terraform
 alias tg='terragrunt'
