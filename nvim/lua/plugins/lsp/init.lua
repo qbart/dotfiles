@@ -69,7 +69,11 @@ return {
       cmp.setup({
         preselect = cmp.PreselectMode.Item,
         window = {
-          completion = cmp.config.window.bordered(),
+          -- completion = cmp.config.window.bordered(),
+          completion = {
+            border = "none",
+            -- winhighlight = "Normal:CmpItemMenu,CursorLine:PmenuSel,Search:None",
+          },
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp_mapping,
@@ -85,6 +89,22 @@ return {
             { name = 'buffer' },
           })
       })
+
+      local palette = require("sequoia.palette")
+      vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg='NONE', fg=palette.text })
+      vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { bg='NONE', fg=palette.baja })
+      vim.api.nvim_set_hl(0, 'CmpItemKindText', { bg='NONE', fg=palette.subtle })
+      vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg='NONE', fg=palette.sky })
+      vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link='CmpItemKindFunction' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link='CmpItemKindFunction' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { link='CmpItemKindFunction' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link='CmpItemKindFunction' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg=palette.baja })
+      vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
+      vim.api.nvim_set_hl(0, 'CmpItemMenu', { bg="NONE", fg=palette.lavendar })
+      vim.api.nvim_set_hl(0, 'CmpItemKind', { bg="NONE", fg=palette.denim })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbr', { bg="NONE", fg=palette.lavendar })
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline('/', {

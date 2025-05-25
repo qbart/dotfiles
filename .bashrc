@@ -38,19 +38,21 @@ export EDITOR=nvim
 export GOPATH=$HOME/go
 export VULKAN_SDK=$HOME/sdk/vulkan
 export VK_ADD_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d
-
+export RENDERDOC_ROOT=$HOME/sdk/renderdoc
 export VCPKG_DISABLE_METRICS=1
 export VCPKG_ROOT=$HOME/d/3/vcpkg
 export FLYCTL_INSTALL="$HOME/.fly"
 export PICO_SDK_PATH=$HOME/sdk/pico
 export LLVM_ROOT=$HOME/d/3/llvm-project/build
 
+export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
+
 export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin
 export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
-export PATH=$LLVM_ROOT/bin:$VULKAN_SDK/bin:$PATH
+export PATH=$LLVM_ROOT/bin:$VULKAN_SDK/bin:$PATH:$RENDERDOC_ROOT/bin
 export PATH=/opt/cmake/bin:$PATH
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
