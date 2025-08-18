@@ -9,6 +9,8 @@ return {
         go = { "gofmt"},
         lua = { "stylua" },
         terraform = { "terraform_fmt" },
+        c = { "clang_format" },
+        cpp = { "clang_format" },
       }
     },
   },
