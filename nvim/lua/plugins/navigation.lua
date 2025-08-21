@@ -366,6 +366,7 @@ return {
             { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         },
         config = function()
+            local actions = require('telescope.actions')
             require('telescope').setup {
                 pickers = {
                     find_files = {
@@ -392,6 +393,10 @@ return {
                         i = {
                             ['<C-u>'] = false,
                             ['<C-d>'] = false,
+                            ['<esc>'] = actions.close,
+       -- ['<C-j>'] = actions.move_selection_next,
+        -- ['<C-k>'] = actions.move_selection_previous,
+        -- ['<C-h>'] = 'which_key',
                         },
                     },
                 },
