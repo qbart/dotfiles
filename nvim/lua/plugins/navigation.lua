@@ -290,70 +290,71 @@ return {
     },
 
     -- file/buffer/... fuzzy finder
-    { "ibhagwan/fzf-lua", opts = {}, config = function()
-        require('fzf-lua').setup {
-            winopts = {
-                height     = 0.85, -- window height
-                width      = 0.80, -- window width
-                row        = 0.35, -- window row position (0=top, 1=bottom)
-                col        = 0.50, -- window col position (0=left, 1=right)
-                border     = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-                fullscreen = false, -- start fullscreen?
-                treesitter = false,
-                preview    = {
-                    border       = 'border', -- border|noborder, applies only to
-                    -- native fzf previewers (bat/cat/git/etc)
-                    wrap         = 'nowrap', -- wrap|nowrap
-                    hidden       = 'nohidden', -- hidden|nohidden
-                    vertical     = 'down:70%', -- up|down:size
-                    horizontal   = 'right:70%', -- right|left:size
-                    layout       = 'flex', -- horizontal|vertical|flex
-                    flip_columns = 120, -- #cols to switch to horizontal on flex
-                    -- Only used with the builtin previewer:
-                    title        = true, -- preview border title (file/buf)?
-                    title_pos  = "left", -- left|center|right, title alignment
-                    scrollbar    = 'float', -- `false` or string:'float|border'
-                    -- float:  in-window floating border
-                    -- border: in-border chars (see below)
-                    scrolloff    = '-2', -- float scrollbar offset from right
-                    -- applies only when scrollbar = 'float'
-                    scrollchars  = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
-                    -- applies only when scrollbar = 'border'
-                    delay        = 100, -- delay(ms) displaying the preview
-                    -- prevents lag on fast scrolling
-                    winopts      = { -- builtin previewer window options
-                        number         = true,
-                        relativenumber = false,
-                        cursorline     = true,
-                        cursorlineopt  = 'both',
-                        cursorcolumn   = false,
-                        signcolumn     = 'no',
-                        list           = false,
-                        foldenable     = false,
-                        foldmethod     = 'manual',
-                    },
-                },
-                previewers = {
-                    builtin = {
-                        syntax         = true, -- preview syntax highlight?
-                        syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
-                        syntax_limit_b = 1024 * 1024 * 10, -- syntax limit (bytes), 0=nolimit
-                        limit_b        = 1024 * 1024 * 50, -- preview limit (bytes), 0=nolimit
-                        -- preview extensions using a custom shell command:
-                        -- for example, use `viu` for image previews
-                        -- will do nothing if `viu` isn't executable
-                        extensions     = {
-                            ["ico"] = { "viu", "-b" },
-                            ["png"] = { "viu", "-b" },
-                            ["jpg"] = { "viu", "-b" },
-                        },
-                    },
-                },
-            }
-        }
-
-    end,
-    },
+    -- { "ibhagwan/fzf-lua", opts = {}, config = function()
+    --     require('fzf-lua').setup {
+            -- winopts = {
+            --     height     = 0.85, -- window height
+            --     width      = 0.80, -- window width
+            --     row        = 0.35, -- window row position (0=top, 1=bottom)
+            --     col        = 0.50, -- window col position (0=left, 1=right)
+            --     border     = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+            --     fullscreen = false, -- start fullscreen?
+            --     treesitter = false,
+            --     preview    = {
+            --         default = 'bat', -- 'builtin' | 'bat' | 'cat' | 'git_diff' | 'none'
+            --         border       = 'border', -- border|noborder, applies only to
+            --         -- native fzf previewers (bat/cat/git/etc)
+            --         wrap         = 'nowrap', -- wrap|nowrap
+            --         hidden       = 'nohidden', -- hidden|nohidden
+            --         vertical     = 'down:70%', -- up|down:size
+            --         horizontal   = 'right:70%', -- right|left:size
+            --         layout       = 'flex', -- horizontal|vertical|flex
+            --         flip_columns = 120, -- #cols to switch to horizontal on flex
+            --         -- Only used with the builtin previewer:
+            --         title        = true, -- preview border title (file/buf)?
+            --         title_pos  = "left", -- left|center|right, title alignment
+            --         scrollbar    = 'float', -- `false` or string:'float|border'
+            --         -- float:  in-window floating border
+            --         -- border: in-border chars (see below)
+            --         scrolloff    = '-2', -- float scrollbar offset from right
+            --         -- applies only when scrollbar = 'float'
+            --         scrollchars  = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
+            --         -- applies only when scrollbar = 'border'
+            --         delay        = 100, -- delay(ms) displaying the preview
+            --         -- prevents lag on fast scrolling
+            --         winopts      = { -- builtin previewer window options
+            --             number         = true,
+            --             relativenumber = false,
+            --             cursorline     = true,
+            --             cursorlineopt  = 'both',
+            --             cursorcolumn   = false,
+            --             signcolumn     = 'no',
+            --             list           = false,
+            --             foldenable     = false,
+            --             foldmethod     = 'manual',
+            --         },
+            --     },
+            --     previewers = {
+            --         builtin = {
+            --             syntax         = true, -- preview syntax highlight?
+            --             syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
+            --             syntax_limit_b = 1024 * 1024 * 10, -- syntax limit (bytes), 0=nolimit
+            --             limit_b        = 1024 * 1024 * 50, -- preview limit (bytes), 0=nolimit
+            --             -- preview extensions using a custom shell command:
+            --             -- for example, use `viu` for image previews
+            --             -- will do nothing if `viu` isn't executable
+            --             extensions     = {
+            --                 ["ico"] = { "viu", "-b" },
+            --                 ["png"] = { "viu", "-b" },
+            --                 ["jpg"] = { "viu", "-b" },
+            --             },
+            --         },
+            --     },
+            -- }
+    --     }
+    --
+    -- end,
+    -- },
 
     -- Fuzzy Finder (files, lsp, etc)
     {
@@ -362,6 +363,7 @@ return {
             { 'nvim-lua/plenary.nvim' },
             { "otavioschwanck/telescope-alternate" },
             { "xiyaowong/telescope-emoji.nvim" },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         },
         config = function()
             require('telescope').setup {
@@ -402,6 +404,13 @@ return {
                             vim.fn.setreg("*", emoji.value)
                             print([[Press "*p to paste ]] .. emoji.value)
                         end,
+                    },
+                    fzf = {
+                      fuzzy = true, -- false will only do exact matching
+                      override_generic_sorter = true, -- override the generic sorter
+                      override_file_sorter = true, -- override the file sorter
+                      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
                     }
                 },
             }
@@ -415,6 +424,18 @@ return {
                     } },
                     { '(.*)_test.go', {
                         { '[1].go', 'Implementation' }
+                    } },
+                    { '(.*).cpp', {
+                        { '[1].hpp', 'Header' }
+                    } },
+                    { '(.*).hpp', {
+                        { '[1].cpp', 'Implementation' }
+                    } },
+                    { '(.*).c', {
+                        { '[1].h', 'Header' }
+                    } },
+                    { '(.*).h', {
+                        { '[1].c', 'Implementation' }
                     } },
                 },
                 presets = { 'rails', 'rspec', 'nestjs' }, -- Telescope pre-defined mapping presets
