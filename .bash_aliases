@@ -45,6 +45,7 @@ alias cdf='cd $(z | awk "{print \$2}" | fzf)'
 alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'{print $2;}'"'"')'
 alias ok='echo -e "\e[32mok\e[0m"'
 alias iplocal='ifconfig -a | grep 192'
+alias trustbin='xattr -dr com.apple.quarantine'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
