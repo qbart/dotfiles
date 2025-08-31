@@ -18,7 +18,8 @@ vim.keymap.set({ 'n', 'v' }, 'j', 'h', { noremap = true })
 -- faster nav
 vim.keymap.set({ 'n', 'v' }, '<C-k>', '5j', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-l>', '5k', { noremap = true })
-vim.keymap.set({ 'n' }, '<leader>aa', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
+vim.keymap.set({ 'n' }, '<leader>a', [[<cmd>Telescope telescope-alternate alternate_file<CR>]], { noremap = true })
+vim.keymap.set({ 'n' }, '#', [[<cmd>Telescope lsp_document_symbols<CR>]], { noremap = true })
 vim.g.VM_maps = {
     ["Skip Region"] = '<C-x>',
     -- ["Select Cursor Down"] = '∆', -- Option+J,
