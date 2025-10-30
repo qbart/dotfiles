@@ -54,6 +54,7 @@ export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$LLVM_ROOT/bin:$VULKAN_SDK/bin:$PATH:$RENDERDOC_ROOT/bin
 export PATH=/opt/cmake/bin:$PATH
+export PATH=/snap/bin:$PATH
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # fzf
