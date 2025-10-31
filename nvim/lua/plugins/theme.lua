@@ -1,24 +1,28 @@
 return {
     {
-        "forest-nvim/sequoia.nvim",
+        "EdenEast/nightfox.nvim",
         lazy = false,
         priority = 1000,
+        options = {
+        },
         config = function()
-            local palette = require("sequoia.palette")
-            require('sequoia').setup({
-                highlight_groups = {
-                    NeoTreeDirectoryIcon = { fg = palette.baja },
-                    NeoTreeDirectoryName = { fg = palette.baja },
-                },
-            })
-            vim.cmd("colorscheme sequoia") -- or 'sequoia-night' / 'sequoia-rise'
+            -- local palette = require("sequoia.palette")
+            -- require('sequoia').setup({
+            --     highlight_groups = {
+            --         NeoTreeDirectoryIcon = { fg = palette.baja },
+            --         NeoTreeDirectoryName = { fg = palette.baja },
+            --     },
+            -- })
+            vim.cmd("colorscheme carbonfox")
+            vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#000000" })
         end
     },
 
     { 'nvim-lualine/lualine.nvim', opts = {
         options = {
             icons_enabled = true,
-            theme = 'sequoia',
+            theme = 'carbonfox',
             component_separators = { left = '', right = ''},
             section_separators = { left = '', right = ''},
             disabled_filetypes = {

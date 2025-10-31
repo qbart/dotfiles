@@ -160,7 +160,7 @@ return {
 
     -- "TODO" comments
     { "folke/todo-comments.nvim", opts = {}, config = function()
-        local palette = require("sequoia.palette")
+        -- local palette = require("sequoia.palette")
         require("todo-comments").setup {
             signs = true, -- show icons in the signs column
             sign_priority = 8, -- sign priority
@@ -182,14 +182,14 @@ return {
                 fg = "NONE", -- The gui style to use for the fg highlight group.
                 bg = "BOLD", -- The gui style to use for the bg highlight group.
             },
-            colors = {
-                error = { "DiagnosticError", "ErrorMsg", palette.error },
-                warning = { "DiagnosticWarn", "WarningMsg", palette.honey },
-                info = { "DiagnosticInfo", palette.baja },
-                hint = { "DiagnosticHint", palette.grass },
-                default = { "Identifier", palette.lily },
-                test = { "Identifier", palette.lily },
-            },
+            -- colors = {
+                -- error = { "DiagnosticError", "ErrorMsg", palette.error },
+                -- warning = { "DiagnosticWarn", "WarningMsg", palette.honey },
+                -- info = { "DiagnosticInfo", palette.baja },
+                -- hint = { "DiagnosticHint", palette.grass },
+                -- default = { "Identifier", palette.lily },
+                -- test = { "Identifier", palette.lily },
+            -- },
         }
     end},
 
@@ -222,7 +222,7 @@ return {
     { "haringsrob/nvim_context_vt",
         dependencies = { 'nvim-treesitter/nvim-treesitter', },
         config = function()
-            local palette = require("sequoia.palette")
+            -- local palette = require("sequoia.palette")
             require('nvim_context_vt').setup({
                 enabled = true,
                 prefix = '//',
@@ -248,8 +248,8 @@ return {
                     return opts.prefix .. " " .. utils.get_node_text(node)[1]
                 end,
             })
-            vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.subtle, bg = "" })
-            vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
+            -- vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.subtle, bg = "" })
+            -- vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
         end ,
     },
 
