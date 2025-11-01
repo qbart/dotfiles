@@ -1,5 +1,3 @@
-local keymap = require('plugins.lsp.keymap')
-
 return {
   -- formatter
   {
@@ -155,26 +153,34 @@ return {
 
       local lsOpts = {
         capabilities = capabilities,
-        on_attach = function(client, buffer)
-          keymap.on_attach(client, buffer)
-        end,
-        root_dir = vim.loop.cwd,
+        -- on_attach = function(client, buffer)
+        --   keymap.on_attach(client, buffer)
+        -- end,
+        root_dir = vim.loop.cwd(),
+        -- root_markers = {
+        --   '.git',
+        -- },
         flags = {
           debounce_text_changes = 150
         },
       }
 
-      vim.lsp.config('bashls', lsOpts)
-      vim.lsp.config('clangd', lsOpts)
-      vim.lsp.config('cssls', lsOpts)
-      vim.lsp.config('dockerls', lsOpts)
-      vim.lsp.config('docker_compose_language_service', lsOpts)
-      vim.lsp.config('eslint', lsOpts)
-      --vim.lsp.config('glslls', lsOpts)
-      --vim.lsp.config('golangci_lint_ls', lsOpts)
-      vim.lsp.config('gopls', lsOpts)
-      vim.lsp.config('html', lsOpts)
-      vim.lsp.config('jsonls', {
+      local lspconfig = function(server, config)
+        vim.lsp.config[server] = config
+        vim.lsp.enable(server)
+      end
+
+      lspconfig('bashls', lsOpts)
+      lspconfig('clangd', lsOpts)
+      lspconfig('cssls', lsOpts)
+      lspconfig('dockerls', lsOpts)
+      lspconfig('docker_compose_language_service', lsOpts)
+      lspconfig('eslint', lsOpts)
+      --lspconfig('glslls', lsOpts)
+      --lspconfig('golangci_lint_ls', lsOpts)
+      lspconfig('gopls', lsOpts)
+      lspconfig('html', lsOpts)
+      lspconfig('jsonls', {
         capabilities = capabilities,
         root_dir = vim.loop.cwd,
         settings = {
@@ -182,7 +188,7 @@ return {
           validate = { enable = true },
         }
       })
-      vim.lsp.config('lua_ls', {
+      lspconfig('lua_ls', {
         settings = {
           Lua = {
             workspace = {
@@ -208,23 +214,23 @@ return {
           },
         },
       })
-      vim.lsp.config('marksman', lsOpts)
-      vim.lsp.config('omnisharp', lsOpts)
-      vim.lsp.config('pyright', lsOpts)
-      vim.lsp.config('rust_analyzer', lsOpts)
-      vim.lsp.config('sqlls', lsOpts)
-      vim.lsp.config('tailwindcss', lsOpts)
-      vim.lsp.config('templ', lsOpts)
-      vim.lsp.config('terraformls', lsOpts)
-      vim.lsp.config('tflint', {
+      lspconfig('marksman', lsOpts)
+      lspconfig('omnisharp', lsOpts)
+      lspconfig('pyright', lsOpts)
+      lspconfig('rust_analyzer', lsOpts)
+      lspconfig('sqlls', lsOpts)
+      lspconfig('tailwindcss', lsOpts)
+      lspconfig('templ', lsOpts)
+      lspconfig('terraformls', lsOpts)
+      lspconfig('tflint', {
         capabilities = capabilities,
         filetypes = { "terraform", "tf", "hcl" },
       })
-      vim.lsp.config('ts_ls', lsOpts)
-      vim.lsp.config('wgsl_analyzer', lsOpts)
-      vim.lsp.config('yamlls', lsOpts)
+      lspconfig('ts_ls', lsOpts)
+      lspconfig('wgsl_analyzer', lsOpts)
+      lspconfig('yamlls', lsOpts)
 
-      vim.cmd([[ do User LspAttach Buffers ]])
+      -- vim.cmd([[ do UserLspAttach ]])
     end,
   },
 
