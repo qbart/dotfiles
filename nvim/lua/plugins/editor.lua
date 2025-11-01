@@ -150,17 +150,21 @@ return {
                     ref = ' ',
                     link = '  ',
                 },
-                show_outline = {
+                outline = {
                     win_position = 'right',
                     --set special filetype win that outline window split.like NvimTree neotree
                     -- defx, db_ui
                     win_with = '',
                     win_width = 40,
-                    auto_enter = true,
                     auto_preview = true,
+                    auto_close = true,
                     virt_text = '┃',
                     jump_key = 'o',
                     auto_refresh = true,
+                    close_after_jump = true,
+                    keys = {
+                        jump = '<CR>',
+                    },
                 },
             })
         end,

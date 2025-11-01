@@ -6,16 +6,12 @@ return {
         options = {
         },
         config = function()
-            -- local palette = require("sequoia.palette")
-            -- require('sequoia').setup({
-            --     highlight_groups = {
-            --         NeoTreeDirectoryIcon = { fg = palette.baja },
-            --         NeoTreeDirectoryName = { fg = palette.baja },
-            --     },
-            -- })
+            -- local palette = require('nightfox.palette').load("carbonfox")
             vim.cmd("colorscheme carbonfox")
+            -- black background
             vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#000000" })
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#070707" })
+            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#151515', bg = 'NONE' })
         end
     },
 
