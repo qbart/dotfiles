@@ -19,11 +19,21 @@ return {
         "robitx/gp.nvim",
         config = function()
             local conf = {
-                -- For customization, refer to Install > Configuration in the Documentation/Readme
+                chat_confirm_delete = false,
+                providers = {
+                    openai = {
+                        disable = true,
+                    },
+                    anthropic = {
+                        disable = false,
+                        endpoint = "https://api.anthropic.com/v1/messages",
+                        secret = {
+                            "cat", os.getenv("HOME") .. "/.secrets/ANTHROPIC_API_KEY"
+                        },
+                    },
+                }
             }
             require("gp").setup(conf)
-
-            -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
         end,
     },
 
