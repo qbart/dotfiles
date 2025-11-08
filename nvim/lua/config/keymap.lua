@@ -6,7 +6,7 @@ vim.keymap.set({'n', 'v'}, 'zi', [[<cmd>GpImplement<CR>]], { noremap = true })
 vim.keymap.set({'n', 'v'}, 'za', [[:GpAppend ]], { noremap = true })
 vim.keymap.set({'n', 'v'}, 'zc', [[<cmd>GpChatNew vsplit<CR>]], { noremap = true })
 vim.keymap.set({'n', 'v'}, 'zx', [[<cmd>GpContext vsplit<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'zp', [[<cmd>GpChaPaste vsplit<CR>]], { noremap = true })
+vim.keymap.set({'n', 'v'}, 'zp', [[<cmd>GpChatPaste vsplit<CR>]], { noremap = true })
 --
 -- finders
 --
