@@ -5,12 +5,12 @@
 
   outputs = { self, nixpkgs }: 
   let
-    system = "aarch64-darwin"; # or "x86_64-darwin" if you have Intel Mac
+    system = "aarch64-darwin"; 
     pkgs = import nixpkgs { inherit system; };
   in {
-    devShells.default = pkgs.mkShell {
+    devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
-        exa
+        eza
       ];
     };
   };
