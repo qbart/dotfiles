@@ -7,7 +7,6 @@ chmod 0700 ~/.secrets
 
 
 ln -f -s "$(pwd)/.vimrc" ~/.vimrc
-ln -f -s "$(pwd)/nix" ~/.config/nix
 ln -f -s "$(pwd)/.tmux.conf" ~/.tmux.conf
 ln -f -s "$(pwd)/nvim" ~/.config/nvim
 ln -f -s "$(pwd)/kitty" ~/.config/kitty
@@ -27,4 +26,3 @@ ln -f -s "$(pwd)/.terraformrc" ~/.terraformrc
 rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim
 rm ~/.config/byhost/byhost
-rm ~/.config/nix/nix
