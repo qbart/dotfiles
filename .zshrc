@@ -24,7 +24,7 @@ export EDITOR=nvim
 
 # ----- envs -----
 PATH=$HOME/.asdf/shims:$PATH
-PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
+PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin:/usr/local/bin
 export HOMEBREW_NO_AUTO_UPDATE=1
 export OVERMIND_NO_PORT=1
 
