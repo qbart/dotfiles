@@ -31,7 +31,11 @@ alias relzsh='source ~/.zshrc'
 alias mkdirtoday1='mkdir $(date -I)'
 alias mkdirtoday3='mkdir -p $(date -I | tr "-" "/")'
 alias mkdir='mkdir -p'
-alias cat='bat -p'
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  alias cat='batcat -p'
+else
+  alias cat='bat -p'
+fi
 alias ra='source ~/.bash_aliases'
 alias ea='edit ~/.bash_aliases'
 alias copy='rsync -ah --inplace --info=progress2'
