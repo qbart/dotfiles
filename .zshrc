@@ -17,6 +17,7 @@ setopt CORRECT
 
 export VISUAL=nvim
 export EDITOR=nvim
+export GPG_TTY=$(tty)
 
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases

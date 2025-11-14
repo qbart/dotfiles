@@ -1,6 +1,7 @@
 [user]
-	email = 
+	email = git@qbart.dev
 	name = qbart
+	signingkey = A63B5B96B64B14A5881E034E3BEB5D856985D0D5
 
 [core]
     pager = delta 
@@ -23,3 +24,5 @@
 [diff]
     colorMoved = default
 
+[commit]
+	gpgsign = true
