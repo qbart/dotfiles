@@ -1,24 +1,54 @@
 return {
     {
-        "EdenEast/nightfox.nvim",
-        lazy = false,
-        priority = 1000,
+        "ellisonleao/gruvbox.nvim",
         options = {
+            terminal_colors = true, -- add neovim terminal colors
+            undercurl = true,
+            underline = true,
+            bold = true,
+            italic = {
+                strings = true,
+                emphasis = true,
+                comments = true,
+                operators = false,
+                folds = true,
+            },
+            strikethrough = true,
+            invert_selection = false,
+            invert_signs = false,
+            invert_tabline = false,
+            inverse = true, -- invert background for search, diffs, statuslines and errors
+            contrast = "hard", -- can be "hard", "soft" or empty string
+            palette_overrides = {},
+            dim_inactive = false,
+            overrides = {},
+            transparent_mode = false,
         },
         config = function()
-            -- local palette = require('nightfox.palette').load("carbonfox")
-            vim.cmd("colorscheme carbonfox")
-            -- black background
-            vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#070707" })
-            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#151515', bg = 'NONE' })
+            vim.cmd("colorscheme gruvbox")
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#333333" })
         end
     },
+    -- {
+    --     "EdenEast/nightfox.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     options = {
+    --     },
+    --     config = function()
+    --         -- vim.cmd("colorscheme carbonfox")
+    --         -- black background
+    --         -- vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+    --         -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#070707" })
+    --         -- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#151515', bg = 'NONE' })
+    --     end
+    -- },
 
     { 'nvim-lualine/lualine.nvim', opts = {
         options = {
             icons_enabled = true,
-            theme = 'carbonfox',
+            theme = 'gruvbox',
+            -- theme = 'carbonfox',
             component_separators = { left = '', right = ''},
             section_separators = { left = '', right = ''},
             disabled_filetypes = {

@@ -8,6 +8,7 @@ vim.g.copilot_no_tab_map = true
 vim.o.syntax = "ON"
 vim.o.termguicolors = true
 vim.o.background="dark"
+-- vim.o.background="light"
 
 -- share clipboard
 vim.o.clipboard = 'unnamedplus'
