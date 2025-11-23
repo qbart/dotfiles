@@ -35,6 +35,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias cat='batcat -p'
 else
   alias cat='bat -p'
+  alias htop='btop'
 fi
 alias ra='source ~/.bash_aliases'
 alias ea='edit ~/.bash_aliases'
