@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cargo install git-delta eza bat ripgrep hwatch websocat
+cargo install git-delta eza bat ripgrep hwatch websocat fd-find
