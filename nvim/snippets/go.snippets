@@ -1,4 +1,4 @@
-snippet type "type <name> struct {...}"
+snippet types "type <name> struct {...}"
     type ${1:name} struct {
 	    $0
     }
@@ -27,9 +27,9 @@ snippet fnsr "func (s *S) name() {} struct function with return"
 	    return $6
     }
 
-snippet test "func Test_(t *testing.T) test"
+snippet test "func Test(t *testing.T) test"
     func Test_${1}(t *testing.T) {
-	    $0
+        $0
     }
 
 snippet date "2006-01-02T15:04:05Z07:00 (RFC3339)"
@@ -45,23 +45,29 @@ snippet gracefulshutdown "Graceful shutdown with deadline"
     defer cancel()
     srv.Shutdown(ctx)
 
-snippet httphandler "stdlib HTTP handler"
+snippet fnhh "stdlib HTTP handler"
     func $1(w http.ResponseWriter, r *http.Request) {
 	    fmt.Fprintf(w, "$0")
     }
 
-snippet jsonencode "json encode map[string]interface{}"
-	json.NewEncoder($1).Encode(map[string]interface{}{
+snippet jencode "json encode map[string]any{}"
+	json.NewEncoder($1).Encode(map[string]any{}{
 		$0,
 	})
 
 snippet fmterr "fmt.Errorf"
     fmt.Errorf("$0: %w", err)
 
-snippet ife "if err != nil {"
     if err != nil {
 	    return fmt.Errorf("$0: %w", err)
     }
+
+snippet fopen "open file"
+    f, err := os.OpenFile("$0", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+    if err != nil {
+	    return err
+    }
+    defer f.Close()
 
 snippet logoutput "set log output"
     f, err := os.OpenFile("$0test.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
