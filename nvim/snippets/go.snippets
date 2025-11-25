@@ -58,6 +58,7 @@ snippet jencode "json encode map[string]any{}"
 snippet fmterr "fmt.Errorf"
     fmt.Errorf("$0: %w", err)
 
+snippet ifer "if err != nil {...}"
     if err != nil {
 	    return fmt.Errorf("$0: %w", err)
     }
