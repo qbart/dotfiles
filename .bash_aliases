@@ -142,6 +142,7 @@ tfmod() {
 
 # go
 alias gohot='air -c air.conf'
+alias nocgo='export CGO_ENABLED=0'
 alias khr='dev ssh known-hosts reset'
 alias hsd='hugo serve -D'
 alias igo='yaegi'
