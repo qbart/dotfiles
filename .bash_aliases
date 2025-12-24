@@ -119,6 +119,7 @@ alias gfa='git fetch --all --tags'
 alias gat='git tag -m "Set version" -a'
 alias gl='git log --oneline --color=always --decorate --graph'
 alias gll='git log --oneline -200 --color=always'
+alias gai='git add . && git commit -m "ai: generated chunk"'
 alias st='git status'
 alias brm='git branch -D'
 alias br='echo && git branch -r'
@@ -212,7 +213,11 @@ alias loc='xargs wc -l'
 alias restartpolybar='~/.config/polybar/launch.sh'
 
 dns() {
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  sudo resolvectl flush-caches
+else
   sudo dscacheutil -flushcache
+fi
 }
 
 #
