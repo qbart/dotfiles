@@ -65,6 +65,15 @@ fi
 export VCPKG_DISABLE_METRICS=true
 export VCPKG_ROOT=$HOME/sdk/vcpkg
 export VULKAN_SDK=$HOME/sdk/VulkanSDK/1.3.296.0/macOS
+export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
+export PATH="$VULKAN_SDK/bin:$PATH"
+
+# c++
+if command -v clang 2>&1 >/dev/null
+then
+  export CC=clang
+  export CXX=clang++
+fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
