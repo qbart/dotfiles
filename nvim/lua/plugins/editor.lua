@@ -16,24 +16,43 @@ return {
     },
 
     {
-        "robitx/gp.nvim",
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
         config = function()
-            local conf = {
-                chat_confirm_delete = false,
-                providers = {
-                    openai = {
-                        disable = true,
+            require("copilot").setup({
+                panel = {
+                    enabled = true,
+                    auto_refresh = false,
+                    keymap = {
+                        jump_prev = false,
+                        jump_next = false,
+                        accept = "<CR>",
+                        refresh = false,
+                        open = false,
                     },
-                    anthropic = {
-                        disable = false,
-                        endpoint = "https://api.anthropic.com/v1/messages",
-                        secret = {
-                            "cat", os.getenv("HOME") .. "/.secrets/ANTHROPIC_API_KEY"
-                        },
+                    layout = {
+                        position = "bottom", -- | top | left | right | bottom |
+                        ratio = 0.4
                     },
-                }
-            }
-            require("gp").setup(conf)
+                },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = false,
+                    hide_during_completion = true,
+                    debounce = 15,
+                    trigger_on_accept = false,
+                    keymap = {
+                        accept = false,
+                        accept_word = false,
+                        accept_line = false,
+                        next = false,
+                        prev = false,
+                        dismiss = "<C-x>",
+                        toggle_auto_trigger = false,
+                    },
+                },
+            })
         end,
     },
 
@@ -209,12 +228,12 @@ return {
                 bg = "BOLD", -- The gui style to use for the bg highlight group.
             },
             -- colors = {
-                -- error = { "DiagnosticError", "ErrorMsg", palette.error },
-                -- warning = { "DiagnosticWarn", "WarningMsg", palette.honey },
-                -- info = { "DiagnosticInfo", palette.baja },
-                -- hint = { "DiagnosticHint", palette.grass },
-                -- default = { "Identifier", palette.lily },
-                -- test = { "Identifier", palette.lily },
+            -- error = { "DiagnosticError", "ErrorMsg", palette.error },
+            -- warning = { "DiagnosticWarn", "WarningMsg", palette.honey },
+            -- info = { "DiagnosticInfo", palette.baja },
+            -- hint = { "DiagnosticHint", palette.grass },
+            -- default = { "Identifier", palette.lily },
+            -- test = { "Identifier", palette.lily },
             -- },
         }
     end},

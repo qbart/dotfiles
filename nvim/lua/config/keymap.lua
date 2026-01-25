@@ -1,12 +1,10 @@
 --
 -- ai
 --
-vim.keymap.set({'n', 'v'}, 'zz', [[:GpRewrite ]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'zi', [[<cmd>GpImplement<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'za', [[:GpAppend ]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'zc', [[<cmd>GpChatNew vsplit<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'zx', [[<cmd>GpContext vsplit<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'zp', [[<cmd>GpChatPaste vsplit<CR>]], { noremap = true })
+vim.keymap.set({'n', 'v'}, 'zz', [[<cmd>Copilot panel toggle<CR>]], { noremap = true })
+vim.keymap.set({'n', 'v'}, 'za', [[<cmd>Copilot panel accept<CR>]], { noremap = true })
+vim.keymap.set({'n', 'v'}, 'z.', [[<cmd>Copilot panel jump_next<CR>]], { noremap = true })
+vim.keymap.set({'n', 'v'}, 'z,', [[<cmd>Copilot panel jump_prev<CR>]], { noremap = true })
 --
 -- finders
 --
@@ -51,8 +49,7 @@ vim.keymap.set('n', "<S-TAB>", "<cmd>Neotree source=buffers reveal=true position
 -- save file
 vim.keymap.set('n', '<C-s>', [[<cmd>w<CR>]], { noremap = true })
 -- quit
-vim.keymap.set('n', '<C-q>', [[<cmd>q<CR>]], { noremap = true, silent = true })
-vim.keymap.set('n', '<C-S-q>', [[<cmd>qa!<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-q>', [[<cmd>qa<CR>]], { noremap = true, silent = true })
 -- splits
 vim.keymap.set('n', '<leader>wk', [[<cmd>sp<CR>]], {})
 vim.keymap.set('n', '<leader>wl', [[<cmd>vs<CR>]], {})
@@ -79,9 +76,3 @@ vim.keymap.set('n', '`', [[<cmd>Lspsaga outline<CR>]], { silent = true, noremap 
 vim.keymap.set('n', '}}', vim.diagnostic.goto_prev, { silent = true, noremap = true })
 vim.keymap.set('n', ']]', vim.diagnostic.goto_next, { silent = true, noremap = true })
 -- vim.keymap.set("n", "<localleader>n", "[[<cmd>AerialToggle<CR>]]", { noremap = true, silent = true })
---
--- ai
-vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
-})

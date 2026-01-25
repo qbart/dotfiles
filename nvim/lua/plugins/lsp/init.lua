@@ -66,6 +66,14 @@ return {
         -- }), -- accept only if select so you can create new line normally
       }
 
+      -- cmp.event:on("menu_opened", function()
+      --   vim.b.copilot_suggestion_hidden = true
+      -- end)
+      --
+      -- cmp.event:on("menu_closed", function()
+      --   vim.b.copilot_suggestion_hidden = false
+      -- end)
+      --
       cmp.setup({
         preselect = cmp.PreselectMode.Item,
         window = {
@@ -218,7 +226,7 @@ return {
       lspconfig('omnisharp', lsOpts)
       lspconfig('pyright', lsOpts)
       lspconfig('rust_analyzer', lsOpts)
-      lspconfig('sqlls', lsOpts)
+      -- lspconfig('sqlls', lsOpts)
       lspconfig('tailwindcss', lsOpts)
       lspconfig('templ', lsOpts)
       lspconfig('terraformls', lsOpts)
