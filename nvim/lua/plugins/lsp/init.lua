@@ -9,6 +9,7 @@ return {
         terraform = { "terraform_fmt" },
         c = { "clang_format" },
         cpp = { "clang_format" },
+        rust = { "rustfmt" },
       }
     },
   },
