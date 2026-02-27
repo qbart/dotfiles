@@ -247,3 +247,14 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+tea()
+{
+  caffeinate -dimsu &
+  osascript -e 'tell application "System Events" to keystroke "q" using {control down, command down}'
+}
+
+untea()
+{
+  pkill caffeinate
+}
