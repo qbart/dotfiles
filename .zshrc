@@ -64,7 +64,8 @@ if [ -d "$HOME/sdk/pico" ]; then
 fi
 export VCPKG_DISABLE_METRICS=true
 export VCPKG_ROOT=$HOME/sdk/vcpkg
-export VULKAN_SDK=$HOME/sdk/VulkanSDK/1.3.296.0/macOS
+export VULKAN_SDK=$HOME/sdk/VulkanSDK/1.4.335.1/macOS
+export VULKAN_ROOT=$VULKAN_SDK
 export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 export PATH="$VULKAN_SDK/bin:$PATH"
 
