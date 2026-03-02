@@ -1,10 +1,10 @@
 --
 -- ai
 --
-vim.keymap.set({'n', 'v'}, 'zz', [[<cmd>Copilot panel toggle<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'za', [[<cmd>Copilot panel accept<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'z.', [[<cmd>Copilot panel jump_next<CR>]], { noremap = true })
-vim.keymap.set({'n', 'v'}, 'z,', [[<cmd>Copilot panel jump_prev<CR>]], { noremap = true })
+-- vim.keymap.set({'n', 'v'}, 'zz', [[<cmd>Copilot panel toggle<CR>]], { noremap = true })
+-- vim.keymap.set({'n', 'v'}, 'za', [[<cmd>Copilot panel accept<CR>]], { noremap = true })
+-- vim.keymap.set({'n', 'v'}, 'z.', [[<cmd>Copilot panel jump_next<CR>]], { noremap = true })
+-- vim.keymap.set({'n', 'v'}, 'z,', [[<cmd>Copilot panel jump_prev<CR>]], { noremap = true })
 --
 -- finders
 --
