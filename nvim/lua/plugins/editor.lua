@@ -15,47 +15,6 @@ return {
     end,
     },
 
-    -- {
-    --     "zbirenbaum/copilot.lua",
-    --     cmd = "Copilot",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot").setup({
-    --             panel = {
-    --                 enabled = true,
-    --                 auto_refresh = false,
-    --                 keymap = {
-    --                     jump_prev = false,
-    --                     jump_next = false,
-    --                     accept = "<CR>",
-    --                     refresh = false,
-    --                     open = false,
-    --                 },
-    --                 layout = {
-    --                     position = "bottom", -- | top | left | right | bottom |
-    --                     ratio = 0.4
-    --                 },
-    --             },
-    --             suggestion = {
-    --                 enabled = true,
-    --                 auto_trigger = false,
-    --                 hide_during_completion = true,
-    --                 debounce = 15,
-    --                 trigger_on_accept = false,
-    --                 keymap = {
-    --                     accept = false,
-    --                     accept_word = false,
-    --                     accept_line = false,
-    --                     next = false,
-    --                     prev = false,
-    --                     dismiss = "<C-x>",
-    --                     toggle_auto_trigger = false,
-    --                 },
-    --             },
-    --         })
-    --     end,
-    -- },
-    --
     -- auto pairs
     {
         "echasnovski/mini.pairs",
@@ -332,7 +291,7 @@ return {
         end
     },
 
-    -- scrollbar
+    -- git scrollbar
     { "petertriho/nvim-scrollbar", config = function()
         require("scrollbar").setup()
     end},

@@ -34,7 +34,7 @@ vim.g.VM_maps = {
     -- ["Select Cursor Up"]   = 'Ż', --  Option+K
 }
 -- window
-vim.keymap.set('n', '<leader>ww',  function()
+vim.keymap.set('n', '<tab>',  function()
     local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
 end, { noremap = true, silent = true })

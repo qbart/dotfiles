@@ -1,7 +1,4 @@
 return {
-    -- better f
-    --{ 'rhysd/clever-f.vim' },
-
     -- Flash enhances the built-in search functionality by showing labels
     -- at the end of each match, letting you quickly jump to a specific
     -- location.
@@ -35,7 +32,7 @@ return {
     {
         "nvim-pack/nvim-spectre",
         keys = {
-            { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+            { "<leader>h", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
         },
     },
 
@@ -88,7 +85,7 @@ return {
                     enable_character_fade = true
                 },
                 indent = {
-                    indent_size = 2,
+                    indent_size = 1,
                     padding = 1, -- extra padding on left hand side
                     -- indent guides
                     with_markers = true,
@@ -133,7 +130,7 @@ return {
             },
             window = {
                 position = "left",
-                width = 50,
+                width = 44,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -288,73 +285,6 @@ return {
             }
         },
     },
-
-    -- file/buffer/... fuzzy finder
-    -- { "ibhagwan/fzf-lua", opts = {}, config = function()
-    --     require('fzf-lua').setup {
-            -- winopts = {
-            --     height     = 0.85, -- window height
-            --     width      = 0.80, -- window width
-            --     row        = 0.35, -- window row position (0=top, 1=bottom)
-            --     col        = 0.50, -- window col position (0=left, 1=right)
-            --     border     = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-            --     fullscreen = false, -- start fullscreen?
-            --     treesitter = false,
-            --     preview    = {
-            --         default = 'bat', -- 'builtin' | 'bat' | 'cat' | 'git_diff' | 'none'
-            --         border       = 'border', -- border|noborder, applies only to
-            --         -- native fzf previewers (bat/cat/git/etc)
-            --         wrap         = 'nowrap', -- wrap|nowrap
-            --         hidden       = 'nohidden', -- hidden|nohidden
-            --         vertical     = 'down:70%', -- up|down:size
-            --         horizontal   = 'right:70%', -- right|left:size
-            --         layout       = 'flex', -- horizontal|vertical|flex
-            --         flip_columns = 120, -- #cols to switch to horizontal on flex
-            --         -- Only used with the builtin previewer:
-            --         title        = true, -- preview border title (file/buf)?
-            --         title_pos  = "left", -- left|center|right, title alignment
-            --         scrollbar    = 'float', -- `false` or string:'float|border'
-            --         -- float:  in-window floating border
-            --         -- border: in-border chars (see below)
-            --         scrolloff    = '-2', -- float scrollbar offset from right
-            --         -- applies only when scrollbar = 'float'
-            --         scrollchars  = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
-            --         -- applies only when scrollbar = 'border'
-            --         delay        = 100, -- delay(ms) displaying the preview
-            --         -- prevents lag on fast scrolling
-            --         winopts      = { -- builtin previewer window options
-            --             number         = true,
-            --             relativenumber = false,
-            --             cursorline     = true,
-            --             cursorlineopt  = 'both',
-            --             cursorcolumn   = false,
-            --             signcolumn     = 'no',
-            --             list           = false,
-            --             foldenable     = false,
-            --             foldmethod     = 'manual',
-            --         },
-            --     },
-            --     previewers = {
-            --         builtin = {
-            --             syntax         = true, -- preview syntax highlight?
-            --             syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
-            --             syntax_limit_b = 1024 * 1024 * 10, -- syntax limit (bytes), 0=nolimit
-            --             limit_b        = 1024 * 1024 * 50, -- preview limit (bytes), 0=nolimit
-            --             -- preview extensions using a custom shell command:
-            --             -- for example, use `viu` for image previews
-            --             -- will do nothing if `viu` isn't executable
-            --             extensions     = {
-            --                 ["ico"] = { "viu", "-b" },
-            --                 ["png"] = { "viu", "-b" },
-            --                 ["jpg"] = { "viu", "-b" },
-            --             },
-            --         },
-            --     },
-            -- }
-    --     }
-    --
-    -- end,
-    -- },
 
     -- Fuzzy Finder (files, lsp, etc)
     {
