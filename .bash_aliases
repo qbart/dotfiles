@@ -83,6 +83,7 @@ alias sshnostrict='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=
 
 # python
 alias py='python3'
+alias venv='source venv/bin/activate'
 
 # node
 alias nrd='npm run dev'
