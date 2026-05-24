@@ -37,6 +37,7 @@ else
   alias cat='bat -p'
   alias htop='btop'
 fi
+alias mi='make install'
 alias ra='source ~/.bash_aliases'
 alias ea='edit ~/.bash_aliases'
 alias copy='rsync -ah --inplace --info=progress2'
@@ -206,8 +207,8 @@ alias getjson='curl -X GET -H "Content-Type: application/json"'
 # aws
 alias install-awscli='pip install awscli --upgrade --user'
 
-# heroku
-alias hr='heroku run'
+# hades
+alias hr='hades run'
 
 # other
 alias loc='xargs wc -l'
