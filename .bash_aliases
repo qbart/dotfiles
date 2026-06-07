@@ -38,6 +38,7 @@ else
   alias htop='btop'
 fi
 alias mi='make install'
+alias m='make'
 alias ra='source ~/.bash_aliases'
 alias ea='edit ~/.bash_aliases'
 alias copy='rsync -ah --inplace --info=progress2'
@@ -52,6 +53,9 @@ alias fkill='kill $(ps -ux | awk '"'"'NR > 1 { print $0 }'"'"' | fzf | awk '"'"'
 alias ok='echo -e "\e[32mok\e[0m"'
 alias iplocal='ifconfig -a | grep 192'
 alias trustbin='xattr -dr com.apple.quarantine'
+
+# ai
+alias claudegodmode='claude --dangerously-skip-permissions'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
@@ -103,6 +107,7 @@ alias amend='git commit --amend'
 alias ci='git commit -m'
 alias push='git push origin HEAD'
 alias pushbak='git push bak HEAD'
+alias pushgh='git push gh HEAD'
 alias pusht='git push origin HEAD --tags'
 alias pushu='git push -u origin HEAD'
 alias pushf='git push --force-with-lease origin HEAD'
