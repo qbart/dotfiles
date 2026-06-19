@@ -37,6 +37,7 @@ else
   alias cat='bat -p'
   alias htop='btop'
 fi
+alias loadenvs='export $(cat .env | xargs)'
 alias mi='make install'
 alias m='make'
 alias ra='source ~/.bash_aliases'
