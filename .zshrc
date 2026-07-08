@@ -63,6 +63,7 @@ if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
 export VCPKG_DISABLE_METRICS=true
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 export VCPKG_ROOT=$HOME/sdk/vcpkg
 export VULKAN_SDK=$HOME/sdk/VulkanSDK/current/macOS
 export VULKAN_ROOT=$VULKAN_SDK
