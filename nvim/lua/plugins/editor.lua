@@ -1,16 +1,33 @@
 return {
-    -- editorconfig
-    { "gpanders/editorconfig.nvim" },
+    -- editorconfig is built into neovim (see lua/config/options.lua)
 
     -- whitespace trim
     { "cappyzawa/trim.nvim", config = function()
         require('trim').setup({
-            disable = { "markdown" },
+            ft_blocklist = { "markdown" },
             trim_on_write = true,
             trim_trailing = true,
             trim_last_line = false,
             trim_first_line = true,
             highlight = false,
+        })
+
+        -- trim.nvim has no per-buffer opt-out, so re-register its BufWritePre
+        -- hook with a guard that honors .editorconfig's trim_trailing_whitespace
+        local blocklist = require('trim.config').get().ft_blocklist
+        vim.api.nvim_create_augroup('TrimNvim', { clear = true })
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            group = 'TrimNvim',
+            pattern = '*',
+            callback = function(args)
+                local ec = vim.b[args.buf].editorconfig
+                if type(ec) == 'table' and ec.trim_trailing_whitespace == 'false' then
+                    return
+                end
+                if not vim.tbl_contains(blocklist, vim.bo[args.buf].filetype) then
+                    require('trim.trimmer').trim()
+                end
+            end,
         })
     end,
     },

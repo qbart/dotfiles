@@ -1,6 +1,12 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- built-in editorconfig support (:help editorconfig)
+-- applies indent_style/indent_size/tab_width/end_of_line/charset/
+-- trim_trailing_whitespace/insert_final_newline/max_line_length per buffer,
+-- overriding the defaults set below
+vim.g.editorconfig = true
+
 -- set copilot to manual trigger
 vim.g.copilot_no_tab_map = true
 
