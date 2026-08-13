@@ -32,31 +32,6 @@ return {
         },
     },
 
-    -- Automatically add closing tags for HTML and JSX
-    {
-        "windwp/nvim-ts-autotag",
-        opts = {
-            enable_close = true,
-            enable_rename = true,
-            enable_close_on_slash = true,
-        },
-        config = function ()
-            require('nvim-ts-autotag').setup            {
-                opts = {
-                    -- Defaults
-                    enable_close = true, -- Auto close tags
-                    enable_rename = true, -- Auto rename pairs of tags
-                    enable_close_on_slash = true -- Auto close on trailing </
-                },
-                per_filetype = {
-                    -- ["html"] = {
-                    --   enable_close = false
-                    -- }
-                }
-            }
-        end
-    },
-
     -- switch cwd based on patterns
     { "ahmedkhalf/project.nvim",
         enabled = false,
@@ -252,18 +227,18 @@ return {
                     return opts.prefix .. " " .. utils.get_node_text(node)[1]
                 end,
             })
-            -- vim.api.nvim_set_hl(0, 'ContextVt', { fg = palette.subtle, bg = "" })
+            vim.api.nvim_set_hl(0, 'ContextVt', { fg = "#000000", bg = "" })
             -- vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
         end ,
     },
 
-    -- highlight arguments definitaions and usages
-    { 'm-demare/hlargs.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        config = function()
-            require('hlargs').setup()
-        end
-    },
+    -- -- highlight arguments definitaions and usages
+    -- { 'm-demare/hlargs.nvim',
+    --     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    --     config = function()
+    --         require('hlargs').setup()
+    --     end
+    -- },
 
     -- color picker and colorizer
     { "uga-rosa/ccc.nvim",
