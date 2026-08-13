@@ -2,11 +2,12 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        lazy = false,
         version = "main",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
-            { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "nvim-treesitter/nvim-treesitter-context" },
+            --{ "nvim-treesitter/nvim-treesitter-textobjects" },
         },
         config = function()
             require'treesitter-context'.setup {
@@ -87,7 +88,7 @@ return {
                 separator = nil,
             }
 
-            require('nvim-treesitter.configs').setup {
+            require('nvim-treesitter.config').setup {
                 -- Add languages to be installed here that you want installed for treesitter
                 ensure_installed = 'all',
 --               ensure_installed = {
@@ -348,5 +349,40 @@ return {
                 on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
             }
         end
+    },
+
+    -- show closing context as virtualtext
+    { "andersevenrud/nvim_context_vt",
+        dependencies = { 'nvim-treesitter/nvim-treesitter', },
+        config = function()
+            -- local palette = require("sequoia.palette")
+            require('nvim_context_vt').setup({
+                enabled = true,
+                prefix = '//',
+                -- prefix = '',
+                highlight = 'ContextVt',
+                disable_ft = { 'markdown' },
+                disable_virtual_lines = false,
+                disable_virtual_lines_ft = { 'yaml' },
+                -- How many lines required after starting position to show virtual text
+                -- Default: 1 (equals two lines total)
+                min_rows = 3,
+                min_rows_ft = {},
+                custom_parser = function(node, ft, opts)
+                    local utils = require('nvim_context_vt.utils')
+                    local type = node:type()
+
+                    -- If you return `nil`, no virtual text will be displayed.
+                    if type == 'function' or type == "function_declaration" or type == "method_declaration" then
+                        return nil
+                    end
+
+                    -- This is the standard text
+                    return opts.prefix .. " " .. utils.get_node_text(node)[1]
+                end,
+            })
+            vim.api.nvim_set_hl(0, 'ContextVt', { fg = "#000000", bg = "" })
+            -- vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
+        end ,
     },
 }

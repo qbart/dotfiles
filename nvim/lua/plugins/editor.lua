@@ -76,66 +76,66 @@ return {
         },
     },
 
-    -- some diagnostics and preview LSP
-    {
-        'nvimdev/lspsaga.nvim',
-        config = function()
-            local symbols = require("utils.symbols")
-            require('lspsaga').setup({
-                diagnostic_header = { " ", " ", " ", " " },
-                preview = {
-                    lines_above = 0,
-                    line_below = 0,
-                },
-                -- diagnostic = {
-                --
-                -- },
-                symbol_in_winbar = {
-                    enable = false,
-                },
-                code_action = {
-                    num_shortcut = false,
-                    show_server_name = false,
-                    extend_gitsigns = false,
-                },
-                lightbulb = {
-                    enable = false,
-                    sign = true,
-                    enable_in_insert = true,
-                    sign_priority = 20,
-                    virtual_text = false,
-                },
-                ui = {
-                    code_action = symbols.action,
-                },
-                finder_icons = {
-                    def = '  ',
-                    ref = ' ',
-                    link = '  ',
-                },
-                outline = {
-                    win_position = 'right',
-                    --set special filetype win that outline window split.like NvimTree neotree
-                    -- defx, db_ui
-                    win_with = '',
-                    win_width = 40,
-                    auto_preview = true,
-                    auto_close = true,
-                    virt_text = '┃',
-                    jump_key = 'o',
-                    auto_refresh = true,
-                    close_after_jump = true,
-                    keys = {
-                        jump = '<CR>',
-                    },
-                },
-            })
-        end,
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter', -- optional
-            'nvim-tree/nvim-web-devicons',     -- optional
-        }
-    },
+    -- -- some diagnostics and preview LSP
+    -- {
+    --     'nvimdev/lspsaga.nvim',
+    --     config = function()
+    --         local symbols = require("utils.symbols")
+    --         require('lspsaga').setup({
+    --             diagnostic_header = { " ", " ", " ", " " },
+    --             preview = {
+    --                 lines_above = 0,
+    --                 line_below = 0,
+    --             },
+    --             -- diagnostic = {
+    --             --
+    --             -- },
+    --             symbol_in_winbar = {
+    --                 enable = false,
+    --             },
+    --             code_action = {
+    --                 num_shortcut = false,
+    --                 show_server_name = false,
+    --                 extend_gitsigns = false,
+    --             },
+    --             lightbulb = {
+    --                 enable = false,
+    --                 sign = true,
+    --                 enable_in_insert = true,
+    --                 sign_priority = 20,
+    --                 virtual_text = false,
+    --             },
+    --             ui = {
+    --                 code_action = symbols.action,
+    --             },
+    --             finder_icons = {
+    --                 def = '  ',
+    --                 ref = ' ',
+    --                 link = '  ',
+    --             },
+    --             outline = {
+    --                 win_position = 'right',
+    --                 --set special filetype win that outline window split.like NvimTree neotree
+    --                 -- defx, db_ui
+    --                 win_with = '',
+    --                 win_width = 40,
+    --                 auto_preview = true,
+    --                 auto_close = true,
+    --                 virt_text = '┃',
+    --                 jump_key = 'o',
+    --                 auto_refresh = true,
+    --                 close_after_jump = true,
+    --                 keys = {
+    --                     jump = '<CR>',
+    --                 },
+    --             },
+    --         })
+    --     end,
+    --     dependencies = {
+    --         'nvim-treesitter/nvim-treesitter', -- optional
+    --         'nvim-tree/nvim-web-devicons',     -- optional
+    --     }
+    -- },
 
     -- "TODO" comments
     { "folke/todo-comments.nvim", opts = {}, config = function()
@@ -196,41 +196,6 @@ return {
 
     -- convert between oneliner/multiline statement split/join
     { 'AndrewRadev/splitjoin.vim' },
-
-    -- show closing context as virtualtext
-    { "haringsrob/nvim_context_vt",
-        dependencies = { 'nvim-treesitter/nvim-treesitter', },
-        config = function()
-            -- local palette = require("sequoia.palette")
-            require('nvim_context_vt').setup({
-                enabled = true,
-                prefix = '//',
-                -- prefix = '',
-                highlight = 'ContextVt',
-                disable_ft = { 'markdown' },
-                disable_virtual_lines = false,
-                disable_virtual_lines_ft = { 'yaml' },
-                -- How many lines required after starting position to show virtual text
-                -- Default: 1 (equals two lines total)
-                min_rows = 3,
-                min_rows_ft = {},
-                custom_parser = function(node, ft, opts)
-                    local utils = require('nvim_context_vt.utils')
-                    local type = node:type()
-
-                    -- If you return `nil`, no virtual text will be displayed.
-                    if type == 'function' or type == "function_declaration" or type == "method_declaration" then
-                        return nil
-                    end
-
-                    -- This is the standard text
-                    return opts.prefix .. " " .. utils.get_node_text(node)[1]
-                end,
-            })
-            vim.api.nvim_set_hl(0, 'ContextVt', { fg = "#000000", bg = "" })
-            -- vim.api.nvim_set_hl(0, 'GitComment', { fg = palette.subtle, bg = "" })
-        end ,
-    },
 
     -- -- highlight arguments definitaions and usages
     -- { 'm-demare/hlargs.nvim',
