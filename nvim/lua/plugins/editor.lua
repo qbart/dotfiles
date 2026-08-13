@@ -77,65 +77,65 @@ return {
     },
 
     -- -- some diagnostics and preview LSP
-    -- {
-    --     'nvimdev/lspsaga.nvim',
-    --     config = function()
-    --         local symbols = require("utils.symbols")
-    --         require('lspsaga').setup({
-    --             diagnostic_header = { " ", " ", " ", " " },
-    --             preview = {
-    --                 lines_above = 0,
-    --                 line_below = 0,
-    --             },
-    --             -- diagnostic = {
-    --             --
-    --             -- },
-    --             symbol_in_winbar = {
-    --                 enable = false,
-    --             },
-    --             code_action = {
-    --                 num_shortcut = false,
-    --                 show_server_name = false,
-    --                 extend_gitsigns = false,
-    --             },
-    --             lightbulb = {
-    --                 enable = false,
-    --                 sign = true,
-    --                 enable_in_insert = true,
-    --                 sign_priority = 20,
-    --                 virtual_text = false,
-    --             },
-    --             ui = {
-    --                 code_action = symbols.action,
-    --             },
-    --             finder_icons = {
-    --                 def = '  ',
-    --                 ref = ' ',
-    --                 link = '  ',
-    --             },
-    --             outline = {
-    --                 win_position = 'right',
-    --                 --set special filetype win that outline window split.like NvimTree neotree
-    --                 -- defx, db_ui
-    --                 win_with = '',
-    --                 win_width = 40,
-    --                 auto_preview = true,
-    --                 auto_close = true,
-    --                 virt_text = '┃',
-    --                 jump_key = 'o',
-    --                 auto_refresh = true,
-    --                 close_after_jump = true,
-    --                 keys = {
-    --                     jump = '<CR>',
-    --                 },
-    --             },
-    --         })
-    --     end,
-    --     dependencies = {
-    --         'nvim-treesitter/nvim-treesitter', -- optional
-    --         'nvim-tree/nvim-web-devicons',     -- optional
-    --     }
-    -- },
+    {
+        'nvimdev/lspsaga.nvim',
+        config = function()
+            local symbols = require("utils.symbols")
+            require('lspsaga').setup({
+                diagnostic_header = { " ", " ", " ", " " },
+                preview = {
+                    lines_above = 0,
+                    line_below = 0,
+                },
+                -- diagnostic = {
+                --
+                -- },
+                symbol_in_winbar = {
+                    enable = false,
+                },
+                code_action = {
+                    num_shortcut = false,
+                    show_server_name = false,
+                    extend_gitsigns = false,
+                },
+                lightbulb = {
+                    enable = false,
+                    sign = true,
+                    enable_in_insert = true,
+                    sign_priority = 20,
+                    virtual_text = false,
+                },
+                ui = {
+                    code_action = symbols.action,
+                },
+                finder_icons = {
+                    def = '  ',
+                    ref = ' ',
+                    link = '  ',
+                },
+                outline = {
+                    win_position = 'right',
+                    --set special filetype win that outline window split.like NvimTree neotree
+                    -- defx, db_ui
+                    win_with = '',
+                    win_width = 40,
+                    auto_preview = true,
+                    auto_close = true,
+                    virt_text = '┃',
+                    jump_key = 'o',
+                    auto_refresh = true,
+                    close_after_jump = true,
+                    keys = {
+                        jump = '<CR>',
+                    },
+                },
+            })
+        end,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter', -- optional
+            'nvim-tree/nvim-web-devicons',     -- optional
+        }
+    },
 
     -- "TODO" comments
     { "folke/todo-comments.nvim", opts = {}, config = function()

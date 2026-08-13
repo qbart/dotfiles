@@ -14,6 +14,8 @@ return {
     },
   },
 
+  { "pherrymason/c3-lsp" },
+
   {
     "hrsh7th/nvim-cmp",
     version = false,
