@@ -29,6 +29,8 @@ return {
             vim.api.nvim_set_hl(0, "NormalNC", { bg = "#333333" })
         end
     },
+
+    { "code5717/c3.vim" },
     -- {
     --     "EdenEast/nightfox.nvim",
     --     lazy = false,
