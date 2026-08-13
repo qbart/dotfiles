@@ -9,8 +9,8 @@
 -- finders
 --
 vim.keymap.set('n', '<leader>g', [[<cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>F', [[<cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>f', [[<cmd>Telescope current_buffer_fuzzy_find<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>f', [[<cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-f>', [[<cmd>Telescope current_buffer_fuzzy_find<CR>]], { noremap = true, silent = true })
 vim.keymap.set('n', 'gr', [[<cmd>Telescope lsp_references<CR>]], { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>t', [[<cmd>Lspsaga term_toggle<CR>]], { silent = true, noremap = true })
 -- vim.keymap.set('n', '<leader>s', [[<cmd>FzfLua lsp_document_symbols<CR>]], { noremap = true, silent = true })
