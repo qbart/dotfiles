@@ -57,6 +57,7 @@ alias trustbin='xattr -dr com.apple.quarantine'
 
 # ai
 alias claudegodmode='claude --dangerously-skip-permissions'
+alias clauder='claude --resume'
 
 # keyboards
 alias flash_moonlander='make moonlander:qbart:flash'
