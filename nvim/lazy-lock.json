@@ -34,7 +34,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "2ae6958df7ced50baac5035cec0c15799eedfbf7" },
   "nvim_context_vt": { "branch": "master", "commit": "74c5ec8786426c5458e1a9f6b8b2fd6977ba01ab" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
-  "schemastore.nvim": { "branch": "main", "commit": "3067d706e9738fbed404fa0397199c9d1921fd1c" },
+  "schemastore.nvim": { "branch": "main", "commit": "7e3f6dd6ef6da93f74974521c81d8d5bff0443c5" },
   "splitjoin.vim": { "branch": "main", "commit": "b26971a7fdc7ca645b766459e3ed7949300c404f" },
   "telescope-alternate": { "branch": "master", "commit": "9d1fa85b1585b5709b5e84a67463cb93c498a95e" },
   "telescope-emoji.nvim": { "branch": "master", "commit": "86248d97be84a1ce83f0541500ef9edc99ea2aa1" },
