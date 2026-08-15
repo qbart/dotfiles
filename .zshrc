@@ -62,6 +62,7 @@ if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/goo
 if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
+export CMAKE_ROOT="/Applications/CMake.app/Contents"
 export VCPKG_DISABLE_METRICS=true
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 export VCPKG_ROOT=$HOME/sdk/vcpkg
@@ -69,6 +70,8 @@ export VULKAN_SDK=$HOME/sdk/VulkanSDK/current/macOS
 export VULKAN_ROOT=$VULKAN_SDK
 export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 export PATH="$VULKAN_SDK/bin:$PATH"
+export PATH="$CMAKE_ROOT/bin:$PATH"
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
 # c++
 if command -v clang 2>&1 >/dev/null
