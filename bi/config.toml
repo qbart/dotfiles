@@ -1,0 +1,20 @@
+[options]
+number = 10
+
+[keys]
+leader = " "
+
+[keys.normal]
+"h" = false
+"j" = "left"
+"k" = "down"
+"l" = "up"
+";" = "right"
+
+[keys.tree]
+"h" = false
+"j" = "tree_collapse"
+"k" = "tree_select_down"
+"l" = "tree_select_up"
+";" = "tree_expand"
+
