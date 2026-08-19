@@ -13,10 +13,10 @@ ln -s "$(pwd)/i3" ~/.i3 -f
 ln -s "$(pwd)/polybar" ~/.config/polybar -f
 ln -s "$(pwd)/rofi" ~/.config/rofi -f
 ln -s "$(pwd)/flameshot" ~/.config/flameshot -f
-ln -s "$(pwd)/lf" ~/.config/lf -f
 ln -s "$(pwd)/kitty" ~/.config/kitty -f
 ln -s "$(pwd)/dunst" ~/.config/dunst -f
 ln -s "$(pwd)/byhost" ~/.config/byhost -f
+ln -f -s "$(pwd)/ghostty" ~/.config/ghostty
 
 ln -s "$(pwd)/.bash_ps1" ~/.bash_ps1 -f
 ln -s "$(pwd)/.bash_theme" ~/.bash_theme -f
@@ -39,10 +39,10 @@ ln -s -f "$(pwd)/bin/ck" ~/bin/ck
 rm ~/.config/rofi/rofi
 rm ~/.config/flameshot/flameshot
 rm ~/.config/polybar/polybar
-rm ~/.config/lf/lf
 rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim
 rm ~/.config/bi/bi
 rm ~/.i3/i3
 rm ~/.config/dunst/dunst
 rm ~/.config/byhost/byhost
+rm ~/.config/ghostty/ghostty

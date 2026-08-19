@@ -12,6 +12,7 @@ ln -f -s "$(pwd)/nvim" ~/.config/nvim
 ln -f -s "$(pwd)/bi" ~/.config/bi
 ln -f -s "$(pwd)/kitty" ~/.config/kitty
 ln -f -s "$(pwd)/byhost" ~/.config/byhost
+ln -f -s "$(pwd)/ghostty" ~/.config/ghostty
 
 ln -f -s "$(pwd)/.bash_aliases" ~/.bash_aliases
 
@@ -28,3 +29,4 @@ rm ~/.config/kitty/kitty
 rm ~/.config/nvim/nvim
 rm ~/.config/bi/bi
 rm ~/.config/byhost/byhost
+rm ~/.config/ghostty/ghostty

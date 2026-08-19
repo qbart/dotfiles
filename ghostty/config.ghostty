@@ -1,0 +1,9 @@
+foreground = #282c34
+background = #ffffff
+
+font-family="Fira Code Regular"
+font-size = 16
+font-style-italic = false
+font-feature = "-calt, -liga, -dlig"
+
+macos-option-as-alt = true

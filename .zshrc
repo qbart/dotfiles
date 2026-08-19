@@ -62,6 +62,7 @@ if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/sdk/goo
 if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
+export XDG_CONFIG_HOME="$HOME/.config"
 export CMAKE_ROOT="/Applications/CMake.app/Contents"
 export VCPKG_DISABLE_METRICS=true
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
