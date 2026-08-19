@@ -3,8 +3,7 @@ alias cpi='cp -i'                          # confirm before overwriting somethin
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --color=auto'
-alias v='edit'
-alias edit='nvim'
+alias edit='bi'
 alias sc='sudo systemctl'
 alias scu='systemctl --user'
 alias jc='sudo journalctl'

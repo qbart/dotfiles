@@ -15,9 +15,10 @@ setopt CORRECT
 
 [ -f ~/.config/byhost/$(hostname).sh ] && source ~/.config/byhost/$(hostname).sh
 
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=bi
+export EDITOR=bi
 export GPG_TTY=$(tty)
+bindkey -e
 
 # ----- aliases -----
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
