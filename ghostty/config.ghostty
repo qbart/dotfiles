@@ -1,5 +1,4 @@
-foreground = #282c34
-background = #ffffff
+theme = "gruvbox-material-hard-dark"
 
 font-family="Fira Code Regular"
 font-size = 16
