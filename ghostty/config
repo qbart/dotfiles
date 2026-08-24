@@ -1,4 +1,4 @@
-theme = "gruvbox-material-hard-dark"
+theme = "main"
 
 font-family="Fira Code Regular"
 font-size = 16
