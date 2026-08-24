@@ -1,6 +1,6 @@
 [options]
 number = 10
-theme = "gruvbox-dark"
+theme = "main"
 ssh_theme = "pascal"
 
 [keys]
@@ -16,8 +16,8 @@ leader = " "
 "<leader>wk"  = ":sp<CR>"
 "<leader>wl"  = ":vs<CR>"
 "<C-q>" = ":q<CR>"
-"<leader>wf" = "window_pick"
 "<leader>s" = ":symbols<CR>"
+"<leader>ww" = "window_pick"
 # "h"      = "left"
 # "l"      = "right"
 # "j"      = "down"
