@@ -74,6 +74,7 @@ export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 export PATH="$VULKAN_SDK/bin:$PATH"
 export PATH="$CMAKE_ROOT/bin:$PATH"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+export DOCKER=podman
 
 # c++
 if command -v clang 2>&1 >/dev/null
