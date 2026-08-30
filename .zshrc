@@ -64,6 +64,7 @@ if [ -d "$HOME/sdk/pico" ]; then
   export PICO_SDK_PATH=$HOME/sdk/pico
 fi
 export XDG_CONFIG_HOME="$HOME/.config"
+export C3_ROOT="$HOME/sdk/c3"
 export CMAKE_ROOT="/Applications/CMake.app/Contents"
 export VCPKG_DISABLE_METRICS=true
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
@@ -73,6 +74,7 @@ export VULKAN_ROOT=$VULKAN_SDK
 export LD_LIBRARY_PATH="$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 export PATH="$VULKAN_SDK/bin:$PATH"
 export PATH="$CMAKE_ROOT/bin:$PATH"
+export PATH="$C3_ROOT:$PATH"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 export DOCKER=podman
 
