@@ -29,7 +29,8 @@ PATH=$HOME/.asdf/shims:$PATH
 PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin:/usr/local/bin
 export HOMEBREW_NO_AUTO_UPDATE=1
 export OVERMIND_NO_PORT=1
-
+export TURBO_TELEMETRY_DISABLED=1
+export DO_NOT_TRACK=1
 
 if [ -d "/opt/apache-maven-3.8.5/bin" ]; then
   PATH=$PATH:/opt/apache-maven-3.8.5/bin
