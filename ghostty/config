@@ -6,3 +6,4 @@ font-style-italic = false
 font-feature = "-calt, -liga, -dlig"
 
 macos-option-as-alt = true
+maximize = true
