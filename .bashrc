@@ -45,6 +45,7 @@ export VCPKG_ROOT=$HOME/d/3/vcpkg
 export FLYCTL_INSTALL="$HOME/.fly"
 export PICO_SDK_PATH=$HOME/sdk/pico
 export LLVM_ROOT=$HOME/d/3/llvm-project/build
+export XDG_CONFIG_HOME=$HOME/.config
 
 export LD_LIBRARY_PATH="$SLANG_ROOT/lib:$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 
