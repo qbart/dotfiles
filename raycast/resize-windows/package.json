@@ -1,0 +1,70 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "resize-windows",
+  "title": "Resize Windows",
+  "description": "Arrange the windows on the current screen side by side in columns with custom proportions, e.g. 1:2:1.",
+  "icon": "icon.png",
+  "author": "kiwi",
+  "license": "MIT",
+  "platforms": [
+    "macOS"
+  ],
+  "categories": [
+    "Productivity",
+    "System"
+  ],
+  "commands": [
+    {
+      "name": "resize",
+      "title": "Resize Windows",
+      "subtitle": "Proportional Columns",
+      "description": "Arrange windows horizontally in the given proportions, e.g. 1:2:1. Can also be used as a fallback command with \":resize 1:2:1\".",
+      "mode": "no-view",
+      "keywords": [
+        "resize",
+        "layout",
+        "columns",
+        "split",
+        "tile",
+        "arrange"
+      ],
+      "arguments": [
+        {
+          "name": "ratio",
+          "placeholder": "1:2:1",
+          "type": "text",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "gap",
+      "title": "Gap",
+      "description": "Space in pixels between windows and around the screen edges.",
+      "type": "textfield",
+      "required": false,
+      "default": "0"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.3.1",
+    "@raycast/utils": "^2.3.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.10",
+    "eslint": "^10.10.0",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix",
+    "test": "node --experimental-strip-types --test test/*.test.ts"
+  }
+}
