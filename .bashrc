@@ -46,6 +46,10 @@ export FLYCTL_INSTALL="$HOME/.fly"
 export PICO_SDK_PATH=$HOME/sdk/pico
 export LLVM_ROOT=$HOME/d/3/llvm-project/build
 export XDG_CONFIG_HOME=$HOME/.config
+export GRADLE_HOME=$HOME/sdk/gradle
+export ANDROID_HOME=$HOME/sdk/android
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/current
+export ANDROID_SDK_ROOT=$ANDROID_HOME
 
 export LD_LIBRARY_PATH="$SLANG_ROOT/lib:$VULKAN_SDK/lib:$LD_LIBRARY_PATH"
 
@@ -54,7 +58,7 @@ export PATH=$PATH:$HOME/.asdf/shims:$HOME/.asdf/bin
 export PATH=$PATH:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:/bin:$HOME/.fzf/bin
 export PATH=$PATH:$GOPATH/bin
-export PATH=$LLVM_ROOT/bin:$SLANG_ROOT/bin:$VULKAN_SDK/bin:$PATH:$RENDERDOC_ROOT/bin
+export PATH=$LLVM_ROOT/bin:$SLANG_ROOT/bin:$VULKAN_SDK/bin:$PATH:$RENDERDOC_ROOT/bin:$HOME/sdk/android/platform-tools:$GRADLE_HOME/bin
 export PATH=/opt/cmake/bin:$PATH
 export PATH=/snap/bin:$PATH
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
