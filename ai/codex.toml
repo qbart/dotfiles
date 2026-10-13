@@ -1,0 +1,10 @@
+[mcp_servers.blender]
+command = "uv"
+args = ["--directory", "/home/kiwi/sdk/mcp/blender-1.0.2", "run", "blender-mcp"]
+
+[mcp_servers.blender.tools.execute_blender_code]
+approval_mode = "approve"
+
+[mcp_servers.aseprite]
+command = "uv"
+args = ["--directory", "/home/kiwi/d/3/aseprite-mcp", "run", "-m", "aseprite_mcp"]

@@ -263,6 +263,13 @@ ex ()
   fi
 }
 
+flactomp3()
+{
+for f in *.flac; do
+  sox "$f" -C 320 "${f%.flac}.mp3"
+done
+}
+
 tea()
 {
   caffeinate -dimsu &
@@ -272,4 +279,17 @@ tea()
 untea()
 {
   pkill caffeinate
+}
+
+tmux_running() {
+    tmux has-session -t "=$1" 2>/dev/null
+}
+
+tmux_new() {
+    tmux new -d -s "$1" -c "$HOME/d/$1" \
+        "claude --dangerously-skip-permissions --resume '$1' --remote-control '$1'"
+}
+
+tmux_ensure() {
+    tmux_running "$1" || tmux_new "$1"
 }
