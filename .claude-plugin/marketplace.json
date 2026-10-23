@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "qbart",
+  "description": "qbart's personal Claude Code skills",
+  "owner": {
+    "name": "qbart"
+  },
+  "plugins": [
+    {
+      "name": "qbart",
+      "description": "Personal skills: icons (Lucide SVG lookup)",
+      "source": "./skills",
+      "strict": false,
+      "skills": [
+        "./icons"
+      ]
+    }
+  ]
+}
