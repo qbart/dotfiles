@@ -228,6 +228,10 @@ else
 fi
 }
 
+if command -v bi >/dev/null 2>&1; then
+    alias vim='bi'
+fi
+
 buildclang()
 {
     mkdir -p build/
