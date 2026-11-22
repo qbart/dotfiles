@@ -1,5 +1,7 @@
 # Transformation
 
+Part of undo/redo stack.
+
 ## Input
 
 G - grab mode
