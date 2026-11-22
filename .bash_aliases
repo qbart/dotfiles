@@ -99,7 +99,7 @@ alias brd='bun run dev'
 
 # git
 alias rebase='git pull --rebase --autostash origin'
-alias rebasem='git pull --rebase --autostash origin master'
+alias rebasem='git pull --rebase --autostash origin main'
 alias rebasec='git rebase --continue'
 alias rebasebff='git pull --rebase --autostash origin $(  git branch | grep -v "*" | fzf | awk '"'"'{print $1;}'"'"'  )'
 alias rebase5='git rebase --autostash -i HEAD~5'

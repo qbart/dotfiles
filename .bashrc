@@ -33,8 +33,8 @@ source ~/.config/byhost/$(hostname).sh
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # ----- envs -----
-export VISUAL=nvim # ranger
-export EDITOR=nvim
+export VISUAL=bi # ranger
+export EDITOR=bi
 export GOPATH=$HOME/go
 export VULKAN_SDK=$HOME/sdk/vulkan
 export SLANG_ROOT=$HOME/sdk/slang

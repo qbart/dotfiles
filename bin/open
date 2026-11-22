@@ -1,1 +1,1 @@
-firefox $1
+xdg-open $1
